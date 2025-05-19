@@ -48,21 +48,7 @@ a:hover {
     color: var(--highlight);
 }
 
-a::before {
-    content: '<';
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
 
-a::after {
-    content: '/>';
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-a:hover::before, a:hover::after {
-    opacity: 1;
-}
 
 /* Navigation */
 nav {
@@ -81,7 +67,7 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1.5rem 3rem;
 }
 
 /* Logo Styling */
