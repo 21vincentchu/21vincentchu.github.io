@@ -100,10 +100,7 @@ nav {
     color: var(--highlight);
 }
 
-.logo::before {
-    content: 'const ';
-    color: var(--keyword-color);
-}
+
 
 
 .logo a::before, .logo a::after {
