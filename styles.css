@@ -169,11 +169,6 @@ h1 {
     color: var(--class-color);
 }
 
-h1::before {
-    content: 'class ';
-    color: var(--keyword-color);
-    font-size: 1.8rem;
-}
 
 h2 {
     font-size: 1.8rem;
@@ -188,21 +183,7 @@ h2::before {
     font-size: 1.4rem;
 }
 
-.tagline {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    color: var(--string-color);
-}
 
-.tagline::before {
-    content: '/* ';
-    color: var(--comment-color);
-}
-
-.tagline::after {
-    content: ' */';
-    color: var(--comment-color);
-}
 
 .social-links {
     display: flex;
@@ -273,14 +254,6 @@ h2::before {
     color: var(--keyword-color);
 }
 
-.profile-image::after {
-    content: ';';
-    position: absolute;
-    bottom: -25px;
-    right: 0;
-    color: var(--text-color);
-    font-size: 1.5rem;
-}
 
 .profile-image img {
     width: 280px;
@@ -299,10 +272,6 @@ section {
     position: relative;
 }
 
-/* Removed line numbers */
-section::before {
-    display: none;
-}
 
 .section-header {
     display: flex;
@@ -321,11 +290,6 @@ section::before {
 section h2 {
     font-size: 2rem;
     color: var(--class-color);
-}
-
-section h2::before {
-    content: 'class ';
-    color: var(--keyword-color);
 }
 
 section p {
