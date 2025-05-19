@@ -75,3 +75,101 @@ footer {
     color: #777;
     font-size: 0.9rem;
 }
+
+.profile-header {
+    background: linear-gradient(120deg, #8e44ad 0%, #3498db 100%);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-banner {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+}
+
+.profile-photo {
+    margin-right: 2rem;
+}
+
+.profile-photo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+.profile-info {
+    color: white;
+}
+
+.profile-info h1 {
+    margin: 0.5rem 0;
+    font-size: 2.2rem;
+    color: white;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.code-snippet {
+    position: relative;
+    background: rgba(0,0,0,0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: monospace;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.code-text {
+    font-size: 1rem;
+}
+
+.arrow {
+    position: absolute;
+    top: 10px;
+    right: -80px;
+}
+
+.contact-email {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.email-text {
+    border-bottom: 1px dotted rgba(255,255,255,0.7);
+}
+
+/* Adjust the container to handle the banner */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+}
+
+/* Adjust other sections to have padding */
+section {
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+}
+
+footer {
+    padding: 1rem 2rem;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
