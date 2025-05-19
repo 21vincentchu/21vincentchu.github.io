@@ -5,45 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent Chu | Developer</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Profile header with banner -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">VC</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+                <a href="resume.pdf" target="_blank">Resume</a>
+            </div>
+        </div>
+    </nav>
 
-        <header class="image-banner">
-            <img src="Vincent-banner.png" alt="Vincent Chu- Developer Banner">
+    <header>
+        <div class="intro-text">
+            <p class="greeting">Hello! 👋</p>
+            <h1>I'm Vincent Chu.</h1>
+            <h2>A backend developer.</h2>
+            <p class="tagline">I build robust, scalable server-side applications.</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/21vincentchu" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:21vincentchu@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="mailto:21vincentchu@gmail.com" class="btn primary-btn">Email Me</a>
+                <a href="#projects" class="btn secondary-btn">View Projects</a>
+            </div>
+        </div>
+        <div class="profile-image">
+            <img src="DSCF1159.jpg" alt="Vincent Chu">
+        </div>
+    </header>
 
-        </header>
-        
-        <section id="about">
+    <section id="about">
+        <div class="section-header">
+            <div class="section-decorator"></div>
             <h2>About Me</h2>
-            <p>I'm a backend developer specializing in building reliable, scalable server-side applications.</p>
-            <p>This is a simple portfolio site hosted on GitHub Pages to showcase my work and skills.</p>
-        </section>
+        </div>
+        <p>I'm a backend developer with expertise in building reliable, scalable server-side applications. With a strong foundation in programming and problem-solving, I enjoy creating efficient solutions to complex challenges.</p>
+        <p>When I'm not coding, you can find me [your hobbies/interests].</p>
+    </section>
+
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-decorator"></div>
+            <h2>My Stack</h2>
+        </div>
         
-        <section id="skills">
-            <h2>Technical Skills</h2>
-            <ul>
-                <li>C#</li>
-                <li>Java</li>
-                <li>Python</li>
-                <li>SQL</li>
-            </ul>
-        </section>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <ul>
+                    <li><i class="fas fa-code"></i> C#</li>
+                    <li><i class="fab fa-java"></i> Java</li>
+                    <li><i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-database"></i> SQL</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Frameworks</h3>
+                <ul>
+                    <li><i class="fas fa-layer-group"></i> .NET Core</li>
+                    <li><i class="fab fa-node-js"></i> Node.js</li>
+                    <li><i class="fas fa-server"></i> Express</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Tools</h3>
+                <ul>
+                    <li><i class="fab fa-git-alt"></i> Git</li>
+                    <li><i class="fab fa-docker"></i> Docker</li>
+                    <li><i class="fas fa-cloud"></i> AWS</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Databases</h3>
+                <ul>
+                    <li><i class="fas fa-database"></i> PostgreSQL</li>
+                    <li><i class="fas fa-database"></i> MongoDB</li>
+                    <li><i class="fas fa-database"></i> SQL Server</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-decorator"></div>
+            <h2>Projects</h2>
+        </div>
         
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Feel free to reach out for collaboration or opportunities!</p>
-            <p>
-                <a href="https://github.com/21vincentchu" target="_blank">GitHub</a> |
-                <a href="mailto:21vincentchu@gmail.com">Email</a> |
-                <a href="tel:3143472150">Phone: 314-347-2150</a>
-            </p>
-        </section>
-        
-        <footer>
-            <p>&copy; 2025 Vincent Chu | Hosted on GitHub Pages</p>
-        </footer>
-    </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Project Name</h3>
+                <p>Project description goes here. Explain what problem this solves and what technologies were used.</p>
+                <div class="project-links">
+                    <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                    <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
+                </div>
+                <div class="project-tags">
+                    <span>C#</span>
+                    <span>.NET</span>
+                    <span>SQL</span>
+                </div>
+            </div>
+            
+            <!-- Add more project cards as needed -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header">
+            <div class="section-decorator"></div>
+            <h2>Get In Touch</h2>
+        </div>
+        <p>Feel free to reach out for collaboration or opportunities!</p>
+        <div class="contact-options">
+            <a href="mailto:21vincentchu@gmail.com" class="contact-option">
+                <i class="fas fa-envelope"></i>
+                <span>21vincentchu@gmail.com</span>
+            </a>
+            <a href="tel:3143472150" class="contact-option">
+                <i class="fas fa-phone"></i>
+                <span>314-347-2150</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Vincent Chu | Built with GitHub Pages</p>
+    </footer>
+
+    <!-- JavaScript for animations -->
+    <script src="script.js"></script>
 </body>
 </html>
