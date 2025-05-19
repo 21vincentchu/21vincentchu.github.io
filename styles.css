@@ -96,11 +96,11 @@ nav {
     font-size: 1.5rem;
 }
 
+
+
 .logo a:hover {
     color: var(--highlight);
 }
-
-
 
 
 .logo a::before, .logo a::after {
