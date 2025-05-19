@@ -173,3 +173,13 @@ footer {
     text-align: center;
     border-top: 1px solid #eee;
 }
+
+.profile-photo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    object-fit: cover;
+    max-width: 120px; /* Ensure image is no larger than 120px */
+}
