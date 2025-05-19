@@ -151,3 +151,17 @@ footer {
 .email-text {
     border-bottom: 1px dotted rgba(255,255,255,0.7);
 }
+
+/* Image banner styling */
+.image-banner {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.image-banner img {
+    width: 100%;
+    display: block;
+}
