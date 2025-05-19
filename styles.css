@@ -84,10 +84,20 @@ nav {
     padding: 1rem 2rem;
 }
 
+/* Logo Styling */
 .logo {
+    position: relative;
+}
+
+.logo a {
+    text-decoration: none;
+    color: var(--function-color);
     font-weight: 600;
     font-size: 1.5rem;
-    color: var(--function-color);
+}
+
+.logo a:hover {
+    color: var(--highlight);
 }
 
 .logo::before {
@@ -96,9 +106,14 @@ nav {
 }
 
 .logo::after {
-    content: ' = ( ) => { ... }';
+    content: ' = () => { ... }';
     color: var(--text-color);
     font-size: 1rem;
+}
+
+.logo a::before, .logo a::after {
+    content: none;
+    display: none;
 }
 
 .nav-links {
@@ -139,17 +154,9 @@ header {
     position: relative;
 }
 
+/* Removed line numbers */
 .intro-text::before {
-    content: '01 02 03 04 05 06 07 08';
-    position: absolute;
-    left: -60px;
-    top: 0;
-    bottom: 0;
-    color: var(--line-number);
-    font-size: 0.85rem;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-    letter-spacing: -5px;
+    display: none;
 }
 
 .greeting {
@@ -300,17 +307,9 @@ section {
     position: relative;
 }
 
+/* Removed line numbers */
 section::before {
-    content: attr(data-line-numbers);
-    position: absolute;
-    left: 20px;
-    top: 5rem;
-    bottom: 5rem;
-    color: var(--line-number);
-    font-size: 0.85rem;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-    letter-spacing: -5px;
+    display: none;
 }
 
 .section-header {
@@ -644,10 +643,6 @@ footer::after {
         margin-bottom: 3rem;
     }
     
-    .intro-text::before {
-        display: none;
-    }
-    
     .social-links, .cta-buttons {
         justify-content: center;
     }
@@ -659,10 +654,6 @@ footer::after {
     
     .nav-links {
         display: none; /* Would need a mobile menu */
-    }
-    
-    section::before {
-        display: none;
     }
 }
 
