@@ -89,6 +89,17 @@ nav {
     position: relative;
 }
 
+.logo::before {
+    content: 'const ';
+    color: var(--keyword-color);
+}
+
+.logo::after {
+    content: ' = () => { ... }';
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
 .logo a {
     text-decoration: none;
     color: var(--function-color);
@@ -96,12 +107,9 @@ nav {
     font-size: 1.5rem;
 }
 
-
-
 .logo a:hover {
     color: var(--highlight);
 }
-
 
 .logo a::before, .logo a::after {
     content: none;
@@ -146,11 +154,6 @@ header {
     position: relative;
 }
 
-/* Removed line numbers */
-.intro-text::before {
-    display: none;
-}
-
 .greeting {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
@@ -175,16 +178,6 @@ h2 {
     margin-bottom: 1.5rem;
     font-weight: 500;
 }
-
-h2::before {
-    /*content: 'function ';
-    color: var(--keyword-color);
-    font-size: 1.4rem;
-    */
-    display: none;
-}
-
-
 
 .social-links {
     display: flex;
@@ -255,7 +248,6 @@ h2::before {
     color: var(--keyword-color);
 }
 
-
 .profile-image img {
     width: 280px;
     height: 280px;
@@ -272,7 +264,6 @@ section {
     margin: 0 auto;
     position: relative;
 }
-
 
 .section-header {
     display: flex;
@@ -299,7 +290,6 @@ section p {
     margin-bottom: 1.5rem;
     color: var(--text-color);
 }
-
 
 /* Skills Section */
 .skills-grid {
@@ -338,13 +328,6 @@ section p {
     color: var(--variable-color);
 }
 
-.skill-category h3::after {
-    /*content: ' = {';
-    color: var(--text-color);
-    */
-    display: none;
-}
-
 .skill-category ul {
     list-style: none;
 }
@@ -367,16 +350,6 @@ section p {
     color: var(--property-color);
 }
 
-.skill-category::after {
-    /*content: '};';
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    color: var(--text-color);
-    */
-    display: none;
-}
-
 /* Projects Section */
 .projects-grid {
     display: grid;
@@ -394,8 +367,6 @@ section p {
     position: relative;
 }
 
-
-
 .project-card:hover {
     transform: translateY(-5px);
 }
@@ -406,21 +377,21 @@ section p {
     color: var(--string-color);
 }
 
-
 .project-card p {
     margin-bottom: 1.5rem;
     font-size: 1rem;
     color: var(--text-color);
 }
 
+/* Remove description label */
 .project-card p::before {
-    content: 'description: "';
-    color: var(--property-color);
+    content: none;
+    display: none;
 }
 
 .project-card p::after {
-    content: '",';
-    color: var(--property-color);
+    content: none;
+    display: none;
 }
 
 .project-links {
@@ -428,7 +399,6 @@ section p {
     gap: 1.5rem;
     margin-bottom: 1.5rem;
 }
-
 
 .project-links a::before, .project-links a::after {
     display: none;
@@ -440,20 +410,6 @@ section p {
     gap: 0.5rem;
 }
 
-.project-tags::before {
-    color: var(--property-color);
-    display: block;
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
-
-.project-tags::after {
-    color: var(--property-color);
-    display: block;
-    width: 100%;
-    margin-top: 0.5rem;
-}
-
 .project-tags span {
     background-color: rgba(97, 175, 239, 0.1);
     color: var(--string-color);
@@ -462,19 +418,15 @@ section p {
     font-size: 0.85rem;
 }
 
+/* Remove quotes from tags */
 .project-tags span::before {
-    content: '"';
+    content: none;
+    display: none;
 }
 
 .project-tags span::after {
-    content: '",';
-}
-
-.project-card::after {
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    
+    content: none;
+    display: none;
 }
 
 /* Contact Section */
