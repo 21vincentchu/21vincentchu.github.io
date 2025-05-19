@@ -89,17 +89,6 @@ nav {
     position: relative;
 }
 
-.logo::before {
-    content: 'const ';
-    color: var(--keyword-color);
-}
-
-.logo::after {
-    content: ' = () => { ... }';
-    color: var(--text-color);
-    font-size: 1rem;
-}
-
 .logo a {
     text-decoration: none;
     color: var(--function-color);
