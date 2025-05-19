@@ -300,10 +300,6 @@ section p {
     color: var(--text-color);
 }
 
-section p::before {
-    content: '// ';
-    color: var(--comment-color);
-}
 
 /* Skills Section */
 .skills-grid {
@@ -343,8 +339,10 @@ section p::before {
 }
 
 .skill-category h3::after {
-    content: ' = {';
+    /*content: ' = {';
     color: var(--text-color);
+    */
+    display: none;
 }
 
 .skill-category ul {
@@ -396,15 +394,7 @@ section p::before {
     position: relative;
 }
 
-.project-card::before {
-    content: 'new Project(';
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    background-color: var(--bg-color);
-    padding: 0 8px;
-    color: var(--function-color);
-}
+
 
 .project-card:hover {
     transform: translateY(-5px);
@@ -418,10 +408,6 @@ section p::before {
 
 .project-card h3::before {
     content: 'name: "';
-}
-
-.project-card h3::after {
-    content: '",';
 }
 
 .project-card p {
@@ -501,11 +487,10 @@ section p::before {
 }
 
 .project-card::after {
-    content: ');';
     position: absolute;
     bottom: 15px;
     right: 20px;
-    color: var(--text-color);
+    
 }
 
 /* Contact Section */
