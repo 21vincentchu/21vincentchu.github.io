@@ -406,9 +406,6 @@ section p {
     color: var(--string-color);
 }
 
-.project-card h3::before {
-    content: 'name: "';
-}
 
 .project-card p {
     margin-bottom: 1.5rem;
@@ -432,17 +429,6 @@ section p {
     margin-bottom: 1.5rem;
 }
 
-.project-links::before {
-    content: 'links: [';
-    color: var(--property-color);
-    margin-right: 0.5rem;
-}
-
-.project-links::after {
-    content: '],';
-    color: var(--property-color);
-    margin-left: 0.5rem;
-}
 
 .project-links a::before, .project-links a::after {
     display: none;
@@ -455,7 +441,6 @@ section p {
 }
 
 .project-tags::before {
-    content: 'technologies: [';
     color: var(--property-color);
     display: block;
     width: 100%;
@@ -463,7 +448,6 @@ section p {
 }
 
 .project-tags::after {
-    content: ']';
     color: var(--property-color);
     display: block;
     width: 100%;
@@ -499,20 +483,6 @@ section p {
     flex-direction: column;
     gap: 1.5rem;
     max-width: 500px;
-}
-
-.contact-options::before {
-    content: 'const contact = {';
-    color: var(--keyword-color);
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.contact-options::after {
-    content: '};';
-    color: var(--text-color);
-    display: block;
-    margin-top: 1rem;
 }
 
 .contact-option {
