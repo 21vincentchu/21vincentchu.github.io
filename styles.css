@@ -87,11 +87,13 @@ nav {
 /* Logo Styling */
 .logo {
     position: relative;
+    color: #61afef; 
 }
 
 .logo a {
     display: inline-block;
     text-decoration: none;
+    color: inherit;
 }
 
 .logo a img {
@@ -108,6 +110,9 @@ nav {
 
 .nav-links {
     display: flex;
+    justify-content: flex-end;
+    margin-left: auto; /* Pushes nav to the right */
+
 }
 
 .nav-links a {
