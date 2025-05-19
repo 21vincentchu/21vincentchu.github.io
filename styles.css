@@ -90,20 +90,21 @@ nav {
 }
 
 .logo a {
+    display: inline-block;
     text-decoration: none;
-    color: var(--function-color);
-    font-weight: 600;
-    font-size: 1.5rem;
 }
 
-.logo a:hover {
-    color: var(--highlight);
+.logo a img {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
-.logo a::before, .logo a::after {
-    content: none;
-    display: none;
+.logo a:hover img {
+    filter: brightness(1.2);
 }
+
+
 
 .nav-links {
     display: flex;
