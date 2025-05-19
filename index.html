@@ -24,9 +24,9 @@
 
     <header>
         <div class="intro-text">
-            <p class="greeting">Hello! 👋</p>
-            <h1>I'm Vincent Chu.</h1>
-            <h2>A backend developer.</h2>
+            <p class="greeting terminal-cursor">Hello! 👋</p>
+            <h1>Vincent Chu</h1>
+            <h2>Backend Developer</h2>
             <p class="tagline">I build robust, scalable server-side applications.</p>
             
             <div class="social-links">
@@ -45,7 +45,7 @@
         </div>
     </header>
 
-    <section id="about">
+    <section id="about" data-line-numbers="10 11 12 13 14 15">
         <div class="section-header">
             <div class="section-decorator"></div>
             <h2>About Me</h2>
@@ -54,7 +54,7 @@
         <p>When I'm not coding, you can find me [your hobbies/interests].</p>
     </section>
 
-    <section id="skills">
+    <section id="skills" data-line-numbers="20 21 22 23 24 25 26 27 28 29 30">
         <div class="section-header">
             <div class="section-decorator"></div>
             <h2>My Stack</h2>
@@ -100,7 +100,7 @@
         </div>
     </section>
 
-    <section id="projects">
+    <section id="projects" data-line-numbers="40 41 42 43 44 45 46 47">
         <div class="section-header">
             <div class="section-decorator"></div>
             <h2>Projects</h2>
@@ -125,18 +125,18 @@
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" data-line-numbers="50 51 52 53 54 55">
         <div class="section-header">
             <div class="section-decorator"></div>
             <h2>Get In Touch</h2>
         </div>
         <p>Feel free to reach out for collaboration or opportunities!</p>
         <div class="contact-options">
-            <a href="mailto:21vincentchu@gmail.com" class="contact-option">
+            <a href="mailto:21vincentchu@gmail.com" class="contact-option" data-type="email">
                 <i class="fas fa-envelope"></i>
                 <span>21vincentchu@gmail.com</span>
             </a>
-            <a href="tel:3143472150" class="contact-option">
+            <a href="tel:3143472150" class="contact-option" data-type="phone">
                 <i class="fas fa-phone"></i>
                 <span>314-347-2150</span>
             </a>
@@ -148,6 +148,23 @@
     </footer>
 
     <!-- JavaScript for animations -->
-    <script src="script.js"></script>
+    <script>
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all sections and skill categories
+        document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
