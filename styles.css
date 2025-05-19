@@ -169,7 +169,6 @@ h1 {
     color: var(--class-color);
 }
 
-
 h2 {
     font-size: 1.8rem;
     color: var(--function-color);
@@ -178,9 +177,11 @@ h2 {
 }
 
 h2::before {
-    content: 'function ';
+    /*content: 'function ';
     color: var(--keyword-color);
     font-size: 1.4rem;
+    */
+    display: none;
 }
 
 
@@ -369,11 +370,13 @@ section p::before {
 }
 
 .skill-category::after {
-    content: '};';
+    /*content: '};';
     position: absolute;
     bottom: 15px;
     right: 20px;
     color: var(--text-color);
+    */
+    display: none;
 }
 
 /* Projects Section */
