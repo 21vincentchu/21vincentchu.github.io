@@ -59,6 +59,7 @@ nav {
     backdrop-filter: blur(5px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
+    height: 70px; /* Add a fixed height to the nav */
 }
 
 .nav-container {
@@ -67,45 +68,67 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.5rem 3rem;
+    padding: 0 3rem; /* Remove vertical padding */
+    height: 100%; /* Make container take full height of nav */
 }
 
 /* Logo Styling */
 .logo {
     position: relative;
-    color: #61afef; 
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .logo a {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: inherit;
+    height: 100%;
 }
 
-.logo a img {
-    height: 40px;
+.logo svg {
+    height: 65px;
     width: auto;
     display: block;
 }
+
+.logo svg .cls-1 {
+    fill: #61afef;
+}
+
+.logo a:hover svg {
+    filter: brightness(1.2);
+}
+
+.logo a img {
+    max-height: 35px; /* Use max-height instead of fixed height */
+    width: auto; /* Maintain aspect ratio */
+    display: block;
+}
+
 
 .logo a:hover img {
     filter: brightness(1.2);
 }
 
-
-
 .nav-links {
     display: flex;
     justify-content: flex-end;
-    margin-left: auto; /* Pushes nav to the right */
-
+    margin-left: auto;
+    align-items: center;
+    height: 100%; /* Take full height */
+    gap: 2rem; /* Use gap instead of margin-left on individual links */
 }
 
 .nav-links a {
-    margin-left: 2rem;
+    height: 100%; /* Make links take full height */
+    display: flex; /* Make links flex containers */
+    align-items: center; /* Center content vertically */
     font-weight: 500;
     color: var(--function-color);
-    padding: 0.3rem 0;
+    margin-left: 0; /* Remove margin-left since we're using gap */
+    padding: 0; /* Remove vertical padding */
 }
 
 .nav-links a::before, .nav-links a::after {
