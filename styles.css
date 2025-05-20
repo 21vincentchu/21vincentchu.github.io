@@ -986,7 +986,6 @@ footer::after {
 
 /* Add a code-like syntax before the heading */
 .photo-gallery-container h3::before {
-    content: 'const myPhotos = ';
     color: var(--keyword-color);
     font-size: 0.9rem;
     position: absolute;
