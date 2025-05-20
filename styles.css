@@ -40,45 +40,104 @@
 .theme-toggle {
     display: flex;
     align-items: center;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
 }
 
-#theme-switch {
-    background: transparent;
-    border: none;
-    color: var(--function-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+}
+
+.toggle-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
 }
 
-#theme-switch:hover {
-    background-color: rgba(97, 175, 239, 0.1);
-    color: var(--highlight);
+.toggle-track {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+    background-color: rgba(62, 68, 81, 0.7);
+    border-radius: 34px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
-/* Show/hide sun and moon icons based on theme */
-#theme-switch .fa-sun {
-    display: none;
+.toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--function-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#theme-switch .fa-moon {
-    display: block;
+.toggle-input:checked + .toggle-label .toggle-thumb {
+    transform: translateX(22px);
 }
 
-[data-theme="light"] #theme-switch .fa-sun {
-    display: block;
+.toggle-input:checked + .toggle-label .toggle-track {
+    background-color: rgba(97, 175, 239, 0.2);
 }
 
-[data-theme="light"] #theme-switch .fa-moon {
-    display: none;
+.toggle-text-dark,
+.toggle-text-light {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.toggle-text-dark {
+    color: var(--function-color);
+}
+
+.toggle-text-light {
+    color: var(--comment-color);
+}
+
+/* When in dark mode, highlight "Dark" */
+[data-theme="dark"] .toggle-text-dark {
+    color: var(--function-color);
+}
+
+[data-theme="dark"] .toggle-text-light {
+    color: var(--comment-color);
+}
+
+/* When in light mode, highlight "Light" */
+[data-theme="light"] .toggle-text-dark {
+    color: var(--comment-color);
+}
+
+[data-theme="light"] .toggle-text-light {
+    color: var(--function-color);
+}
+
+/* Adjustments for small screens */
+@media (max-width: 768px) {
+    .toggle-text-dark, 
+    .toggle-text-light {
+        display: none;
+    }
+    
+    .theme-toggle {
+        margin-left: 0.75rem;
+    }
 }
 
 /* Additional adjustments for light theme */
@@ -132,8 +191,6 @@ a {
 a:hover {
     color: var(--highlight);
 }
-
-
 
 /* Navigation */
 nav {
@@ -707,13 +764,13 @@ footer::after {
 .clock-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end; /* Align to the right */
     justify-content: center;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     margin-right: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.4rem 0.6rem;
     border-radius: 6px;
-    background-color: rgba(62, 68, 81, 0.4);
+    background-color: rgba(62, 68, 81, 0.3); /* Slightly more transparent */
     transition: all 0.3s ease;
 }
 
@@ -730,16 +787,18 @@ footer::after {
 }
 
 .timezone {
-    font-size: 0.75rem;
+    font-size: 0.65rem; /* Smaller font */
     color: var(--comment-color);
-    margin-bottom: 0.1rem;
+    margin-bottom: 0;
+    line-height: 1;
 }
 
 .time {
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Smaller font */
     font-weight: 500;
     color: var(--function-color);
     font-family: var(--font-code);
+    line-height: 1.2;
 }
 
 /* Animation for the seconds */
@@ -828,4 +887,25 @@ footer::after {
 .loaded #loading-screen {
     opacity: 0;
     visibility: hidden;
+}
+
+/* Email Copy Button Styles */
+.copy-email {
+    cursor: pointer;
+    position: relative;
+}
+
+.copy-email:active {
+    transform: scale(0.97);
+}
+
+/* Animation for the copy confirmation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.copy-email .fa-check {
+    color: var(--string-color);
+    animation: fadeIn 1.0s ease;
 }
