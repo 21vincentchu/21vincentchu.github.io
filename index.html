@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body id ="top">
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">
+                <span class="loading-message">Loading Vinny's Website! </span>
+                <span class="loading-dots">...</span>
+            </div>
+        </div>
+    </div>
+
     <nav>
         <div class="nav-container">
             <div class="logo">
@@ -25,13 +35,25 @@
                     </svg>
                 </a>
             </div>
-            
+
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
                 <a href="Vincent Chu_April2025_Resume.pdf" target="_blank">Resume</a>
+
+                <div class="clock-container">
+                    <div class="timezone">My Current Time</div>
+                    <div class="time" id="live-clock">--:--:-- PM</div>
+                </div>
+
+                <div class="theme-toggle">
+                    <button id="theme-switch" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,7 +63,7 @@
             <p class="greeting terminal-cursor">Hello! 👋</p>
             <h1>Vincent Chu</h1>
             <h2>Backend Developer</h2>
-            <p class="tagline">I build robust backend applications and also specialize in AI, machine learning, data analytics, and data engineering</p>
+            <p class="tagline">I build robust backend applications and am intersted in AI, machine learning, data analytics, and data engineering</p>
             
             <div class="social-links">
                 <a href="https://github.com/21vincentchu" target="_blank"><i class="fab fa-github"></i></a>
@@ -288,24 +310,90 @@
         <p>&copy; 2025 Vincent Chu | Built with GitHub Pages | logo by <a href="https://codytu.com/">codytu.com</a></p>
     </footer>
 
-    <!-- JavaScript for animations -->
-    <script>
-        // Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+<script>
+    // Loading Screen Functionality
+    window.addEventListener('load', () => {
+        // Add a small delay to make the loading screen visible for at least a moment
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 1000); // Adjust time as needed (in milliseconds)
+    });
 
-        // Observe all sections and skill categories
-        document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
         });
-    </script>
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all sections and skill categories
+    document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+
+    // Theme Toggle Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeSwitch = document.getElementById('theme-switch');
+        
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Set initial theme
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Toggle theme when button is clicked
+        themeSwitch.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // This will automatically update the button appearance via CSS
+        });
+    });
+
+    // Live Clock Functionality
+    function updateClock() {
+        const clockElement = document.getElementById('live-clock');
+        if (!clockElement) return;
+        
+        // Create a date object for Central Time (US)
+        const options = {
+            timeZone: 'America/Chicago',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        };
+        
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+        const timeString = formatter.format(new Date());
+        
+        // Format to highlight seconds
+        const timeComponents = timeString.split(':');
+        let hours = timeComponents[0];
+        let minutes = timeComponents[1];
+        let secondsAndPeriod = timeComponents[2].split(' ');
+        let seconds = secondsAndPeriod[0];
+        let period = secondsAndPeriod[1];
+        
+        // Create the formatted time with the seconds highlighted
+        clockElement.innerHTML = `${hours}:${minutes}:<span class="seconds">${seconds}</span> ${period}`;
+    }
+
+    // Update the clock immediately and then every second
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+
+
 </body>
 </html>

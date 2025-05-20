@@ -18,6 +18,91 @@
     --font-code: 'Fira Code', monospace;
 }
 
+/* Light theme variables */
+[data-theme="light"] {
+    --bg-color: #f5f5f5;
+    --text-color: #333333;
+    --comment-color: #6a737d;
+    --keyword-color: #9c27b0;
+    --function-color: #0366d6;
+    --string-color: #22863a;
+    --number-color: #e06c75;
+    --variable-color: #d73a49;
+    --property-color: #6f42c1;
+    --class-color: #6f42c1;
+    --highlight: #0366d6;
+    --line-number: #babbbd;
+    --selection: rgba(0, 0, 0, 0.1);
+    --border-color: #e1e4e8;
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+#theme-switch {
+    background: transparent;
+    border: none;
+    color: var(--function-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+#theme-switch:hover {
+    background-color: rgba(97, 175, 239, 0.1);
+    color: var(--highlight);
+}
+
+/* Show/hide sun and moon icons based on theme */
+#theme-switch .fa-sun {
+    display: none;
+}
+
+#theme-switch .fa-moon {
+    display: block;
+}
+
+[data-theme="light"] #theme-switch .fa-sun {
+    display: block;
+}
+
+[data-theme="light"] #theme-switch .fa-moon {
+    display: none;
+}
+
+/* Additional adjustments for light theme */
+[data-theme="light"] .skill-category,
+[data-theme="light"] .project-card,
+[data-theme="light"] .contact-option {
+    background-color: rgba(225, 228, 232, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] nav {
+    background-color: rgba(245, 245, 245, 0.95);
+}
+
+[data-theme="light"] footer {
+    background-color: rgba(245, 245, 245, 0.95);
+}
+
+[data-theme="light"] .skill-category::before,
+[data-theme="light"] .profile-image::before,
+[data-theme="light"] .contact-option::before {
+    background-color: var(--bg-color);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -258,7 +343,6 @@ h2 {
     border-radius: 8px;
     object-fit: cover;
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Sections */
@@ -615,4 +699,133 @@ footer::after {
     .timeline-content time {
         font-size: 0.85rem;
     }
+}
+
+/* Add this to your styles.css file */
+
+/* Clock styling */
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: rgba(62, 68, 81, 0.4);
+    transition: all 0.3s ease;
+}
+
+.clock-container:hover {
+    background-color: rgba(62, 68, 81, 0.7);
+}
+
+[data-theme="light"] .clock-container {
+    background-color: rgba(225, 228, 232, 0.4);
+}
+
+[data-theme="light"] .clock-container:hover {
+    background-color: rgba(225, 228, 232, 0.7);
+}
+
+.timezone {
+    font-size: 0.75rem;
+    color: var(--comment-color);
+    margin-bottom: 0.1rem;
+}
+
+.time {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--function-color);
+    font-family: var(--font-code);
+}
+
+/* Animation for the seconds */
+@keyframes pulseSeconds {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.time span.seconds {
+    display: inline-block;
+    animation: pulseSeconds 1s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .clock-container {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loader-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(97, 175, 239, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--function-color);
+    animation: spin 1s linear infinite;
+}
+
+.loader-text {
+    font-family: var(--font-code);
+    color: var(--function-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: flex;
+}
+
+.loading-dots {
+    overflow: hidden;
+    animation: loadingDots 1.5s infinite steps(4, end);
+    width: 24px;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loadingDots {
+    0% { width: 0; }
+    100% { width: 24px; }
+}
+
+.loaded #loading-screen {
+    opacity: 0;
+    visibility: hidden;
 }
