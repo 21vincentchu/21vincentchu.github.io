@@ -40,7 +40,8 @@
 .theme-toggle {
     display: flex;
     align-items: center;
-    margin-left: 1.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0;
 }
 
 .toggle-switch {
@@ -66,7 +67,7 @@
 .toggle-track {
     position: relative;
     display: inline-block;
-    width: 44px;
+    width: 33px;
     height: 22px;
     background-color: rgba(62, 68, 81, 0.7);
     border-radius: 34px;
@@ -87,7 +88,7 @@
 }
 
 .toggle-input:checked + .toggle-label .toggle-thumb {
-    transform: translateX(22px);
+    transform: translateX(11px);
 }
 
 .toggle-input:checked + .toggle-label .toggle-track {
@@ -210,7 +211,7 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 3rem; /* Remove vertical padding */
+    padding: 0 2rem; /* Remove vertical padding */
     height: 100%; /* Make container take full height of nav */
 }
 
@@ -738,7 +739,7 @@ footer::after {
 }
 
 .timeline-content time {
-    font-size: 0.9rem;
+    font-size: 0.65rem;
     color: var(--string-color);
 }
 
@@ -758,20 +759,23 @@ footer::after {
     }
 }
 
-/* Add this to your styles.css file */
 
+/* Add styling for "My Current Time" in the clock */
+.clock-container .timezone {
+    white-space: nowrap; /* Prevent wrapping */
+}
 /* Clock styling */
 .clock-container {
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* Align to the right */
     justify-content: center;
-    margin-left: 1rem;
-    margin-right: 0.5rem;
+    margin-left: 1.5rem;
+    margin-right: 0.75rem;
     padding: 0.4rem 0.6rem;
     border-radius: 6px;
     background-color: rgba(62, 68, 81, 0.3); /* Slightly more transparent */
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 .clock-container:hover {
@@ -794,7 +798,7 @@ footer::after {
 }
 
 .time {
-    font-size: 0.85rem; /* Smaller font */
+    font-size: 0.65rem; /* Smaller font */
     font-weight: 500;
     color: var(--function-color);
     font-family: var(--font-code);
@@ -907,5 +911,61 @@ footer::after {
 
 .copy-email .fa-check {
     color: var(--string-color);
-    animation: fadeIn 1.0s ease;
+    animation: fadeIn 3.0s ease;
+}
+
+/* Purple gradient for resume link */
+.nav-links a.resume-link {
+    font-weight: 900;
+    /* Gradient using keyword color (purple) and highlight color (blue) */
+    background: linear-gradient(90deg, var(--keyword-color), var(--property-color));    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Standard property instead of text-fill-color */
+    border: none;
+    position: relative;
+}
+
+.nav-links a.resume-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    /* Matching gradient for the underline */
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-links a.resume-link:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Ensure border-bottom is removed on hover */
+.nav-links a.resume-link:hover {
+    border-bottom: none;
+}
+
+/* Add a bit more emphasis */
+.nav-links a.resume-link {
+    position: relative;
+    padding: 0 0.6rem;
+    margin: 0 0.2rem;
+}
+
+/* Add a subtle glow effect on hover */
+.nav-links a.resume-link:hover::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 8px);
+    background: linear-gradient(90deg, var(--keyword-color), var(--highlight));
+    opacity: 0.1;
+    border-radius: 4px;
+    z-index: -1;
 }
