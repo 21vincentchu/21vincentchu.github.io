@@ -9,16 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body id ="top">
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">
+                <span class="loading-message">Loading Vincent's Website! </span>
+                <span class="loading-dots">...</span>
+            </div>
+        </div>
+    </div>
     <nav>
         <div class="nav-container">
             <div class="logo">
                 <a href="/">
-                    <!-- Embedded SVG instead of image -->
+                    <!-- Your SVG logo here -->
                     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
                         <defs>
-                        <style>
-                            .cls-1 { fill: #61afef; stroke-width: 0px; }
-                        </style>
+                            <style>
+                                .cls-1 { fill: #61afef; stroke-width: 0px; }
+                            </style>
                         </defs>
                         <path class="cls-1" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
                         <path class="cls-1" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
@@ -26,12 +35,43 @@
                 </a>
             </div>
             
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-                <a href="Vincent Chu_April2025_Resume.pdf" target="_blank">Resume</a>
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <!-- Nav links now wrapped in a container for better mobile control -->
+            <div class="nav-wrapper">
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                    <a href="Vincent Chu_April2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
+                </div>
+                
+                <!-- Utilities container for clock and theme toggle -->
+                <div class="nav-utilities">
+                    <div class="clock-container">
+                        <div class="timezone">My Current Time</div>
+                        <div class="time" id="live-clock">--:--:-- PM</div>
+                    </div>
+                    
+                    <div class="theme-toggle">
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="theme-switch" class="toggle-input">
+                            <label for="theme-switch" class="toggle-label">
+                                <span class="toggle-text-dark">Dark</span>
+                                <span class="toggle-track">
+                                    <span class="toggle-thumb"></span>
+                                </span>
+                                <span class="toggle-text-light">Light</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,7 +81,7 @@
             <p class="greeting terminal-cursor">Hello! 👋</p>
             <h1>Vincent Chu</h1>
             <h2>Backend Developer</h2>
-            <p class="tagline">I build robust backend applications and also specialize in AI, machine learning, data analytics, and data engineering</p>
+            <p class="tagline">First, feel free to call me Vinny! I build robust backend applications and am intersted in AI, machine learning, data analytics, and data engineering</p>
             
             <div class="social-links">
                 <a href="https://github.com/21vincentchu" target="_blank"><i class="fab fa-github"></i></a>
@@ -70,6 +110,40 @@
 
         <p>I'm a backend developer with expertise in building reliable, scalable server-side applications with a strong foundation in programming and problem-solving.</p>
         <p>When I'm not coding, you can find me at my local cafe drinking coffee, taking photos on my Fujifilm XM5, watching F1 (Tifosi), listening to music, nerding about audio products and computers, and collecting custom mechanical keyboards.</p>
+
+        <div class="photo-gallery-container">
+            <h3>My Photos</h3>
+            <div class="photo-gallery">
+                <figure class="gallery-item">
+                    <img src="images/photo1.jpg" alt="Record Store" loading="lazy">
+                    <figcaption>My favorite record store</figcaption>
+
+                </figure>
+                <figure class="gallery-item">
+                    <img src="images/photo2.jpg" alt="My computer set" loading="lazy">
+                    <figcaption>My setup</figcaption>
+
+                </figure>
+                <figure class="gallery-item">
+                    <img src="images/photo3.jpg" alt="coffee shop with nice lighting" loading="lazy">
+                    <figcaption>Northwest Coffee in St.Louis</figcaption>
+
+                </figure>
+                <figure class="gallery-item">
+                    <img src="images/photo4.jpg" alt="Custom Mechanical Keyboard" loading="lazy">
+                    <figcaption>Custom Mechanical Keyboard</figcaption>
+
+                </figure>
+                <figure class="gallery-item">
+                    <img src="images/photo5.jpg" alt="My cat, Taro" loading="lazy">
+                    <figcaption>My cat, Taro</figcaption>
+                </figure>
+                <figure class="gallery-item">
+                    <img src="images/photo6.jpg" alt="Picture of memorial union on mizzou campus" loading="lazy">
+                    <figcaption>Memorial Union at Mizzou</figcaption>
+                </figure>
+            </div>
+        </div>
 
     <!-----------------------EXPERIENCE SECTION--------------------->
 
@@ -199,18 +273,15 @@
                 </ul>
             </div>
         
-            <!--
             <div class="skill-category">
                 <h3>Languages</h3>
                 <ul>
                     <li><i class="fas fa-language"></i> English (Native)</li>
                     <li><i class="fas fa-language"></i> Vietnamese (Native)</li>
                 </ul>
-            </div>
-            -->
+            </div>    
         
         </div>
-        
     </section>
     
     <section id="projects" data-line-numbers="40 41 42 43 44 45 46 47">
@@ -273,13 +344,9 @@
         </div>
         <p>Feel free to reach out for collaboration or opportunities!</p>
         <div class="contact-options">
-            <a href="mailto:21vincentchu@gmail.com" class="contact-option" data-type="email">
+            <a href="#" class="contact-option copy-email" data-type="email">
                 <i class="fas fa-envelope"></i>
-                <span>21vincentchu@gmail.com</span>
-            </a>
-            <a href="tel:3143472150" class="contact-option" data-type="phone">
-                <i class="fas fa-phone"></i>
-                <span>314-347-2150</span>
+                <span>Copy my email address</span>
             </a>
         </div>
     </section>
@@ -288,24 +355,186 @@
         <p>&copy; 2025 Vincent Chu | Built with GitHub Pages | logo by <a href="https://codytu.com/">codytu.com</a></p>
     </footer>
 
-    <!-- JavaScript for animations -->
-    <script>
-        // Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+<script>
+    // Loading Screen Functionality
+    window.addEventListener('load', () => {
+        // Add a small delay to make the loading screen visible for at least a moment
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 1000); // Adjust time as needed (in milliseconds)
+    });
 
-        // Observe all sections and skill categories
-        document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
         });
-    </script>
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all sections and skill categories
+    document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+
+    // Theme Toggle Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    // Check for saved theme preference or use device preference
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+    
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // Set the checkbox state based on the theme
+    themeSwitch.checked = savedTheme === 'light';
+    
+    // Toggle theme when checkbox is clicked
+    themeSwitch.addEventListener('change', () => {
+        const newTheme = themeSwitch.checked ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+});
+
+    // Live Clock Functionality
+    function updateClock() {
+        const clockElement = document.getElementById('live-clock');
+        if (!clockElement) return;
+        
+        // Create a date object for Central Time (US)
+        const options = {
+            timeZone: 'America/Chicago',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        };
+        
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+        const timeString = formatter.format(new Date());
+        
+        // Format to highlight seconds
+        const timeComponents = timeString.split(':');
+        let hours = timeComponents[0];
+        let minutes = timeComponents[1];
+        let secondsAndPeriod = timeComponents[2].split(' ');
+        let seconds = secondsAndPeriod[0];
+        let period = secondsAndPeriod[1];
+        
+        // Create the formatted time with the seconds highlighted
+        clockElement.innerHTML = `${hours}:${minutes}:<span class="seconds">${seconds}</span> ${period}`;
+    }
+
+    // Update the clock immediately and then every second
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Add this to your existing JavaScript at the bottom of your HTML file
+
+// Email protection
+document.addEventListener("DOMContentLoaded", function () {
+  // Get all elements with the copy-email class
+  const copyLinks = document.querySelectorAll(".copy-email");
+
+    // Your email details
+    const user = "21vincentchu";
+    const domain = "gmail.com";
+    const email = `${user}@${domain}`;
+    
+    // Add click listener to each copy button
+    copyLinks.forEach(copyLink => {
+        copyLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        
+        if (!navigator.clipboard) {
+            // Fallback for browsers that don't support clipboard API
+            const temp = document.createElement("textarea");
+            temp.value = email;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+        } else {
+            // Modern browsers
+            navigator.clipboard.writeText(email);
+        }
+        
+        // Show feedback (optional)
+        const originalText = this.innerHTML;
+        this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+            this.innerHTML = originalText;
+        }, 1000);
+        });
+    });
+    });
+    // Add this to your existing JavaScript
+
+// Mobile Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navWrapper = document.querySelector('.nav-wrapper');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    // Toggle menu when hamburger is clicked
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            document.body.classList.toggle('menu-open'); // Prevent scrolling when menu is open
+        });
+    }
+    
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenuToggle.classList.remove('active');
+            navWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.nav-wrapper') && 
+            !event.target.closest('.mobile-menu-toggle') && 
+            navWrapper.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    });
+    
+    // Add some additional CSS for preventing scroll
+    const style = document.createElement('style');
+    style.textContent = `
+        body.menu-open {
+            overflow: hidden;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navWrapper.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    });
+});
+</script>
+
+
 </body>
 </html>
