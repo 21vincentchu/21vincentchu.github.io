@@ -939,14 +939,16 @@ body.loaded footer {
 
 /* Updated loading screen - smoother transition */
 #loading-screen {
-    position: fixed;
+position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     background: var(--function-color);
     z-index: 9999;
-    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+    display: block; /* Force display */
+    opacity: 1; /* Force visibility */
+    transition: opacity 0.6s ease-out 0.3s, visibility 0.6s ease-out 0.3s;
 }
 
 .wipe-reveal {
