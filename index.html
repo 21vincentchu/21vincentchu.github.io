@@ -209,9 +209,8 @@
             <div class="section-decorator"></div>
             <h2>My Stack</h2>
         </div>
-    
-        <div class="skills-grid">
 
+        <div class="skills-grid">
             <div class="skill-category">
                 <h3>I'm currently learning...</h3>
                 <ul>
@@ -310,7 +309,7 @@
         </div>
         
         <div class="projects-grid">
-            <!-- AI Server Project -->
+            <!---------------- AI Server Project ----------------------->
             <div class="project-card">
                 <h3>AI Backend+Frontend Server</h3>
                 <p>Created the infrastructure for an on-site AI Server using Ollama and OpenWebUI, allowing VR headset users to query a local LLM with domain-specific data using internal documents</p>
@@ -350,12 +349,9 @@
                     <span>Docker</span>
                 </div>
             </div>          
-
-            
         </div>
     </section>
     
-
     <section id="contact" data-line-numbers="50 51 52 53 54 55">
         <div class="section-header">
             <div class="section-decorator"></div>
@@ -456,19 +452,15 @@
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Add this to your existing JavaScript at the bottom of your HTML file
 
 // Email protection
 document.addEventListener("DOMContentLoaded", function () {
-  // Get all elements with the copy-email class
   const copyLinks = document.querySelectorAll(".copy-email");
 
-    // Your email details
     const user = "21vincentchu";
     const domain = "gmail.com";
     const email = `${user}@${domain}`;
     
-    // Add click listener to each copy button
     copyLinks.forEach(copyLink => {
         copyLink.addEventListener("click", function (e) {
         e.preventDefault();
@@ -497,7 +489,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     });
-    // Add this to your existing JavaScript
 
 // Mobile Navigation
 document.addEventListener('DOMContentLoaded', function() {
@@ -553,7 +544,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
-
 </body>
 </html>
