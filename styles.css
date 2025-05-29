@@ -521,6 +521,52 @@ section p {
     color: var(--property-color);
 }
 
+/* Logo Expand to Fill Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+
+.expanding-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: logo-expand-fill 2.5s ease-out forwards;
+}
+
+.expanding-circle svg {
+    width: 80px;
+    height: 80px;
+    fill: var(--function-color);
+}
+
+@keyframes logo-expand-fill {
+    0% { 
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(25);
+    }
+    100% { 
+        transform: scale(50);
+        opacity: 0;
+    }
+}
+
+.loaded #loading-screen {
+    opacity: 0;
+    visibility: hidden;
+}
+
 /* Projects Section */
 .projects-grid {
     display: grid;
@@ -937,33 +983,7 @@ body.loaded footer {
     transition-delay: 0.7s;
 }
 
-/* Updated loading screen - smoother transition */
-#loading-screen {
-position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--function-color);
-    z-index: 9999;
-    display: block; /* Force display */
-    opacity: 1; /* Force visibility */
-    transition: opacity 0.6s ease-out 0.3s, visibility 0.6s ease-out 0.3s;
-}
-
-.wipe-reveal {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color);
-    clip-path: circle(0% at center);
-    animation: circle-wipe-reveal 2.0s ease-in-out forwards;
-}
-
-@keyframes circle-wipe-reveal {
-    0% { clip-path: circle(0% at center); }
-    100% { clip-path: circle(100% at center); }
-}
+/* Logo Zoom Loading */
 
 /* Smooth loading screen fade out */
 .loaded #loading-screen {
