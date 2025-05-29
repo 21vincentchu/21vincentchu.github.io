@@ -880,66 +880,94 @@ footer::after {
     }
 }
 
-/* Loading Screen */
+/* Initially hide all main content while loading */
+body:not(.loaded) nav,
+body:not(.loaded) header,
+body:not(.loaded) section,
+body:not(.loaded) footer {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Smooth transition for main content */
+nav, header, section, footer {
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Staggered animation delays for different sections */
+body.loaded nav {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+}
+
+body.loaded header {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+body.loaded section:nth-of-type(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+body.loaded section:nth-of-type(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+body.loaded section:nth-of-type(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+body.loaded section:nth-of-type(4) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.6s;
+}
+
+body.loaded footer {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.7s;
+}
+
+/* Updated loading screen - smoother transition */
 #loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh;
+    background: var(--function-color);
     z-index: 9999;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
 }
 
-.loader-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+.wipe-reveal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    clip-path: circle(0% at center);
+    animation: circle-wipe-reveal 2.0s ease-in-out forwards;
 }
 
-.loader-spinner {
-    width: 48px;
-    height: 48px;
-    border: 4px solid rgba(97, 175, 239, 0.3);
-    border-radius: 50%;
-    border-top-color: var(--function-color);
-    animation: spin 1s linear infinite;
+@keyframes circle-wipe-reveal {
+    0% { clip-path: circle(0% at center); }
+    100% { clip-path: circle(100% at center); }
 }
 
-.loader-text {
-    font-family: var(--font-code);
-    color: var(--function-color);
-    font-size: 1.2rem;
-    font-weight: 500;
-    display: flex;
-}
-
-.loading-dots {
-    overflow: hidden;
-    animation: loadingDots 1.5s infinite steps(4, end);
-    width: 24px;
-    display: inline-block;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes loadingDots {
-    0% { width: 0; }
-    100% { width: 24px; }
-}
-
+/* Smooth loading screen fade out */
 .loaded #loading-screen {
     opacity: 0;
     visibility: hidden;
+    transition-delay: 0.1s; /* Small delay before hiding loading screen */
 }
 
 /* Email Copy Button Styles */
