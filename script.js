@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
   if (wipe) {
     setTimeout(() => {
       wipe.remove();
-    }, 1300); // just after animation ends
+    }, 5000); // just after animation ends
   }
 });
 
