@@ -18,116 +18,7 @@
     --font-code: 'Fira Code', monospace;
 }
 
-/* Light theme variables */
-[data-theme="light"] {
-    --bg-color: #f5f5f5;
-    --text-color: #333333;
-    --comment-color: #6a737d;
-    --keyword-color: #9c27b0;
-    --function-color: #0366d6;
-    --string-color: #22863a;
-    --number-color: #e06c75;
-    --variable-color: #d73a49;
-    --property-color: #6f42c1;
-    --class-color: #6f42c1;
-    --highlight: #0366d6;
-    --line-number: #babbbd;
-    --selection: rgba(0, 0, 0, 0.1);
-    --border-color: #e1e4e8;
-}
 
-/* Theme toggle button styling */
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    margin-left: 0.5rem;
-    margin-right: 0;
-}
-
-.toggle-switch {
-    position: relative;
-    display: inline-block;
-}
-
-.toggle-input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.toggle-label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    gap: 8px;
-}
-
-.toggle-track {
-    position: relative;
-    display: inline-block;
-    width: 33px;
-    height: 22px;
-    background-color: rgba(62, 68, 81, 0.7);
-    border-radius: 34px;
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
-}
-
-.toggle-thumb {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: var(--function-color);
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.toggle-input:checked + .toggle-label .toggle-thumb {
-    transform: translateX(11px);
-}
-
-.toggle-input:checked + .toggle-label .toggle-track {
-    background-color: rgba(97, 175, 239, 0.2);
-}
-
-.toggle-text-dark,
-.toggle-text-light {
-    font-family: var(--font-code);
-    font-size: 0.7rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.toggle-text-dark {
-    color: var(--function-color);
-}
-
-.toggle-text-light {
-    color: var(--comment-color);
-}
-
-/* When in dark mode, highlight "Dark" */
-[data-theme="dark"] .toggle-text-dark {
-    color: var(--function-color);
-}
-
-[data-theme="dark"] .toggle-text-light {
-    color: var(--comment-color);
-}
-
-/* When in light mode, highlight "Light" */
-[data-theme="light"] .toggle-text-dark {
-    color: var(--comment-color);
-}
-
-[data-theme="light"] .toggle-text-light {
-    color: var(--function-color);
-}
 
 /* Adjustments for small screens */
 @media (max-width: 768px) {
@@ -139,58 +30,6 @@
     .theme-toggle {
         margin-left: 0.75rem;
     }
-}
-
-/* Additional adjustments for light theme */
-[data-theme="light"] .skill-category,
-[data-theme="light"] .project-card,
-[data-theme="light"] .contact-option {
-    background-color: rgba(225, 228, 232, 0.3);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] nav {
-    background-color: rgba(245, 245, 245, 0.95);
-}
-
-[data-theme="light"] footer {
-    background-color: rgba(245, 245, 245, 0.95);
-}
-
-[data-theme="light"] .skill-category::before,
-[data-theme="light"] .profile-image::before,
-[data-theme="light"] .contact-option::before {
-    background-color: var(--bg-color);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--font-code);
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    padding: 0;
-    font-size: 16px;
-}
-
-a {
-    text-decoration: none;
-    color: var(--function-color);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-a:hover {
-    color: var(--highlight);
 }
 
 /* Navigation */
@@ -521,52 +360,6 @@ section p {
     color: var(--property-color);
 }
 
-/* Logo Expand to Fill Screen */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--bg-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
-}
-
-.expanding-circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: logo-expand-fill 2.5s ease-out forwards;
-}
-
-.expanding-circle svg {
-    width: 80px;
-    height: 80px;
-    fill: var(--function-color);
-}
-
-@keyframes logo-expand-fill {
-    0% { 
-        transform: scale(1);
-    }
-    70% {
-        transform: scale(25);
-    }
-    100% { 
-        transform: scale(50);
-        opacity: 0;
-    }
-}
-
-.loaded #loading-screen {
-    opacity: 0;
-    visibility: hidden;
-}
-
 /* Projects Section */
 .projects-grid {
     display: grid;
@@ -854,11 +647,11 @@ footer::after {
     }
 }
 
-
 /* Add styling for "My Current Time" in the clock */
 .clock-container .timezone {
     white-space: nowrap; /* Prevent wrapping */
 }
+
 /* Clock styling */
 .clock-container {
     display: flex;
@@ -875,14 +668,6 @@ footer::after {
 
 .clock-container:hover {
     background-color: rgba(62, 68, 81, 0.7);
-}
-
-[data-theme="light"] .clock-container {
-    background-color: rgba(225, 228, 232, 0.4);
-}
-
-[data-theme="light"] .clock-container:hover {
-    background-color: rgba(225, 228, 232, 0.7);
 }
 
 .timezone {
@@ -924,72 +709,6 @@ footer::after {
         margin-left: 1rem;
         margin-right: 1rem;
     }
-}
-
-/* Initially hide all main content while loading */
-body:not(.loaded) nav,
-body:not(.loaded) header,
-body:not(.loaded) section,
-body:not(.loaded) footer {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* Smooth transition for main content */
-nav, header, section, footer {
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-/* Staggered animation delays for different sections */
-body.loaded nav {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.1s;
-}
-
-body.loaded header {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-}
-
-body.loaded section:nth-of-type(1) {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.3s;
-}
-
-body.loaded section:nth-of-type(2) {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
-}
-
-body.loaded section:nth-of-type(3) {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.5s;
-}
-
-body.loaded section:nth-of-type(4) {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.6s;
-}
-
-body.loaded footer {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.7s;
-}
-
-/* Logo Zoom Loading */
-
-/* Smooth loading screen fade out */
-.loaded #loading-screen {
-    opacity: 0;
-    visibility: hidden;
-    transition-delay: 0.1s; /* Small delay before hiding loading screen */
 }
 
 /* Email Copy Button Styles */
@@ -1043,12 +762,10 @@ body.loaded footer {
     transform: scaleX(1);
 }
 
-/* Ensure border-bottom is removed on hover */
 .nav-links a.resume-link:hover {
     border-bottom: none;
 }
 
-/* Add a bit more emphasis */
 .nav-links a.resume-link {
     position: relative;
     padding: 0 0.6rem;
@@ -1068,8 +785,6 @@ body.loaded footer {
     border-radius: 4px;
     z-index: -1;
 }
-
-/* Add or update these styles in your CSS file */
 
 .photo-gallery-container {
     margin-top: 3rem;
@@ -1145,15 +860,6 @@ body.loaded footer {
 
 .gallery-item:hover figcaption {
     transform: translateY(0);
-}
-
-/* Light theme adjustments */
-[data-theme="light"] .gallery-item {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="light"] .gallery-item:hover {
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
 }
 
 /* Responsive adjustments */
@@ -1298,11 +1004,6 @@ body.loaded footer {
     }
 }
 
-/* Light theme adjustments */
-[data-theme="light"] .nav-wrapper {
-    background-color: var(--bg-color);
-}
-
 /* Smaller screens */
 @media (max-width: 480px) {
     .nav-container {
@@ -1313,4 +1014,3 @@ body.loaded footer {
         height: 50px;
     }
 }
-
