@@ -1019,9 +1019,11 @@ footer::after {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background-color: var(--bg-color); /* adapts to light/dark */
-  animation: wipeUp 1.2s ease forwards;
+  background-color: var(--bg-color);
+  animation: wipeUp 1.0s ease forwards;
   pointer-events: none;
+  opacity: 1;
+  will-change: transform;
 }
 
 @keyframes wipeUp {
@@ -1037,9 +1039,24 @@ footer::after {
 header {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInHeader 0.8s ease forwards;
-  animation-delay: 1.2s; /* syncs with the page wipe */
+  animation: fadeInHeader 1.0s ease forwards;
+  animation-delay: 0.6s; /* syncs with the page wipe */
 }
+
+nav {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownNav 0.6s ease forwards;
+  animation-delay: 0.3s; /* starts early but subtly overlaps with wipe */
+}
+
+@keyframes slideDownNav {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 @keyframes fadeInHeader {
   to {
