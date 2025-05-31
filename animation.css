@@ -1,0 +1,237 @@
+#page-wipe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Cover the hero section height (nav + header content) */
+  z-index: 9999;
+  background-color: var(--bg-color);
+  animation: wipeUp 1.0s ease forwards;
+  pointer-events: none;
+  opacity: 1;
+  will-change: transform;
+}
+
+@keyframes wipeUp {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Header Fade-In Animation */
+header {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInHeader 1.2s ease forwards;
+  animation-delay: 0.6s; /* syncs with the page wipe */
+}
+
+nav {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownNav 0.8s ease forwards;
+  animation-delay: 0.4s; /* starts early but subtly overlaps with wipe */
+}
+
+@keyframes slideDownNav {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeInHeader {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. Pulse animation for social links */
+.social-links a {
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* 2. Smooth scroll progress indicator */
+.scroll-progress {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--function-color), var(--highlight));
+    z-index: 999;
+    transition: width 0.1s ease;
+}
+
+/* 3. Magnetic hover effect for buttons */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* 4. Bouncing arrow for scroll hint - simplified and clickable */
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100; /* Make sure it's on top */
+}
+
+.scroll-hint a {
+    display: inline-block;
+    color: var(--comment-color);
+    font-size: 2rem; /* Make it bigger for easier clicking */
+    text-decoration: none;
+    padding: 10px; /* Add padding for larger click area */
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+/* 5. Smooth reveal for section decorators */
+.section-decorator {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s ease;
+}
+
+/* Add this class when section comes into view */
+.section-decorator.animate {
+    transform: scaleX(1);
+}
+
+@keyframes revealBar {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* 6. Breathing effect for the GitHub link */
+.github-link {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(97, 175, 239, 0.2);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 4px 15px rgba(97, 175, 239, 0.4);
+    }
+}
+
+/* 7. Smooth line drawing for timeline - triggered on scroll */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background-color: var(--function-color);
+    transition: height 2s ease-out;
+}
+
+/* Add this class when timeline comes into view */
+.timeline.animate::before {
+    height: 100%;
+}
+
+@keyframes drawLine {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100%;
+    }
+}
+
+/* 8. project card hover with 3D effect */
+.project-card:hover {
+    transform: translateY(-10px) rotateY(3deg) rotateX(2deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+}
+
+/* 9. skill category hover with 3D effect */
+.skill-category:hover {
+    transform: translateY(-10px) rotateY(3deg) rotateX(2deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+/* 10. Photo gallery enhanced hover */
+.gallery-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* 11. Smooth zoom on image hover */
+.zoomable {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.zoomable img {
+    transition: transform 0.5s ease;
+}
+
+.zoomable:hover img {
+    transform: scale(1.15);
+}
+

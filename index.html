@@ -1,25 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        // Force scroll to top immediately
+        window.scrollTo(0, 0);
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent Chu | Developer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="theme.css"> 
-
-    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="animation.css"> 
+    <link rel="stylesheet" href="mobile.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cpath fill='%2361afef' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='%2361afef' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
+
+    <div class="scroll-hint">
+        <a href="#about" aria-label="Scroll to About section">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </div>
 </head>
 
-<body id ="top">
-    <div id="page-wipe"></div>
 
+<body id ="top">
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="scroll-progress"></div>
+    <div id="page-wipe"></div>
     <nav>
         <div class="nav-container">
             <div class="logo">
                 <a href="/">
-                    <!-- Your SVG logo here -->
+                    <!-- SVG logo here -->
                     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
                         <defs>
                             <style>
@@ -73,13 +95,12 @@
         </div>
     </nav>
 
-
     <header>
         <div class="intro-text">
             <p class="greeting terminal-cursor">Hello! 👋</p>
-            <h1>Vincent Chu</h1>
+            <h1 data-text="Vincent Chu">Vincent Chu</h1>
             <h2>Backend Developer</h2>
-            <p class="tagline">First, feel free to call me Vinny! I build robust backend applications and am interested in AI, machine learning, data analytics, and data engineering</p>
+            <p class="tagline">First, feel free to call me Vinny! I have a passion for machine learning, data engineering, analytics, and creating scalable solutions!</p>
             
             <div class="social-links">
                 <a href="https://github.com/21vincentchu" target="_blank"><i class="fab fa-github"></i></a>
@@ -104,10 +125,9 @@
             <div class="section-decorator"></div>
             <h2>About Me</h2>
         </div>
-        <p>Student @ the University of Missouri-Columbia</p>
+        <p>I'm currently working on AI infrastructure for VR applications, developing local LLM systems that support graduate-level semiconductor research at Mizzou and creating ServiceNow solutions for Maritz</p>
+        <p>When I'm not coding, you can find me at my local cafe drinking coffee, taking photos on my Fujifilm XM5, watching F1, listening to music, nerding about audio products and computers, and collecting custom mechanical keyboards.</p>
 
-        <p>I'm a backend developer with expertise in building reliable, scalable server-side applications with a strong foundation in programming and problem-solving.</p>
-        <p>When I'm not coding, you can find me at my local cafe drinking coffee, taking photos on my Fujifilm XM5, watching F1 (Tifosi), listening to music, nerding about audio products and computers, and collecting custom mechanical keyboards.</p>
 
         <div class="photo-gallery-container">
             <h3>My Photos</h3>
@@ -303,7 +323,12 @@
         <div class="section-header">
             <div class="section-decorator"></div>
             <h2>Projects</h2>
+            <a href="https://github.com/21vincentchu" target="_blank" class="github-link">
+                <i class="fab fa-github"></i>
+                <span>My GitHub</span>
+            </a>
         </div>
+        
         
         <div class="projects-grid">
             <!---------------- AI Server Project ----------------------->
@@ -385,7 +410,7 @@
         <div class="contact-options">
             <a href="#" class="contact-option copy-email" data-type="email">
                 <i class="fas fa-envelope"></i>
-                <span>Copy my email address</span>
+                <span>Click to copy my email address</span>
             </a>
         </div>
     </section>
@@ -558,6 +583,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    const progressBar = document.querySelector('.scroll-progress');
+    if (progressBar) {
+        progressBar.style.width = scrolled + '%';
+    }
+});
+
+// Timeline animation on scroll
+const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+        }
+    });
+}, { threshold: 0.3 }); // Trigger when 30% of timeline is visible
+
+// Observe the timeline
+const timeline = document.querySelector('.timeline');
+if (timeline) {
+    timelineObserver.observe(timeline);
+}
+
+// Section decorator animation on scroll 
+const decoratorObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const decorator = entry.target.querySelector('.section-decorator');
+            if (decorator) {
+                decorator.classList.add('animate');
+            }
+        }
+    });
+}, { threshold: 0.1 }); 
+
+// Observe all sections with decorators
+const sectionsWithDecorators = document.querySelectorAll('section');
+sectionsWithDecorators.forEach(section => {
+    decoratorObserver.observe(section);
+});
+
+
 </script>
 </body>
 </html>

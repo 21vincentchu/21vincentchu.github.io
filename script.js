@@ -1,17 +1,5 @@
-// Intersection Observer for scroll animations
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-}, { threshold: 0.1 });
-
-// Observe all elements for scroll animations
-document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-});
+// Remove scroll-based animations - sections will appear immediately
+// No Intersection Observer needed since we only want header/nav animations
 
 // Theme Toggle
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,12 +26,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Force scroll to top on page unload (before refresh)
+window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+});
+
+// Prevent browser from restoring scroll position
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Force scroll to top immediately when script loads
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+});
+
+// Page wipe animation
 window.addEventListener("load", () => {
-  const wipe = document.getElementById("page-wipe");
-  if (wipe) {
-    setTimeout(() => {
-      wipe.remove();
-    }, 5000); // just after animation ends
-  }
+    // Ensure we're at the top
+    window.scrollTo(0, 0);
+    
+    const wipe = document.getElementById("page-wipe");
+    if (wipe) {
+        setTimeout(() => {
+            wipe.remove();
+        }, 1000); // Remove after animation completes
+    }
 });
 
