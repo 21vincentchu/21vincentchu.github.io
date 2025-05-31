@@ -5,20 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent Chu | Developer</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="theme.css"> 
+
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cpath fill='%2361afef' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='%2361afef' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
-
 </head>
+
 <body id ="top">
-    <div id="loading-screen">
-        <div class="expanding-circle">
-            <svg viewBox="0 0 2000 2000">
-                <path d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
-                <path d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
-            </svg>
-        </div>
-    </div>
     <nav>
         <div class="nav-container">
             <div class="logo">
@@ -399,16 +393,7 @@
     </footer>
 
 <script>
-    // Loading Screen Functionality
-    window.addEventListener('load', () => {
-        // Add a small delay to make the loading screen visible for at least a moment
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-        }, 2000); // Adjust time as needed (in milliseconds)
-    });
-
-
-    // Intersection Observer for fade-in animations
+     // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
