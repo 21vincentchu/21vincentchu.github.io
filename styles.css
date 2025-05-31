@@ -1,3 +1,9 @@
+/* Smooth scrolling with offset for fixed nav */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -16,20 +22,6 @@
     --selection: rgba(128, 203, 196, 0.2);
     --border-color: #3e4451;
     --font-code: 'Fira Code', monospace;
-}
-
-
-
-/* Adjustments for small screens */
-@media (max-width: 768px) {
-    .toggle-text-dark, 
-    .toggle-text-light {
-        display: none;
-    }
-    
-    .theme-toggle {
-        margin-left: 0.75rem;
-    }
 }
 
 /* Navigation */
@@ -511,14 +503,6 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-footer::before {
-    content: '/* ';
-}
-
-footer::after {
-    content: ' */';
-}
-
 /* Terminal cursor effect */
 .terminal-cursor::after {
     content: '|';
@@ -870,197 +854,79 @@ footer::after {
     }
 }
 
-/* Mobile Navigation CSS */
-
-/* Mobile menu button - hidden by default on desktop */
-.mobile-menu-toggle {
+/* Hide scrollbar for webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
     display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 20;
 }
 
-.mobile-menu-toggle .bar {
-    height: 3px;
-    width: 100%;
-    background-color: var(--function-color);
-    border-radius: 3px;
-    transition: all 0.3s ease;
+/* Hide scrollbar for Firefox */
+html {
+    scrollbar-width: none;
 }
 
-/* Nav wrapper to contain everything for mobile */
-.nav-wrapper {
+/* Alternative method - hide scrollbar but keep functionality */
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
+}
+
+/* GitHub link styling in section header */
+.github-link {
     display: flex;
     align-items: center;
-}
-
-.nav-utilities {
-    display: flex;
-    align-items: center;
+    gap: 0.5rem;
     margin-left: auto;
+    padding: 0.5rem 1rem;
+    background-color: rgba(62, 68, 81, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--function-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-/* Media queries for responsive design */
+.github-link:hover {
+    background-color: var(--function-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(97, 175, 239, 0.3);
+}
+
+.github-link i {
+    font-size: 1.1rem;
+}
+
+.github-link::before, 
+.github-link::after {
+    display: none;
+}
+
+/* Light theme adjustments for GitHub link */
+[data-theme="light"] .github-link {
+    background-color: rgba(225, 228, 232, 0.4);
+    color: var(--function-color);
+}
+
+[data-theme="light"] .github-link:hover {
+    background-color: var(--function-color);
+    color: var(--bg-color);
+    box-shadow: 0 4px 12px rgba(3, 102, 214, 0.3);
+}
+
+/* Responsive adjustment */
 @media (max-width: 768px) {
-    /* Adjust main navigation layout */
-    .nav-container {
-        padding: 0 1.5rem;
+    .github-link span {
+        display: none;
     }
     
-    /* Show hamburger menu */
-    .mobile-menu-toggle {
-        display: flex;
-        margin-left: auto;
+    .github-link {
+        padding: 0.5rem;
+        min-width: auto;
     }
-    
-    /* Nav wrapper becomes the mobile dropdown */
-    .nav-wrapper {
-        position: fixed;
-        top: 70px; /* Match navbar height */
-        left: 0;
-        width: 100%;
-        background-color: var(--bg-color);
-        border-bottom: 1px solid var(--border-color);
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem 0;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        opacity: 0;
-        visibility: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-    }
-    
-    /* Show menu when active */
-    .nav-wrapper.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* Change nav links to vertical */
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 0 1.5rem;
-        gap: 0;
-    }
-    
-    .nav-links a {
-        padding: 0.75rem 0;
-        width: 100%;
-        border-bottom: 1px solid var(--border-color);
-        height: auto;
-    }
-    
-    .nav-links a:last-child {
-        border-bottom: none;
-    }
-    
-    /* Add hover effect for mobile */
-    .nav-links a:hover {
-        border-bottom: 1px solid var(--border-color);
-        padding-left: 0.5rem;
-    }
-    
-    /* Style utilities for mobile */
-    .nav-utilities {
-        width: 100%;
-        justify-content: space-between;
-        padding: 1rem 1.5rem 0;
-        margin-top: 0.5rem;
-        border-top: 1px solid var(--border-color);
-    }
-    
-    /* Hamburger to X animation */
-    .mobile-menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-    }
-    
-    .mobile-menu-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .mobile-menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-    }
-    
-    /* Ensure clock is visible */
-    .clock-container {
-        margin: 0;
-    }
-    
-    /* Ensure theme toggle is visible */
-    .theme-toggle {
-        margin: 0;
-    }
-}
-
-/* Smaller screens */
-@media (max-width: 480px) {
-    .nav-container {
-        padding: 0 1rem;
-    }
-    
-    .logo svg {
-        height: 50px;
-    }
-}
-
-#page-wipe {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background-color: var(--bg-color);
-  animation: wipeUp 1.0s ease forwards;
-  pointer-events: none;
-  opacity: 1;
-  will-change: transform;
-}
-
-@keyframes wipeUp {
-  0% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-
-/* Header Fade-In Animation */
-header {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInHeader 1.0s ease forwards;
-  animation-delay: 0.6s; /* syncs with the page wipe */
-}
-
-nav {
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: slideDownNav 0.6s ease forwards;
-  animation-delay: 0.3s; /* starts early but subtly overlaps with wipe */
-}
-
-@keyframes slideDownNav {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-@keyframes fadeInHeader {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
