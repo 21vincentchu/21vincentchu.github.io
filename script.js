@@ -37,3 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
         themeSwitch.title = isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode';
     }
 });
+
+window.addEventListener("load", () => {
+  const wipe = document.getElementById("page-wipe");
+  if (wipe) {
+    setTimeout(() => {
+      wipe.remove();
+    }, 1300); // just after animation ends
+  }
+});
+
