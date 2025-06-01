@@ -4,7 +4,8 @@ html {
     scroll-padding-top: 90px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600;700&display=swap');
 
 :root {
     --bg-color: #282c34;
@@ -21,7 +22,8 @@ html {
     --line-number: #495162;
     --selection: rgba(128, 203, 196, 0.2);
     --border-color: #3e4451;
-    --font-code: 'Fira Code', monospace;
+    --font-code: 'Recursive', monospace;
+
 }
 
 /* Navigation */
