@@ -235,3 +235,56 @@ nav {
     transform: scale(1.15);
 }
 
+/* Typing Effect Loader - Fixed Width */
+.typing-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    font-family: var(--font-code);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.typing-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.typing-text {
+    color: var(--function-color);
+    font-size: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid var(--function-color);
+    width: 0;
+    animation: 
+        typing 2.0s steps(50) forwards,
+        loaderBlink 1s infinite; /* Changed from 'blink' to 'loaderBlink' */
+}
+
+.typing-text.finished {
+    animation: loaderBlink 1s infinite; /* Changed here too */
+    width: 50;
+    border-right: none;
+}
+
+@keyframes typing {
+    from { 
+        width: 0; 
+    }
+    to { 
+        width: 50ch;
+    }
+}
+
+@keyframes loaderBlink { /* Renamed from 'blink' to 'loaderBlink' */
+    0%, 50% { border-color: var(--function-color); }
+    51%, 100% { border-color: transparent; }
+}

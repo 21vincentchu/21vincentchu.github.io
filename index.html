@@ -28,15 +28,15 @@
 
 
 <body id ="top">
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
+</div>
     <div class="scroll-progress"></div>
     <div id="page-wipe"></div>
+    
+    <div class="typing-loader" id="typing-loader">
+        <div class="typing-text">console.log("Welcome to Vincent's Portfolio");</div>
+    </div>
+
+
     <nav>
         <div class="nav-container">
             <div class="logo">
@@ -328,7 +328,6 @@
                 <span>My GitHub</span>
             </a>
         </div>
-        
         
         <div class="projects-grid">
             <!---------------- AI Server Project ----------------------->
@@ -625,7 +624,31 @@ sectionsWithDecorators.forEach(section => {
     decoratorObserver.observe(section);
 });
 
+// Typing loader control - UPDATE THIS IN YOUR HTML <script> SECTION
+window.addEventListener('load', () => {
+    const loader = document.getElementById('typing-loader');
+    const typingText = document.querySelector('.typing-text');
+    
+    // After typing animation finishes, remove cursor and fade out
+    setTimeout(() => {
+        if (typingText) {
+            typingText.classList.add('finished');
+        }
+    }, 3100); // When typing animation completes
+    
+    setTimeout(() => {
+        if (loader) {
+            loader.classList.add('hidden');
+            setTimeout(() => {
+                loader.remove();
+            }, 500);
+        }
+    }, 2500);
+});
+
 
 </script>
+    <img src="catdance.gif" alt="Dancing cat" class="cat-dance">
+
 </body>
 </html>
