@@ -930,3 +930,30 @@ body::-webkit-scrollbar {
         min-width: auto;
     }
 }
+
+/* Cat dance gif in bottom right corner */
+.cat-dance {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 130px;
+    height: auto;
+    z-index: 1000;
+    opacity: 1.0;
+    transition: opacity 0.3s ease;
+}
+
+.cat-dance:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* Make it smaller on mobile */
+@media (max-width: 768px) {
+    .cat-dance {
+        width: 60px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
