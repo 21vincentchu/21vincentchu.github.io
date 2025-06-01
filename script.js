@@ -4,7 +4,7 @@
 // Theme Toggle
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('theme-switch');
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     
     // Set initial theme
     document.documentElement.setAttribute('data-theme', savedTheme);
