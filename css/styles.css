@@ -105,6 +105,7 @@ nav {
     color: var(--function-color);
     margin-left: 0; /* Remove margin-left since we're using gap */
     padding: 0; /* Remove vertical padding */
+    transition: none;
 }
 
 .nav-links a::before, .nav-links a::after {
@@ -114,6 +115,7 @@ nav {
 .nav-links a:hover {
     color: var(--highlight);
     border-bottom: 2px solid var(--highlight);
+    transition: none;
 }
 
 /* Header */
@@ -720,56 +722,22 @@ footer {
 
 /* Purple gradient for resume link */
 .nav-links a.resume-link {
-    font-weight: 900;
-    /* Gradient using keyword color (purple) and highlight color (blue) */
-    background: linear-gradient(90deg, var(--keyword-color), var(--property-color));    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent; /* Standard property instead of text-fill-color */
-    border: none;
-    position: relative;
-}
-
-.nav-links a.resume-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    /* Matching gradient for the underline */
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.nav-links a.resume-link:hover::before {
-    transform-origin: left;
-    transform: scaleX(1);
-}
-
-.nav-links a.resume-link:hover {
-    border-bottom: none;
-}
-
-.nav-links a.resume-link {
     position: relative;
     padding: 0 0.6rem;
     margin: 0 0.2rem;
+    background: linear-gradient(90deg, var(--keyword-color), var(--property-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    border: none;
+    font-weight: 900;
+    transition: none;
 }
 
-/* Add a subtle glow effect on hover */
-.nav-links a.resume-link:hover::after {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 8px);
-    background: linear-gradient(90deg, var(--keyword-color), var(--highlight));
-    opacity: 0.1;
-    border-radius: 4px;
-    z-index: -1;
+.nav-links a.resume-link:hover {
+    border-bottom: 2px solid var(--highlight);
+    transition: none;
 }
 
 .photo-gallery-container {
@@ -959,3 +927,4 @@ body::-webkit-scrollbar {
         right: 15px;
     }
 }
+
