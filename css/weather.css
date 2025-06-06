@@ -36,15 +36,6 @@
     font-weight: 700;
 }
 
-.feels-like {
-    color: var(--comment-color);
-    font-size: 0.9rem;
-}
-
-#feels-like {
-    color: var(--text-color);
-    font-weight: 500;
-}
 
 /* Weather details grid */
 .weather-details {

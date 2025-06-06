@@ -133,7 +133,6 @@
                 <div id="weather-description"></div>
                 <div class="temp-display">
                     <span id="temp"></span>
-                    <span class="feels-like">feels like <span id="feels-like"></span></span>
                 </div>
             </div>
             
@@ -479,8 +478,7 @@
                     document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + "°";
                     document.getElementById("weather-description").innerHTML = json.weather[0].description;
                     
-                    // Feels like temperature
-                    document.getElementById("feels-like").innerHTML = json.main.feels_like.toFixed(0) + "°";
+
                     
                     // Humidity
                     document.getElementById("humidity").innerHTML = json.main.humidity + "%";
