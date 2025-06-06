@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/theme.css"> 
     <link rel="stylesheet" href="css/animation.css"> 
     <link rel="stylesheet" href="css/mobile.css"> 
+    <link rel="stylesheet" href="css/weather.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cpath fill='%2361afef' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='%2361afef' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
 
@@ -125,6 +126,34 @@
         </div>
     </header>
 
+    <section class="weather-clock-section">
+        <div class="weather-container">
+            <!-- Main weather info -->
+            <div class="main-weather">
+                <div id="weather-description"></div>
+                <div class="temp-display">
+                    <span id="temp"></span>
+                    <span class="feels-like">feels like <span id="feels-like"></span></span>
+                </div>
+            </div>
+            
+            <!-- Weather details grid -->
+            <div class="weather-details">
+                <div class="weather-item">
+                    <span class="label">High/Low</span>
+                    <span class="value"><span id="temp-high"></span> / <span id="temp-low"></span></span>
+                </div>
+                <div class="weather-item">
+                    <span class="label">Humidity</span>
+                    <span class="value" id="humidity"></span>
+                </div>
+                <div class="weather-item">
+                    <span class="label">Wind</span>
+                    <span class="value" id="wind-speed"></span>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-----------------------ABOUT ME------------------------------->
 
     <section id="about" data-line-numbers="10 11 12 13 14 15">
@@ -437,6 +466,52 @@
         threshold: 0.1
     });
 
+    window.onload = () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?id=4407066&units=imperial&appid=44c9f50e295f8a812f54e3683316132e');
+        xhr.onload = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let json = JSON.parse(xhr.responseText);
+                    console.log(json);
+                    
+                    // Temperature and description
+                    document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + "°";
+                    document.getElementById("weather-description").innerHTML = json.weather[0].description;
+                    
+                    // Feels like temperature
+                    document.getElementById("feels-like").innerHTML = json.main.feels_like.toFixed(0) + "°";
+                    
+                    // Humidity
+                    document.getElementById("humidity").innerHTML = json.main.humidity + "%";
+                    
+                    // Wind speed
+                    document.getElementById("wind-speed").innerHTML = json.wind.speed.toFixed(0) + " mph";
+                    
+                    // High/Low temperatures
+                    document.getElementById("temp-high").innerHTML = json.main.temp_max.toFixed(0) + "°";
+                    document.getElementById("temp-low").innerHTML = json.main.temp_min.toFixed(0) + "°";
+                    
+                    // City name
+                    let cityName = document.createElement('div');
+                    cityName.className = 'city-name';
+                    cityName.innerHTML = `${json.name}, MO`;
+                    document.querySelector('.weather-container').appendChild(cityName);
+                    
+                } else {
+                    console.error('Weather API Error:', xhr.status);
+                    document.getElementById("temp").innerHTML = "N/A";
+                    document.getElementById("weather-description").innerHTML = "Weather unavailable";
+                }
+            }
+        }
+        xhr.onerror = () => {
+            console.error('Weather API Request Failed');
+            document.getElementById("temp").innerHTML = "N/A";
+            document.getElementById("weather-description").innerHTML = "Weather unavailable";
+        }
+        xhr.send();
+    }
     // Observe all sections and skill categories
     document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
         el.classList.add('fade-in');
