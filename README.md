@@ -6,13 +6,12 @@ Things about this website
 - Current time in the nav bar with seconds animiation
 - dark/light mode
 - hidden email that must be clicked to hide website scalping
+- Weather API
 
 To Do: 
 - Fix opening animation on mobile
-- Weather API?
 - setup a page for connection to local LLM API?
 - Spotify API?
-- other interesting API's to play around with interesting API's
 
 Nav:
 
