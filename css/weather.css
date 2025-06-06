@@ -1,0 +1,109 @@
+/* Weather Section */
+.weather-clock-section {
+    text-align: center;
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.weather-container {
+    color: var(--text-color);
+}
+
+/* Main weather display */
+.main-weather {
+    margin-bottom: 1.5rem;
+}
+
+#weather-description {
+    color: var(--function-color);
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+}
+
+.temp-display {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+#temp {
+    color: var(--string-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.feels-like {
+    color: var(--comment-color);
+    font-size: 0.9rem;
+}
+
+#feels-like {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Weather details grid */
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.weather-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.weather-item .label {
+    color: var(--comment-color);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.weather-item .value {
+    color: var(--property-color);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.city-name {
+    margin-top: 1rem;
+    color: var(--variable-color);
+    font-size: 0.95rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .weather-clock-section {
+        padding: 1.5rem 0;
+    }
+    
+    #temp {
+        font-size: 2rem;
+    }
+    
+    .temp-display {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .weather-details {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 300px;
+    }
+    
+    .weather-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
