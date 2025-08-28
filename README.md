@@ -11,8 +11,9 @@ Things about this website
 To Do: 
 - Fix opening animation on mobile
 - setup a page for connection to local LLM API?
-- Spotify API?
-
+- Spotify API? / spotify
+- add my machine learning stuff in a navigation / ML
+- add a personal home / home
 Nav:
 
 /rag for screenshot of template of future rag AI system
