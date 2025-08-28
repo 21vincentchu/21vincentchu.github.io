@@ -1,5 +1,5 @@
 # 21vincentchu.github.io
-Experiementing with frontend
+Playing around with frontend
 Things about this website
 - opening animiation to website
 - mostly playing around with CSS
