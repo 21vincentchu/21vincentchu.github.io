@@ -5,7 +5,7 @@ html {
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;500;600;700&display=swap');
 
 :root {
     --bg-color: #282c34;
@@ -13,7 +13,7 @@ html {
     --comment-color: #7f848e;
     --keyword-color: #c678dd;
     --function-color: #61afef;
-    --string-color: #98c379;
+    --string-color: #2E8B57;
     --number-color: #d19a66;
     --variable-color: #e06c75;
     --property-color: #e5c07b;
@@ -22,7 +22,8 @@ html {
     --line-number: #495162;
     --selection: rgba(128, 203, 196, 0.2);
     --border-color: #3e4451;
-    --font-code: 'Recursive', monospace;
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Crimson Pro', serif;
 
 }
 
@@ -44,8 +45,8 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem; 
-    height: 100%; 
+    padding: 0 2rem;
+    height: 100%;
 }
 
 /* Logo Styling */
@@ -101,7 +102,8 @@ nav {
     height: 100%; /* Make links take full height */
     display: flex; /* Make links flex containers */
     align-items: center; /* Center content vertically */
-    font-weight: 500;
+    font-weight: 700;
+    font-family: var(--font-heading);
     color: var(--function-color);
     margin-left: 0; /* Remove margin-left since we're using gap */
     padding: 0; /* Remove vertical padding */
@@ -118,17 +120,28 @@ nav {
     transition: none;
 }
 
+.nav-links a.active {
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+}
+
 /* Header */
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 100vh;
-    padding: 0 2rem;
+    padding: 0 4rem;
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 80px; /* Account for fixed nav */
     position: relative;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 120px 2rem 0 2rem;
+    }
 }
 
 .intro-text {
@@ -142,13 +155,9 @@ header {
     color: var(--comment-color);
 }
 
-.greeting::before {
-    content: '// ';
-}
-
 h1 {
-    font-size: 2.5rem;
-    line-height: 1.2;
+    font-size: 5rem;
+    line-height: 1.1;
     margin-bottom: 0.5rem;
     font-weight: 700;
     color: var(--class-color);
@@ -222,14 +231,6 @@ h2 {
     position: relative;
 }
 
-.profile-image::before {
-    content: 'const profileImage = ';
-    position: absolute;
-    top: -25px;
-    left: 0;
-    color: var(--keyword-color);
-}
-
 .profile-image img {
     width: 280px;
     height: 280px;
@@ -240,10 +241,16 @@ h2 {
 
 /* Sections */
 section {
-    padding: 2rem 1rem;
+    padding: 5rem 4rem;
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 3rem 2rem;
+    }
 }
 
 .section-header {
@@ -253,16 +260,15 @@ section {
 }
 
 .section-decorator {
-    width: 40px;
-    height: 4px;
-    background-color: var(--function-color);
-    margin-right: 1rem;
-    border-radius: 2px;
+    display: none;
 }
 
 section h2 {
     font-size: 2rem;
     color: var(--class-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--function-color);
+    display: inline-block;
 }
 
 section p {
@@ -314,16 +320,6 @@ section p {
     position: relative;
 }
 
-.skill-category::before {
-    content: 'const ';
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    background-color: var(--bg-color);
-    padding: 0 8px;
-    color: var(--keyword-color);
-}
-
 .skill-category:hover {
     transform: translateY(-5px);
 }
@@ -343,12 +339,6 @@ section p {
     display: flex;
     align-items: center;
     color: var(--property-color);
-}
-
-.skill-category li::before {
-    content: '• ';
-    color: var(--string-color);
-    margin-right: 0.5rem;
 }
 
 .skill-category i {
@@ -461,9 +451,10 @@ section p {
 /* Contact Section */
 .contact-options {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     gap: 1.5rem;
-    max-width: 500px;
+    max-width: 800px;
 }
 
 .contact-option {
@@ -477,16 +468,6 @@ section p {
     position: relative;
 }
 
-.contact-option::before {
-    content: attr(data-type) ': ';
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    background-color: var(--bg-color);
-    padding: 0 8px;
-    color: var(--property-color);
-}
-
 .contact-option:hover {
     background-color: var(--function-color);
     color: var(--bg-color);
@@ -496,6 +477,40 @@ section p {
 .contact-option i {
     font-size: 1.5rem;
     margin-right: 1rem;
+}
+
+/* Contact social links */
+#contact .social-links {
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+}
+
+#contact .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+#contact .social-links a:hover {
+    background-color: var(--function-color);
+    color: var(--bg-color);
+    transform: translateY(-3px);
+}
+
+#contact .social-links i {
+    font-size: 1.8rem;
+    color: var(--function-color);
+}
+
+#contact .social-links a:hover i {
+    color: var(--bg-color);
 }
 
 /* Footer */
@@ -525,22 +540,26 @@ footer {
         text-align: center;
         padding-top: 120px;
     }
-    
+
     .intro-text {
         margin-bottom: 3rem;
     }
-    
+
     .social-links, .cta-buttons {
         justify-content: center;
     }
-    
+
     .profile-image img {
         width: 250px;
         height: 250px;
     }
-    
+
     .nav-links {
         display: none; /* Would need a mobile menu */
+    }
+
+    h1 {
+        font-size: 3rem;
     }
 }
 
@@ -577,46 +596,302 @@ footer {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
 }
 
-.timeline {
+/* Experience Timeline Styles */
+.experience-timeline {
     position: relative;
-    margin: 2rem 0;
-    padding-left: 2rem;
-    border-left: 2px solid var(--border-color);
+    padding-left: 0;
 }
 
-.timeline-item {
+.experience-card {
     position: relative;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.timeline-dot {
-    width: 12px;
-    height: 12px;
-    background-color: var(--function-color);
-    border-radius: 50%;
-    position: absolute;
-    left: -7px;
-    top: 5px;
+.experience-card .timeline-dot {
+    display: none;
 }
 
-.timeline-content h3 {
-    font-size: 1.25rem;
+.card-content {
+    background-color: rgba(62, 68, 81, 0.3);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-left: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.company-logo {
+    float: right;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    opacity: 1;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    clear: both;
+}
+
+/* Special handling for maritz logo - make it visible in blue */
+img[src*="maritz.svg"] {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(74%) saturate(1577%) hue-rotate(195deg) brightness(93%) contrast(93%);
+}
+
+/* Make all logos consistent size */
+img[src*="Mastercard-Logo"] {
+    width: 100px;
+}
+
+img[src*="maritz.svg"] {
+    width: 100px;
+}
+
+img[src*="Accenture-Logo"] {
+    width: 100px;
+}
+
+img[src*="University_of_Missouri_logo"] {
+    width: 80px;
+}
+
+.card-content:hover .company-logo {
+    opacity: 1;
+}
+
+.card-content:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-color: var(--variable-color);
+    border-width: 2px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    gap: 2rem;
+}
+
+.title-section h3 {
+    font-size: 1.15rem;
     color: var(--class-color);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
-.timeline-content span {
-    display: block;
-    font-size: 1.0rem;
-    color: var(--comment-color);
-    margin-bottom: 0.2rem;
-}
-
-.timeline-content time {
-    font-size: 0.8rem;
-    color: var(--string-color);
+.title-section .company {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin: 0;
     font-weight: 500;
+}
+
+.meta-section {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.meta-section p {
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+    color: var(--comment-color);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    justify-content: flex-end;
+}
+
+.meta-section i {
+    color: var(--function-color);
+    font-size: 0.8rem;
+}
+
+/* Job Badges */
+.job-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 16px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-body);
+}
+
+.job-badge.full-time {
+    background-color: rgba(152, 195, 121, 0.2);
+    color: var(--string-color);
+    border: 1px solid var(--string-color);
+}
+
+.job-badge.part-time {
+    background-color: rgba(209, 154, 102, 0.2);
+    color: var(--number-color);
+    border: 1px solid var(--number-color);
+}
+
+.job-badge.internship {
+    background-color: rgba(97, 175, 239, 0.2);
+    color: var(--function-color);
+    border: 1px solid var(--function-color);
+}
+
+.job-badge.research {
+    background-color: rgba(198, 120, 221, 0.2);
+    color: var(--keyword-color);
+    border: 1px solid var(--keyword-color);
+}
+
+/* Tech Tags */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.tech-tags span {
+    background-color: rgba(97, 175, 239, 0.1);
+    color: var(--function-color);
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(97, 175, 239, 0.3);
+    transition: all 0.2s ease;
+}
+
+.tech-tags span:hover {
+    background-color: rgba(97, 175, 239, 0.2);
+    border-color: var(--function-color);
+    transform: translateY(-2px);
+}
+
+/* View Details Button */
+.view-details-btn {
+    background: none;
+    border: none;
+    color: var(--function-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    font-family: var(--font-body);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.view-details-btn:hover {
+    color: var(--highlight);
+}
+
+.view-details-btn i {
+    transition: transform 0.3s ease;
+}
+
+.view-details-btn.active i {
+    transform: rotate(180deg);
+}
+
+/* Details Content */
+.details-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.details-content.show {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.details-content h4 {
+    color: var(--variable-color);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.achievements {
+    list-style: none;
+    padding: 1rem;
+    background-color: rgba(62, 68, 81, 0.2);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.achievements li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.achievements li:last-child {
+    margin-bottom: 0;
+}
+
+.achievements i {
+    color: var(--string-color);
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+/* Company Image */
+.company-image {
+    max-width: 150px;
+    margin-top: 0.75rem;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .experience-timeline {
+        padding-left: 0;
+    }
+
+    .card-content {
+        padding: 1.25rem;
+        margin-left: 0;
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .meta-section {
+        text-align: left;
+    }
+
+    .meta-section p {
+        justify-content: flex-start;
+    }
+
+    .title-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .company-image {
+        max-width: 150px;
+    }
 }
 
 /* Mobile-friendly adjustments */
@@ -669,7 +944,7 @@ footer {
     font-size: 0.65rem; /* Smaller font */
     font-weight: 500;
     color: var(--function-color);
-    font-family: var(--font-code);
+    font-family: var(--font-body);
     line-height: 1.2;
 }
 
@@ -725,19 +1000,35 @@ footer {
     position: relative;
     padding: 0 0.6rem;
     margin: 0 0.2rem;
-    background: linear-gradient(90deg, var(--keyword-color), var(--property-color));
+    background: linear-gradient(90deg, #c678dd, #e5c07b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
     border: none;
     font-weight: 900;
+    font-family: var(--font-heading);
     transition: none;
 }
 
 .nav-links a.resume-link:hover {
     border-bottom: 2px solid var(--highlight);
     transition: none;
+}
+
+/* Keep resume link purple in both modes */
+[data-theme="light"] .nav-links a.resume-link {
+    background: linear-gradient(90deg, #9c27b0, #6f42c1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="dark"] .nav-links a.resume-link {
+    background: linear-gradient(90deg, #c678dd, #e5c07b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .photo-gallery-container {
@@ -750,15 +1041,6 @@ footer {
     margin-bottom: 1.2rem;
     position: relative;
     display: inline-block;
-}
-
-/* Add a code-like syntax before the heading */
-.photo-gallery-container h3::before {
-    color: var(--keyword-color);
-    font-size: 0.9rem;
-    position: absolute;
-    top: -1.2rem;
-    left: 0;
 }
 
 .photo-gallery {
