@@ -127,7 +127,7 @@
 .theme-toggle {
     display: flex;
     align-items: center;
-    margin-left: 0;
+    margin-left: 0.75rem;
     margin-right: 0;
 }
 

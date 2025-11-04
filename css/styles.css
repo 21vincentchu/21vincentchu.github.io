@@ -1,7 +1,7 @@
 /* Smooth scrolling with offset for fixed nav */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 110px;
 }
 
 
@@ -53,10 +53,17 @@ nav.nav-hidden {
     align-items: flex-start;
     max-width: 100%;
     margin: 0;
-    padding: 0 3rem;
+    padding: 0 4rem;
     height: auto;
     position: relative;
     z-index: 1;
+}
+
+@media (max-width: 1200px) {
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 /* Logo Styling */
@@ -66,6 +73,7 @@ nav.nav-hidden {
     align-items: center;
     gap: 0.75rem;
     height: auto;
+    margin-right: auto;
 }
 
 .logo a {
@@ -103,7 +111,6 @@ nav.nav-hidden {
 .nav-links {
     display: flex;
     justify-content: flex-end;
-    margin-left: auto;
     align-items: center;
     height: auto;
     gap: 0;
@@ -142,7 +149,13 @@ nav.nav-hidden {
 
 .nav-links a.active {
     color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+    padding-bottom: 0.3rem;
+}
+
+.nav-links a.resume-link.active {
     border-bottom: none;
+    padding-bottom: 0.5rem;
 }
 
 /* Header */
@@ -265,7 +278,7 @@ section {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    scroll-margin-top: 120px;
+    scroll-margin-top: 0px;
 }
 
 @media (max-width: 768px) {
@@ -558,6 +571,10 @@ footer {
 
 /* Media Queries */
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 0 2rem;
+    }
+
     header {
         flex-direction: column;
         text-align: center;

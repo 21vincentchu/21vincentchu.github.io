@@ -53,6 +53,16 @@
                     <div class="timezone">My Current Time</div>
                     <div class="time" id="live-clock">--:--:-- PM</div>
                 </div>
+                <div class="theme-toggle">
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="theme-switch" class="toggle-input">
+                        <label for="theme-switch" class="toggle-label">
+                            <span class="toggle-track">
+                                <span class="toggle-thumb"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
             </div>
             
             <!-- Mobile menu button -->
@@ -66,17 +76,6 @@
             <div class="nav-wrapper">
                 <div class="nav-links">
                     <a href="#experience">Experience</a><span class="nav-separator">/</span><a href="#skills">Skills</a><span class="nav-separator">/</span><a href="#projects">Projects</a><span class="nav-separator">/</span><a href="#contact">Contact</a><span class="nav-separator">/</span><a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
-                </div>
-
-                <div class="theme-toggle">
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="theme-switch" class="toggle-input">
-                        <label for="theme-switch" class="toggle-label">
-                            <span class="toggle-track">
-                                <span class="toggle-thumb"></span>
-                            </span>
-                        </label>
-                    </div>
                 </div>
             </div>
         </div>
@@ -606,16 +605,15 @@
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-            console.log('Scroll:', scrollTop, 'Last:', lastScrollTop);
-
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-                // Scrolling down
-                nav.classList.add('nav-hidden');
-                console.log('Adding nav-hidden class');
-            } else {
-                // Scrolling up
+            if (scrollTop <= scrollThreshold) {
+                // At the top - always show nav
                 nav.classList.remove('nav-hidden');
-                console.log('Removing nav-hidden class');
+            } else if (scrollTop > lastScrollTop) {
+                // Scrolling down - show nav
+                nav.classList.remove('nav-hidden');
+            } else {
+                // Scrolling up - hide nav
+                nav.classList.add('nav-hidden');
             }
 
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
@@ -843,7 +841,7 @@ window.addEventListener('scroll', () => {
     const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
     let current = '';
-    const scrollPosition = window.scrollY + 150; // Adjust offset for better detection
+    const scrollPosition = window.scrollY + 200; // Adjust offset for better detection
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -853,6 +851,11 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
+
+    // Special case: if we're near the bottom of the page, activate contact
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
+        current = 'contact';
+    }
 
     navLinks.forEach(link => {
         link.classList.remove('active');
@@ -915,7 +918,6 @@ function toggleDetails(button) {
 
 
 </script>
-    <img src="images/catdance.gif" alt="Dancing cat" class="cat-dance">
 
 </body>
 </html>
