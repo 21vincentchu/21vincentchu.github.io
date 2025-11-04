@@ -54,7 +54,7 @@
     filter: blur(120px);
     background: radial-gradient(ellipse at 40% 50%, rgba(46, 139, 87, 0.3) 0%, rgba(34, 139, 34, 0.2) 30%, transparent 70%);
     animation: pulse1 6s ease-in-out infinite, morphBlob1 8s ease-in-out infinite, colorShiftDark1 15s ease-in-out infinite;
-    will-change: transform, opacity, filter, border-radius;
+    will-change: transform, opacity;
 }
 
 [data-theme="dark"] body::after {
@@ -66,7 +66,7 @@
     filter: blur(120px);
     background: radial-gradient(ellipse at 60% 50%, rgba(232, 155, 60, 0.25) 0%, rgba(255, 165, 0, 0.2) 25%, transparent 65%);
     animation: pulse2 7s ease-in-out infinite 1s, morphBlob2 9s ease-in-out infinite, colorShiftDark2 18s ease-in-out infinite 3s;
-    will-change: transform, opacity, filter, border-radius;
+    will-change: transform, opacity;
 }
 
 /* Magenta/Pink orb (complementary to green) */
@@ -79,7 +79,7 @@
     filter: blur(130px);
     background: radial-gradient(ellipse at 50% 50%, rgba(255, 105, 180, 0.25) 0%, rgba(219, 112, 147, 0.18) 35%, transparent 70%);
     animation: pulse3 8s ease-in-out infinite 2s, morphBlob3 10s ease-in-out infinite, colorShiftDark3 20s ease-in-out infinite 5s;
-    will-change: transform, opacity, filter, border-radius;
+    will-change: transform, opacity;
 }
 
 /* Blue/Purple orb (complementary to orange) */
@@ -92,7 +92,7 @@
     filter: blur(130px);
     background: radial-gradient(ellipse at 45% 55%, rgba(70, 130, 180, 0.28) 0%, rgba(100, 149, 237, 0.2) 30%, transparent 68%);
     animation: pulse4 9s ease-in-out infinite 3.5s, morphBlob4 11s ease-in-out infinite, colorShiftDark4 22s ease-in-out infinite 7s;
-    will-change: transform, opacity, filter, border-radius;
+    will-change: transform, opacity;
 }
 
 /* Purple/Violet orb (middle of the page) */
@@ -105,7 +105,7 @@
     filter: blur(110px);
     background: radial-gradient(ellipse at 50% 50%, rgba(138, 43, 226, 0.22) 0%, rgba(147, 112, 219, 0.16) 32%, transparent 65%);
     animation: pulse5 7.5s ease-in-out infinite 4s, morphBlob5 9.5s ease-in-out infinite, colorShiftDark5 19s ease-in-out infinite 6s;
-    will-change: transform, opacity, filter, border-radius;
+    will-change: transform, opacity;
 }
 
 /* Coral/Salmon orb (warm accent) */
@@ -118,7 +118,7 @@
     filter: blur(115px);
     background: radial-gradient(ellipse at 55% 45%, rgba(255, 127, 80, 0.24) 0%, rgba(250, 128, 114, 0.18) 28%, transparent 66%);
     animation: pulse6 8.5s ease-in-out infinite 2.5s, morphBlob6 10.5s ease-in-out infinite, colorShiftDark6 21s ease-in-out infinite 8s;
-    will-change: transform, opacity, filter, border-radius;
+    will-change: transform, opacity;
 }
 
 @keyframes pulse1 {
