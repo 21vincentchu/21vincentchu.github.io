@@ -1,6 +1,27 @@
 // Remove scroll-based animations - sections will appear immediately
 // No Intersection Observer needed since we only want header/nav animations
 
+// Auto-hide nav on scroll down, show on scroll up
+let lastScrollTop = 0;
+const nav = document.querySelector('nav');
+const scrollThreshold = 100;
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (Math.abs(scrollTop - lastScrollTop) < 5) return; // Ignore tiny scrolls
+
+    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+        // Scrolling down & past threshold
+        nav.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up or at top
+        nav.style.transform = 'translateY(0)';
+    }
+
+    lastScrollTop = scrollTop;
+});
+
 // Theme Toggle
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('theme-switch');

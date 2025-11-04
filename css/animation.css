@@ -75,14 +75,7 @@ nav {
 
 /* 2. Smooth scroll progress indicator */
 .scroll-progress {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--function-color), var(--highlight));
-    z-index: 999;
-    transition: width 0.1s ease;
+    display: none;
 }
 
 /* 3. Magnetic hover effect for buttons */

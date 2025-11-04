@@ -30,11 +30,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cpath fill='%23e89b3c' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='%23e89b3c' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
 
-    <div class="scroll-hint">
-        <a href="#about" aria-label="Scroll to About section">
-            <i class="fas fa-chevron-down"></i>
-        </a>
-    </div>
 </head>
 
 <body id ="top">
@@ -54,6 +49,10 @@
                         <path class="cls-1" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
                     </svg>
                 </a>
+                <div class="clock-container">
+                    <div class="timezone">My Current Time</div>
+                    <div class="time" id="live-clock">--:--:-- PM</div>
+                </div>
             </div>
             
             <!-- Mobile menu button -->
@@ -66,37 +65,23 @@
             <!-- Nav links now wrapped in a container for better mobile control -->
             <div class="nav-wrapper">
                 <div class="nav-links">
-                    <a href="#about">About</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                    <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
+                    <a href="#experience">Experience</a><span class="nav-separator">/</span><a href="#skills">Skills</a><span class="nav-separator">/</span><a href="#projects">Projects</a><span class="nav-separator">/</span><a href="#contact">Contact</a><span class="nav-separator">/</span><a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
                 </div>
-                
-                <!-- Utilities container for clock and theme toggle -->
-                <div class="nav-utilities">
-                    <div class="clock-container">
-                        <div class="timezone">My Current Time</div>
-                        <div class="time" id="live-clock">--:--:-- PM</div>
-                    </div>
-                    
-                    <div class="theme-toggle">
-                        <div class="toggle-switch">
-                            <input type="checkbox" id="theme-switch" class="toggle-input">
-                            <label for="theme-switch" class="toggle-label">
-                                <span class="toggle-text-dark">Dark</span>
-                                <span class="toggle-track">
-                                    <span class="toggle-thumb"></span>
-                                </span>
-                                <span class="toggle-text-light">Light</span>
-                            </label>
-                        </div>
+
+                <div class="theme-toggle">
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="theme-switch" class="toggle-input">
+                        <label for="theme-switch" class="toggle-label">
+                            <span class="toggle-track">
+                                <span class="toggle-thumb"></span>
+                            </span>
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+
 
     <header>
         <div class="intro-text">
@@ -120,44 +105,6 @@
             <img src="images/DSCF1159.jpg" alt="Vincent Chu">
         </div>
     </header>
-
-    <section class="weather-clock-section">
-        <div class="weather-container">
-            <!-- Main weather info -->
-            <div class="main-weather">
-                <div id="weather-description"></div>
-                <div class="temp-display">
-                    <span id="temp"></span>
-                </div>
-            </div>
-            
-            <!-- Weather details grid -->
-            <div class="weather-details">
-                <div class="weather-item">
-                    <span class="label">High/Low</span>
-                    <span class="value"><span id="temp-high"></span> / <span id="temp-low"></span></span>
-                </div>
-                <div class="weather-item">
-                    <span class="label">Humidity</span>
-                    <span class="value" id="humidity"></span>
-                </div>
-                <div class="weather-item">
-                    <span class="label">Wind</span>
-                    <span class="value" id="wind-speed"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-----------------------ABOUT ME------------------------------->
-
-    <section id="about" data-line-numbers="10 11 12 13 14 15">
-        <div class="section-header">
-            <div class="section-decorator"></div>
-            <h2>About Me</h2>
-        </div>
-        <p>I'm currently working on AI infrastructure for VR applications, developing local LLM systems that support graduate-level semiconductor research at Mizzou.</p>
-        <p>When I'm not coding, you can find me at my local cafe drinking coffee, taking photos on my Fujifilm XM5, watching F1, listening to music, and being an enthusiest for HiFi audio gear, mechanical keyboards, computers, and new technologies</p>
-    </section>
 
     <!-----------------------EXPERIENCE SECTION--------------------->
     <section id="experience">
@@ -643,6 +590,38 @@
     </footer>
 
 <script>
+    // Auto-hide nav on scroll down, show on scroll up
+    (function() {
+        let lastScrollTop = 0;
+        const scrollThreshold = 50;
+        const nav = document.querySelector('nav');
+
+        if (!nav) {
+            console.error('Nav not found!');
+            return;
+        }
+
+        console.log('Nav scroll script loaded');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            console.log('Scroll:', scrollTop, 'Last:', lastScrollTop);
+
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                // Scrolling down
+                nav.classList.add('nav-hidden');
+                console.log('Adding nav-hidden class');
+            } else {
+                // Scrolling up
+                nav.classList.remove('nav-hidden');
+                console.log('Removing nav-hidden class');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+    })();
+
      // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
