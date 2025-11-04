@@ -22,11 +22,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vincent Chu</title>
-    <link rel="stylesheet" href="css/styles.css?v=2">
-    <link rel="stylesheet" href="css/theme.css?v=2">
-    <link rel="stylesheet" href="css/animation.css?v=2">
-    <link rel="stylesheet" href="css/mobile.css?v=2">
-    <link rel="stylesheet" href="css/weather.css?v=2">
+    <link rel="stylesheet" href="css/styles.css?v=6">
+    <link rel="stylesheet" href="css/theme.css?v=6">
+    <link rel="stylesheet" href="css/animation.css?v=6">
+    <link rel="stylesheet" href="css/mobile.css?v=6">
+    <link rel="stylesheet" href="css/weather.css?v=6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cpath fill='%23e89b3c' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='%23e89b3c' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
 
@@ -34,49 +34,67 @@
 
 <body id ="top">
     <div class="scroll-progress"></div>
+    <div class="bg-orb-1"></div>
+    <div class="bg-orb-2"></div>
+    <div class="bg-orb-3"></div>
+    <div class="bg-orb-4"></div>
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <a href="/">
-                    <!-- SVG logo here -->
-                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
-                        <defs>
-                            <style>
-                                .cls-1 { fill: #61afef; stroke-width: 0px; }
-                            </style>
-                        </defs>
-                        <path class="cls-1" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
-                        <path class="cls-1" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
-                    </svg>
-                </a>
-                <div class="clock-container">
-                    <div class="timezone">My Current Time</div>
-                    <div class="time" id="live-clock">--:--:-- PM</div>
-                </div>
-                <div class="theme-toggle">
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="theme-switch" class="toggle-input">
-                        <label for="theme-switch" class="toggle-label">
-                            <span class="toggle-track">
-                                <span class="toggle-thumb"></span>
-                            </span>
-                        </label>
+                <div class="logo-row">
+                    <a href="/">
+                        <!-- SVG logo here -->
+                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                            <defs>
+                                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                    <stop offset="25%" style="stop-color:#f97316;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+                                    <stop offset="75%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                                </linearGradient>
+                                <style>
+                                    .cls-1 { fill: #61afef; stroke-width: 0px; }
+                                </style>
+                            </defs>
+                            <path class="cls-1" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
+                            <path class="cls-1" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
+                        </svg>
+                    </a>
+                    <div class="theme-toggle">
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="theme-switch" class="toggle-input">
+                            <label for="theme-switch" class="toggle-label">
+                                <span class="toggle-track">
+                                    <span class="toggle-thumb"></span>
+                                </span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Mobile menu button -->
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
-            
+
             <!-- Nav links now wrapped in a container for better mobile control -->
             <div class="nav-wrapper">
                 <div class="nav-links">
-                    <a href="#experience">Experience</a><span class="nav-separator">/</span><a href="#skills">Skills</a><span class="nav-separator">/</span><a href="#projects">Projects</a><span class="nav-separator">/</span><a href="#contact">Contact</a><span class="nav-separator">/</span><a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                    <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
                 </div>
+            </div>
+
+            <div class="clock-container">
+                <div class="timezone">My Current Time</div>
+                <div class="time" id="live-clock">--:--:-- PM</div>
             </div>
         </div>
     </nav>
@@ -96,8 +114,7 @@
             </div>
             
             <div class="cta-buttons">
-                <a href="mailto:21vincentchu@gmail.com" class="btn primary-btn">Email Me</a>
-                <a href="#projects" class="btn secondary-btn">View Projects</a>
+                <a href="mailto:21vincentchu@gmail.com" class="btn primary-btn gradient-btn">Email Me</a>
             </div>
         </div>
         <div class="profile-image">
@@ -682,26 +699,29 @@
         observer.observe(el);
     });
 
-    // Theme Toggle Functionality
+    // Theme Toggle Functionality - DISABLED (PERMA DARK MODE)
     document.addEventListener('DOMContentLoaded', () => {
-    const themeSwitch = document.getElementById('theme-switch');
-    
-    // Check for saved theme preference or use device preference
-    const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
-    
-    // Set initial theme
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Set the checkbox state based on the theme
-    themeSwitch.checked = savedTheme === 'light';
-    
-    // Toggle theme when checkbox is clicked
-    themeSwitch.addEventListener('change', () => {
-        const newTheme = themeSwitch.checked ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
+    // const themeSwitch = document.getElementById('theme-switch');
+
+    // Force dark mode always
+    document.documentElement.setAttribute('data-theme', 'dark');
+
+    // // Check for saved theme preference or use device preference
+    // const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+
+    // // Set initial theme
+    // document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // // Set the checkbox state based on the theme
+    // themeSwitch.checked = savedTheme === 'light';
+
+    // // Toggle theme when checkbox is clicked
+    // themeSwitch.addEventListener('change', () => {
+    //     const newTheme = themeSwitch.checked ? 'light' : 'dark';
+    //
+    //     document.documentElement.setAttribute('data-theme', newTheme);
+    //     localStorage.setItem('theme', newTheme);
+    // });
 });
 
     // Live Clock Functionality
@@ -855,6 +875,15 @@ window.addEventListener('scroll', () => {
     // Special case: if we're near the bottom of the page, activate contact
     if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
         current = 'contact';
+    }
+
+    // If no section is active or at the very top, activate Home (logo)
+    const logoLink = document.querySelector('.logo a');
+    if (!current || window.scrollY < 300) {
+        current = 'top';
+        logoLink.classList.add('active');
+    } else {
+        logoLink.classList.remove('active');
     }
 
     navLinks.forEach(link => {

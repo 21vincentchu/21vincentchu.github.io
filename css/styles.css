@@ -24,7 +24,18 @@ html {
     --border-color: #3e4451;
     --font-body: 'Inter', sans-serif;
     --font-heading: 'Crimson Pro', serif;
+    --container-max-width: 1400px;
+    --container-padding: 8rem;
+}
 
+/* Shared container styles */
+.nav-container,
+header,
+section {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
 }
 
 /* Navigation */
@@ -33,7 +44,6 @@ nav {
     top: 0;
     width: 100%;
     background: transparent;
-    backdrop-filter: none;
     border-bottom: none;
     z-index: 1000;
     height: auto;
@@ -49,11 +59,9 @@ nav.nav-hidden {
 
 .nav-container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 100%;
-    margin: 0;
-    padding: 0 6rem;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
     height: auto;
     position: relative;
     z-index: 1;
@@ -70,31 +78,64 @@ nav.nav-hidden {
 .logo {
     position: relative;
     display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-right: 0;
+    padding: 0;
+}
+
+.logo-row {
+    display: flex;
     align-items: center;
     gap: 0.75rem;
-    height: auto;
-    margin-right: auto;
 }
 
 .logo a {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     text-decoration: none;
     height: auto;
 }
 
 .logo svg {
-    height: 50px;
+    height: 90px;
     width: auto;
     display: block;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-left: -10px;
 }
 
 .logo svg .cls-1 {
-    fill: #61afef;
+    fill: url(#logo-gradient);
+    transition: all 0.3s ease;
 }
+
+.logo a {
+    position: relative;
+    padding: 5px;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo a.active {
+    transform: translateY(-4px) scale(1.08);
+}
+
+.logo a.active svg .cls-1 {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+            drop-shadow(0 0 12px rgba(255, 255, 255, 1))
+            drop-shadow(0 0 18px rgba(255, 255, 255, 0.9))
+            drop-shadow(0 0 24px rgba(255, 255, 255, 0.7))
+            drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+}
+
 
 .logo a:hover svg {
     filter: brightness(1.2);
+    transform: rotate(-5deg) scale(1.05);
+}
+
+.logo a:hover svg .cls-1 {
+    fill: #2E8B57;
 }
 
 .logo a img {
@@ -117,45 +158,127 @@ nav.nav-hidden {
 }
 
 .nav-separator {
-    color: var(--function-color);
-    margin: 0 0.5rem;
-    font-weight: 700;
-    font-family: var(--font-heading);
+    display: none;
 }
 
 .nav-links a {
-    height: auto;
     display: inline-block;
     align-items: center;
     font-weight: 700;
     font-family: var(--font-heading);
-    color: var(--function-color);
-    margin-left: 0;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #e8dcc8;
+    margin-left: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     border-bottom: none;
+    border-radius: 25px;
+    background: rgba(26, 29, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    vertical-align: middle;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    position: relative;
 }
 
+@keyframes border-race {
+    0% {
+        clip-path: inset(0 100% 100% 0);
+    }
+    25% {
+        clip-path: inset(0 0 100% 0);
+    }
+    50% {
+        clip-path: inset(0 0 0 0);
+    }
+    75% {
+        clip-path: inset(0 0 0 100%);
+    }
+    100% {
+        clip-path: inset(0 100% 100% 0);
+    }
+}
+
+@keyframes border-glow {
+    0% {
+        transform: translate(0, -50%);
+        left: 0;
+        top: 0;
+    }
+    25% {
+        transform: translate(50%, 0);
+        left: 100%;
+        top: 0;
+    }
+    50% {
+        transform: translate(0, 50%);
+        left: 100%;
+        top: 100%;
+    }
+    75% {
+        transform: translate(-50%, 0);
+        left: 0;
+        top: 100%;
+    }
+    100% {
+        transform: translate(0, -50%);
+        left: 0;
+        top: 0;
+    }
+}
 
 .nav-links a::before, .nav-links a::after {
     display: none;
 }
 
 .nav-links a:hover {
-    color: var(--highlight);
+    color: #111827;
     border-bottom: none;
-    transition: color 0.3s ease;
+    background: #e8e8e8;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 6px 16px rgba(232, 232, 232, 0.4);
 }
 
 .nav-links a.active {
-    color: var(--highlight);
-    border-bottom: 2px solid var(--highlight);
-    padding-bottom: 0.3rem;
+    color: #111827;
+    background: #e8e8e8;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 16px rgba(232, 232, 232, 0.4);
+    overflow: visible;
+    transform: translateY(-4px) scale(1.08);
+}
+
+.nav-links a.active::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 25px;
+    border: 2px solid white;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    animation: border-race 2s linear infinite;
+}
+
+.nav-links a.resume-link {
+    background: rgba(26, 29, 35, 0.9);
+    color: #c678dd;
+    border: 1px solid rgba(198, 120, 221, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+.nav-links a.resume-link:hover {
+    background: #c678dd;
+    color: var(--bg-color);
+    box-shadow: none;
 }
 
 .nav-links a.resume-link.active {
-    border-bottom: none;
-    padding-bottom: 0.5rem;
+    background: transparent;
+    color: #c678dd;
 }
 
 /* Header */
@@ -164,9 +287,6 @@ header {
     align-items: center;
     justify-content: space-between;
     min-height: 100vh;
-    padding: 0 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
     padding-top: 150px;
     position: relative;
 }
@@ -193,12 +313,12 @@ h1 {
     line-height: 1.1;
     margin-bottom: 0.5rem;
     font-weight: 700;
-    color: var(--class-color);
+    color: #f5f1e8;
 }
 
 h2 {
     font-size: 1.8rem;
-    color: var(--function-color);
+    color: #e8dcc8;
     margin-bottom: 1.5rem;
     font-weight: 500;
 }
@@ -211,7 +331,7 @@ h2 {
 
 .social-links a {
     font-size: 1.5rem;
-    color: var(--function-color);
+    color: #d4c9b3;
 }
 
 .social-links a::before, .social-links a::after {
@@ -247,6 +367,20 @@ h2 {
     transform: translateY(-2px);
 }
 
+.gradient-btn {
+    background: #c678dd;
+    color: var(--bg-color);
+    border: 1px solid rgba(198, 120, 221, 0.3);
+    box-shadow: none;
+}
+
+.gradient-btn:hover {
+    background: rgba(26, 29, 35, 0.9);
+    color: #c678dd;
+    box-shadow: none;
+    transform: translateY(-2px);
+}
+
 .secondary-btn {
     background-color: transparent;
     border: 2px solid var(--function-color);
@@ -274,9 +408,8 @@ h2 {
 
 /* Sections */
 section {
-    padding: 5rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
     position: relative;
     scroll-margin-top: 0px;
 }
@@ -299,9 +432,9 @@ section {
 
 section h2 {
     font-size: 2rem;
-    color: var(--class-color);
+    color: #f5f1e8;
     padding-bottom: 0.5rem;
-    border-bottom: 3px solid var(--function-color);
+    border-bottom: 3px solid #a89f8f;
     display: inline-block;
 }
 
@@ -653,6 +786,8 @@ footer {
 
 .card-content {
     background-color: rgba(62, 68, 81, 0.3);
+    backdrop-filter: blur(60px) saturate(180%);
+    -webkit-backdrop-filter: blur(60px) saturate(180%);
     border: 2px solid var(--border-color);
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
@@ -765,27 +900,27 @@ img[src*="University_of_Missouri_logo"] {
 }
 
 .job-badge.full-time {
-    background-color: rgba(152, 195, 121, 0.2);
-    color: var(--string-color);
-    border: 1px solid var(--string-color);
+    background-color: rgba(34, 197, 94, 0.25);
+    color: #4ade80;
+    border: 1px solid #22c55e;
 }
 
 .job-badge.part-time {
-    background-color: rgba(209, 154, 102, 0.2);
-    color: var(--number-color);
-    border: 1px solid var(--number-color);
+    background-color: rgba(251, 146, 60, 0.25);
+    color: #fb923c;
+    border: 1px solid #f97316;
 }
 
 .job-badge.internship {
-    background-color: rgba(97, 175, 239, 0.2);
-    color: var(--function-color);
-    border: 1px solid var(--function-color);
+    background-color: rgba(59, 130, 246, 0.25);
+    color: #60a5fa;
+    border: 1px solid #3b82f6;
 }
 
 .job-badge.research {
-    background-color: rgba(198, 120, 221, 0.2);
-    color: var(--keyword-color);
-    border: 1px solid var(--keyword-color);
+    background-color: rgba(168, 85, 247, 0.25);
+    color: #c084fc;
+    border: 1px solid #a855f7;
 }
 
 /* Tech Tags */
@@ -957,35 +1092,34 @@ img[src*="University_of_Missouri_logo"] {
 
 /* Clock styling */
 .clock-container {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    margin-left: 0;
+    margin-left: auto;
     margin-right: 0;
-    padding: 0;
-    border-radius: 6px;
-    background-color: transparent;
-    transition: all 0.1s ease;
-}
-
-.clock-container:hover {
-    background-color: transparent;
+    padding: 0.6rem 1.25rem;
+    background: rgba(26, 29, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .timezone {
-    font-size: 0.65rem; /* Smaller font */
+    font-size: 0.8rem;
     color: var(--comment-color);
-    margin-bottom: 0;
+    margin-bottom: 0.15rem;
     line-height: 1;
+    font-family: var(--font-body);
+    font-weight: 400;
 }
 
 .time {
-    font-size: 0.65rem; /* Smaller font */
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--function-color);
     font-family: var(--font-body);
-    line-height: 1.2;
+    line-height: 1;
 }
 
 /* Animation for the seconds */
@@ -1035,41 +1169,7 @@ img[src*="University_of_Missouri_logo"] {
     animation: fadeIn 3.0s ease;
 }
 
-/* Purple gradient for resume link */
-.nav-links a.resume-link {
-    position: relative;
-    padding: 0.5rem 0;
-    margin: 0;
-    background: linear-gradient(90deg, #c678dd, #e5c07b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    border: none;
-    font-weight: 900;
-    font-family: var(--font-heading);
-    transition: none;
-}
-
-.nav-links a.resume-link:hover {
-    border-bottom: 2px solid var(--highlight);
-    transition: none;
-}
-
-/* Keep resume link purple in both modes */
-[data-theme="light"] .nav-links a.resume-link {
-    background: linear-gradient(90deg, #9c27b0, #6f42c1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-[data-theme="dark"] .nav-links a.resume-link {
-    background: linear-gradient(90deg, #c678dd, #e5c07b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+/* Resume link bubble styling is defined earlier in the file */
 
 .photo-gallery-container {
     margin-top: 3rem;
