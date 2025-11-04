@@ -1,3 +1,169 @@
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1d23;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow: hidden;
+}
+
+.loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ef4444, #f97316, #a855f7, #3b82f6, #ec4899);
+    background-size: 400% 400%;
+    animation: gradientShift 3s ease infinite;
+    opacity: 0.3;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.loading-circle-container {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+}
+
+.loading-circle {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.loading-circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 3;
+}
+
+.loading-circle-progress {
+    fill: none;
+    stroke: #b794f4;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 339.292; /* 2 * PI * 54 */
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.loading-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f5f1e8;
+    font-family: var(--font-body);
+    z-index: 11;
+}
+
+.loading-logo {
+    width: 250px;
+    height: 250px;
+    z-index: 10;
+    position: relative;
+    animation: logoZoom 0.8s ease-out forwards;
+}
+
+.loading-logo-v-container,
+.loading-logo-c-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-logo-v-container svg,
+.loading-logo-c-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.loading-logo-path {
+    filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6));
+}
+
+.loading-logo-v-container {
+    animation: logoSplitUp 0.7s ease-in 0.8s forwards;
+}
+
+.loading-logo-c-container {
+    animation: logoSplitDown 0.7s ease-in 0.8s forwards;
+}
+
+@keyframes logoZoom {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes logoSplitUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-3000px);
+        opacity: 0;
+    }
+}
+
+@keyframes logoSplitDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(3000px);
+        opacity: 0;
+    }
+}
+
 /* Smooth scrolling with offset for fixed nav */
 html {
     scroll-behavior: smooth;
@@ -436,6 +602,25 @@ section h2 {
     padding-bottom: 0.5rem;
     border-bottom: 3px solid #a89f8f;
     display: inline-block;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+section h2.active {
+    color: #b794f4;
+    border-bottom: 3px solid #b794f4;
+    animation: headingPulse 0.6s ease-out;
+}
+
+@keyframes headingPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 section p {
@@ -496,7 +681,7 @@ section p {
 .skill-category h3 {
     margin-bottom: 1.5rem;
     font-size: 1.25rem;
-    color: var(--variable-color);
+    color: #f5f1e8;
 }
 
 .skill-category ul {
@@ -562,7 +747,7 @@ section p {
 .project-card h3 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
-    color: var(--string-color);
+    color: #f5f1e8;
 }
 
 .project-card p {

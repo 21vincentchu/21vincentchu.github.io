@@ -33,6 +33,48 @@
 </head>
 
 <body id ="top">
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-gradient"></div>
+        <div class="loading-logo">
+            <div class="loading-logo-v-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                    <defs>
+                        <linearGradient id="loading-logo-gradient-v" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                            <stop offset="25%" style="stop-color:#f97316;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="75%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path class="loading-logo-path" fill="url(#loading-logo-gradient-v)" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
+                </svg>
+            </div>
+            <div class="loading-logo-c-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                    <defs>
+                        <linearGradient id="loading-logo-gradient-c" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                            <stop offset="25%" style="stop-color:#f97316;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="75%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path class="loading-logo-path" fill="url(#loading-logo-gradient-c)" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="loading-circle-container">
+            <svg class="loading-circle" viewBox="0 0 120 120">
+                <circle class="loading-circle-bg" cx="60" cy="60" r="54"></circle>
+                <circle class="loading-circle-progress" cx="60" cy="60" r="54" id="loading-circle-progress"></circle>
+            </svg>
+            <div class="loading-percentage" id="loading-percentage">0/100</div>
+        </div>
+    </div>
+
     <div class="scroll-progress"></div>
     <div class="bg-orb-1"></div>
     <div class="bg-orb-2"></div>
@@ -105,7 +147,7 @@
             <p class="greeting terminal-cursor">Hello! 👋</p>
             <h1 data-text="Vincent Chu">Vincent<br>Chu</h1>
             <h2>Backend Developer</h2>
-            <p class="tagline">First, feel free to call me Vinny! I have a passion for machine learning, data engineering, analytics, infrastructure and creating scalable solutions!</p>
+            <p class="tagline">First, feel free to call me Vinny! I have a passion for machine learning, data engineering, analytics, infrastructure, tools, and learning to solve cool problems! </p>
             
             <div class="social-links">
                 <a href="https://github.com/21vincentchu" target="_blank"><i class="fab fa-github"></i></a>
@@ -552,9 +594,9 @@
     <section id="photos">
         <div class="section-header">
             <div class="section-decorator"></div>
-            <h2>My Photos</h2>
+            <h2>Extra stuff</h2>
         </div>
-        <p>Captured on my Fujifilm XM5 | <a href="https://www.flickr.com/photos/201227251@N04/" target="_blank">View more on Flickr</a></p>
+        <p>I'm from St. Louis and proud to be Vietnamese-American. When I'm not coding, you'll find me cafe hopping with my Fujifilm XM5, or tuning my custom mechanical keyboards. I love music, F1 racing, fashion, HiFi audio, PC building, coffee, and exploring the city. Photography is my creative outlet—check out more of my work on <a href="https://www.flickr.com/photos/201227251@N04/" target="_blank">Flickr</a>!</p>
         <div class="photo-gallery">
             <figure class="gallery-item">
                 <img src="images/photo1.jpg" alt="Record Store" loading="lazy">
@@ -647,6 +689,43 @@
     }, {
         threshold: 0.1
     });
+
+    // Loading screen counter animation - fixed 1.5 seconds
+    let loadingCounter = 0;
+    const percentageElement = document.getElementById('loading-percentage');
+    const circleProgress = document.getElementById('loading-circle-progress');
+    const loadingScreen = document.querySelector('.loading-screen');
+    const loadingDuration = 1500; // 1.5 seconds
+    const updateInterval = 20; // Update every 20ms for smooth animation
+    const increment = 100 / (loadingDuration / updateInterval);
+    const circumference = 2 * Math.PI * 54; // 2 * PI * radius
+
+    // Start counting immediately
+    const counterInterval = setInterval(() => {
+        if (loadingCounter < 100) {
+            loadingCounter += increment;
+            if (loadingCounter > 100) loadingCounter = 100;
+
+            const percent = Math.floor(loadingCounter);
+            percentageElement.textContent = `${percent}/100`;
+
+            // Update circle progress
+            const offset = circumference - (loadingCounter / 100) * circumference;
+            circleProgress.style.strokeDashoffset = offset;
+        } else {
+            clearInterval(counterInterval);
+            percentageElement.textContent = '100/100';
+            circleProgress.style.strokeDashoffset = 0;
+
+            // Fade out after reaching 100
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 300);
+        }
+    }, updateInterval);
 
     window.onload = () => {
         let xhr = new XMLHttpRequest();
@@ -806,7 +885,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navWrapper = document.querySelector('.nav-wrapper');
     const navLinks = document.querySelectorAll('.nav-links a');
-    
+    const clockContainer = document.querySelector('.nav-container > .clock-container');
+
+    // Function to handle mobile clock
+    function handleMobileClock() {
+        if (window.innerWidth <= 768) {
+            // On mobile: clone clock into nav-wrapper if not already there
+            if (clockContainer && !navWrapper.querySelector('.clock-container')) {
+                const clockClone = clockContainer.cloneNode(true);
+                navWrapper.insertBefore(clockClone, navWrapper.firstChild);
+            }
+        } else {
+            // On desktop: remove clock from nav-wrapper if it exists
+            const clockInMenu = navWrapper.querySelector('.clock-container');
+            if (clockInMenu) {
+                clockInMenu.remove();
+            }
+        }
+    }
+
+    // Run on load
+    handleMobileClock();
+
+    // Run on resize
+    window.addEventListener('resize', handleMobileClock);
+
     // Toggle menu when hamburger is clicked
     if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', function() {
@@ -862,12 +965,12 @@ window.addEventListener('scroll', () => {
         progressBar.style.width = scrolled + '%';
     }
 
-    // Highlight active nav link based on scroll position
+    // Highlight active nav link and section heading based on scroll position
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
     let current = '';
-    const scrollPosition = window.scrollY + 200; // Adjust offset for better detection
+    const scrollPosition = window.scrollY + 600; // Adjust offset for earlier detection
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -892,11 +995,24 @@ window.addEventListener('scroll', () => {
         logoLink.classList.remove('active');
     }
 
+    // Update nav links
     navLinks.forEach(link => {
         link.classList.remove('active');
         const href = link.getAttribute('href');
         if (href === `#${current}`) {
             link.classList.add('active');
+        }
+    });
+
+    // Update section headings
+    sections.forEach(section => {
+        const heading = section.querySelector('h2');
+        if (heading) {
+            if (section.getAttribute('id') === current) {
+                heading.classList.add('active');
+            } else {
+                heading.classList.remove('active');
+            }
         }
     });
 });
