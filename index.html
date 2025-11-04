@@ -114,7 +114,7 @@
             </div>
             
             <div class="cta-buttons">
-                <a href="mailto:21vincentchu@gmail.com" class="btn primary-btn gradient-btn">Email Me</a>
+                <a href="mailto:21vincentchu@gmail.com" class="btn primary-btn gradient-btn copy-email">Email Me</a>
             </div>
         </div>
         <div class="profile-image">
@@ -769,7 +769,8 @@ document.addEventListener("DOMContentLoaded", function () {
     copyLinks.forEach(copyLink => {
         copyLink.addEventListener("click", function (e) {
         e.preventDefault();
-        
+
+        // Copy to clipboard
         if (!navigator.clipboard) {
             // Fallback for browsers that don't support clipboard API
             const temp = document.createElement("textarea");
@@ -782,15 +783,20 @@ document.addEventListener("DOMContentLoaded", function () {
             // Modern browsers
             navigator.clipboard.writeText(email);
         }
-        
-        // Show feedback (optional)
+
+        // Show feedback
         const originalText = this.innerHTML;
         this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        
-        // Reset button text after 2 seconds
+
+        // Reset button text after 10 seconds
         setTimeout(() => {
             this.innerHTML = originalText;
-        }, 1000);
+        }, 10000);
+
+        // Also open mailto link after a brief delay
+        setTimeout(() => {
+            window.location.href = `mailto:${email}`;
+        }, 500);
         });
     });
     });
