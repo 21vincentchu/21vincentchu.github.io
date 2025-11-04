@@ -171,7 +171,7 @@ html {
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 :root {
     --bg-color: #282c34;
@@ -188,8 +188,8 @@ html {
     --line-number: #495162;
     --selection: rgba(128, 203, 196, 0.2);
     --border-color: #3e4451;
-    --font-body: 'Inter', sans-serif;
-    --font-heading: 'Crimson Pro', serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
     --container-max-width: 1400px;
     --container-padding: 8rem;
 }
@@ -332,7 +332,7 @@ nav.nav-hidden {
     align-items: center;
     font-weight: 700;
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.5;
     color: #e8dcc8;
     margin-left: 0.5rem;
@@ -469,13 +469,13 @@ header {
 }
 
 .greeting {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
     color: var(--comment-color);
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 4.75rem;
     line-height: 1.1;
     margin-bottom: 0.5rem;
     font-weight: 700;
@@ -483,7 +483,7 @@ h1 {
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 1.65rem;
     color: #e8dcc8;
     margin-bottom: 1.5rem;
     font-weight: 500;
@@ -597,7 +597,7 @@ section {
 }
 
 section h2 {
-    font-size: 2rem;
+    font-size: 1.85rem;
     color: #f5f1e8;
     padding-bottom: 0.5rem;
     border-bottom: 3px solid #a89f8f;
@@ -624,7 +624,7 @@ section h2.active {
 }
 
 section p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     max-width: 800px;
     margin-bottom: 1.5rem;
     color: var(--text-color);
