@@ -1,77 +1,312 @@
-// Remove scroll-based animations - sections will appear immediately
-// No Intersection Observer needed since we only want header/nav animations
+// ========================================
+// INTERSECTION OBSERVERS & ANIMATIONS
+// ========================================
 
-// Auto-hide nav on scroll down, show on scroll up
-let lastScrollTop = 0;
-const nav = document.querySelector('nav');
-const scrollThreshold = 100;
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (Math.abs(scrollTop - lastScrollTop) < 5) return; // Ignore tiny scrolls
-
-    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-        // Scrolling down & past threshold
-        nav.style.transform = 'translateY(-100%)';
-    } else {
-        // Scrolling up or at top
-        nav.style.transform = 'translateY(0)';
-    }
-
-    lastScrollTop = scrollTop;
-});
-
-// Theme Toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const themeSwitch = document.getElementById('theme-switch');
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    // Set initial theme
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeSwitch.checked = savedTheme === 'light';
-    updateButtonAppearance();
-    
-    // Handle theme changes
-    themeSwitch.addEventListener('change', () => {
-        const newTheme = themeSwitch.checked ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateButtonAppearance();
+// Fade-in animations for sections
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
     });
-    
-    function updateButtonAppearance() {
-        const isLight = themeSwitch.checked;
-        themeSwitch.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-        themeSwitch.title = isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode';
+}, {
+    threshold: 0.1
+});
+
+// ========================================
+// LOADING SCREEN ANIMATION
+// ========================================
+let loadingCounter = 0;
+const percentageElement = document.getElementById('loading-percentage');
+const circleProgress = document.getElementById('loading-circle-progress');
+const loadingScreen = document.querySelector('.loading-screen');
+const loadingDuration = 1500; // 1.5 seconds
+const updateInterval = 20; // Update every 20ms for smooth animation
+const increment = 100 / (loadingDuration / updateInterval);
+const circumference = 2 * Math.PI * 54; // 2 * PI * radius
+
+// Start counting immediately
+const counterInterval = setInterval(() => {
+    if (loadingCounter < 100) {
+        loadingCounter += increment;
+        if (loadingCounter > 100) loadingCounter = 100;
+
+        const percent = Math.floor(loadingCounter);
+        percentageElement.textContent = `${percent}/100`;
+
+        // Update circle progress
+        const offset = circumference - (loadingCounter / 100) * circumference;
+        circleProgress.style.strokeDashoffset = offset;
+    } else {
+        clearInterval(counterInterval);
+        percentageElement.textContent = '100/100';
+        circleProgress.style.strokeDashoffset = 0;
+
+        // Fade out after reaching 100
+        setTimeout(() => {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 500);
+        }, 300);
     }
+}, updateInterval);
+
+// Observe all sections and skill categories
+document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
+    el.classList.add('fade-in');
+    observer.observe(el);
 });
 
-// Force scroll to top on page unload (before refresh)
-window.addEventListener('beforeunload', () => {
-    window.scrollTo(0, 0);
-});
+// Force dark mode always
+document.documentElement.setAttribute('data-theme', 'dark');
 
-// Prevent browser from restoring scroll position
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+// ========================================
+// CLOCK FUNCTIONALITY
+// ========================================
+function updateClock() {
+    const clockElement = document.getElementById('live-clock');
+    if (!clockElement) return;
+
+    // Create a date object for Central Time (US)
+    const options = {
+        timeZone: 'America/Chicago',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+    };
+
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    const timeString = formatter.format(new Date());
+
+    // Format to highlight seconds
+    const timeComponents = timeString.split(':');
+    let hours = timeComponents[0];
+    let minutes = timeComponents[1];
+    let secondsAndPeriod = timeComponents[2].split(' ');
+    let seconds = secondsAndPeriod[0];
+    let period = secondsAndPeriod[1];
+
+    // Create the formatted time with the seconds highlighted
+    clockElement.innerHTML = `${hours}:${minutes}:<span class="seconds">${seconds}</span> ${period}`;
 }
 
-// Force scroll to top immediately when script loads
-document.addEventListener('DOMContentLoaded', () => {
-    window.scrollTo(0, 0);
-});
+// Update the clock immediately and then every second
+updateClock();
+setInterval(updateClock, 1000);
 
-// Page wipe animation
-window.addEventListener("load", () => {
-    // Ensure we're at the top
-    window.scrollTo(0, 0);
-    
-    const wipe = document.getElementById("page-wipe");
-    if (wipe) {
-        setTimeout(() => {
-            wipe.remove();
-        }, 1000); // Remove after animation completes
+// DOM Content Loaded - Initialize interactive features
+document.addEventListener('DOMContentLoaded', function() {
+    // Email protection
+    const copyLinks = document.querySelectorAll(".copy-email");
+    const user = "21vincentchu";
+    const domain = "gmail.com";
+    const email = `${user}@${domain}`;
+
+    copyLinks.forEach(copyLink => {
+        copyLink.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Copy to clipboard
+            if (!navigator.clipboard) {
+                const temp = document.createElement("textarea");
+                temp.value = email;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                document.body.removeChild(temp);
+            } else {
+                navigator.clipboard.writeText(email);
+            }
+
+            // Show feedback
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+            setTimeout(() => {
+                this.innerHTML = originalText;
+            }, 10000);
+
+            setTimeout(() => {
+                window.location.href = `mailto:${email}`;
+            }, 500);
+        });
+    });
+
+    // Mobile Navigation
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navWrapper = document.querySelector('.nav-wrapper');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const clockContainer = document.querySelector('.nav-container > .clock-container');
+
+    // Function to handle mobile clock
+    function handleMobileClock() {
+        if (window.innerWidth <= 768) {
+            // On mobile: clone clock into nav-wrapper if not already there
+            if (clockContainer && !navWrapper.querySelector('.clock-container')) {
+                const clockClone = clockContainer.cloneNode(true);
+                navWrapper.insertBefore(clockClone, navWrapper.firstChild);
+            }
+        } else {
+            // On desktop: remove clock from nav-wrapper if it exists
+            const clockInMenu = navWrapper.querySelector('.clock-container');
+            if (clockInMenu) {
+                clockInMenu.remove();
+            }
+        }
     }
+
+    // Run on load
+    handleMobileClock();
+
+    // Run on resize
+    window.addEventListener('resize', handleMobileClock);
+
+    // Toggle menu when hamburger is clicked
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            document.body.classList.toggle('menu-open'); // Prevent scrolling when menu is open
+        });
+    }
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenuToggle.classList.remove('active');
+            navWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.nav-wrapper') &&
+            !event.target.closest('.mobile-menu-toggle') &&
+            navWrapper.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    });
+
+    // Add some additional CSS for preventing scroll
+    const style = document.createElement('style');
+    style.textContent = `
+        body.menu-open {
+            overflow: hidden;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navWrapper.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navWrapper.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    });
 });
 
+// ========================================
+// SCROLL PROGRESS & ACTIVE SECTIONS
+// ========================================
+window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    const progressBar = document.querySelector('.scroll-progress');
+    if (progressBar) {
+        progressBar.style.width = scrolled + '%';
+    }
+
+    // Highlight active nav link and section heading based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    let current = '';
+    const scrollPosition = window.scrollY + 600; // Adjust offset for earlier detection
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    // Special case: if we're near the bottom of the page, activate contact
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
+        current = 'contact';
+    }
+
+    // If no section is active or at the very top, activate Home (logo)
+    const logoLink = document.querySelector('.logo a');
+    if (!current || window.scrollY < 300) {
+        current = 'top';
+        logoLink.classList.add('active');
+    } else {
+        logoLink.classList.remove('active');
+    }
+
+    // Update nav links
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+
+    // Update section headings
+    sections.forEach(section => {
+        const heading = section.querySelector('h2');
+        if (heading) {
+            if (section.getAttribute('id') === current) {
+                heading.classList.add('active');
+            } else {
+                heading.classList.remove('active');
+            }
+        }
+    });
+});
+
+// ========================================
+// SECTION DECORATOR ANIMATIONS
+// ========================================
+const decoratorObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const decorator = entry.target.querySelector('.section-decorator');
+            if (decorator) {
+                decorator.classList.add('animate');
+            }
+        }
+    });
+}, { threshold: 0.1 });
+
+// Observe all sections with decorators
+const sectionsWithDecorators = document.querySelectorAll('section');
+sectionsWithDecorators.forEach(section => {
+    decoratorObserver.observe(section);
+});
+
+// ========================================
+// TOGGLE EXPERIENCE DETAILS
+// ========================================
+function toggleDetails(button) {
+    const detailsContent = button.nextElementSibling;
+    const isActive = button.classList.contains('active');
+
+    if (isActive) {
+        button.classList.remove('active');
+        detailsContent.classList.remove('show');
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> View details';
+    } else {
+        button.classList.add('active');
+        detailsContent.classList.add('show');
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide details';
+    }
+}
