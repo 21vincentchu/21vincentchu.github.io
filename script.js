@@ -32,14 +32,14 @@ const counterInterval = setInterval(() => {
         if (loadingCounter > 100) loadingCounter = 100;
 
         const percent = Math.floor(loadingCounter);
-        percentageElement.textContent = `${percent}/100`;
+        percentageElement.textContent = `${percent}%`;
 
         // Update circle progress
         const offset = circumference - (loadingCounter / 100) * circumference;
         circleProgress.style.strokeDashoffset = offset;
     } else {
         clearInterval(counterInterval);
-        percentageElement.textContent = '100/100';
+        percentageElement.textContent = '100%';
         circleProgress.style.strokeDashoffset = 0;
 
         // Fade out after reaching 100
@@ -73,23 +73,14 @@ function updateClock() {
         timeZone: 'America/Chicago',
         hour: 'numeric',
         minute: 'numeric',
-        second: 'numeric',
         hour12: true
     };
 
     const formatter = new Intl.DateTimeFormat('en-US', options);
     const timeString = formatter.format(new Date());
 
-    // Format to highlight seconds
-    const timeComponents = timeString.split(':');
-    let hours = timeComponents[0];
-    let minutes = timeComponents[1];
-    let secondsAndPeriod = timeComponents[2].split(' ');
-    let seconds = secondsAndPeriod[0];
-    let period = secondsAndPeriod[1];
-
-    // Create the formatted time with the seconds highlighted
-    clockElement.innerHTML = `${hours}:${minutes}:<span class="seconds">${seconds}</span> ${period}`;
+    // Display time without seconds
+    clockElement.innerHTML = timeString;
 }
 
 // Update the clock immediately and then every second

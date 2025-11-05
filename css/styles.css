@@ -47,8 +47,8 @@
     position: absolute;
     bottom: 3rem;
     left: 3rem;
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     z-index: 10;
 }
 
@@ -61,13 +61,13 @@
 .loading-circle-bg {
     fill: none;
     stroke: rgba(255, 255, 255, 0.1);
-    stroke-width: 3;
+    stroke-width: 1;
 }
 
 .loading-circle-progress {
     fill: none;
     stroke: #b794f4;
-    stroke-width: 3;
+    stroke-width: 1;
     stroke-linecap: round;
     stroke-dasharray: 339.292; /* 2 * PI * 54 */
     stroke-dashoffset: 339.292;
@@ -79,7 +79,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: #f5f1e8;
     font-family: var(--font-body);
@@ -1278,12 +1278,13 @@ img[src*="University_of_Missouri_logo"] {
 /* Clock styling */
 .clock-container {
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     margin-left: auto;
     margin-right: 0;
-    padding: 0.6rem 1.25rem;
+    padding: 0.6rem 1.75rem;
     background: rgba(26, 29, 35, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 25px;
@@ -1291,16 +1292,15 @@ img[src*="University_of_Missouri_logo"] {
 }
 
 .timezone {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--comment-color);
-    margin-bottom: 0.15rem;
     line-height: 1;
     font-family: var(--font-body);
     font-weight: 400;
 }
 
 .time {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--function-color);
     font-family: var(--font-body);
