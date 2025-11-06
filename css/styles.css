@@ -171,7 +171,14 @@ html {
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@font-face {
+    font-family: 'Vercetti';
+    src: url('../fonts/Vercetti Regular/OpenType WOFFs/Vercetti-Regular.woff2') format('woff2'),
+         url('../fonts/Vercetti Regular/OpenType WOFFs/Vercetti-Regular.woff') format('woff'),
+         url('../fonts/Vercetti Regular/Vercetti-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
 
 :root {
     --bg-color: #282c34;
@@ -188,8 +195,8 @@ html {
     --line-number: #495162;
     --selection: rgba(128, 203, 196, 0.2);
     --border-color: #3e4451;
-    --font-body: 'Space Grotesk', sans-serif;
-    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Vercetti', sans-serif;
+    --font-heading: 'Vercetti', sans-serif;
     --container-max-width: 1400px;
     --container-padding: 8rem;
 }
