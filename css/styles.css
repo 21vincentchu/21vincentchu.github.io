@@ -172,11 +172,42 @@ html {
 
 
 @font-face {
-    font-family: 'Vercetti';
-    src: url('../fonts/Vercetti Regular/OpenType WOFFs/Vercetti-Regular.woff2') format('woff2'),
-         url('../fonts/Vercetti Regular/OpenType WOFFs/Vercetti-Regular.woff') format('woff'),
-         url('../fonts/Vercetti Regular/Vercetti-Regular.otf') format('opentype');
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Light.woff2') format('woff2'),
+         url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Regular.woff2') format('woff2'),
+         url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Regular.woff') format('woff');
     font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Medium.woff2') format('woff2'),
+         url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Bold.woff2') format('woff2'),
+         url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Black.woff2') format('woff2'),
+         url('../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Black.woff') format('woff');
+    font-weight: 900;
     font-style: normal;
 }
 
@@ -195,8 +226,8 @@ html {
     --line-number: #495162;
     --selection: rgba(128, 203, 196, 0.2);
     --border-color: #3e4451;
-    --font-body: 'Vercetti', sans-serif;
-    --font-heading: 'Vercetti', sans-serif;
+    --font-body: 'Satoshi', sans-serif;
+    --font-heading: 'Satoshi', sans-serif;
     --container-max-width: 1400px;
     --container-padding: 8rem;
 }
@@ -278,6 +309,51 @@ nav.nav-hidden {
     margin-left: -10px;
 }
 
+@keyframes gradientShift {
+    0% {
+        stop-color: #ef4444; /* red */
+    }
+    20% {
+        stop-color: #f59e0b; /* yellow */
+    }
+    40% {
+        stop-color: #a855f7; /* purple */
+    }
+    60% {
+        stop-color: #8b5cf6; /* violet */
+    }
+    80% {
+        stop-color: #06b6d4; /* cyan */
+    }
+    100% {
+        stop-color: #ef4444; /* back to red */
+    }
+}
+
+.logo svg .stop1 {
+    animation: gradientShift 10s ease-in-out infinite;
+}
+
+.logo svg .stop2 {
+    animation: gradientShift 10s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.logo svg .stop3 {
+    animation: gradientShift 10s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.logo svg .stop4 {
+    animation: gradientShift 10s ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+.logo svg .stop5 {
+    animation: gradientShift 10s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
 .logo svg .cls-1 {
     fill: url(#logo-gradient);
     transition: all 0.3s ease;
@@ -320,6 +396,10 @@ nav.nav-hidden {
 
 .logo a:hover img {
     filter: brightness(1.2);
+}
+
+.nav-wrapper {
+    margin-left: 0.25rem;
 }
 
 .nav-links {
@@ -459,6 +539,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
     min-height: 100vh;
     padding-top: 150px;
     position: relative;
@@ -1291,7 +1372,7 @@ img[src*="University_of_Missouri_logo"] {
     gap: 0.5rem;
     margin-left: auto;
     margin-right: 0;
-    padding: 0.6rem 1.75rem;
+    padding: 0.7rem 1.25rem;
     background: rgba(26, 29, 35, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 25px;
@@ -1312,6 +1393,7 @@ img[src*="University_of_Missouri_logo"] {
     color: var(--function-color);
     font-family: var(--font-body);
     line-height: 1;
+    white-space: nowrap;
 }
 
 /* Animation for the seconds */
