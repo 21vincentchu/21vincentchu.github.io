@@ -155,11 +155,9 @@ nav {
 @keyframes breathe {
     0%, 100% {
         transform: scale(1);
-        box-shadow: 0 2px 8px rgba(97, 175, 239, 0.2);
     }
     50% {
         transform: scale(1.02);
-        box-shadow: 0 4px 15px rgba(97, 175, 239, 0.4);
     }
 }
 
@@ -191,23 +189,17 @@ nav {
 
 /* 8. project card hover with 3D effect */
 .project-card:hover {
-    transform: translateY(-10px) rotateY(3deg) rotateX(2deg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
+    border-color: var(--variable-color);
 }
 
 /* 9. skill category hover with 3D effect */
 .skill-category:hover {
-    transform: translateY(-10px) rotateY(3deg) rotateX(2deg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
-    transform-style: preserve-3d;
+    border-color: var(--variable-color);
 }
 
 /* 10. Photo gallery enhanced hover */
 .gallery-item:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: var(--variable-color);
 }
 
 .gallery-item:hover img {

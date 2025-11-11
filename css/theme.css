@@ -22,264 +22,9 @@
 
 [data-theme="dark"] body::before,
 [data-theme="dark"] body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0;
-    z-index: -1;
-    pointer-events: none;
+    display: none;
 }
 
-/* Additional background orbs */
-[data-theme="dark"] body .bg-orb-1,
-[data-theme="dark"] body .bg-orb-2,
-[data-theme="dark"] body .bg-orb-3,
-[data-theme="dark"] body .bg-orb-4 {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0;
-    z-index: -1;
-    pointer-events: none;
-}
-
-[data-theme="dark"] body::before {
-    width: 700px;
-    height: 700px;
-    top: 15%;
-    left: -5%;
-    border-radius: 60% 40% 50% 70% / 60% 50% 70% 40%;
-    filter: blur(120px);
-    background: radial-gradient(ellipse at 40% 50%, rgba(46, 139, 87, 0.3) 0%, rgba(34, 139, 34, 0.2) 30%, transparent 70%);
-    animation: pulse1 6s ease-in-out infinite, morphBlob1 8s ease-in-out infinite, colorShiftDark1 15s ease-in-out infinite;
-    will-change: transform, opacity;
-}
-
-[data-theme="dark"] body::after {
-    width: 800px;
-    height: 800px;
-    bottom: 10%;
-    right: -10%;
-    border-radius: 50% 60% 40% 70% / 50% 70% 60% 40%;
-    filter: blur(120px);
-    background: radial-gradient(ellipse at 60% 50%, rgba(232, 155, 60, 0.25) 0%, rgba(255, 165, 0, 0.2) 25%, transparent 65%);
-    animation: pulse2 7s ease-in-out infinite 1s, morphBlob2 9s ease-in-out infinite, colorShiftDark2 18s ease-in-out infinite 3s;
-    will-change: transform, opacity;
-}
-
-/* Magenta/Pink orb (complementary to green) */
-[data-theme="dark"] body .bg-orb-1 {
-    width: 700px;
-    height: 700px;
-    top: 40%;
-    right: 5%;
-    border-radius: 38% 62% 73% 27% / 61% 34% 66% 39%;
-    filter: blur(110px);
-    background: radial-gradient(ellipse at 50% 50%, rgba(255, 20, 147, 0.28) 0%, rgba(236, 72, 153, 0.20) 35%, rgba(219, 39, 119, 0.12) 55%, transparent 75%);
-    animation: pulse3 7s ease-in-out infinite 2s, morphBlob3 9s ease-in-out infinite, colorShiftDark3 16s ease-in-out infinite 5s, floatOrb1 20s ease-in-out infinite;
-    will-change: transform, opacity;
-}
-
-/* Blue/Purple orb (complementary to orange) */
-[data-theme="dark"] body .bg-orb-2 {
-    width: 750px;
-    height: 750px;
-    top: 60%;
-    left: 10%;
-    border-radius: 55% 45% 50% 50% / 45% 60% 40% 55%;
-    filter: blur(130px);
-    background: radial-gradient(ellipse at 45% 55%, rgba(70, 130, 180, 0.28) 0%, rgba(100, 149, 237, 0.2) 30%, transparent 68%);
-    animation: pulse4 9s ease-in-out infinite 3.5s, morphBlob4 11s ease-in-out infinite, colorShiftDark4 22s ease-in-out infinite 7s;
-    will-change: transform, opacity;
-}
-
-/* Purple/Violet orb (middle of the page) */
-[data-theme="dark"] body .bg-orb-3 {
-    width: 650px;
-    height: 650px;
-    top: 25%;
-    left: 45%;
-    border-radius: 29% 71% 64% 36% / 68% 42% 58% 32%;
-    filter: blur(105px);
-    background: radial-gradient(ellipse at 50% 50%, rgba(192, 38, 211, 0.24) 0%, rgba(168, 85, 247, 0.18) 32%, rgba(147, 51, 234, 0.12) 55%, transparent 70%);
-    animation: pulse5 7.5s ease-in-out infinite 4s, morphBlob5 9.5s ease-in-out infinite, colorShiftDark5 17s ease-in-out infinite 6s, floatOrb3 22s ease-in-out infinite 3s;
-    will-change: transform, opacity;
-}
-
-/* Coral/Salmon orb (warm accent) */
-[data-theme="dark"] body .bg-orb-4 {
-    width: 720px;
-    height: 720px;
-    bottom: 35%;
-    right: 20%;
-    border-radius: 67% 33% 28% 72% / 44% 71% 29% 56%;
-    filter: blur(108px);
-    background: radial-gradient(ellipse at 55% 45%, rgba(255, 105, 180, 0.22) 0%, rgba(255, 20, 147, 0.16) 28%, rgba(219, 39, 119, 0.10) 50%, transparent 70%);
-    animation: pulse6 8s ease-in-out infinite 2.5s, morphBlob6 10s ease-in-out infinite, colorShiftDark6 18s ease-in-out infinite 8s, floatOrb4 25s ease-in-out infinite 5s;
-    will-change: transform, opacity;
-}
-
-@keyframes pulse1 {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    25% {
-        opacity: 0.3;
-        transform: scale(1.0);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.4);
-    }
-    75% {
-        opacity: 0.4;
-        transform: scale(1.1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-}
-
-@keyframes pulse2 {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    25% {
-        opacity: 0.4;
-        transform: scale(1.1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.5);
-    }
-    75% {
-        opacity: 0.3;
-        transform: scale(1.0);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-}
-
-@keyframes pulse3 {
-    0% { opacity: 0.2; transform: scale(0.85); }
-    25% { opacity: 0.55; transform: scale(1.05); }
-    50% { opacity: 0.85; transform: scale(1.35); }
-    75% { opacity: 0.6; transform: scale(1.15); }
-    100% { opacity: 0.2; transform: scale(0.85); }
-}
-
-@keyframes pulse4 {
-    0% { opacity: 0; transform: scale(0.88); }
-    25% { opacity: 0.38; transform: scale(1.08); }
-    50% { opacity: 0.72; transform: scale(1.42); }
-    75% { opacity: 0.35; transform: scale(1.05); }
-    100% { opacity: 0; transform: scale(0.88); }
-}
-
-@keyframes pulse5 {
-    0% { opacity: 0; transform: scale(0.82); }
-    25% { opacity: 0.32; transform: scale(1.02); }
-    50% { opacity: 0.6; transform: scale(1.35); }
-    75% { opacity: 0.38; transform: scale(1.08); }
-    100% { opacity: 0; transform: scale(0.82); }
-}
-
-@keyframes pulse6 {
-    0% { opacity: 0; transform: scale(0.87); }
-    25% { opacity: 0.36; transform: scale(1.06); }
-    50% { opacity: 0.68; transform: scale(1.38); }
-    75% { opacity: 0.33; transform: scale(1.03); }
-    100% { opacity: 0; transform: scale(0.87); }
-}
-
-@keyframes morphBlob3 {
-    0%, 100% { border-radius: 38% 62% 73% 27% / 61% 34% 66% 39%; }
-    25% { border-radius: 72% 28% 35% 65% / 44% 71% 29% 56%; }
-    50% { border-radius: 27% 73% 58% 42% / 69% 38% 62% 31%; }
-    75% { border-radius: 61% 39% 24% 76% / 33% 67% 33% 67%; }
-}
-
-@keyframes morphBlob4 {
-    0%, 100% { border-radius: 55% 45% 50% 50% / 45% 60% 40% 55%; }
-    33% { border-radius: 45% 55% 60% 40% / 60% 40% 55% 45%; }
-    66% { border-radius: 60% 40% 45% 55% / 40% 55% 45% 60%; }
-}
-
-@keyframes morphBlob5 {
-    0%, 100% { border-radius: 29% 71% 64% 36% / 68% 42% 58% 32%; }
-    25% { border-radius: 68% 32% 41% 59% / 37% 73% 27% 63%; }
-    50% { border-radius: 34% 66% 71% 29% / 59% 28% 72% 41%; }
-    75% { border-radius: 73% 27% 38% 62% / 46% 61% 39% 54%; }
-}
-
-@keyframes morphBlob6 {
-    0%, 100% { border-radius: 67% 33% 28% 72% / 44% 71% 29% 56%; }
-    25% { border-radius: 31% 69% 72% 28% / 68% 36% 64% 32%; }
-    50% { border-radius: 74% 26% 39% 61% / 29% 73% 27% 71%; }
-    75% { border-radius: 36% 64% 68% 32% / 71% 29% 71% 29%; }
-}
-
-@keyframes colorShiftDark3 {
-    0%, 100% { background-color: rgba(255, 20, 147, 0.26); }
-    20% { background-color: rgba(236, 72, 153, 0.22); }
-    40% { background-color: rgba(219, 39, 119, 0.20); }
-    60% { background-color: rgba(255, 0, 127, 0.24); }
-    80% { background-color: rgba(240, 50, 140, 0.21); }
-}
-
-@keyframes colorShiftDark4 {
-    0%, 100% { background-color: rgba(70, 130, 180, 0.25); }
-    20% { background-color: rgba(100, 149, 237, 0.27); }
-    40% { background-color: rgba(65, 105, 225, 0.26); }
-    60% { background-color: rgba(30, 144, 255, 0.24); }
-    80% { background-color: rgba(85, 140, 200, 0.26); }
-}
-
-@keyframes colorShiftDark5 {
-    0%, 100% { background-color: rgba(192, 38, 211, 0.22); }
-    20% { background-color: rgba(168, 85, 247, 0.20); }
-    40% { background-color: rgba(147, 51, 234, 0.18); }
-    60% { background-color: rgba(192, 38, 211, 0.21); }
-    80% { background-color: rgba(168, 85, 247, 0.19); }
-}
-
-@keyframes colorShiftDark6 {
-    0%, 100% { background-color: rgba(255, 105, 180, 0.20); }
-    20% { background-color: rgba(255, 20, 147, 0.18); }
-    40% { background-color: rgba(219, 39, 119, 0.16); }
-    60% { background-color: rgba(236, 72, 153, 0.17); }
-    80% { background-color: rgba(255, 0, 127, 0.19); }
-}
-
-/* Floating animations for orbs */
-@keyframes floatOrb1 {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(-80px, -100px); }
-    50% { transform: translate(-120px, 60px); }
-    75% { transform: translate(60px, -80px); }
-}
-
-@keyframes floatOrb3 {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(100px, 80px); }
-    50% { transform: translate(-60px, 120px); }
-    75% { transform: translate(80px, -60px); }
-}
-
-@keyframes floatOrb4 {
-    0%, 100% { transform: translate(0, 0); }
-    20% { transform: translate(-100px, 70px); }
-    40% { transform: translate(80px, 100px); }
-    60% { transform: translate(-70px, -80px); }
-    80% { transform: translate(90px, -60px); }
-}
 
 [data-theme="dark"] .logo svg .cls-1 {
     fill: url(#logo-gradient);
@@ -352,7 +97,6 @@
     border-radius: 50%;
     background-color: var(--function-color);
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .toggle-input:checked + .toggle-label .toggle-thumb {
@@ -490,59 +234,29 @@ body {
 
 body::before,
 body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0;
-    z-index: -1;
-    pointer-events: none;
-}
-
-body::before {
-    width: 800px;
-    height: 800px;
-    top: 10%;
-    left: -10%;
-    border-radius: 60% 40% 50% 70% / 60% 50% 70% 40%;
-    filter: blur(150px);
-    background: radial-gradient(ellipse at 40% 50%, rgba(46, 139, 87, 0.6) 0%, rgba(34, 139, 34, 0.4) 30%, transparent 70%);
-    animation: pulse1 6s ease-in-out infinite, morphBlob1 8s ease-in-out infinite, colorShift1 15s ease-in-out infinite;
-    will-change: transform, opacity, filter, border-radius;
-}
-
-body::after {
-    width: 700px;
-    height: 700px;
-    bottom: 10%;
-    right: -5%;
-    border-radius: 50% 60% 40% 70% / 50% 70% 60% 40%;
-    filter: blur(150px);
-    background: radial-gradient(ellipse at 60% 50%, rgba(255, 140, 0, 0.65) 0%, rgba(255, 165, 0, 0.45) 25%, transparent 65%);
-    animation: pulse2 7s ease-in-out infinite 1s, morphBlob2 9s ease-in-out infinite, colorShift2 18s ease-in-out infinite 3s;
-    will-change: transform, opacity, filter, border-radius;
+    display: none;
 }
 
 @keyframes pulse1 {
     0% {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.9);
     }
     25% {
-        opacity: 0.3;
+        opacity: 0.15;
         transform: scale(1.0);
     }
     50% {
-        opacity: 0.7;
-        transform: scale(1.4);
+        opacity: 0.35;
+        transform: scale(1.2);
     }
     75% {
-        opacity: 0.4;
-        transform: scale(1.1);
+        opacity: 0.2;
+        transform: scale(1.05);
     }
     100% {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.9);
     }
 }
 
@@ -552,15 +266,15 @@ body::after {
         transform: scale(0.9);
     }
     25% {
-        opacity: 0.4;
-        transform: scale(1.1);
+        opacity: 0.2;
+        transform: scale(1.05);
     }
     50% {
-        opacity: 0.8;
-        transform: scale(1.5);
+        opacity: 0.4;
+        transform: scale(1.25);
     }
     75% {
-        opacity: 0.3;
+        opacity: 0.15;
         transform: scale(1.0);
     }
     100% {
@@ -600,86 +314,86 @@ body::after {
 /* Light theme color shifting */
 @keyframes colorShift1 {
     0%, 100% {
-        background-color: rgba(46, 139, 87, 0.5);
+        background-color: rgba(168, 85, 247, 0.25);
     }
     16% {
-        background-color: rgba(60, 150, 95, 0.55);
+        background-color: rgba(147, 51, 234, 0.28);
     }
     33% {
-        background-color: rgba(120, 180, 80, 0.6);
+        background-color: rgba(192, 38, 211, 0.3);
     }
     50% {
-        background-color: rgba(200, 200, 60, 0.6);
+        background-color: rgba(168, 85, 247, 0.3);
     }
     66% {
-        background-color: rgba(240, 160, 50, 0.6);
+        background-color: rgba(147, 51, 234, 0.3);
     }
     83% {
-        background-color: rgba(100, 145, 85, 0.55);
+        background-color: rgba(192, 38, 211, 0.28);
     }
 }
 
 @keyframes colorShift2 {
     0%, 100% {
-        background-color: rgba(255, 140, 0, 0.55);
+        background-color: rgba(255, 140, 0, 0.28);
     }
     16% {
-        background-color: rgba(255, 180, 40, 0.6);
+        background-color: rgba(255, 165, 0, 0.3);
     }
     33% {
-        background-color: rgba(220, 200, 60, 0.6);
+        background-color: rgba(232, 155, 60, 0.32);
     }
     50% {
-        background-color: rgba(140, 200, 70, 0.6);
+        background-color: rgba(255, 140, 0, 0.3);
     }
     66% {
-        background-color: rgba(60, 160, 80, 0.55);
+        background-color: rgba(240, 170, 50, 0.3);
     }
     83% {
-        background-color: rgba(200, 150, 50, 0.6);
+        background-color: rgba(255, 165, 0, 0.28);
     }
 }
 
 /* Dark theme color shifting */
 @keyframes colorShiftDark1 {
     0%, 100% {
-        background-color: rgba(46, 139, 87, 0.25);
+        background-color: rgba(168, 85, 247, 0.12);
     }
     16% {
-        background-color: rgba(55, 145, 90, 0.28);
+        background-color: rgba(147, 51, 234, 0.14);
     }
     33% {
-        background-color: rgba(100, 170, 70, 0.3);
+        background-color: rgba(192, 38, 211, 0.15);
     }
     50% {
-        background-color: rgba(180, 180, 50, 0.3);
+        background-color: rgba(168, 85, 247, 0.15);
     }
     66% {
-        background-color: rgba(220, 140, 40, 0.3);
+        background-color: rgba(147, 51, 234, 0.15);
     }
     83% {
-        background-color: rgba(90, 140, 80, 0.28);
+        background-color: rgba(192, 38, 211, 0.14);
     }
 }
 
 @keyframes colorShiftDark2 {
     0%, 100% {
-        background-color: rgba(232, 155, 60, 0.22);
+        background-color: rgba(232, 155, 60, 0.11);
     }
     16% {
-        background-color: rgba(240, 170, 50, 0.25);
+        background-color: rgba(240, 170, 50, 0.12);
     }
     33% {
-        background-color: rgba(200, 180, 60, 0.28);
+        background-color: rgba(255, 140, 0, 0.14);
     }
     50% {
-        background-color: rgba(120, 180, 70, 0.28);
+        background-color: rgba(232, 155, 60, 0.14);
     }
     66% {
-        background-color: rgba(50, 150, 80, 0.25);
+        background-color: rgba(240, 170, 50, 0.12);
     }
     83% {
-        background-color: rgba(180, 140, 50, 0.25);
+        background-color: rgba(255, 165, 0, 0.12);
     }
 }
 
@@ -692,11 +406,10 @@ a {
     color: #c084fc;
     transition: all 0.3s ease;
     position: relative;
-    text-shadow: 0 0 8px rgba(192, 132, 252, 0.3);
+    text-shadow: none;
 }
 
 a:hover {
     color: #e0b3ff;
-    text-shadow: 0 0 12px rgba(224, 179, 255, 0.6),
-                 0 0 16px rgba(224, 179, 255, 0.4);
+    text-shadow: none;
 }

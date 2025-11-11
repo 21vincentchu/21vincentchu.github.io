@@ -301,3 +301,41 @@ function toggleDetails(button) {
         button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide details';
     }
 }
+
+// ========================================
+// SPOTIFY RECENTLY PLAYED
+// ========================================
+
+async function loadSpotifyTracks() {
+    const container = document.getElementById('spotify-tracks');
+
+    try {
+        const response = await fetch('recently_played.json');
+        const data = await response.json();
+
+        if (!data.success || data.tracks.length === 0) {
+            container.innerHTML = '<p class="no-tracks">No recent tracks available. Run update_spotify.py to populate.</p>';
+            return;
+        }
+
+        // Create track cards
+        const tracksHTML = data.tracks.map(track => `
+            <a href="${track.url}" target="_blank" class="spotify-track-card">
+                <img src="${track.image}" alt="${track.album}" class="track-image">
+                <div class="track-info">
+                    <div class="track-name">${track.name}</div>
+                    <div class="track-artist">${track.artist}</div>
+                </div>
+            </a>
+        `).join('');
+
+        container.innerHTML = tracksHTML;
+
+    } catch (error) {
+        console.error('Error loading Spotify tracks:', error);
+        container.innerHTML = '<p class="error-text">Failed to load tracks. Please try again later.</p>';
+    }
+}
+
+// Load Spotify tracks when page loads
+document.addEventListener('DOMContentLoaded', loadSpotifyTracks);
