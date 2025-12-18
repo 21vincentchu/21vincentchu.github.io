@@ -261,11 +261,20 @@ nav {
     padding: 2rem 0;
     padding-bottom: 1rem;
     transform: translateY(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 nav.nav-hidden {
     transform: translateY(-100%);
+}
+
+/* Blur effect when scrolled */
+nav.scrolled {
+    background: rgba(26, 29, 35, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.5rem 0;
+    padding-bottom: 0.5rem;
 }
 
 .nav-container {

@@ -206,6 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // SCROLL PROGRESS & ACTIVE SECTIONS
 // ========================================
 window.addEventListener('scroll', () => {
+    // Add blur effect to navbar when scrolled
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+
     const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
     const progressBar = document.querySelector('.scroll-progress');
     if (progressBar) {
