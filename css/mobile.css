@@ -1,7 +1,7 @@
 /* Mobile Navigation CSS */
 
 /* Adjustments for small screens */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .toggle-text-dark, 
     .toggle-text-light {
         display: none;
@@ -48,19 +48,37 @@
 }
 
 /* Media queries for responsive design */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
+    /* Remove nav bar background completely on mobile */
+    nav {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: transparent;
+        border-radius: 0;
+        border: none;
+        top: 0;
+        max-width: 100%;
+        padding: 1rem 0;
+    }
+
     /* Adjust main navigation layout */
     .nav-container {
-        padding: 0 1.5rem;
+        padding: 0 2.5rem !important;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
+        background: transparent;
     }
 
     /* Logo stays on left */
     .logo {
         flex-shrink: 0;
         margin-right: auto;
+        margin-left: 0;
+    }
+
+    .logo svg {
+        margin-left: 0 !important;
     }
 
     /* Hamburger menu button */
@@ -69,48 +87,37 @@
         flex-shrink: 0;
         order: 2;
         margin-left: auto;
+        margin-right: 0;
+        z-index: 1001;
+        position: relative;
     }
 
     /* Hide nav-wrapper by default - it will slide in */
     .nav-wrapper {
         position: fixed;
-        top: 140px;
+        top: 0;
         right: 0;
-        width: auto;
-        height: auto;
-        background-color: transparent;
-        backdrop-filter: none;
+        width: 240px;
+        height: 100vh;
+        background: rgba(30, 35, 60, 0.95);
+        backdrop-filter: blur(80px) saturate(200%);
+        -webkit-backdrop-filter: blur(80px) saturate(200%);
         flex-direction: column;
-        align-items: flex-end;
-        padding: 0 1.5rem;
+        align-items: flex-start;
+        padding: 140px 2rem 2rem 2rem;
         transition: transform 0.25s ease-out;
         transform: translateX(100%);
-        box-shadow: none;
-        z-index: 999;
-        overflow-y: visible;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        overflow-y: auto;
         will-change: transform;
     }
 
-    /* Hide the original clock position on mobile */
-    .nav-container > .clock-container {
-        display: none;
-    }
-
-    /* Clone clock inside nav-wrapper on mobile */
-    .nav-wrapper .clock-container {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0.8rem 1.25rem;
-        margin-bottom: 1rem;
-        width: auto;
-        border-radius: 25px;
-        background: rgba(26, 29, 35, 0.9);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        text-align: right;
-        margin-left: 0;
-        margin-right: 0;
+    /* Hide the clock completely on mobile */
+    .nav-container > .clock-container,
+    .nav-wrapper .clock-container,
+    .clock-container {
+        display: none !important;
     }
 
     /* Show menu when active */
@@ -122,14 +129,14 @@
     .nav-links {
         display: flex;
         flex-direction: column;
-        width: auto;
+        width: 100%;
         padding: 0;
-        gap: 1rem;
-        align-items: flex-end;
+        gap: 0.5rem !important;
+        align-items: flex-start;
     }
 
     .nav-links a {
-        padding: 0.8rem 1.25rem;
+        padding: 0.5rem 1rem;
         width: auto;
         border-radius: 25px;
         background: rgba(26, 29, 35, 0.9);
@@ -163,11 +170,6 @@
         transform: translateY(-9px) rotate(-45deg);
     }
     
-    /* Ensure clock is visible */
-    .clock-container {
-        margin: 0;
-    }
-    
     /* Ensure theme toggle is visible */
     .theme-toggle {
         margin: 0;
@@ -176,10 +178,11 @@
 
 /* Smaller screens */
 @media (max-width: 480px) {
+    /* Keep the same padding as 850px breakpoint */
     .nav-container {
-        padding: 0 1rem;
+        padding: 0 2.5rem !important;
     }
-    
+
     .logo svg {
         height: 50px;
     }

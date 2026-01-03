@@ -131,28 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-links a');
     const clockContainer = document.querySelector('.nav-container > .clock-container');
 
-    // Function to handle mobile clock
-    function handleMobileClock() {
-        if (window.innerWidth <= 768) {
-            // On mobile: clone clock into nav-wrapper if not already there
-            if (clockContainer && !navWrapper.querySelector('.clock-container')) {
-                const clockClone = clockContainer.cloneNode(true);
-                navWrapper.insertBefore(clockClone, navWrapper.firstChild);
-            }
-        } else {
-            // On desktop: remove clock from nav-wrapper if it exists
-            const clockInMenu = navWrapper.querySelector('.clock-container');
-            if (clockInMenu) {
-                clockInMenu.remove();
-            }
-        }
-    }
-
-    // Run on load
-    handleMobileClock();
-
-    // Run on resize
-    window.addEventListener('resize', handleMobileClock);
+    // No need to handle mobile clock anymore - it's hidden on mobile via CSS
 
     // Toggle menu when hamburger is clicked
     if (mobileMenuToggle) {

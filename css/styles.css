@@ -255,10 +255,10 @@ nav {
     left: 0;
     right: 0;
     width: calc(var(--container-max-width) - calc(var(--container-padding) * 2) + 4rem);
-    max-width: calc(100% - 4rem);
+    max-width: calc(100% - 6rem);
     margin: 0 auto;
-    padding: 0.5rem 2rem;
-    border-radius: 50px;
+    padding: 0.3rem 2.2rem;
+    border-radius: 60px;
     border: 2px solid var(--border-color);
     background: rgba(26, 29, 35, 0.3);
     backdrop-filter: blur(60px) saturate(180%);
@@ -274,8 +274,7 @@ nav.nav-hidden {
 }
 
 nav .nav-container {
-    padding-left: 0;
-    padding-right: 0;
+    /* padding handled by nav element */
     margin: 0;
     max-width: none;
     width: auto;
@@ -310,9 +309,7 @@ nav .logo {
     margin-left: 0;
 }
 
-nav .mobile-menu-toggle {
-    display: none !important;
-}
+/* Mobile menu toggle visibility is handled in mobile.css */
 
 .nav-container {
     display: flex;
@@ -325,92 +322,85 @@ nav .mobile-menu-toggle {
 }
 
 /* Responsive nav adjustments */
-@media (max-width: 1600px) {
-    nav .clock-container {
-        margin-left: 15rem;
-    }
-}
-
 @media (max-width: 1400px) {
-    nav .clock-container {
-        margin-left: 10rem;
+    .nav-container {
+        gap: 0.5rem;
     }
-}
 
-@media (max-width: 1280px) {
-    nav .clock-container {
-        margin-left: 7rem;
+    .nav-links {
+        gap: 0.25rem;
+    }
+
+    .nav-links a {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
     }
 }
 
 @media (max-width: 1200px) {
     nav {
-        padding: 0.5rem 1rem;
-        max-width: calc(100% - 2rem);
-    }
-
-    nav .clock-container {
-        margin-left: 5rem;
+        padding: 0.3rem 2.2rem;
+        max-width: calc(100% - 10rem);
     }
 
     .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        gap: 0.5rem;
+        gap: 0.4rem;
+    }
+
+    .nav-links {
+        gap: 0.2rem;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
     }
 }
 
 @media (max-width: 1024px) {
     nav {
-        padding: 0.5rem 0.9rem;
+        padding: 0.3rem 2.2rem;
+        max-width: calc(100% - 8rem);
     }
 
-    nav .clock-container {
-        margin-left: 3rem;
+    .nav-container {
+        gap: 0.3rem;
     }
 
     .nav-links a {
-        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 992px) {
     nav {
-        padding: 0.5rem 0.75rem;
-    }
-
-    nav .clock-container {
-        margin-left: 2rem;
-        padding: 0.5rem 1rem;
+        padding: 0.3rem 2.2rem;
+        max-width: calc(100% - 6rem);
     }
 
     .nav-links a {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 900px) {
-    nav .clock-container {
-        margin-left: 1.5rem;
+    .nav-links a {
+        padding: 0.45rem 0.7rem;
+        font-size: 0.75rem;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     nav {
         padding: 0.5rem;
         top: 0.5rem;
     }
 
-    nav .clock-container {
-        margin-left: 1rem;
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
-    }
-
     .nav-links a {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+        padding: 0.4rem 0.65rem;
+        font-size: 0.75rem;
     }
 
     nav .logo svg {
@@ -419,8 +409,9 @@ nav .mobile-menu-toggle {
 }
 
 @media (max-width: 640px) {
-    nav .clock-container {
-        margin-left: 0.75rem;
+    .nav-links a {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.7rem;
     }
 }
 
@@ -683,7 +674,7 @@ header {
     position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     header {
         padding: 120px 2rem 0 2rem;
     }
@@ -806,7 +797,7 @@ section {
     scroll-margin-top: 0px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     section {
         padding: 3rem 2rem;
     }
@@ -851,7 +842,7 @@ section h2.active {
 
 section p {
     font-size: 1rem;
-    max-width: 800px;
+    max-width: 850px;
     margin-bottom: 1.5rem;
     color: var(--text-color);
 }
@@ -1031,7 +1022,7 @@ section p {
     flex-direction: row;
     align-items: center;
     gap: 1.5rem;
-    max-width: 800px;
+    max-width: 850px;
 }
 
 .contact-option {
@@ -1109,10 +1100,8 @@ footer {
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 2rem;
-    }
+@media (max-width: 850px) {
+    /* nav-container padding is handled in mobile.css */
 
     header {
         flex-direction: column;
@@ -1442,7 +1431,7 @@ img[src*="University_of_Missouri_logo"] {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .experience-timeline {
         padding-left: 0;
     }
@@ -1509,6 +1498,7 @@ img[src*="University_of_Missouri_logo"] {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 25px;
     box-shadow: none;
+    transition: all 0.3s ease;
 }
 
 .timezone {
@@ -1547,7 +1537,7 @@ img[src*="University_of_Missouri_logo"] {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .clock-container {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -1643,7 +1633,7 @@ img[src*="University_of_Missouri_logo"] {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .photo-gallery {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 1rem;
@@ -1713,11 +1703,11 @@ body::-webkit-scrollbar {
 }
 
 /* Responsive adjustment */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .github-link span {
         display: none;
     }
-    
+
     .github-link {
         padding: 0.5rem;
         min-width: auto;
@@ -1743,7 +1733,7 @@ body::-webkit-scrollbar {
 }
 
 /* Make it smaller on mobile */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .cat-dance {
         width: 60px;
         bottom: 15px;
@@ -1864,7 +1854,7 @@ body::-webkit-scrollbar {
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .spotify-section {
         padding: 1.5rem;
         margin: 2rem 0 1.5rem 0;
