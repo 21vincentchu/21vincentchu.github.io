@@ -25,6 +25,161 @@
     display: none;
 }
 
+/* Blob Background Container */
+.blob-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Individual Blobs */
+.blob {
+    position: absolute;
+    border-radius: 30% 70% 20% 80% / 60% 40% 70% 30%;
+    filter: blur(60px);
+    opacity: 0.4;
+    will-change: transform, border-radius;
+}
+
+/* Blob 1 - Lilac/Purple */
+.blob-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #ddd6fe 100%);
+    top: -10%;
+    right: -5%;
+    animation: float1 20s ease-in-out infinite, morph1 15s ease-in-out infinite;
+}
+
+/* Blob 2 - Teal/Cyan */
+.blob-2 {
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 50%, #67e8f9 100%);
+    bottom: -15%;
+    left: -10%;
+    animation: float2 25s ease-in-out infinite, morph2 18s ease-in-out infinite;
+}
+
+/* Blob 3 - Blue/Purple Mix */
+.blob-3 {
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #a5b4fc 100%);
+    top: 40%;
+    right: -8%;
+    animation: float3 30s ease-in-out infinite, morph3 20s ease-in-out infinite;
+}
+
+/* Floating Animations */
+@keyframes float1 {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(30px, -50px) rotate(120deg);
+    }
+    66% {
+        transform: translate(-20px, 30px) rotate(240deg);
+    }
+}
+
+@keyframes float2 {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(-40px, 40px) rotate(-120deg);
+    }
+    66% {
+        transform: translate(30px, -30px) rotate(-240deg);
+    }
+}
+
+@keyframes float3 {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(50px, -40px) rotate(120deg);
+    }
+    66% {
+        transform: translate(-40px, 50px) rotate(240deg);
+    }
+}
+
+/* Morphing Animations */
+@keyframes morph1 {
+    0%, 100% {
+        border-radius: 30% 70% 20% 80% / 60% 40% 70% 30%;
+    }
+    25% {
+        border-radius: 75% 25% 65% 35% / 45% 80% 20% 55%;
+    }
+    50% {
+        border-radius: 20% 80% 35% 65% / 70% 30% 60% 40%;
+    }
+    75% {
+        border-radius: 65% 35% 75% 25% / 35% 65% 45% 55%;
+    }
+}
+
+@keyframes morph2 {
+    0%, 100% {
+        border-radius: 70% 30% 60% 40% / 30% 70% 40% 60%;
+    }
+    25% {
+        border-radius: 25% 75% 40% 60% / 65% 35% 70% 30%;
+    }
+    50% {
+        border-radius: 80% 20% 30% 70% / 50% 50% 35% 65%;
+    }
+    75% {
+        border-radius: 35% 65% 75% 25% / 55% 45% 60% 40%;
+    }
+}
+
+@keyframes morph3 {
+    0%, 100% {
+        border-radius: 40% 60% 55% 45% / 70% 30% 65% 35%;
+    }
+    33% {
+        border-radius: 80% 20% 45% 55% / 25% 75% 50% 50%;
+    }
+    66% {
+        border-radius: 25% 75% 70% 30% / 60% 40% 25% 75%;
+    }
+}
+
+/* Responsive adjustments for blobs */
+@media (max-width: 768px) {
+    .blob-1 {
+        width: 300px;
+        height: 300px;
+        top: -15%;
+        right: -15%;
+    }
+
+    .blob-2 {
+        width: 350px;
+        height: 350px;
+        bottom: -20%;
+        left: -20%;
+    }
+
+    .blob-3 {
+        width: 250px;
+        height: 250px;
+        top: 35%;
+        right: -12%;
+    }
+}
+
 
 [data-theme="dark"] .logo svg .cls-1 {
     fill: url(#logo-gradient);
