@@ -421,29 +421,9 @@ projectCards.forEach(card => {
 
 
 // ========================================
-// PARALLAX BLOBS
+// PARALLAX BLOBS - DISABLED
 // ========================================
-
-const blobContainer = document.querySelector('.blob-container');
-
-let ticking = false;
-
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            const scrolled = window.pageYOffset;
-            
-            // Move the entire blob container for parallax effect
-            if (blobContainer) {
-                blobContainer.style.transform = 'translateY(' + scrolled * 0.15 + 'px)';
-            }
-            
-            ticking = false;
-        });
-        
-        ticking = true;
-    }
-});
+// Blobs now just float in place without scrolling
 
 // ========================================
 // BACKGROUND COLOR SHIFT
