@@ -326,3 +326,158 @@ async function loadSpotifyTracks() {
 
 // Load Spotify tracks when page loads
 document.addEventListener('DOMContentLoaded', loadSpotifyTracks);
+
+// ========================================
+// CUSTOM CURSOR
+// ========================================
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorRing = document.querySelector('.cursor-ring');
+
+let mouseX = 0;
+let mouseY = 0;
+let ringX = 0;
+let ringY = 0;
+
+// Update cursor position on mouse move
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // Move dot instantly
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+});
+
+// Animate ring with delay (smooth follow effect)
+function animateRing() {
+    // Lerp (linear interpolation) for smooth following
+    ringX += (mouseX - ringX) * 0.3;
+    ringY += (mouseY - ringY) * 0.3;
+    
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    
+    requestAnimationFrame(animateRing);
+}
+
+animateRing();
+
+// Add hover effect for interactive elements
+const interactiveElements = document.querySelectorAll('a, button, .btn, .nav-links a, .project-card, .experience-card, .gallery-item, input, textarea');
+
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        cursorDot.classList.add('hover');
+        cursorRing.classList.add('hover');
+    });
+    
+    element.addEventListener('mouseleave', () => {
+        cursorDot.classList.remove('hover');
+        cursorRing.classList.remove('hover');
+    });
+});
+
+// ========================================
+// SCROLL-TRIGGERED FADE-IN ANIMATIONS
+// ========================================
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.02,
+    rootMargin: '0px 0px 0px 0px'
+};
+
+const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        // Add animate class if not in view initially
+        if (!entry.isIntersecting && !entry.target.classList.contains('fade-in-animate')) {
+            entry.target.classList.add('fade-in-animate');
+        }
+        
+        // Add visible class when scrolled into view
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-visible');
+        }
+    });
+}, observerOptions);
+
+// Observe all sections
+const sections = document.querySelectorAll('section');
+sections.forEach(section => {
+    scrollObserver.observe(section);
+});
+
+// Observe experience cards
+const experienceCards = document.querySelectorAll('.experience-card');
+experienceCards.forEach(card => {
+    scrollObserver.observe(card);
+});
+
+// Observe project cards
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach(card => {
+    scrollObserver.observe(card);
+});
+
+
+// ========================================
+// PARALLAX BLOBS
+// ========================================
+
+const blobContainer = document.querySelector('.blob-container');
+
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            
+            // Move the entire blob container for parallax effect
+            if (blobContainer) {
+                blobContainer.style.transform = 'translateY(' + scrolled * 0.15 + 'px)';
+            }
+            
+            ticking = false;
+        });
+        
+        ticking = true;
+    }
+});
+
+// ========================================
+// BACKGROUND COLOR SHIFT
+// ========================================
+
+const bodyElement = document.body;
+
+const sectionColors = {
+    'experience': '#1a1d23',
+    'education': '#1c1f25',
+    'skills': '#1a1e26',
+    'projects': '#1b1d24',
+    'photos': '#1a1c23',
+    'contact': '#191c22'
+};
+
+const colorObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            if (sectionColors[sectionId]) {
+                bodyElement.style.backgroundColor = sectionColors[sectionId];
+            }
+        }
+    });
+}, {
+    threshold: 0.5
+});
+
+// Observe sections for color changes
+Object.keys(sectionColors).forEach(sectionId => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        colorObserver.observe(section);
+    }
+});
+

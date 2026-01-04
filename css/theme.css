@@ -27,20 +27,20 @@
 
 /* Blob Background Container */
 .blob-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 300vh;
     z-index: -1;
-    overflow: hidden;
+    overflow: visible;
     pointer-events: none;
 }
 
 /* Individual Blobs */
 .blob {
     position: absolute;
-    border-radius: 45% 55% 38% 62% / 58% 42% 63% 37%;
+    border-radius: 73% 27% 82% 18% / 34% 86% 14% 66%;
     filter: blur(80px);
     opacity: 0.35;
     will-change: transform, border-radius;
@@ -116,54 +116,54 @@
 /* Morphing Animations */
 @keyframes morph1 {
     0%, 100% {
-        border-radius: 42% 58% 35% 65% / 63% 47% 53% 37%;
+        border-radius: 82% 18% 23% 77% / 88% 12% 91% 9%;
     }
     20% {
-        border-radius: 68% 32% 58% 42% / 38% 72% 28% 62%;
+        border-radius: 19% 81% 76% 24% / 15% 85% 17% 83%;
     }
     40% {
-        border-radius: 35% 65% 47% 53% / 71% 29% 61% 39%;
+        border-radius: 71% 29% 14% 86% / 93% 7% 81% 19%;
     }
     60% {
-        border-radius: 73% 27% 62% 38% / 42% 68% 32% 58%;
+        border-radius: 28% 72% 89% 11% / 22% 78% 13% 87%;
     }
     80% {
-        border-radius: 48% 52% 39% 61% / 56% 44% 65% 35%;
+        border-radius: 67% 33% 45% 55% / 79% 21% 68% 32%;
     }
 }
 
 @keyframes morph2 {
     0%, 100% {
-        border-radius: 64% 36% 52% 48% / 45% 67% 33% 55%;
+        border-radius: 91% 9% 84% 16% / 21% 79% 12% 88%;
     }
     25% {
-        border-radius: 37% 63% 46% 54% / 69% 31% 58% 42%;
+        border-radius: 14% 86% 27% 73% / 94% 6% 85% 15%;
     }
     50% {
-        border-radius: 71% 29% 38% 62% / 51% 49% 43% 57%;
+        border-radius: 78% 22% 11% 89% / 33% 67% 8% 92%;
     }
     75% {
-        border-radius: 43% 57% 66% 34% / 58% 42% 54% 46%;
+        border-radius: 25% 75% 68% 32% / 87% 13% 74% 26%;
     }
 }
 
 @keyframes morph3 {
     0%, 100% {
-        border-radius: 51% 49% 44% 56% / 62% 38% 59% 41%;
+        border-radius: 86% 14% 71% 29% / 18% 82% 24% 76%;
     }
     25% {
-        border-radius: 69% 31% 57% 43% / 36% 74% 26% 64%;
+        border-radius: 23% 77% 92% 8% / 64% 36% 11% 89%;
     }
     50% {
-        border-radius: 39% 61% 48% 52% / 68% 32% 47% 53%;
+        border-radius: 69% 31% 17% 83% / 88% 12% 77% 23%;
     }
     75% {
-        border-radius: 76% 24% 41% 59% / 53% 47% 62% 38%;
+        border-radius: 12% 88% 43% 57% / 29% 71% 95% 5%;
     }
 }
 
 /* Responsive adjustments for blobs */
-@media (max-width: 850px) {
+@media (max-width: 970px) {
     .blob-1 {
         width: 300px;
         height: 300px;
@@ -303,7 +303,7 @@
 } */
 
 /* Adjustments for small screens */
-@media (max-width: 850px) {
+@media (max-width: 970px) {
     .toggle-text-dark, 
     .toggle-text-light {
         display: none;
@@ -573,4 +573,71 @@ a {
 a:hover {
     color: #e0b3ff;
     text-shadow: none;
+}
+
+/* Fixed Blob Container (doesn't move) */
+.blob-container-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+
+/* Blob 4 - Peachy Orange (scrolling) */
+.blob-4 {
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(135deg, #fb923c 0%, #fdba74 50%, #fed7aa 100%);
+    bottom: 35%;
+    right: 5%;
+    animation: float1 22s ease-in-out infinite, morph2 16s ease-in-out infinite;
+}
+
+/* Blob 6 - Deep Purple/Violet (fixed) */
+.blob-6 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
+    top: 45%;
+    left: 40%;
+    animation: float3 24s ease-in-out infinite, morph1 19s ease-in-out infinite;
+}
+
+/* Blob 7 - Bright Blue (fixed) */
+.blob-7 {
+    width: 550px;
+    height: 550px;
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+    bottom: 5%;
+    right: 35%;
+    animation: float2 26s ease-in-out infinite, morph2 21s ease-in-out infinite;
+}
+
+/* Responsive adjustments for new blobs */
+@media (max-width: 970px) {
+    .blob-4 {
+        width: 250px;
+        height: 250px;
+        bottom: 20%;
+        right: -10%;
+    }
+
+    .blob-6 {
+        width: 200px;
+        height: 200px;
+        top: 35%;
+        left: 30%;
+    }
+
+    .blob-7 {
+        width: 280px;
+        height: 280px;
+        bottom: 5%;
+        right: 20%;
+    }
 }

@@ -1,12 +1,12 @@
 /* Mobile Navigation CSS */
 
 /* Adjustments for small screens */
-@media (max-width: 850px) {
-    .toggle-text-dark, 
+@media (max-width: 970px) {
+    .toggle-text-dark,
     .toggle-text-light {
         display: none;
     }
-    
+
     .theme-toggle {
         margin-left: 0.75rem;
     }
@@ -48,7 +48,7 @@
 }
 
 /* Media queries for responsive design */
-@media (max-width: 850px) {
+@media (max-width: 970px) {
     /* Remove nav bar background completely on mobile */
     nav {
         backdrop-filter: none;
