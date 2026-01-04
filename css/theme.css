@@ -35,172 +35,207 @@
     z-index: -1;
     overflow: visible;
     pointer-events: none;
+    transform: translateZ(0);
+    isolation: isolate;
 }
 
 /* Individual Blobs */
 .blob {
     position: absolute;
     border-radius: 73% 27% 82% 18% / 34% 86% 14% 66%;
-    filter: blur(80px);
-    opacity: 0.35;
+    filter: blur(60px);
+    opacity: 0.45;
     will-change: transform, border-radius;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Blob 1 - Lilac/Purple */
 .blob-1 {
-    width: 550px;
-    height: 550px;
+    width: 35vw;
+    height: 35vw;
     background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #ddd6fe 100%);
-    top: 5%;
-    right: 10%;
-    animation: float1 20s ease-in-out infinite, morph1 15s ease-in-out infinite;
+    top: -5%;
+    right: -5%;
+    border-radius: 95% 5% 92% 8% / 12% 95% 5% 88%;
+    animation: float1 240s ease-in-out infinite, morph1 60s ease-in-out infinite;
 }
 
 /* Blob 2 - Teal/Cyan */
 .blob-2 {
-    width: 650px;
-    height: 650px;
+    width: 40vw;
+    height: 40vw;
     background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 50%, #67e8f9 100%);
-    bottom: -5%;
-    left: 5%;
-    animation: float2 25s ease-in-out infinite, morph2 18s ease-in-out infinite;
+    bottom: -10%;
+    left: -5%;
+    border-radius: 5% 95% 88% 12% / 90% 8% 85% 15%;
+    animation: float2 280s ease-in-out infinite, morph2 70s ease-in-out infinite;
 }
 
 /* Blob 3 - Blue/Purple Mix */
 .blob-3 {
-    width: 500px;
-    height: 500px;
+    width: 32vw;
+    height: 32vw;
     background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #a5b4fc 100%);
-    top: 45%;
-    right: 8%;
-    animation: float3 30s ease-in-out infinite, morph3 20s ease-in-out infinite;
+    top: 40%;
+    right: -5%;
+    border-radius: 88% 12% 5% 95% / 8% 90% 92% 5%;
+    animation: float3 320s ease-in-out infinite, morph3 75s ease-in-out infinite;
 }
 
-/* Floating Animations */
+/* Floating Animations - slow, screen-spanning movement */
 @keyframes float1 {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
-    25% {
-        transform: translate(80px, -60px);
+    20% {
+        transform: translate(-40vw, 30vh) rotate(8deg) scale(1.05);
     }
-    50% {
-        transform: translate(-40px, -100px);
+    40% {
+        transform: translate(-60vw, 60vh) rotate(-5deg) scale(0.95);
     }
-    75% {
-        transform: translate(-90px, 50px);
+    60% {
+        transform: translate(-20vw, 80vh) rotate(12deg) scale(1.08);
+    }
+    80% {
+        transform: translate(10vw, 40vh) rotate(-8deg) scale(0.98);
     }
     100% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
 }
 
 @keyframes float2 {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
-    25% {
-        transform: translate(-70px, 90px);
+    20% {
+        transform: translate(50vw, -20vh) rotate(-6deg) scale(1.1);
     }
-    50% {
-        transform: translate(100px, 60px);
+    40% {
+        transform: translate(70vw, 20vh) rotate(10deg) scale(0.92);
     }
-    75% {
-        transform: translate(50px, -80px);
+    60% {
+        transform: translate(40vw, -40vh) rotate(-12deg) scale(1.05);
+    }
+    80% {
+        transform: translate(20vw, 10vh) rotate(5deg) scale(0.96);
     }
     100% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
 }
 
 @keyframes float3 {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
-    25% {
-        transform: translate(110px, 70px);
+    16% {
+        transform: translate(-50vw, -30vh) rotate(10deg) scale(0.9);
+    }
+    33% {
+        transform: translate(-70vw, 20vh) rotate(-8deg) scale(1.12);
     }
     50% {
-        transform: translate(30px, -90px);
+        transform: translate(-30vw, 50vh) rotate(15deg) scale(0.95);
     }
-    75% {
-        transform: translate(-100px, -40px);
+    66% {
+        transform: translate(10vw, 30vh) rotate(-10deg) scale(1.05);
+    }
+    83% {
+        transform: translate(-20vw, -10vh) rotate(6deg) scale(0.98);
     }
     100% {
-        transform: translate(0, 0);
+        transform: translate(0, 0) rotate(0deg) scale(1);
     }
 }
 
-/* Morphing Animations */
+/* Morphing Animations - Extra funky shapes */
 @keyframes morph1 {
     0%, 100% {
-        border-radius: 82% 18% 23% 77% / 88% 12% 91% 9%;
+        border-radius: 95% 5% 92% 8% / 12% 95% 5% 88%;
     }
-    20% {
-        border-radius: 19% 81% 76% 24% / 15% 85% 17% 83%;
+    14% {
+        border-radius: 8% 92% 15% 85% / 88% 8% 95% 5%;
     }
-    40% {
-        border-radius: 71% 29% 14% 86% / 93% 7% 81% 19%;
+    28% {
+        border-radius: 70% 30% 95% 5% / 5% 85% 10% 90%;
     }
-    60% {
-        border-radius: 28% 72% 89% 11% / 22% 78% 13% 87%;
+    42% {
+        border-radius: 15% 85% 8% 92% / 92% 15% 85% 8%;
     }
-    80% {
-        border-radius: 67% 33% 45% 55% / 79% 21% 68% 32%;
+    56% {
+        border-radius: 88% 12% 70% 30% / 20% 90% 5% 95%;
+    }
+    70% {
+        border-radius: 5% 95% 88% 12% / 85% 5% 92% 8%;
+    }
+    84% {
+        border-radius: 60% 40% 5% 95% / 8% 70% 88% 12%;
     }
 }
 
 @keyframes morph2 {
     0%, 100% {
-        border-radius: 91% 9% 84% 16% / 21% 79% 12% 88%;
+        border-radius: 92% 8% 5% 95% / 90% 5% 88% 12%;
     }
-    25% {
-        border-radius: 14% 86% 27% 73% / 94% 6% 85% 15%;
+    16% {
+        border-radius: 5% 95% 85% 15% / 8% 92% 12% 88%;
+    }
+    33% {
+        border-radius: 85% 15% 92% 8% / 95% 10% 5% 90%;
     }
     50% {
-        border-radius: 78% 22% 11% 89% / 33% 67% 8% 92%;
+        border-radius: 12% 88% 5% 95% / 5% 85% 95% 5%;
     }
-    75% {
-        border-radius: 25% 75% 68% 32% / 87% 13% 74% 26%;
+    66% {
+        border-radius: 95% 5% 70% 30% / 88% 8% 12% 92%;
+    }
+    83% {
+        border-radius: 30% 70% 8% 92% / 12% 95% 85% 5%;
     }
 }
 
 @keyframes morph3 {
     0%, 100% {
-        border-radius: 86% 14% 71% 29% / 18% 82% 24% 76%;
+        border-radius: 5% 95% 90% 10% / 85% 8% 92% 5%;
     }
-    25% {
-        border-radius: 23% 77% 92% 8% / 64% 36% 11% 89%;
+    20% {
+        border-radius: 90% 10% 5% 95% / 5% 88% 8% 92%;
     }
-    50% {
-        border-radius: 69% 31% 17% 83% / 88% 12% 77% 23%;
+    40% {
+        border-radius: 8% 92% 85% 15% / 92% 5% 90% 10%;
     }
-    75% {
-        border-radius: 12% 88% 43% 57% / 29% 71% 95% 5%;
+    60% {
+        border-radius: 85% 15% 12% 88% / 8% 95% 5% 85%;
+    }
+    80% {
+        border-radius: 15% 85% 95% 5% / 90% 12% 88% 8%;
     }
 }
 
 /* Responsive adjustments for blobs */
 @media (max-width: 970px) {
     .blob-1 {
-        width: 300px;
-        height: 300px;
-        top: -15%;
+        width: 50vw;
+        height: 50vw;
+        top: -10%;
         right: -15%;
     }
 
     .blob-2 {
-        width: 350px;
-        height: 350px;
-        bottom: -20%;
-        left: -20%;
+        width: 55vw;
+        height: 55vw;
+        bottom: -15%;
+        left: -15%;
     }
 
     .blob-3 {
-        width: 250px;
-        height: 250px;
-        top: 35%;
-        right: -12%;
+        width: 45vw;
+        height: 45vw;
+        top: 30%;
+        right: -10%;
     }
 }
 
@@ -603,59 +638,64 @@ a:hover {
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
+    transform: translateZ(0);
+    isolation: isolate;
 }
 
 
 /* Blob 4 - Peachy Orange */
 .blob-4 {
-    width: 450px;
-    height: 450px;
+    width: 28vw;
+    height: 28vw;
     background: linear-gradient(135deg, #fb923c 0%, #fdba74 50%, #fed7aa 100%);
-    bottom: 35%;
-    right: 5%;
-    animation: float1 22s ease-in-out infinite, morph2 16s ease-in-out infinite;
+    bottom: 30%;
+    right: -5%;
+    border-radius: 12% 88% 92% 8% / 85% 5% 90% 15%;
+    animation: float1 260s ease-in-out infinite reverse, morph2 65s ease-in-out infinite;
 }
 
 /* Blob 6 - Deep Purple/Violet (fixed) */
 .blob-6 {
-    width: 500px;
-    height: 500px;
+    width: 33vw;
+    height: 33vw;
     background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
-    top: 45%;
-    left: 40%;
-    animation: float3 24s ease-in-out infinite, morph1 19s ease-in-out infinite;
+    top: 40%;
+    left: 35%;
+    border-radius: 8% 92% 88% 12% / 92% 15% 5% 85%;
+    animation: float3 300s ease-in-out infinite, morph1 80s ease-in-out infinite;
 }
 
 /* Blob 7 - Bright Blue (fixed) */
 .blob-7 {
-    width: 550px;
-    height: 550px;
+    width: 36vw;
+    height: 36vw;
     background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
-    bottom: 5%;
-    right: 35%;
-    animation: float2 26s ease-in-out infinite, morph2 21s ease-in-out infinite;
+    bottom: -5%;
+    right: 30%;
+    border-radius: 85% 15% 5% 95% / 10% 85% 88% 8%;
+    animation: float2 340s ease-in-out infinite, morph2 85s ease-in-out infinite;
 }
 
 /* Responsive adjustments for new blobs */
 @media (max-width: 970px) {
     .blob-4 {
-        width: 250px;
-        height: 250px;
-        bottom: 20%;
+        width: 45vw;
+        height: 45vw;
+        bottom: 15%;
         right: -10%;
     }
 
     .blob-6 {
-        width: 200px;
-        height: 200px;
-        top: 35%;
-        left: 30%;
+        width: 40vw;
+        height: 40vw;
+        top: 30%;
+        left: 25%;
     }
 
     .blob-7 {
-        width: 280px;
-        height: 280px;
-        bottom: 5%;
-        right: 20%;
+        width: 50vw;
+        height: 50vw;
+        bottom: -5%;
+        right: 15%;
     }
 }

@@ -261,8 +261,8 @@ nav {
     border-radius: 60px;
     border: 2px solid var(--border-color);
     background: rgba(26, 29, 35, 0.3);
-    backdrop-filter: blur(200px) saturate(200%);
-    -webkit-backdrop-filter: blur(200px) saturate(200%);
+    backdrop-filter: blur(100px) saturate(180%);
+    -webkit-backdrop-filter: blur(100px) saturate(180%);
     border-bottom: none;
     z-index: 1000;
     height: auto;
@@ -896,13 +896,16 @@ section p {
 
 .skill-category {
     background-color: rgba(62, 68, 81, 0.3);
-    backdrop-filter: blur(200px) saturate(200%);
-    -webkit-backdrop-filter: blur(200px) saturate(200%);
+    backdrop-filter: blur(100px) saturate(180%);
+    -webkit-backdrop-filter: blur(100px) saturate(180%);
     padding: 2rem;
     border-radius: 12px;
     border: 2px solid var(--border-color);
     box-shadow: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+    contain: layout style paint;
+    opacity: 1 !important;
     position: relative;
 }
 
@@ -964,13 +967,16 @@ section p {
 }
 .project-card {
     background-color: rgba(62, 68, 81, 0.3);
-    backdrop-filter: blur(200px) saturate(200%);
-    -webkit-backdrop-filter: blur(200px) saturate(200%);
+    backdrop-filter: blur(100px) saturate(180%);
+    -webkit-backdrop-filter: blur(100px) saturate(180%);
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease;
     position: relative;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    contain: layout style paint;
 }
 
 .project-card:hover {
@@ -1150,16 +1156,6 @@ footer {
     }
 }
 
-/* Animation classes */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.fade-in.show {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 .photo-gallery {
     display: flex;
@@ -1198,8 +1194,8 @@ footer {
 
 .card-content {
     background-color: rgba(62, 68, 81, 0.3);
-    backdrop-filter: blur(200px) saturate(200%);
-    -webkit-backdrop-filter: blur(200px) saturate(200%);
+    backdrop-filter: blur(100px) saturate(180%);
+    -webkit-backdrop-filter: blur(100px) saturate(180%);
     border: 2px solid var(--border-color);
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
@@ -1979,72 +1975,6 @@ section#contact {
     transform: translateY(0);
 }
 
-/* Add animation class for smooth transitions */
-section.fade-in-animate {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Visible state when scrolled into view */
-section.fade-in-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Experience cards stagger animation */
-.experience-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.experience-card.fade-in-animate {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.experience-card.fade-in-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Stagger delays for cards */
-
-/* Project cards animation */
-.project-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.project-card.fade-in-animate {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.project-card.fade-in-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* Gallery items animation */
-.gallery-item {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.gallery-item.fade-in-animate {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.gallery-item.fade-in-visible {
-    opacity: 1;
-    transform: scale(1);
-}
 
 
 /* ========================================
@@ -2093,8 +2023,8 @@ body {
     width: 50px;
     height: 50px;
     background: rgba(168, 85, 247, 0.9);
-    backdrop-filter: blur(200px) saturate(200%);
-    -webkit-backdrop-filter: blur(200px) saturate(200%);
+    backdrop-filter: blur(100px) saturate(180%);
+    -webkit-backdrop-filter: blur(100px) saturate(180%);
     border: 2px solid rgba(192, 132, 252, 0.5);
     border-radius: 50%;
     color: white;

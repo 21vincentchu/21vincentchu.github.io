@@ -1,19 +1,4 @@
 // ========================================
-// INTERSECTION OBSERVERS & ANIMATIONS
-// ========================================
-
-// Fade-in animations for sections
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-}, {
-    threshold: 0.1
-});
-
-// ========================================
 // LOADING SCREEN ANIMATION
 // ========================================
 let loadingCounter = 0;
@@ -51,12 +36,6 @@ const counterInterval = setInterval(() => {
         }, 300);
     }
 }, updateInterval);
-
-// Observe all sections and skill categories
-document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-});
 
 // Force dark mode always
 document.documentElement.setAttribute('data-theme', 'dark');
@@ -376,49 +355,6 @@ interactiveElements.forEach(element => {
         cursorRing.classList.remove('hover');
     });
 });
-
-// ========================================
-// SCROLL-TRIGGERED FADE-IN ANIMATIONS
-// ========================================
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.02,
-    rootMargin: '0px 0px 0px 0px'
-};
-
-const scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        // Add animate class if not in view initially
-        if (!entry.isIntersecting && !entry.target.classList.contains('fade-in-animate')) {
-            entry.target.classList.add('fade-in-animate');
-        }
-        
-        // Add visible class when scrolled into view
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-visible');
-        }
-    });
-}, observerOptions);
-
-// Observe all sections
-const sections = document.querySelectorAll('section');
-sections.forEach(section => {
-    scrollObserver.observe(section);
-});
-
-// Observe experience cards
-const experienceCards = document.querySelectorAll('.experience-card');
-experienceCards.forEach(card => {
-    scrollObserver.observe(card);
-});
-
-// Observe project cards
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    scrollObserver.observe(card);
-});
-
 
 // ========================================
 // PARALLAX BLOBS - DISABLED
