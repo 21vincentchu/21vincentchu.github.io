@@ -481,3 +481,27 @@ Object.keys(sectionColors).forEach(sectionId => {
     }
 });
 
+
+// ========================================
+// BACK TO TOP BUTTON
+// ========================================
+
+const backToTopButton = document.getElementById('back-to-top');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 500) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
+});
+
+// Smooth scroll to top on click
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+

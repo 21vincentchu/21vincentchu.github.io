@@ -2081,3 +2081,51 @@ body {
 .gallery-item:nth-child(4) { transition-delay: 0.2s; }
 .gallery-item:nth-child(5) { transition-delay: 0.25s; }
 .gallery-item:nth-child(6) { transition-delay: 0.3s; }
+
+/* ========================================
+   BACK TO TOP BUTTON
+   ======================================== */
+
+.back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    background: rgba(168, 85, 247, 0.9);
+    backdrop-filter: blur(200px) saturate(200%);
+    -webkit-backdrop-filter: blur(200px) saturate(200%);
+    border: 2px solid rgba(192, 132, 252, 0.5);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+}
+
+.back-to-top:hover {
+    background: rgba(192, 132, 252, 1);
+    transform: translateY(0) scale(1.1);
+    box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@media (max-width: 970px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
