@@ -235,7 +235,7 @@ html {
     --function-color: #61afef;
     --string-color: #2E8B57;
     --number-color: #d19a66;
-    --variable-color: #e06c75;
+    --variable-color: #e89b3c;
     --property-color: #e5c07b;
     --class-color: #e5c07b;
     --highlight: #528bff;
@@ -736,13 +736,27 @@ h2 {
 
 .social-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
 }
 
 .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.5rem;
-    color: #d4c9b3;
+    padding: 0.5rem 0.5rem;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
 }
 
 .social-links a::before, .social-links a::after {
@@ -810,8 +824,8 @@ h2 {
 }
 
 .profile-image img {
-    width: 280px;
-    height: 280px;
+    width: 330px;
+    height: 330px;
     border-radius: 8px;
     object-fit: cover;
     border: 1px solid var(--border-color);
@@ -1333,6 +1347,12 @@ img[src*="University_of_Missouri_logo"] {
     background-color: rgba(168, 85, 247, 0.25);
     color: #c084fc;
     border: 1px solid #a855f7;
+}
+
+.job-badge.current {
+    background-color: rgba(6, 182, 212, 0.25);
+    color: #22d3ee;
+    border: 1px solid #06b6d4;
 }
 
 /* Tech Tags */

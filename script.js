@@ -334,12 +334,26 @@ let mouseX = 0;
 let mouseY = 0;
 let ringX = 0;
 let ringY = 0;
+let cursorInitialized = false;
+
+// Hide cursor initially
+cursorDot.style.opacity = '0';
+cursorRing.style.opacity = '0';
 
 // Update cursor position on mouse move
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    
+
+    // Initialize cursor position on first move
+    if (!cursorInitialized) {
+        ringX = mouseX;
+        ringY = mouseY;
+        cursorDot.style.opacity = '1';
+        cursorRing.style.opacity = '1';
+        cursorInitialized = true;
+    }
+
     // Move dot instantly
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
