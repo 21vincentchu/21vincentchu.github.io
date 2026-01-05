@@ -27,13 +27,12 @@ const counterInterval = setInterval(() => {
         percentageElement.textContent = '100%';
         circleProgress.style.strokeDashoffset = 0;
 
-        // Fade out after reaching 100
+        // Start animation immediately when reaching 100%
+        loadingScreen.classList.add('fade-out');
+        document.body.classList.add('loaded');
         setTimeout(() => {
-            loadingScreen.classList.add('fade-out');
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 500);
-        }, 300);
+            loadingScreen.remove();
+        }, 600);
     }
 }, updateInterval);
 
@@ -267,6 +266,26 @@ function toggleDetails(button) {
         button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide details';
     }
 }
+
+// Make entire card clickable for toggling details
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card-content');
+    cards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+            // Don't toggle if clicking on a link
+            if (e.target.closest('a')) return;
+
+            // If clicking the button itself, let the onclick handle it
+            if (e.target.closest('.view-details-btn')) return;
+
+            const button = card.querySelector('.view-details-btn');
+            if (button) {
+                toggleDetails(button);
+            }
+        });
+    });
+});
 
 // ========================================
 // SPOTIFY RECENTLY PLAYED

@@ -20,6 +20,20 @@
     overflow-x: hidden;
 }
 
+/* Film Grain Overlay */
+.film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+}
+
 [data-theme="dark"] body::before,
 [data-theme="dark"] body::after {
     display: none;
@@ -53,21 +67,21 @@
 
 /* Blob 1 - Lilac/Purple */
 .blob-1 {
-    width: 35vw;
-    height: 35vw;
+    width: 45vmin;
+    height: 45vmin;
     background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #ddd6fe 100%);
-    top: -5%;
-    right: -5%;
+    top: 5%;
+    right: 10%;
     border-radius: 95% 5% 92% 8% / 12% 95% 5% 88%;
     animation: float1 240s ease-in-out infinite, morph1 60s ease-in-out infinite;
 }
 
 /* Blob 2 - Teal/Cyan */
 .blob-2 {
-    width: 40vw;
-    height: 40vw;
+    width: 50vmin;
+    height: 50vmin;
     background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 50%, #67e8f9 100%);
-    bottom: -10%;
+    top: 30%;
     left: -5%;
     border-radius: 5% 95% 88% 12% / 90% 8% 85% 15%;
     animation: float2 280s ease-in-out infinite, morph2 70s ease-in-out infinite;
@@ -75,31 +89,31 @@
 
 /* Blob 3 - Blue/Purple Mix */
 .blob-3 {
-    width: 32vw;
-    height: 32vw;
+    width: 42vmin;
+    height: 42vmin;
     background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #a5b4fc 100%);
-    top: 40%;
-    right: -5%;
+    top: 10%;
+    right: 35%;
     border-radius: 88% 12% 5% 95% / 8% 90% 92% 5%;
     animation: float3 320s ease-in-out infinite, morph3 75s ease-in-out infinite;
 }
 
-/* Floating Animations - slow, screen-spanning movement */
+/* Floating Animations - slow movement using vmin for consistent scaling */
 @keyframes float1 {
     0% {
         transform: translate(0, 0) rotate(0deg) scale(1);
     }
     20% {
-        transform: translate(-40vw, 30vh) rotate(8deg) scale(1.05);
+        transform: translate(-25vmin, -15vmin) rotate(8deg) scale(1.05);
     }
     40% {
-        transform: translate(-60vw, 60vh) rotate(-5deg) scale(0.95);
+        transform: translate(-40vmin, 10vmin) rotate(-5deg) scale(0.95);
     }
     60% {
-        transform: translate(-20vw, 80vh) rotate(12deg) scale(1.08);
+        transform: translate(-15vmin, -20vmin) rotate(12deg) scale(1.08);
     }
     80% {
-        transform: translate(10vw, 40vh) rotate(-8deg) scale(0.98);
+        transform: translate(10vmin, 5vmin) rotate(-8deg) scale(0.98);
     }
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
@@ -111,16 +125,16 @@
         transform: translate(0, 0) rotate(0deg) scale(1);
     }
     20% {
-        transform: translate(50vw, -20vh) rotate(-6deg) scale(1.1);
+        transform: translate(30vmin, -20vmin) rotate(-6deg) scale(1.1);
     }
     40% {
-        transform: translate(70vw, 20vh) rotate(10deg) scale(0.92);
+        transform: translate(45vmin, -5vmin) rotate(10deg) scale(0.92);
     }
     60% {
-        transform: translate(40vw, -40vh) rotate(-12deg) scale(1.05);
+        transform: translate(20vmin, -30vmin) rotate(-12deg) scale(1.05);
     }
     80% {
-        transform: translate(20vw, 10vh) rotate(5deg) scale(0.96);
+        transform: translate(10vmin, -10vmin) rotate(5deg) scale(0.96);
     }
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
@@ -132,19 +146,19 @@
         transform: translate(0, 0) rotate(0deg) scale(1);
     }
     16% {
-        transform: translate(-50vw, -30vh) rotate(10deg) scale(0.9);
+        transform: translate(-30vmin, -18vmin) rotate(10deg) scale(0.9);
     }
     33% {
-        transform: translate(-70vw, 20vh) rotate(-8deg) scale(1.12);
+        transform: translate(-45vmin, 8vmin) rotate(-8deg) scale(1.12);
     }
     50% {
-        transform: translate(-30vw, 50vh) rotate(15deg) scale(0.95);
+        transform: translate(-20vmin, -12vmin) rotate(15deg) scale(0.95);
     }
     66% {
-        transform: translate(10vw, 30vh) rotate(-10deg) scale(1.05);
+        transform: translate(12vmin, -22vmin) rotate(-10deg) scale(1.05);
     }
     83% {
-        transform: translate(-20vw, -10vh) rotate(6deg) scale(0.98);
+        transform: translate(-8vmin, 4vmin) rotate(6deg) scale(0.98);
     }
     100% {
         transform: translate(0, 0) rotate(0deg) scale(1);
@@ -218,24 +232,24 @@
 /* Responsive adjustments for blobs */
 @media (max-width: 970px) {
     .blob-1 {
-        width: 50vw;
-        height: 50vw;
-        top: -10%;
-        right: -15%;
+        width: 55vmin;
+        height: 55vmin;
+        top: 0%;
+        right: -10%;
     }
 
     .blob-2 {
-        width: 55vw;
-        height: 55vw;
-        bottom: -15%;
-        left: -15%;
+        width: 60vmin;
+        height: 60vmin;
+        top: 25%;
+        left: -10%;
     }
 
     .blob-3 {
-        width: 45vw;
-        height: 45vw;
-        top: 30%;
-        right: -10%;
+        width: 50vmin;
+        height: 50vmin;
+        top: 15%;
+        right: -5%;
     }
 }
 
@@ -645,21 +659,32 @@ a:hover {
 
 /* Blob 4 - Peachy Orange */
 .blob-4 {
-    width: 28vw;
-    height: 28vw;
+    width: 38vmin;
+    height: 38vmin;
     background: linear-gradient(135deg, #fb923c 0%, #fdba74 50%, #fed7aa 100%);
-    bottom: 30%;
-    right: -5%;
+    top: 15%;
+    left: -5%;
     border-radius: 12% 88% 92% 8% / 85% 5% 90% 15%;
     animation: float1 260s ease-in-out infinite reverse, morph2 65s ease-in-out infinite;
 }
 
+/* Blob 5 - Rose/Pink (bottom) */
+.blob-5 {
+    width: 46vmin;
+    height: 46vmin;
+    background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #fda4af 100%);
+    top: 65%;
+    left: 20%;
+    border-radius: 92% 8% 15% 85% / 5% 88% 95% 12%;
+    animation: float2 290s ease-in-out infinite reverse, morph3 70s ease-in-out infinite;
+}
+
 /* Blob 6 - Deep Purple/Violet (fixed) */
 .blob-6 {
-    width: 33vw;
-    height: 33vw;
+    width: 44vmin;
+    height: 44vmin;
     background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
-    top: 40%;
+    top: 20%;
     left: 35%;
     border-radius: 8% 92% 88% 12% / 92% 15% 5% 85%;
     animation: float3 300s ease-in-out infinite, morph1 80s ease-in-out infinite;
@@ -667,35 +692,42 @@ a:hover {
 
 /* Blob 7 - Bright Blue (fixed) */
 .blob-7 {
-    width: 36vw;
-    height: 36vw;
+    width: 48vmin;
+    height: 48vmin;
     background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
-    bottom: -5%;
-    right: 30%;
+    top: 45%;
+    right: 20%;
     border-radius: 85% 15% 5% 95% / 10% 85% 88% 8%;
     animation: float2 340s ease-in-out infinite, morph2 85s ease-in-out infinite;
 }
 
-/* Responsive adjustments for new blobs */
+/* Responsive adjustments for blobs */
 @media (max-width: 970px) {
     .blob-4 {
-        width: 45vw;
-        height: 45vw;
-        bottom: 15%;
-        right: -10%;
+        width: 50vmin;
+        height: 50vmin;
+        top: 10%;
+        left: -10%;
+    }
+
+    .blob-5 {
+        width: 52vmin;
+        height: 52vmin;
+        top: 60%;
+        left: 15%;
     }
 
     .blob-6 {
-        width: 40vw;
-        height: 40vw;
-        top: 30%;
+        width: 45vmin;
+        height: 45vmin;
+        top: 25%;
         left: 25%;
     }
 
     .blob-7 {
-        width: 50vw;
-        height: 50vw;
-        bottom: -5%;
-        right: 15%;
+        width: 55vmin;
+        height: 55vmin;
+        top: 40%;
+        right: 5%;
     }
 }

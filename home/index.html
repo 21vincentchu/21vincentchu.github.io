@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Vincent</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ef4444'/%3E%3Cstop offset='25%25' style='stop-color:%23f97316'/%3E%3Cstop offset='50%25' style='stop-color:%23a855f7'/%3E%3Cstop offset='75%25' style='stop-color:%233b82f6'/%3E%3Cstop offset='100%25' style='stop-color:%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='url(%23g)' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
+    <style>
+        /* Dashboard-specific styles */
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-bottom: 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .links-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+            min-height: 500px;
+        }
+
+        .bottom-row > .dashboard-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 500px;
+        }
+
+        .dashboard-card {
+            background-color: rgba(62, 68, 81, 0.6);
+            backdrop-filter: blur(200px) saturate(180%);
+            -webkit-backdrop-filter: blur(200px) saturate(180%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            border-color: var(--variable-color);
+        }
+
+        .dashboard-card h2 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--comment-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* Time Section */
+        .time-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 3rem;
+        }
+
+        .time-left {
+            text-align: left;
+        }
+
+        .time-display {
+            font-size: 5rem;
+            font-weight: 300;
+            color: #f5f1e8;
+            letter-spacing: -2px;
+            font-family: var(--font-heading);
+            line-height: 1;
+        }
+
+        .date-display {
+            font-size: 1.25rem;
+            color: var(--comment-color);
+            font-weight: 400;
+            margin-top: 0.5rem;
+        }
+
+        .greeting-display {
+            font-size: 1.1rem;
+            color: var(--variable-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Weather Right Side */
+        .weather-inline {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 0.25rem;
+        }
+
+        .weather-temp-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .weather-inline i {
+            color: var(--function-color);
+            font-size: 2.5rem;
+        }
+
+        .weather-temp-display {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #f5f1e8;
+        }
+
+        .weather-condition-inline {
+            color: var(--comment-color);
+            font-size: 1rem;
+        }
+
+        .weather-location {
+            color: var(--comment-color);
+            font-size: 0.85rem;
+        }
+
+        /* Quick Links */
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(62, 68, 81, 0.5);
+            border-radius: 8px;
+            color: #f5f1e8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .quick-link:hover {
+            background: rgba(62, 68, 81, 0.8);
+            border-color: var(--variable-color);
+            transform: translateY(-2px);
+            color: #f5f1e8;
+        }
+
+        .quick-link i {
+            font-size: 1.25rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        .link-logo {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .quick-link.notion i { color: #ffffff; }
+        .quick-link.drive i { color: #4285f4; }
+        .quick-link.portfolio i { color: #c084fc; }
+        .quick-link.claude i { color: #d4a27f; }
+        .quick-link.gmail i { color: #ea4335; }
+        .quick-link.capitalone i { color: #d03027; }
+        .quick-link.chase i { color: #117aca; }
+        .quick-link.amex i { color: #006fcf; }
+        .quick-link.paypal i { color: #003087; }
+        .quick-link.youtube i { color: #ff0000; }
+        .quick-link.monkeytype i { color: #e2b714; }
+        .quick-link.instagram i { color: #e4405f; }
+        .quick-link.twitch i { color: #9146ff; }
+        .quick-link.talmundo i { color: #eb001b; }
+        .quick-link.workday i { color: #0875e1; }
+
+        /* Todo Section */
+        .todo-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .todo-list {
+            flex: 1;
+        }
+
+        .todo-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .todo-list::-webkit-scrollbar-track {
+            background: rgba(62, 68, 81, 0.3);
+            border-radius: 3px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb {
+            background: var(--comment-color);
+            border-radius: 3px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb:hover {
+            background: var(--variable-color);
+        }
+
+        /* Notes Section */
+        .notes-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notes-textarea {
+            flex: 1;
+            background: rgba(62, 68, 81, 0.5);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #f5f1e8;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            resize: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--variable-color);
+        }
+
+        .notes-textarea::placeholder {
+            color: var(--comment-color);
+        }
+
+        .notes-textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .notes-textarea::-webkit-scrollbar-track {
+            background: rgba(62, 68, 81, 0.3);
+            border-radius: 3px;
+        }
+
+        .notes-textarea::-webkit-scrollbar-thumb {
+            background: var(--comment-color);
+            border-radius: 3px;
+        }
+
+        .notes-textarea::-webkit-scrollbar-thumb:hover {
+            background: var(--variable-color);
+        }
+
+        /* Notes Folder System */
+        .notes-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .notes-header h2 {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .notes-menu-btn {
+            background: rgba(62, 68, 81, 0.5);
+            border: none;
+            color: var(--comment-color);
+            padding: 0.5rem 0.65rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notes-menu-btn:hover {
+            background: rgba(62, 68, 81, 0.8);
+            color: #f5f1e8;
+        }
+
+        .notes-container {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .notes-sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 180px;
+            height: 100%;
+            background: rgba(26, 29, 35, 0.95);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            z-index: 10;
+            transform: translateX(-110%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notes-sidebar.open {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notes-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--comment-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .add-folder-btn {
+            background: none;
+            border: none;
+            color: var(--comment-color);
+            cursor: pointer;
+            padding: 0.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .add-folder-btn:hover {
+            color: var(--variable-color);
+        }
+
+        .folder-list {
+            list-style: none;
+            padding: 0.5rem;
+            margin: 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .folder-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .folder-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .folder-list::-webkit-scrollbar-thumb {
+            background: var(--comment-color);
+            border-radius: 2px;
+        }
+
+        .folder-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #f5f1e8;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .folder-item:hover {
+            background: rgba(62, 68, 81, 0.5);
+        }
+
+        .folder-item.active {
+            background: rgba(232, 155, 60, 0.2);
+            color: var(--variable-color);
+        }
+
+        .folder-item i {
+            font-size: 0.85rem;
+        }
+
+        .folder-item span {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .folder-delete {
+            background: none;
+            border: none;
+            color: var(--comment-color);
+            cursor: pointer;
+            padding: 0.15rem;
+            opacity: 0;
+            transition: all 0.2s ease;
+            font-size: 0.75rem;
+        }
+
+        .folder-item:hover .folder-delete {
+            opacity: 1;
+        }
+
+        .folder-delete:hover {
+            color: #ef4444;
+        }
+
+        /* Add Folder Input */
+        .add-folder-form {
+            display: none;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .add-folder-form.show {
+            display: block;
+        }
+
+        .add-folder-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background: rgba(62, 68, 81, 0.5);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            color: #f5f1e8;
+            font-size: 0.85rem;
+            font-family: var(--font-body);
+            transition: border-color 0.3s ease;
+        }
+
+        .add-folder-input:focus {
+            outline: none;
+            border-color: var(--variable-color);
+        }
+
+        .add-folder-input::placeholder {
+            color: var(--comment-color);
+        }
+
+        .add-folder-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .add-folder-actions button {
+            flex: 1;
+            padding: 0.4rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+        }
+
+        .folder-save-btn {
+            background: var(--variable-color);
+            color: #1a1d23;
+        }
+
+        .folder-save-btn:hover {
+            background: #f59e0b;
+        }
+
+        .folder-cancel-btn {
+            background: rgba(62, 68, 81, 0.5);
+            color: var(--comment-color);
+        }
+
+        .folder-cancel-btn:hover {
+            background: rgba(62, 68, 81, 0.8);
+            color: #f5f1e8;
+        }
+
+        .todo-input-wrapper {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .todo-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: rgba(62, 68, 81, 0.5);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            color: #f5f1e8;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: border-color 0.3s ease;
+        }
+
+        .todo-input:focus {
+            outline: none;
+            border-color: var(--variable-color);
+        }
+
+        .todo-input::placeholder {
+            color: var(--comment-color);
+        }
+
+        .todo-add-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--variable-color);
+            border: none;
+            border-radius: 8px;
+            color: #1a1d23;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .todo-add-btn:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .todo-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(62, 68, 81, 0.3);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .todo-item:hover {
+            background: rgba(62, 68, 81, 0.5);
+        }
+
+        .todo-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--variable-color);
+            cursor: pointer;
+        }
+
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: var(--comment-color);
+        }
+
+        .todo-item span {
+            flex: 1;
+            color: #f5f1e8;
+        }
+
+        .todo-delete {
+            background: none;
+            border: none;
+            color: var(--comment-color);
+            cursor: pointer;
+            padding: 0.25rem;
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+
+        .todo-item:hover .todo-delete {
+            opacity: 1;
+        }
+
+        .todo-delete:hover {
+            color: #ef4444;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--comment-color);
+            padding: 2rem;
+            font-style: italic;
+        }
+
+        /* Back link */
+        .back-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(62, 68, 81, 0.6);
+            backdrop-filter: blur(100px);
+            border-radius: 25px;
+            color: #f5f1e8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .back-link:hover {
+            border-color: var(--variable-color);
+            color: #f5f1e8;
+        }
+
+        .back-link i {
+            margin-right: 0.5rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 1rem 1.5rem;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(62, 68, 81, 0.5);
+            border-radius: 50px;
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+
+        .search-form:focus-within {
+            border-color: var(--variable-color);
+        }
+
+        .search-icon {
+            color: #4285f4;
+            font-size: 1.25rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #f5f1e8;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--comment-color);
+        }
+
+        /* Use normal cursor */
+        body, a, button, input {
+            cursor: auto !important;
+        }
+
+        /* Override main site's scroll locks */
+        html, body {
+            overflow: visible !important;
+            overflow-y: auto !important;
+            height: auto !important;
+            scrollbar-width: auto !important;
+            -ms-overflow-style: auto !important;
+        }
+
+        /* Page scrollbar - override hidden scrollbar */
+        ::-webkit-scrollbar {
+            display: block !important;
+            width: 10px !important;
+        }
+
+        body::-webkit-scrollbar {
+            display: block !important;
+            width: 10px !important;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1d23 !important;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(62, 68, 81, 0.8) !important;
+            border-radius: 5px !important;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--variable-color) !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .links-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 1rem;
+            }
+
+            .links-row {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom-row {
+                grid-template-columns: 1fr;
+            }
+
+            .time-section {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+
+            .time-left {
+                text-align: center;
+            }
+
+            .weather-inline {
+                align-items: center;
+                text-align: center;
+            }
+
+            .time-display {
+                font-size: 3.5rem;
+            }
+
+            .date-display {
+                font-size: 1rem;
+            }
+
+            .quick-links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: #1a1d23;">
+    <!-- Film Grain Overlay -->
+    <div class="film-grain"></div>
+
+    <!-- Blob Background -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
+    </div>
+
+    <div class="blob-container-fixed">
+        <div class="blob blob-6"></div>
+        <div class="blob blob-7"></div>
+    </div>
+
+    <div class="dashboard">
+        <!-- Time, Date & Weather -->
+        <div class="dashboard-card time-section">
+            <div class="time-left">
+                <div class="time-display" id="time">--:--</div>
+                <div class="date-display" id="date">Loading...</div>
+                <div class="greeting-display" id="greeting"></div>
+            </div>
+            <div class="weather-inline" id="weather">
+                <div class="weather-temp-row">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span class="weather-temp-display">--°F</span>
+                </div>
+                <div class="weather-condition-inline">Loading...</div>
+                <div class="weather-location">St. Louis, MO</div>
+            </div>
+        </div>
+
+        <!-- Google Search -->
+        <div class="dashboard-card search-section">
+            <form class="search-form" action="https://www.google.com/search" method="GET" target="_blank">
+                <i class="fab fa-google search-icon"></i>
+                <input type="text" name="q" class="search-input" placeholder="Search Google...">
+            </form>
+        </div>
+
+        <!-- Links Row -->
+        <div class="links-row">
+            <!-- Quick Links -->
+            <div class="dashboard-card">
+                <h2>Quick Links</h2>
+                <div class="quick-links-grid">
+                    <a href="https://notion.so" target="_blank" class="quick-link notion">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" class="link-logo">
+                        <span>Notion</span>
+                    </a>
+                    <a href="https://drive.google.com" target="_blank" class="quick-link drive">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg" alt="Drive" class="link-logo">
+                        <span>Google Drive</span>
+                    </a>
+                    <a href="https://claude.ai" target="_blank" class="quick-link claude">
+                        <img src="https://claude.ai/favicon.ico" alt="Claude" class="link-logo">
+                        <span>Claude</span>
+                    </a>
+                    <a href="https://mail.google.com" target="_blank" class="quick-link gmail">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" class="link-logo">
+                        <span>Gmail</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Financial -->
+            <div class="dashboard-card">
+                <h2>Financial</h2>
+                <div class="quick-links-grid">
+                    <a href="https://capitalone.com" target="_blank" class="quick-link capitalone">
+                        <img src="../images/capital-one-logo.png" alt="Capital One" class="link-logo">
+                        <span>Capital One</span>
+                    </a>
+                    <a href="https://chase.com" target="_blank" class="quick-link chase">
+                        <img src="https://cdn.simpleicons.org/chase/117aca" alt="Chase" class="link-logo">
+                        <span>Chase</span>
+                    </a>
+                    <a href="https://americanexpress.com" target="_blank" class="quick-link amex">
+                        <img src="https://cdn.simpleicons.org/americanexpress/006fcf" alt="Amex" class="link-logo">
+                        <span>Amex</span>
+                    </a>
+                    <a href="https://paypal.com" target="_blank" class="quick-link paypal">
+                        <img src="https://cdn.simpleicons.org/paypal/003087" alt="PayPal" class="link-logo">
+                        <span>PayPal</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mastercard -->
+            <div class="dashboard-card">
+                <h2>Mastercard</h2>
+                <div class="quick-links-grid">
+                    <a href="https://askpeopleservices.ehr.com/default.ashx?CLASSNAME=prehirelogin" target="_blank" class="quick-link mastercard">
+                        <img src="https://cdn.simpleicons.org/mastercard/eb001b" alt="Mastercard" class="link-logo">
+                        <span>People Place</span>
+                    </a>
+                    <a href="https://www.myworkday.com/wday/authgwy/mastercard/login.htmld?redirect=n#;mastercard;login.flex?redirect%3Dn" target="_blank" class="quick-link workday">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Workday</span>
+                    </a>
+                    <a href="https://mastercard.apps.talmundo.com/auth/login" target="_blank" class="quick-link talmundo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Talmundo</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Entertainment -->
+            <div class="dashboard-card">
+                <h2>Entertainment</h2>
+                <div class="quick-links-grid">
+                    <a href="https://youtube.com" target="_blank" class="quick-link youtube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://monkeytype.com" target="_blank" class="quick-link monkeytype">
+                        <i class="fas fa-keyboard"></i>
+                        <span>Monkeytype</span>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="quick-link instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://twitch.tv" target="_blank" class="quick-link twitch">
+                        <i class="fab fa-twitch"></i>
+                        <span>Twitch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Row: Notes & Todo -->
+        <div class="bottom-row">
+            <div class="dashboard-card notes-section">
+                <div class="notes-header">
+                    <button class="notes-menu-btn" onclick="toggleNotesMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="currentFolderName">General</h2>
+                </div>
+                <div class="notes-container">
+                    <div class="notes-sidebar" id="notesSidebar">
+                        <div class="notes-sidebar-header">
+                            <span>Folders</span>
+                            <button class="add-folder-btn" onclick="showAddFolderForm()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="add-folder-form" id="addFolderForm">
+                            <input type="text" class="add-folder-input" id="newFolderInput" placeholder="Folder name...">
+                            <div class="add-folder-actions">
+                                <button class="folder-cancel-btn" onclick="hideAddFolderForm()">Cancel</button>
+                                <button class="folder-save-btn" onclick="createFolder()">Create</button>
+                            </div>
+                        </div>
+                        <ul class="folder-list" id="folderList"></ul>
+                    </div>
+                    <textarea class="notes-textarea" id="notesArea" placeholder="Write your notes here..."></textarea>
+                </div>
+            </div>
+
+            <div class="dashboard-card todo-section">
+                <h2>To-Do List</h2>
+                <div class="todo-input-wrapper">
+                    <input type="text" class="todo-input" id="todoInput" placeholder="Add a new task...">
+                    <button class="todo-add-btn" onclick="addTodo()">Add</button>
+                </div>
+                <ul class="todo-list" id="todoList">
+                    <li class="empty-state">No tasks yet. Add one above!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Portfolio</a>
+
+    <script>
+        // Force dark mode
+        document.documentElement.setAttribute('data-theme', 'dark');
+
+        // Keyboard shortcut: Ctrl+Space to focus search
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.code === 'Space') {
+                e.preventDefault();
+                document.querySelector('.search-input').focus();
+            }
+        });
+
+        // ========================================
+        // TIME & DATE
+        // ========================================
+        function updateTime() {
+            const now = new Date();
+            const options = { timeZone: 'America/Chicago' };
+
+            const timeStr = now.toLocaleTimeString('en-US', {
+                ...options,
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            document.getElementById('time').textContent = timeStr;
+
+            const dateStr = now.toLocaleDateString('en-US', {
+                ...options,
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
+            document.getElementById('date').textContent = dateStr;
+
+            const hour = new Date().toLocaleString('en-US', { ...options, hour: 'numeric', hour12: false });
+            const hourNum = parseInt(hour);
+            let greeting = 'Good evening, Vinny';
+            if (hourNum < 12) greeting = 'Good morning, Vinny';
+            else if (hourNum < 17) greeting = 'Good afternoon, Vinny';
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // ========================================
+        // WEATHER
+        // ========================================
+        async function fetchWeather() {
+            try {
+                const response = await fetch('https://wttr.in/St.Louis,Missouri?format=%t|%C&u');
+                const data = await response.text();
+                let [temp, condition] = data.split('|');
+
+                // Remove + sign but keep - for negative temps
+                temp = temp.trim().replace(/^\+/, '');
+
+                let icon = 'fa-cloud-sun';
+                const condLower = condition.toLowerCase();
+                if (condLower.includes('sunny') || condLower.includes('clear')) icon = 'fa-sun';
+                else if (condLower.includes('rain')) icon = 'fa-cloud-rain';
+                else if (condLower.includes('snow')) icon = 'fa-snowflake';
+                else if (condLower.includes('cloud')) icon = 'fa-cloud';
+                else if (condLower.includes('thunder')) icon = 'fa-bolt';
+                else if (condLower.includes('fog') || condLower.includes('mist')) icon = 'fa-smog';
+
+                document.getElementById('weather').innerHTML = `
+                    <div class="weather-temp-row">
+                        <i class="fas ${icon}"></i>
+                        <span class="weather-temp-display">${temp}</span>
+                    </div>
+                    <div class="weather-condition-inline">${condition.trim()}</div>
+                    <div class="weather-location">St. Louis, MO</div>
+                `;
+            } catch (error) {
+                console.error('Weather fetch failed:', error);
+            }
+        }
+
+        fetchWeather();
+        setInterval(fetchWeather, 600000);
+
+        // ========================================
+        // TODO LIST
+        // ========================================
+        let todos = JSON.parse(localStorage.getItem('vinny-todos')) || [];
+
+        function saveTodos() {
+            localStorage.setItem('vinny-todos', JSON.stringify(todos));
+        }
+
+        function renderTodos() {
+            const list = document.getElementById('todoList');
+
+            if (todos.length === 0) {
+                list.innerHTML = '<li class="empty-state">No tasks yet. Add one above!</li>';
+                return;
+            }
+
+            list.innerHTML = todos.map((todo, index) => `
+                <li class="todo-item ${todo.completed ? 'completed' : ''}">
+                    <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})">
+                    <span>${todo.text}</span>
+                    <button class="todo-delete" onclick="deleteTodo(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </li>
+            `).join('');
+        }
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+
+            if (text) {
+                todos.unshift({ text, completed: false });
+                saveTodos();
+                renderTodos();
+                input.value = '';
+            }
+        }
+
+        function toggleTodo(index) {
+            todos[index].completed = !todos[index].completed;
+            saveTodos();
+            renderTodos();
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+        }
+
+        document.getElementById('todoInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+
+        renderTodos();
+
+        // ========================================
+        // NOTES WITH FOLDERS
+        // ========================================
+        const notesArea = document.getElementById('notesArea');
+        const notesSidebar = document.getElementById('notesSidebar');
+        const folderList = document.getElementById('folderList');
+        const currentFolderName = document.getElementById('currentFolderName');
+
+        // Initialize folders from localStorage or create default
+        let folders = JSON.parse(localStorage.getItem('vinny-notes-folders')) || [
+            { id: 'general', name: 'General' }
+        ];
+        let currentFolder = localStorage.getItem('vinny-notes-current-folder') || 'general';
+        let notesData = JSON.parse(localStorage.getItem('vinny-notes-data')) || {};
+
+        // Migrate old notes if they exist
+        const oldNotes = localStorage.getItem('vinny-notes');
+        if (oldNotes && !notesData['general']) {
+            notesData['general'] = oldNotes;
+            localStorage.setItem('vinny-notes-data', JSON.stringify(notesData));
+            localStorage.removeItem('vinny-notes');
+        }
+
+        function saveFolders() {
+            localStorage.setItem('vinny-notes-folders', JSON.stringify(folders));
+            localStorage.setItem('vinny-notes-current-folder', currentFolder);
+        }
+
+        function saveNotes() {
+            notesData[currentFolder] = notesArea.value;
+            localStorage.setItem('vinny-notes-data', JSON.stringify(notesData));
+        }
+
+        function toggleNotesMenu() {
+            notesSidebar.classList.toggle('open');
+        }
+
+        function renderFolders() {
+            folderList.innerHTML = folders.map(folder => `
+                <li class="folder-item ${folder.id === currentFolder ? 'active' : ''}" onclick="switchFolder('${folder.id}')">
+                    <i class="fas fa-folder"></i>
+                    <span>${folder.name}</span>
+                    ${folder.id !== 'general' ? `<button class="folder-delete" onclick="deleteFolder(event, '${folder.id}')"><i class="fas fa-times"></i></button>` : ''}
+                </li>
+            `).join('');
+        }
+
+        function switchFolder(folderId) {
+            // Save current notes before switching
+            saveNotes();
+
+            currentFolder = folderId;
+            const folder = folders.find(f => f.id === folderId);
+            currentFolderName.textContent = folder ? folder.name : 'Notes';
+
+            // Load notes for the selected folder
+            notesArea.value = notesData[folderId] || '';
+
+            saveFolders();
+            renderFolders();
+
+            // Close sidebar after selection
+            notesSidebar.classList.remove('open');
+        }
+
+        const addFolderForm = document.getElementById('addFolderForm');
+        const newFolderInput = document.getElementById('newFolderInput');
+
+        function showAddFolderForm() {
+            addFolderForm.classList.add('show');
+            newFolderInput.value = '';
+            newFolderInput.focus();
+        }
+
+        function hideAddFolderForm() {
+            addFolderForm.classList.remove('show');
+            newFolderInput.value = '';
+        }
+
+        function createFolder() {
+            const name = newFolderInput.value.trim();
+            if (name) {
+                const id = 'folder-' + Date.now();
+                folders.push({ id, name });
+                saveFolders();
+                renderFolders();
+                hideAddFolderForm();
+                switchFolder(id);
+            }
+        }
+
+        // Handle Enter key in folder input
+        newFolderInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') createFolder();
+        });
+
+        // Handle Escape key to cancel
+        newFolderInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hideAddFolderForm();
+        });
+
+        function deleteFolder(event, folderId) {
+            event.stopPropagation();
+
+            if (confirm('Delete this folder and its notes?')) {
+                folders = folders.filter(f => f.id !== folderId);
+                delete notesData[folderId];
+                localStorage.setItem('vinny-notes-data', JSON.stringify(notesData));
+
+                // If deleting current folder, switch to general
+                if (currentFolder === folderId) {
+                    switchFolder('general');
+                } else {
+                    saveFolders();
+                    renderFolders();
+                }
+            }
+        }
+
+        // Save notes on input
+        notesArea.addEventListener('input', saveNotes);
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.notes-sidebar') &&
+                !e.target.closest('.notes-menu-btn') &&
+                notesSidebar.classList.contains('open')) {
+                notesSidebar.classList.remove('open');
+            }
+        });
+
+        // Initialize
+        renderFolders();
+        const initialFolder = folders.find(f => f.id === currentFolder);
+        currentFolderName.textContent = initialFolder ? initialFolder.name : 'Notes';
+        notesArea.value = notesData[currentFolder] || '';
+    </script>
+</body>
+</html>

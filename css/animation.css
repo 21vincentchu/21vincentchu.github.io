@@ -21,30 +21,47 @@
   }
 }
 
-/* Header Fade-In Animation */
-header {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInHeader 1.2s ease forwards;
-  animation-delay: 0.6s; /* syncs with the page wipe */
+/* Fade-In Animations - only after loading */
+body.loaded header {
+  animation: fadeInHeader 1s ease forwards;
 }
 
-nav {
-  opacity: 0;
-  transform: translateY(-20px);
+body.loaded nav {
   animation: slideDownNav 0.8s ease forwards;
-  animation-delay: 0.4s; /* starts early but subtly overlaps with wipe */
 }
 
-@keyframes slideDownNav {
+body.loaded section,
+body.loaded footer {
+  animation: fadeInContent 1s ease forwards;
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+@keyframes slideDownNav {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @keyframes fadeInHeader {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);

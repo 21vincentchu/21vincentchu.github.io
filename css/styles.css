@@ -5,12 +5,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    background: transparent;
+    z-index: 9998;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1a1d23;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.6s ease;
     overflow: hidden;
 }
 
@@ -19,23 +19,32 @@
     visibility: hidden;
 }
 
+/* Prevent scroll during loading */
+body:not(.loaded) {
+    overflow: hidden !important;
+    height: 100vh;
+}
+
+/* Hide content until loading complete */
+main,
+header,
+section,
+footer,
+nav {
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.loaded main,
+body.loaded header,
+body.loaded section,
+body.loaded footer,
+body.loaded nav {
+    pointer-events: auto;
+}
+
 .loading-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg,
-        #ef4444 0%,
-        #f97316 20%,
-        #a855f7 40%,
-        #3b82f6 60%,
-        #ec4899 80%,
-        #ef4444 100%
-    );
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease-in-out infinite;
-    opacity: 0.3;
+    display: none;
 }
 
 @keyframes gradientShift {
@@ -257,10 +266,10 @@ nav {
     width: calc(var(--container-max-width) - calc(var(--container-padding) * 2) + 4rem);
     max-width: calc(100% - 6rem);
     margin: 0 auto;
-    padding: 0.3rem 2.2rem;
+    padding: 0.15rem 2.2rem;
     border-radius: 60px;
     border: 2px solid var(--border-color);
-    background: rgba(26, 29, 35, 0.3);
+    background: rgba(26, 29, 35, 0.24);
     backdrop-filter: blur(100px) saturate(180%);
     -webkit-backdrop-filter: blur(100px) saturate(180%);
     border-bottom: none;
@@ -716,9 +725,13 @@ h1 {
 
 h2 {
     font-size: 1.65rem;
-    color: #e8dcc8;
+    color: #f5f1e8;
     margin-bottom: 1.5rem;
     font-weight: 500;
+}
+
+.tagline {
+    color: #f5f1e8;
 }
 
 .social-links {
@@ -834,25 +847,14 @@ section h2 {
     padding-bottom: 0.5rem;
     border-bottom: 3px solid #a89f8f;
     display: inline-block;
-    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    font-weight: 700;
+    transition: color 0.3s ease, border-color 0.3s ease, font-size 0.3s ease;
 }
 
 section h2.active {
-    color: #b794f4;
-    border-bottom: 3px solid #b794f4;
-    animation: headingPulse 0.6s ease-out;
-}
-
-@keyframes headingPulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+    color: var(--variable-color);
+    border-bottom: 3px solid var(--variable-color);
+    font-size: 2.1rem;
 }
 
 section p {
@@ -895,9 +897,9 @@ section p {
 }
 
 .skill-category {
-    background-color: rgba(62, 68, 81, 0.3);
-    backdrop-filter: blur(100px) saturate(180%);
-    -webkit-backdrop-filter: blur(100px) saturate(180%);
+    background-color: rgba(62, 68, 81, 0.6);
+    backdrop-filter: blur(200px) saturate(180%);
+    -webkit-backdrop-filter: blur(200px) saturate(180%);
     padding: 2rem;
     border-radius: 12px;
     border: 2px solid var(--border-color);
@@ -966,9 +968,9 @@ section p {
     }
 }
 .project-card {
-    background-color: rgba(62, 68, 81, 0.3);
-    backdrop-filter: blur(100px) saturate(180%);
-    -webkit-backdrop-filter: blur(100px) saturate(180%);
+    background-color: rgba(62, 68, 81, 0.6);
+    backdrop-filter: blur(200px) saturate(180%);
+    -webkit-backdrop-filter: blur(200px) saturate(180%);
     padding: 2rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
@@ -1054,7 +1056,7 @@ section p {
     display: flex;
     align-items: center;
     padding: 1.5rem;
-    background-color: rgba(62, 68, 81, 0.3);
+    background-color: rgba(62, 68, 81, 0.6);
     border-radius: 8px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
@@ -1084,7 +1086,7 @@ section p {
     justify-content: center;
     width: 70px;
     padding: 1.5rem;
-    background-color: rgba(62, 68, 81, 0.3);
+    background-color: rgba(62, 68, 81, 0.6);
     border-radius: 8px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
@@ -1193,9 +1195,9 @@ footer {
 }
 
 .card-content {
-    background-color: rgba(62, 68, 81, 0.3);
-    backdrop-filter: blur(100px) saturate(180%);
-    -webkit-backdrop-filter: blur(100px) saturate(180%);
+    background-color: rgba(62, 68, 81, 0.6);
+    backdrop-filter: blur(200px) saturate(180%);
+    -webkit-backdrop-filter: blur(200px) saturate(180%);
     border: 2px solid var(--border-color);
     border-radius: 12px;
     padding: 1.25rem 1.5rem;
@@ -1682,7 +1684,7 @@ body::-webkit-scrollbar {
     gap: 0.5rem;
     margin-left: auto;
     padding: 0.5rem 1rem;
-    background-color: rgba(62, 68, 81, 0.3);
+    background-color: rgba(62, 68, 81, 0.6);
     border: 1px solid var(--border-color);
     border-radius: 6px;
     color: var(--function-color);
@@ -1921,14 +1923,13 @@ body::-webkit-scrollbar {
     z-index: 10001;
     transition: transform 0.15s ease, background-color 0.2s ease;
     transform: translate(-50%, -50%);
-    mix-blend-mode: difference;
 }
 
 /* Cursor ring */
 .cursor-ring {
     width: 40px;
     height: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    border: 2px solid #ffffff;
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -1937,7 +1938,6 @@ body::-webkit-scrollbar {
     z-index: 10000;
     transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
     transform: translate(-50%, -50%);
-    mix-blend-mode: difference;
 }
 
 /* Cursor hover states */
@@ -1964,13 +1964,13 @@ body::-webkit-scrollbar {
    SCROLL FADE-IN ANIMATIONS
    ======================================== */
 
-/* Sections start visible but can animate in */
-section#experience,
-section#education,
-section#skills,
-section#projects,
-section#photos,
-section#contact {
+/* Sections animate in after loading */
+body.loaded section#experience,
+body.loaded section#education,
+body.loaded section#skills,
+body.loaded section#projects,
+body.loaded section#photos,
+body.loaded section#contact {
     opacity: 1;
     transform: translateY(0);
 }
