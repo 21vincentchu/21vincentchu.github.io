@@ -271,7 +271,6 @@ function toggleDetails(button) {
 document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('.card-content');
     cards.forEach(card => {
-        card.style.cursor = 'pointer';
         card.addEventListener('click', function(e) {
             // Don't toggle if clicking on a link
             if (e.target.closest('a')) return;

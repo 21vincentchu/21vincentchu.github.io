@@ -1905,7 +1905,7 @@ body::-webkit-scrollbar {
 
 /* Hide default cursor on desktop */
 @media (min-width: 971px) {
-    body, a, button, .btn, .nav-links a {
+    body, a, button, .btn, .nav-links a, .card-content, .experience-card, .skill-category, .project-card, .gallery-item, .contact-option, .spotify-track-card {
         cursor: none !important;
     }
 }
