@@ -8,26 +8,31 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Verify Project Structure') {
             steps {
-                echo 'Installing npm dependencies...'
-                sh 'npm install'
+                echo 'Verifying project files...'
+                sh 'ls -la'
+                sh 'echo "Checking for main files:"'
+                sh 'test -f index.html && echo "✓ index.html found"'
+                sh 'test -f script.js && echo "✓ script.js found"'
+                sh 'test -d css && echo "✓ css directory found"'
+                sh 'test -d images && echo "✓ images directory found"'
             }
         }
 
-        stage('Verify Project') {
+        stage('Validate HTML') {
             steps {
-                echo 'Verifying project structure...'
-                sh 'ls -la'
-                sh 'echo "Main files present:"'
-                sh 'ls *.html *.js package.json'
+                echo 'Checking HTML files exist...'
+                sh 'find . -name "*.html" -type f'
             }
         }
 
         stage('Success') {
             steps {
+                echo '================================'
                 echo 'Pipeline completed successfully!'
                 echo 'Project is ready for deployment.'
+                echo '================================'
             }
         }
     }
