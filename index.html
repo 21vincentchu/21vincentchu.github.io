@@ -50,12 +50,23 @@
     <!-- Preload critical CSS -->
     <link rel="preload" href="css/styles.css?v=31" as="style">
     <link rel="preload" href="css/theme.css?v=27" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossorigin="anonymous">
     <script>
         const preloadTheme = window.__theme || 'dark';
         if (preloadTheme === 'light') {
             document.write('<link rel="preload" href="css/light-mode.css?v=1" as="style">');
         }
     </script>
+
+    <!-- Preload critical images -->
+    <link rel="preload" href="images/DSCF1159.jpg" as="image">
+    <link rel="preload" href="images/photo1.jpg" as="image">
+    <link rel="preload" href="images/photo2.jpg" as="image">
+    <link rel="preload" href="images/photo3.jpg" as="image">
+    <link rel="preload" href="images/photo4.jpg" as="image">
+    <link rel="preload" href="images/photo5.jpg" as="image">
+    <link rel="preload" href="images/photo6.jpg" as="image">
+    <link rel="preload" href="images/photo7.jpg" as="image">
     <meta name="description" content="BizOps Engineer at Mastercard passionate about machine learning, data engineering, analytics, and infrastructure. Check out my projects and experience!">
 
     <!-- Open Graph / Facebook -->
