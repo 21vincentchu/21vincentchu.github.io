@@ -36,8 +36,23 @@ const counterInterval = setInterval(() => {
     }
 }, updateInterval);
 
-// Force dark mode always
-document.documentElement.setAttribute('data-theme', 'dark');
+// Theme Management
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const htmlElement = document.documentElement;
+
+// Get saved theme or default to dark
+const savedTheme = localStorage.getItem('theme') || 'dark';
+htmlElement.setAttribute('data-theme', savedTheme);
+
+// Handle theme toggle button click
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', function() {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+}
 
 // ========================================
 // CLOCK FUNCTIONALITY

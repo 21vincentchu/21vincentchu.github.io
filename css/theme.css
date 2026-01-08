@@ -16,7 +16,7 @@
 
 [data-theme="dark"] body {
     position: relative;
-    background-color: #1a1d23;
+    background-color: #1a1d23 !important;
     overflow-x: hidden;
 }
 
@@ -258,31 +258,76 @@
     fill: url(#logo-gradient);
 }
 
-/* Light theme variables - COMMENTED OUT (PERMA DARK MODE) */
-/* [data-theme="light"] {
-    --bg-color: #f5f1e8;
-    --text-color: #000000;
-    --comment-color: #5a5a5a;
-    --keyword-color: #e89b3c;
-    --function-color: #e89b3c;
-    --string-color: #2E8B57;
-    --number-color: #e89b3c;
-    --variable-color: #d97732;
-    --property-color: #2E8B57;
-    --class-color: #2E8B57;
-    --highlight: #e89b3c;
-    --line-number: #babbbd;
-    --selection: rgba(0, 0, 0, 0.1);
-    --border-color: #e5dfd0;
-} */
 
-/* Theme toggle button styling - HIDDEN (PERMA DARK MODE) */
+/* Old theme toggle - hidden */
 .theme-toggle {
     display: none;
-    /* display: flex;
+}
+
+/* Floating Theme Toggle Button */
+.theme-toggle-floating {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(62, 68, 81, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
     align-items: center;
-    margin-left: 0.75rem;
-    margin-right: 0; */
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle-floating:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle-floating i {
+    font-size: 1.5rem;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.theme-icon-dark {
+    color: #fbbf24;
+}
+
+.theme-icon-light {
+    color: #fbbf24;
+}
+
+/* Show/hide icons based on theme */
+[data-theme="dark"] .theme-icon-dark {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-icon-light {
+    opacity: 0;
+    transform: rotate(180deg) scale(0);
+}
+
+[data-theme="light"] .theme-icon-dark {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0);
+}
+
+[data-theme="light"] .theme-icon-light {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* Light mode styling for the button */
+[data-theme="light"] .theme-toggle-floating {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--border-color);
 }
 
 .toggle-switch {
@@ -360,14 +405,6 @@
     color: var(--comment-color);
 }
 
-/* When in light mode, highlight "Light" - COMMENTED OUT (PERMA DARK MODE) */
-/* [data-theme="light"] .toggle-text-dark {
-    color: var(--comment-color);
-}
-
-[data-theme="light"] .toggle-text-light {
-    color: var(--function-color);
-} */
 
 /* Adjustments for small screens */
 @media (max-width: 970px) {
@@ -381,62 +418,6 @@
     }
 }
 
-/* Additional adjustments for light theme - COMMENTED OUT (PERMA DARK MODE) */
-/* [data-theme="light"] .skill-category,
-[data-theme="light"] .project-card,
-[data-theme="light"] .contact-option,
-[data-theme="light"] .card-content {
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .card-content:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-}
-
-[data-theme="light"] .achievements {
-    background-color: rgba(229, 223, 208, 0.3);
-}
-
-[data-theme="light"] .skill-category li {
-    color: #000000;
-}
-
-[data-theme="light"] .tech-tags span {
-    color: #000000;
-}
-
-[data-theme="light"] .logo svg .cls-1 {
-    fill: #2E8B57;
-}
-
-[data-theme="light"] nav {
-    background-color: transparent;
-}
-
-[data-theme="light"] footer {
-    background-color: transparent;
-}
-
-[data-theme="light"] .clock-container {
-    background-color: transparent;
-}
-
-[data-theme="light"] .clock-container:hover {
-    background-color: transparent;
-}
-
-[data-theme="light"] .gallery-item {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="light"] .gallery-item:hover {
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
-}
-
-[data-theme="light"] .nav-wrapper {
-    background-color: transparent;
-} */
 
 /* Base styles */
 * {
