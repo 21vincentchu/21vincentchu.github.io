@@ -44,13 +44,36 @@ const htmlElement = document.documentElement;
 const savedTheme = localStorage.getItem('theme') || 'dark';
 htmlElement.setAttribute('data-theme', savedTheme);
 
+// Track if light mode CSS is loaded
+let lightModeCSSLoaded = (savedTheme === 'light');
+
+// Function to load light mode CSS dynamically
+function loadLightModeCSS() {
+    if (lightModeCSSLoaded) return;
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'css/light-mode.css?v=1';
+    document.head.appendChild(link);
+    lightModeCSSLoaded = true;
+}
+
 // Handle theme toggle button click
 if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', function() {
         const currentTheme = htmlElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
+
+        // Load light mode CSS if switching to light and not already loaded
+        if (newTheme === 'light') {
+            loadLightModeCSS();
+        }
+
+        // Small delay to ensure CSS is loaded before switching
+        setTimeout(() => {
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }, newTheme === 'light' && !lightModeCSSLoaded ? 50 : 0);
     });
 }
 
