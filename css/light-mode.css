@@ -5,7 +5,7 @@
 
 /* ROOT VARIABLES */
 [data-theme="light"] {
-    --bg-color: #faf8f5;
+    --bg-color: #f5f1eb;
     --text-color: #374151;
     --comment-color: #6b7280;
     --keyword-color: #9333ea;
@@ -23,7 +23,7 @@
 
 /* BODY */
 [data-theme="light"] body {
-    background-color: #faf8f5 !important;
+    background-color: #f5f1eb !important;
     color: #1f2937;
 }
 
@@ -31,7 +31,7 @@
    LOADING SCREEN
    ======================================== */
 [data-theme="light"] .loading-screen {
-    background: #faf8f5 !important;
+    background: transparent !important;
 }
 
 [data-theme="light"] .loading-circle-bg {
@@ -85,19 +85,19 @@
 
 [data-theme="light"] .nav-links a {
     color: #374151;
-    background: #ffffff;
+    background: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="light"] .nav-links a:hover {
     color: #1f2937;
-    background: #ffffff;
+    background: rgba(245, 241, 235, 0.95);
     border-color: rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .nav-links a.active {
     color: var(--variable-color);
-    background: #ffffff;
+    background: rgba(245, 241, 235, 0.95);
     border: 2px solid rgba(124, 58, 237, 0.3);
 }
 
@@ -106,7 +106,7 @@
 }
 
 [data-theme="light"] .nav-links a.resume-link {
-    background: #ffffff;
+    background: rgba(245, 241, 235, 0.95);
     color: #9333ea;
     border: 1px solid rgba(147, 51, 234, 0.3);
 }
@@ -131,7 +131,7 @@
 }
 
 [data-theme="light"] .nav-wrapper.active {
-    background-color: rgba(250, 248, 245, 0.95);
+    background-color: rgba(245, 241, 235, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -159,7 +159,7 @@
 [data-theme="light"] .social-links a {
     border: 2px solid #1f2937;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(245, 241, 235, 0.95);
     color: #1f2937;
 }
 
@@ -204,7 +204,7 @@
 }
 
 [data-theme="light"] .profile-image img {
-    border: 4px solid white;
+    border: 4px solid #f5f1eb;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -233,7 +233,7 @@
    SKILLS SECTION
    ======================================== */
 [data-theme="light"] .skill-category {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(245, 241, 235, 0.9);
     border: 2px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -261,7 +261,7 @@
    PROJECTS SECTION
    ======================================== */
 [data-theme="light"] .project-card {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(245, 241, 235, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -304,7 +304,7 @@
    CONTACT SECTION
    ======================================== */
 [data-theme="light"] .contact-option {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(245, 241, 235, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -318,7 +318,7 @@
 }
 
 [data-theme="light"] #contact .social-links a {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -341,7 +341,7 @@
    FOOTER
    ======================================== */
 [data-theme="light"] footer {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(245, 241, 235, 0.9);
     color: var(--comment-color);
     border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -362,7 +362,7 @@
 }
 
 [data-theme="light"] .gallery-item {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -374,7 +374,7 @@
 }
 
 [data-theme="light"] .gallery-item figcaption {
-    background: linear-gradient(transparent, rgba(255, 255, 255, 0.95));
+    background: linear-gradient(transparent, rgba(245, 241, 235, 0.95));
     color: #1f2937;
 }
 
@@ -382,14 +382,14 @@
    EXPERIENCE / TIMELINE
    ======================================== */
 [data-theme="light"] .experience-timeline {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(245, 241, 235, 0.7);
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 
 [data-theme="light"] .exp-logo {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -409,7 +409,7 @@
 
 /* Project card light mode */
 [data-theme="light"] .project-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(245, 241, 235, 0.7);
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
@@ -513,13 +513,13 @@
    CLOCK
    ======================================== */
 [data-theme="light"] .clock-container {
-    background: #ffffff;
+    background: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 25px;
 }
 
 [data-theme="light"] .clock-container:hover {
-    background: #ffffff;
+    background: rgba(245, 241, 235, 0.95);
 }
 
 [data-theme="light"] .timezone {
@@ -534,7 +534,7 @@
    GITHUB LINK
    ======================================== */
 [data-theme="light"] .github-link {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     color: var(--function-color);
@@ -550,7 +550,7 @@
    SPOTIFY SECTION
    ======================================== */
 [data-theme="light"] .spotify-section {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(245, 241, 235, 0.9);
     border: 2px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
 }
@@ -564,7 +564,7 @@
 }
 
 [data-theme="light"] .spotify-track-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(245, 241, 235, 0.95);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -572,7 +572,7 @@
 
 [data-theme="light"] .spotify-track-card:hover {
     border-color: #1DB954;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(245, 241, 235, 0.95);
     box-shadow: 0 4px 15px rgba(29, 185, 84, 0.2);
 }
 
@@ -616,7 +616,7 @@
    BACK TO TOP BUTTON
    ======================================== */
 [data-theme="light"] .back-to-top {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(245, 241, 235, 0.95);
     border: 2px solid rgba(147, 51, 234, 0.3);
     border-radius: 50%;
     color: #1f2937;

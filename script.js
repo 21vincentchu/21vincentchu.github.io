@@ -43,7 +43,7 @@ const counterInterval = setInterval(() => {
 // ========================================
 function startTypingAnimation() {
     const typedElement = document.getElementById('typed-greeting');
-    const textToType = "Hi, I'm Vincent";
+    const textToType = "Hi! I am Vincent";
     let charIndex = 0;
     const typingSpeed = 80; // milliseconds per character
     const deleteSpeed = 50; // faster deletion
