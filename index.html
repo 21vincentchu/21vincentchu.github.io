@@ -233,8 +233,8 @@
 
     <header>
         <div class="intro-text">
-            <p class="greeting terminal-cursor">Hello! 👋</p>
-            <h1 data-text="Vincent Chu">Vincent<br>Chu</h1>
+            <p class="greeting">Hello! 👋</p>
+            <h1><span id="typed-greeting"></span><span class="typing-cursor">|</span></h1>
             <h2>BizOps Engineer at Mastercard</h2>
             <p class="tagline">First, feel free to call me Vinny! I have a passion for machine learning, data engineering, analytics, infrastructure, tools, and learning to solve cool problems! </p>
             
@@ -262,19 +262,19 @@
         <div class="experience-timeline">
             <!-- Mastercard Position -->
             <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>BizOps Engineer 1 <span class="job-badge full-time">Full-time</span> <span class="job-badge current">Current</span></h3>
-                            <p class="company">Mastercard</p>
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/ma_symbol.svg" alt="Mastercard">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Mastercard</h3>
+                            <p class="exp-role">BizOps Engineer 1</p>
                         </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> Starting January 2026</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> St. Louis, MO</p>
-                        </div>
+                        <p class="exp-date">Starting January 2026</p>
                     </div>
-                    <img src="images/Mastercard Launch.gif" alt="Mastercard" class="company-image">
+                    <p class="exp-description">Joining Mastercard's BizOps team to drive operational excellence and data-driven decision making across global payment systems.</p>
                     <button class="view-details-btn" onclick="toggleDetails(this)">
                         <i class="fas fa-chevron-down"></i> View details
                     </button>
@@ -287,72 +287,28 @@
                 </div>
             </div>
 
-            <!-- AI Student Researcher -->
-            <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>AI Student Researcher <span class="job-badge research">Research</span></h3>
-                            <p class="company">University of Missouri Columbia</p>
-                        </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> Feb 2025 – Dec 2025</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> Columbia, MO</p>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span>Flask</span>
-                        <span>ChromaDB</span>
-                        <span>OpenAI API</span>
-                        <span>Docker</span>
-                        <span>Tailscale</span>
-                        <span>Python</span>
-                        <span>RAG</span>
-                        <span>Unstructured</span>
-                    </div>
-                    <button class="view-details-btn" onclick="toggleDetails(this)">
-                        <i class="fas fa-chevron-down"></i> View details
-                    </button>
-                    <div class="details-content">
-                        <h4>Key Achievements</h4>
-                        <ul class="achievements">
-                            <li><i class="fas fa-check-circle"></i> AI Infrastructure: Engineered Flask-based RAG API server with ChromaDB vector database integration, OpenAI API's, serving domain-specific LLM responses to VR lab application via RESTful endpoints with Docker and Tailscale on the Nvidia Jetson for 20+ users</li>
-                            <li><i class="fas fa-check-circle"></i> Data Modeling: Built end-to-end document processing pipeline using Unstructured library for multi-format parsing (PDF/DocX/PPT), implementing semantic search, context extraction and OpenAI embedding model integration achieving 95% accuracy</li>
-                            <li><i class="fas fa-check-circle"></i> RAG System Architecture: Designed automated eval framework as LLM judge with ground-truth datasets to measure retrieval accuracy, response latency, and hallucination rates with average response times of 1.8 seconds, with 90% of all requests under 3 seconds</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
             <!-- Maritz Internship -->
             <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>Asset Manager Intern <span class="job-badge internship">Internship</span></h3>
-                            <p class="company">Maritz</p>
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/maritz.svg" alt="Maritz">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Maritz</h3>
+                            <p class="exp-role">Asset Manager Intern</p>
                         </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> May 2025 – Aug 2025</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> St. Louis, MO</p>
-                        </div>
+                        <p class="exp-date">May 2025 – Aug 2025</p>
                     </div>
-                    <div class="tech-tags">
-                        <span>ServiceNow</span>
-                        <span>SQL</span>
-                        <span>Process Automation</span>
-                        <span>ITSM</span>
-                    </div>
+                    <p class="exp-description">Optimized IT asset management processes using ServiceNow, projecting $20,000+ in annual savings through automation.</p>
                     <button class="view-details-btn" onclick="toggleDetails(this)">
                         <i class="fas fa-chevron-down"></i> View details
                     </button>
                     <div class="details-content">
                         <h4>Key Achievements</h4>
                         <ul class="achievements">
-                            <li><i class="fas fa-check-circle"></i> Optimized logistics through process automation and system optimization to reduce asset loss and operational costs, projecting $20,000+ in annual savings with a 156% return on investment (ROI)
-</li>
+                            <li><i class="fas fa-check-circle"></i> Optimized logistics through process automation and system optimization to reduce asset loss and operational costs, projecting $20,000+ in annual savings with a 156% return on investment (ROI)</li>
                             <li><i class="fas fa-check-circle"></i> Established ServiceNow specifications and workflow automation requirements for seamless data flow between ServiceNow platform, ShipEase CORE plugin, managing 6,000+ assets across the company</li>
                         </ul>
                     </div>
@@ -361,26 +317,19 @@
 
             <!-- Teaching Assistant -->
             <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>Teaching Assistant <span class="job-badge part-time">Part-time</span></h3>
-                            <p class="company">University of Missouri Columbia</p>
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">University of Missouri</h3>
+                            <p class="exp-role">Teaching Assistant</p>
                         </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> June 2024 – Dec 2025</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> Columbia, MO</p>
-                        </div>
+                        <p class="exp-date">June 2024 – Dec 2025</p>
                     </div>
-                    <div class="tech-tags">
-                        <span>Python</span>
-                        <span>Machine Learning</span>
-                        <span>SQL</span>
-                        <span>C#</span>
-                        <span>Software Engineering</span>
-                        <span>Teaching</span>
-                    </div>
+                    <p class="exp-description">Assisted 250+ students across multiple CS courses including Python for ML, Software Engineering, SQL, and C# Programming.</p>
                     <button class="view-details-btn" onclick="toggleDetails(this)">
                         <i class="fas fa-chevron-down"></i> View details
                     </button>
@@ -396,61 +345,21 @@
                 </div>
             </div>
 
-            <!-- CoreAutism Researcher -->
-            <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>Student Researcher <span class="job-badge research">Research</span></h3>
-                            <p class="company">CoreAutism Project - University of Missouri</p>
-                        </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> Feb 2024 – Aug 2024</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> Columbia, MO</p>
-                        </div>
-                    </div>
-                    <div class="tech-tags">
-                        <span>Android</span>
-                        <span>Java</span>
-                        <span>AWS</span>
-                        <span>Data Analysis</span>
-                    </div>
-                    <button class="view-details-btn" onclick="toggleDetails(this)">
-                        <i class="fas fa-chevron-down"></i> View details
-                    </button>
-                    <div class="details-content">
-                        <h4>Key Achievements</h4>
-                        <ul class="achievements">
-                            <li><i class="fas fa-check-circle"></i> Technical Analysis: Evaluated and analyzed over 2,000+ data points from voice and heart rate data using AWS, contributing to visualizations that directly informed the development of personalized treatment plans by medical professionals</li>
-                            <li><i class="fas fa-check-circle"></i> App Testing: Conducted UX non-functional and functional testing, identifying 45+ critical bugs to developers, maintaining application stability for 20+ users in a CI/CD environment</li>
-                            <li><i class="fas fa-check-circle"></i> Documentation Initiative: Developed over 5,000 words of technical documentation and produced onboarding video training materials, establishing standard reference materials for current team members and future contributors</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
             <!-- Accenture -->
             <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>Apprentice in Training - Java <span class="job-badge internship">Internship</span></h3>
-                            <p class="company">Accenture Federal Services</p>
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/ACN.svg" alt="Accenture">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Accenture Federal Services</h3>
+                            <p class="exp-role">Apprentice in Training - Java</p>
                         </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> June 2022 – Aug 2022</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> St. Louis, MO</p>
-                        </div>
+                        <p class="exp-date">June 2022 – Aug 2022</p>
                     </div>
-                    <div class="tech-tags">
-                        <span>Java</span>
-                        <span>Agile</span>
-                        <span>CI/CD</span>
-                        <span>Git</span>
-                        <span>Testing</span>
-                    </div>
+                    <p class="exp-description">Implemented Java software components in an agile development pipeline with CI/CD practices for federal government projects.</p>
                     <button class="view-details-btn" onclick="toggleDetails(this)">
                         <i class="fas fa-chevron-down"></i> View details
                     </button>
@@ -461,6 +370,68 @@
                             <li><i class="fas fa-check-circle"></i> Collaborated with senior developers to deliver reliable code for federal government projects</li>
                             <li><i class="fas fa-check-circle"></i> Participated in daily stand-ups and sprint planning meetings following Agile methodology</li>
                             <li><i class="fas fa-check-circle"></i> Gained hands-on experience with version control and automated testing frameworks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Undergraduate Research Subsection -->
+        <h3 class="exp-subsection-title">Undergraduate Research</h3>
+        <div class="experience-timeline">
+            <!-- AI Student Researcher -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">AI Student Researcher</h3>
+                            <p class="exp-role">University of Missouri-Columbia</p>
+                        </div>
+                        <p class="exp-date">Feb 2025 – Dec 2025</p>
+                    </div>
+                    <p class="exp-description">Building RAG systems and AI infrastructure for VR applications, developing Flask APIs with ChromaDB and OpenAI integrations.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> AI Infrastructure: Engineered Flask-based RAG API server with ChromaDB vector database integration, OpenAI API's, serving domain-specific LLM responses to VR lab application via RESTful endpoints with Docker and Tailscale on the Nvidia Jetson for 20+ users</li>
+                            <li><i class="fas fa-check-circle"></i> Data Modeling: Built end-to-end document processing pipeline using Unstructured library for multi-format parsing (PDF/DocX/PPT), implementing semantic search, context extraction and OpenAI embedding model integration achieving 95% accuracy</li>
+                            <li><i class="fas fa-check-circle"></i> RAG System Architecture: Designed automated eval framework as LLM judge with ground-truth datasets to measure retrieval accuracy, response latency, and hallucination rates with average response times of 1.8 seconds, with 90% of all requests under 3 seconds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CoreAutism Researcher -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">CoreAutism Project</h3>
+                            <p class="exp-role">Developer, Student Researcher</p>
+                        </div>
+                        <p class="exp-date">Feb 2024 – Aug 2024</p>
+                    </div>
+                    <p class="exp-description">Analyzed 2,000+ data points from voice and biometric data using AWS, contributing to personalized treatment insights for medical professionals.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> Technical Analysis: Evaluated and analyzed over 2,000+ data points from voice and heart rate data using AWS, contributing to visualizations that directly informed the development of personalized treatment plans by medical professionals</li>
+                            <li><i class="fas fa-check-circle"></i> App Testing: Conducted UX non-functional and functional testing, identifying 45+ critical bugs to developers, maintaining application stability for 20+ users in a CI/CD environment</li>
+                            <li><i class="fas fa-check-circle"></i> Documentation Initiative: Developed over 5,000 words of technical documentation and produced onboarding video training materials, establishing standard reference materials for current team members and future contributors</li>
                         </ul>
                     </div>
                 </div>
@@ -478,18 +449,19 @@
         <div class="experience-timeline">
             <!-- University of Missouri-Columbia -->
             <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>Bachelor of Science - Information Technology <span class="job-badge full-time">Cum Laude</span></h3>
-                            <p class="company">University of Missouri-Columbia</p>
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Bachelor of Science - Information Technology</h3>
+                            <p class="exp-role">University of Missouri-Columbia</p>
                         </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> Jan 2023 – Dec 2025</p>
-                            <p class="location"><i class="fas fa-graduation-cap"></i> GPA: 3.75</p>
-                        </div>
+                        <p class="exp-date">Jan 2023 – Dec 2025</p>
                     </div>
+                    <p class="exp-description">GPA: 3.75 | Cum Laude</p>
                     <button class="view-details-btn" onclick="toggleDetails(this)">
                         <i class="fas fa-chevron-down"></i> View details
                     </button>
@@ -505,18 +477,19 @@
 
             <!-- St. Louis Community College -->
             <div class="experience-card">
-                <div class="timeline-dot"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="title-section">
-                            <h3>Associate of Arts - General Transfers Degree <span class="job-badge full-time">Summa Cum Laude</span></h3>
-                            <p class="company">St. Louis Community College</p>
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/STLCC Logo, lightmode.png" alt="St. Louis Community College">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Associate of Arts - General Transfers Degree</h3>
+                            <p class="exp-role">St. Louis Community College</p>
                         </div>
-                        <div class="meta-section">
-                            <p class="date"><i class="far fa-calendar"></i> Jun 2021 – Dec 2022</p>
-                            <p class="location"><i class="fas fa-graduation-cap"></i> GPA: 3.9</p>
-                        </div>
+                        <p class="exp-date">Jun 2021 – Dec 2022</p>
                     </div>
+                    <p class="exp-description">GPA: 3.9 | Summa Cum Laude</p>
                     <button class="view-details-btn" onclick="toggleDetails(this)">
                         <i class="fas fa-chevron-down"></i> View details
                     </button>
@@ -527,6 +500,96 @@
                             <li><i class="fas fa-star"></i> Dean's List Honoree (Fall 2021, Spring 2022)</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-----------------------PROJECTS SECTION--------------------->
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-decorator"></div>
+            <h2>Projects</h2>
+            <a href="https://github.com/21vincentchu" target="_blank" class="github-link">
+                <i class="fab fa-github"></i>
+                <span>My GitHub</span>
+            </a>
+        </div>
+
+        <div class="projects-grid">
+            <!---------------- OpenAI RAG Q&A System ----------------------->
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-header">
+                        <h3>A RAG Architecture System with OpenAI</h3>
+                        <div class="project-links-row">
+                            <a href="https://github.com/21vincentchu/openAIAPITest" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="company-logos/AI-Powered Question-Answering System for VR-Enhanced Semiconductor Training_ Design, Implementation, and Evaluation.docx" target="_blank" class="project-github-text"><i class="fas fa-file-alt"></i> Paper</a>
+                            <a href="company-logos/AI Based RAG for VR Semiconductor Slides - Vincent Chu (2).pptx" target="_blank" class="project-github-text"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                        </div>
+                    </div>
+                    <p class="project-subtitle">Document Question-Answering System</p>
+                    <p class="project-description">A document question-answering system using RAG (Retrieval Augmented Generation) with ChromaDB vector storage and OpenAI embeddings. Includes a Flask API server for integration with VR applications.</p>
+                </div>
+                <div class="project-image">
+                    <img src="company-logos/AI RAG.svg" alt="AI RAG Architecture Diagram">
+                    <button class="enlarge-btn" onclick="enlargeImage(this)"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="project-tags">
+                    <span>RAG</span>
+                    <span>ChromaDB</span>
+                    <span>OpenAI API</span>
+                    <span>Flask</span>
+                    <span>Python</span>
+                    <span>GPT-4o-mini</span>
+                </div>
+            </div>
+
+            <!---------------- Reverb Project ----------------------->
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-header">
+                        <h3>Reverb</h3>
+                        <div class="project-links-row">
+                            <a href="https://github.com/21vincentchu/spotify-music-app" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://reverb.cool" target="_blank" class="project-github-text"><i class="fas fa-globe"></i> Website</a>
+                        </div>
+                    </div>
+                    <p class="project-subtitle">Social Music Analytics Platform</p>
+                    <p class="project-description">A social music analytics platform that transforms your Spotify listening data into shareable insights and community-driven experiences through music ratings and reviews.</p>
+                </div>
+                <div class="project-image">
+                    <img src="company-logos/Reverb.svg" alt="Reverb Logo">
+                    <button class="enlarge-btn" onclick="enlargeImage(this)"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="project-tags">
+                    <span>Spotify API</span>
+                    <span>Music Analytics</span>
+                    <span>React</span>
+                    <span>Python</span>
+                    <span>Social Platform</span>
+                </div>
+            </div>
+
+            <!---------------- CoreAutism Project ----------------------->
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-header">
+                        <h3>CoreAutism Project <span class="project-status">Journal Paper In Review</span></h3>
+                        <div class="project-links-row">
+                            <a href="https://github.com/MU-IRCF/CoreAutism" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="company-logos/IEEE_CoreAutism_Journalpaper.pdf" target="_blank" class="project-github-text"><i class="fas fa-file-alt"></i> Paper</a>
+                        </div>
+                    </div>
+                    <p class="project-subtitle">Autism Research Data Analysis Platform</p>
+                    <p class="project-description">A research platform analyzing voice and biometric data to develop personalized treatment insights for medical professionals working with autism patients.</p>
+                </div>
+                <div class="project-tags">
+                    <span>AWS</span>
+                    <span>Data Analysis</span>
+                    <span>Python</span>
+                    <span>Biometrics</span>
+                    <span>Healthcare</span>
                 </div>
             </div>
         </div>
@@ -632,69 +695,7 @@
         </div>
     </section>
     
-    <section id="projects" data-line-numbers="40 41 42 43 44 45 46 47">
-        <div class="section-header">
-            <div class="section-decorator"></div>
-            <h2>Projects</h2>
-            <a href="https://github.com/21vincentchu" target="_blank" class="github-link">
-                <i class="fab fa-github"></i>
-                <span>My GitHub</span>
-            </a>
-        </div>
-        
-        <div class="projects-grid">
-            <!---------------- OpenAI RAG Q&A System ----------------------->
-            <div class="project-card">
-                <h3>OpenAI RAG Q&A System</h3>
-                <p>A document question-answering system using RAG (Retrieval Augmented Generation) with ChromaDB vector storage and OpenAI embeddings. Includes a Flask API server for integration with VR applications.</p>
-                <div class="project-links">
-                    <a href="https://github.com/21vincentchu/openAIAPITest" target="_blank"><i class="fas fa-external-link-alt"></i> View on GitHub</a>
-                </div>
-                <div class="project-tags">
-                    <span>RAG</span>
-                    <span>ChromaDB</span>
-                    <span>OpenAI API</span>
-                    <span>Flask</span>
-                    <span>Python</span>
-                    <span>Vector Search</span>
-                    <span>GPT-4o-mini</span>
-                    <span>Unstructured</span>
-                </div>
-            </div>
-
-            <!---------------- Reverb Project ----------------------->
-            <div class="project-card">
-                <h3>Reverb - Social Music Analytics Platform</h3>
-                <p>A social music analytics platform that transforms your Spotify listening data into shareable insights and community-driven experiences through music ratings and reviews.</p>
-                <div class="project-links">
-                    <a href="https://github.com/21vincentchu/spotify-music-app" target="_blank"><i class="fas fa-external-link-alt"></i> View on GitHub</a>
-                </div>
-                <div class="project-tags">
-                    <span>Spotify API</span>
-                    <span>Music Analytics</span>
-                    <span>Social Platform</span>
-                    <span>React</span>
-                    <span>Python</span>
-                </div>
-            </div>
-    
-            <!-- CoreAutism App -->
-            <div class="project-card">
-                <h3>CoreAutism App</h3>
-                <p>Developed and tested a Android wearable app to monitor and analyze speech and biometric data of individuals with Autism Spectrum Disorder, aiding in personalized care insights and information to medical professionals. Currently in the process of submitting journal paper, will update when reviewed</p>
-                <div class="project-tags">
-                    <span>Android</span>
-                    <span>Wearables</span>
-                    <span>Speaker Diarization</span>
-                    <span>Java</span>
-                    <span>AWS</span>
-                    <span>Data Analysis</span>
-                </div>
-            </div>   
-        </div>
-    </section>
-
-    <!-----------------------MY PHOTOS SECTION--------------------->
+<!-----------------------MY PHOTOS SECTION--------------------->
     <section id="photos">
         <div class="section-header">
             <div class="section-decorator"></div>
@@ -761,6 +762,12 @@
     <footer>
         <p>&copy; 2026 Vincent Chu | Built with HTML, CSS, Javascript, Satoshi Type Face | logo by <a href="https://codytu.com/">codytu.com</a></p>
     </footer>
+
+<!-- Image Lightbox Modal -->
+<div class="image-modal" id="imageModal">
+    <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
+    <img src="" alt="Enlarged view" id="modalImage">
+</div>
 
 <script src="script.js"></script>
 

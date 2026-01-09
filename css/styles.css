@@ -1140,6 +1140,18 @@ footer {
     50% { opacity: 0; }
 }
 
+/* Typing cursor animation */
+.typing-cursor {
+    display: inline-block;
+    font-weight: 300;
+    animation: blink 1s step-end infinite;
+    margin-left: 4px;
+}
+
+h1 .typing-cursor {
+    font-weight: 300;
+}
+
 /* Media Queries */
 @media (max-width: 970px) {
     /* nav-container padding is handled in mobile.css */
@@ -1196,187 +1208,327 @@ footer {
 /* Experience Timeline Styles */
 .experience-timeline {
     position: relative;
-    padding-left: 0;
+    padding: 2.5rem;
+    background: rgba(30, 35, 45, 0.5);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .experience-card {
     position: relative;
-    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 0;
 }
 
-.experience-card .timeline-dot {
+
+/* Timeline line */
+.timeline-line {
     display: none;
 }
 
-.card-content {
-    background-color: rgba(62, 68, 81, 0.6);
-    backdrop-filter: blur(200px) saturate(180%);
-    -webkit-backdrop-filter: blur(200px) saturate(180%);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    margin-left: 0;
-    transition: all 0.3s ease;
+/* Company Logo */
+.exp-logo {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    border-radius: 14px;
+    background: rgba(40, 45, 55, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
     position: relative;
 }
 
-.card-content:hover {
-    border-color: var(--variable-color);
-    border-width: 2px;
-}
-
-.company-logo {
-    float: right;
-    width: 80px;
-    height: 80px;
+.exp-logo img {
+    width: 55px;
+    height: 55px;
     object-fit: contain;
-    opacity: 1;
-    margin-left: 1rem;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-    clear: both;
 }
 
-/* Special handling for maritz logo - make it visible in blue */
-img[src*="maritz.svg"] {
-    filter: brightness(0) saturate(100%) invert(23%) sepia(74%) saturate(1577%) hue-rotate(195deg) brightness(93%) contrast(93%);
+/* Timeline vertical line - appears between cards */
+.experience-card {
+    position: relative;
 }
 
-/* Make all logos consistent size */
-img[src*="Mastercard-Logo"] {
-    width: 100px;
+.experience-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: calc(2rem + 80px + 10px);
+    bottom: -10px;
+    width: 2px;
+    background: rgba(96, 165, 250, 0.3);
+    z-index: 1;
 }
 
-img[src*="maritz.svg"] {
-    width: 100px;
+/* STLCC and Maritz logos - make them bigger inside the container */
+.exp-logo img[src*="STLCC"],
+.exp-logo img[src*="maritz.svg"] {
+    width: 70px;
+    height: 70px;
 }
 
-img[src*="Accenture-Logo"] {
-    width: 100px;
-}
-
-img[src*="University_of_Missouri_logo"] {
-    width: 80px;
-}
-
-.card-content:hover .company-logo {
-    opacity: 1;
-}
-
-.card-content:hover {
-    border-color: var(--variable-color);
-    border-width: 2px;
-}
-
-.card-header {
+/* Projects Grid */
+.projects-grid {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
+    flex-direction: column;
     gap: 2rem;
 }
 
-.title-section h3 {
-    font-size: 1.15rem;
-    color: var(--class-color);
-    margin-bottom: 0.35rem;
+/* Project Card - Vertical Layout */
+.project-card {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(30, 35, 45, 0.5);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-.title-section .company {
-    font-size: 0.95rem;
-    color: var(--text-color);
-    margin: 0;
-    font-weight: 500;
-}
-
-.meta-section {
-    text-align: right;
-    flex-shrink: 0;
-}
-
-.meta-section p {
-    margin: 0.2rem 0;
-    font-size: 0.85rem;
-    color: var(--comment-color);
+/* Project Content */
+.project-content {
     display: flex;
+    flex-direction: column;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.4rem;
-    justify-content: flex-end;
+    margin-bottom: 0.5rem;
 }
 
-.meta-section i {
-    color: var(--function-color);
-    font-size: 0.8rem;
-}
-
-/* Job Badges */
-.job-badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 16px;
-    font-size: 0.65rem;
+.project-header h3 {
+    font-size: 1.5rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-family: var(--font-body);
+    color: #ffffff;
+    margin: 0;
 }
 
-.job-badge.full-time {
-    background-color: rgba(34, 197, 94, 0.25);
-    color: #4ade80;
-    border: 1px solid #22c55e;
+.project-subtitle {
+    font-size: 1.1rem;
+    color: #e5e5e5;
+    margin: 0 0 1rem 0;
 }
 
-.job-badge.part-time {
-    background-color: rgba(251, 146, 60, 0.25);
-    color: #fb923c;
-    border: 1px solid #f97316;
+.project-description {
+    font-size: 1rem;
+    color: var(--text-color);
+    line-height: 1.7;
+    margin: 0;
 }
 
-.job-badge.internship {
-    background-color: rgba(59, 130, 246, 0.25);
-    color: #60a5fa;
-    border: 1px solid #3b82f6;
-}
-
-.job-badge.research {
-    background-color: rgba(168, 85, 247, 0.25);
-    color: #c084fc;
-    border: 1px solid #a855f7;
-}
-
-.job-badge.current {
-    background-color: rgba(6, 182, 212, 0.25);
-    color: #22d3ee;
-    border: 1px solid #06b6d4;
-}
-
-/* Tech Tags */
-.tech-tags {
+/* Project Image - Under Description */
+.project-image {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    background: #e5e5e5;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.tech-tags span {
-    background-color: rgba(97, 175, 239, 0.1);
-    color: var(--function-color);
-    padding: 0.25rem 0.65rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(97, 175, 239, 0.3);
+.project-image img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/* Enlarge button */
+.enlarge-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+}
+
+.enlarge-btn:hover {
+    background: rgba(96, 165, 250, 0.8);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Image Lightbox Modal */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #e5e5e5;
+    padding: 2rem;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.image-modal-close:hover {
+    opacity: 1;
+}
+
+/* Project GitHub link */
+.project-links-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.project-github-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #a78bfa;
+    text-decoration: none;
     transition: all 0.2s ease;
 }
 
-.tech-tags span:hover {
-    background-color: rgba(97, 175, 239, 0.2);
-    border-color: var(--function-color);
+.project-github-text:hover {
+    color: #c4b5fd;
+}
+
+.project-github-text i {
+    font-size: 1rem;
+}
+
+/* Project status badge */
+.project-status {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Project tags */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.project-tags span {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+/* Experience Content */
+.exp-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.exp-info {
+    flex: 1;
+}
+
+.exp-company {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #60a5fa;
+    margin: 0 0 0.35rem 0;
+}
+
+.exp-role {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #f5f1e8;
+    margin: 0 0 0.5rem 0;
+}
+
+.exp-date {
+    font-size: 1rem;
+    color: #5eead4;
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.exp-description {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    line-height: 1.7;
+    margin: 0.75rem 0 1rem 0;
+    max-width: 700px;
+}
+
+/* Experience Subsection Title */
+.exp-subsection-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--variable-color);
+    margin: 2.5rem 0 1.5rem 0;
+    padding-left: 0.5rem;
+    border-left: 3px solid var(--variable-color);
 }
 
 /* View Details Button */
@@ -1470,33 +1622,54 @@ img[src*="University_of_Missouri_logo"] {
 /* Responsive */
 @media (max-width: 970px) {
     .experience-timeline {
-        padding-left: 0;
+        padding: 1.5rem;
     }
 
-    .card-content {
-        padding: 1.25rem;
-        margin-left: 0;
-    }
-
-    .card-header {
-        flex-direction: column;
+    .experience-card {
         gap: 1rem;
+        padding: 1.5rem 0;
     }
 
-    .meta-section {
+    .experience-card:not(:last-child)::after {
+        left: 32px;
+        top: calc(1.5rem + 65px + 8px);
+        bottom: -8px;
+    }
+
+    .exp-logo {
+        width: 65px;
+        height: 65px;
+        min-width: 65px;
+    }
+
+    .exp-logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .exp-header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .exp-date {
         text-align: left;
     }
 
-    .meta-section p {
-        justify-content: flex-start;
-    }
-
-    .title-section h3 {
+    .exp-company {
         font-size: 1.2rem;
     }
 
-    .company-image {
-        max-width: 150px;
+    .exp-role {
+        font-size: 1rem;
+    }
+
+    .exp-date {
+        font-size: 0.9rem;
+    }
+
+    .exp-description {
+        font-size: 0.95rem;
     }
 }
 
@@ -1956,7 +2129,7 @@ body::-webkit-scrollbar {
     left: 0;
     pointer-events: none;
     z-index: 10000;
-    transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
     transform: translate(-50%, -50%);
 }
 

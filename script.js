@@ -32,9 +32,49 @@ const counterInterval = setInterval(() => {
         document.body.classList.add('loaded');
         setTimeout(() => {
             loadingScreen.remove();
+            // Start typing animation after loading screen is removed
+            startTypingAnimation();
         }, 600);
     }
 }, updateInterval);
+
+// ========================================
+// TYPING ANIMATION FOR GREETING
+// ========================================
+function startTypingAnimation() {
+    const typedElement = document.getElementById('typed-greeting');
+    const textToType = "Hi, I'm Vincent";
+    let charIndex = 0;
+    const typingSpeed = 80; // milliseconds per character
+    const deleteSpeed = 50; // faster deletion
+    const pauseAfterTyping = 2000; // pause before deleting
+    const pauseAfterDeleting = 500; // pause before retyping
+
+    function typeNextChar() {
+        if (charIndex < textToType.length) {
+            typedElement.textContent += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeNextChar, typingSpeed);
+        } else {
+            // Finished typing, wait then start deleting
+            setTimeout(deleteChar, pauseAfterTyping);
+        }
+    }
+
+    function deleteChar() {
+        if (charIndex > 0) {
+            charIndex--;
+            typedElement.textContent = textToType.substring(0, charIndex);
+            setTimeout(deleteChar, deleteSpeed);
+        } else {
+            // Finished deleting, wait then start typing again
+            setTimeout(typeNextChar, pauseAfterDeleting);
+        }
+    }
+
+    // Small delay before starting to type
+    setTimeout(typeNextChar, 300);
+}
 
 // Theme Management
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -400,8 +440,8 @@ document.addEventListener('mousemove', (e) => {
 // Animate ring with delay (smooth follow effect)
 function animateRing() {
     // Lerp (linear interpolation) for smooth following
-    ringX += (mouseX - ringX) * 0.3;
-    ringY += (mouseY - ringY) * 0.3;
+    ringX += (mouseX - ringX) * 0.5;
+    ringY += (mouseY - ringY) * 0.5;
     
     cursorRing.style.left = ringX + 'px';
     cursorRing.style.top = ringY + 'px';
@@ -491,3 +531,35 @@ backToTopButton.addEventListener('click', () => {
     });
 });
 
+// ========================================
+// IMAGE LIGHTBOX MODAL
+// ========================================
+function enlargeImage(button) {
+    const img = button.parentElement.querySelector('img');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+
+    modalImg.src = img.src;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close modal on background click
+document.getElementById('imageModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeImageModal();
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});
