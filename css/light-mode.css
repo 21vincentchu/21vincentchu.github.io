@@ -83,6 +83,15 @@
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* Mobile nav bar tint in light mode */
+@media (max-width: 970px) {
+    [data-theme="light"] nav {
+        background: rgba(245, 241, 235, 0.85);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+}
+
 [data-theme="light"] .nav-links a {
     color: #374151;
     background: rgba(245, 241, 235, 0.95);
@@ -96,8 +105,8 @@
 }
 
 [data-theme="light"] .nav-links a.active {
-    color: var(--variable-color);
-    background: rgba(245, 241, 235, 0.95);
+    color: #f5f1e8;
+    background: var(--variable-color);
     border: 2px solid rgba(124, 58, 237, 0.3);
 }
 
@@ -403,8 +412,28 @@
     filter: invert(1);
 }
 
-[data-theme="light"] .experience-card:not(:last-child)::after {
-    background: rgba(37, 99, 235, 0.25);
+[data-theme="light"] .experience-timeline::before {
+    background: rgba(124, 58, 237, 0.3);
+}
+
+[data-theme="light"] .experience-card::before {
+    background: var(--variable-color);
+    border: 2px solid rgba(245, 241, 235, 0.9);
+}
+
+[data-theme="light"] .experience-card::after {
+    background: var(--variable-color);
+}
+
+[data-theme="light"] .experience-card {
+    border: 2px solid transparent;
+}
+
+[data-theme="light"] .experience-card:hover {
+    background: rgba(245, 241, 235, 0.5);
+    border: 2px solid var(--variable-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
 }
 
 /* Project card light mode */
@@ -527,7 +556,7 @@
 }
 
 [data-theme="light"] .time {
-    color: var(--function-color);
+    color: var(--variable-color);
 }
 
 /* ========================================

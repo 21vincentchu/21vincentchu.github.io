@@ -43,7 +43,9 @@ const counterInterval = setInterval(() => {
 // ========================================
 function startTypingAnimation() {
     const typedElement = document.getElementById('typed-greeting');
-    const textToType = "Hi! I am Vincent";
+    const textToType = "Hi! 👋 I am Vincent";
+    // Convert to array to properly handle emojis as single units
+    const textArray = Array.from(textToType);
     let charIndex = 0;
     const typingSpeed = 80; // milliseconds per character
     const deleteSpeed = 50; // faster deletion
@@ -51,8 +53,8 @@ function startTypingAnimation() {
     const pauseAfterDeleting = 500; // pause before retyping
 
     function typeNextChar() {
-        if (charIndex < textToType.length) {
-            typedElement.textContent += textToType.charAt(charIndex);
+        if (charIndex < textArray.length) {
+            typedElement.textContent += textArray[charIndex];
             charIndex++;
             setTimeout(typeNextChar, typingSpeed);
         } else {
@@ -64,7 +66,7 @@ function startTypingAnimation() {
     function deleteChar() {
         if (charIndex > 0) {
             charIndex--;
-            typedElement.textContent = textToType.substring(0, charIndex);
+            typedElement.textContent = textArray.slice(0, charIndex).join('');
             setTimeout(deleteChar, deleteSpeed);
         } else {
             // Finished deleting, wait then start typing again
@@ -345,9 +347,9 @@ function toggleDetails(button) {
     }
 }
 
-// Make entire card clickable for toggling details
+// Make entire experience card clickable for toggling details
 document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.card-content');
+    const cards = document.querySelectorAll('.experience-card');
     cards.forEach(card => {
         card.addEventListener('click', function(e) {
             // Don't toggle if clicking on a link
