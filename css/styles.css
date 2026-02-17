@@ -1,3 +1,11 @@
+/* Theme transition - applied temporarily during theme switch */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+    transition: background-color 0.4s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
 /* Loading Screen */
 .loading-screen {
     position: fixed;
@@ -260,7 +268,7 @@ section {
 /* Navigation */
 nav {
     position: fixed;
-    top: 1rem;
+    top: 2rem;
     left: 0;
     right: 0;
     width: calc(var(--container-max-width) - calc(var(--container-padding) * 2) + 4rem);

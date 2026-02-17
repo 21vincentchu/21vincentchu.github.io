@@ -111,11 +111,17 @@ if (themeToggleBtn) {
             loadLightModeCSS();
         }
 
-        // Small delay to ensure CSS is loaded before switching
+        // Apply transition class for smooth switching in both directions
+        document.documentElement.classList.add('theme-transition');
+
         setTimeout(() => {
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-        }, newTheme === 'light' && !lightModeCSSLoaded ? 50 : 0);
+        }, 0);
+
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transition');
+        }, 450);
     });
 }
 
