@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // Force scroll to top immediately
+        window.scrollTo(0, 0);
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Mark styles as loaded when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.body) {
+                document.body.classList.add('styles-loaded');
+            }
+        });
+    </script>
+
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4VLQVR8P2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q4VLQVR8P2');
+    </script>
+
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Vincent Chu</title>
+
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="css/styles.css?v=31" as="style">
+    <link rel="preload" href="css/theme.css?v=27" as="style">
+
+    <meta name="description" content="Professional experience of Vincent Chu - Site Reliability Engineer at Mastercard">
+
+    <!-- Base styles - always loaded -->
+    <link rel="stylesheet" href="css/styles.css?v=31">
+    <link rel="stylesheet" href="css/theme.css?v=27">
+
+    <!-- Other styles -->
+    <link rel="stylesheet" href="css/animation.css?v=26">
+    <link rel="stylesheet" href="css/mobile.css?v=26">
+    <link rel="stylesheet" href="css/weather.css?v=26">
+
+    <!-- Preconnect to Font Awesome CDN -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ef4444'/%3E%3Cstop offset='25%25' style='stop-color:%23f97316'/%3E%3Cstop offset='50%25' style='stop-color:%23a855f7'/%3E%3Cstop offset='75%25' style='stop-color:%233b82f6'/%3E%3Cstop offset='100%25' style='stop-color:%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='url(%23g)' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
+
+</head>
+
+<body id="top">
+    <!-- Film Grain Overlay -->
+    <div class="film-grain"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-gradient"></div>
+        <div class="loading-logo">
+            <div class="loading-logo-v-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                    <defs>
+                        <linearGradient id="loading-logo-gradient-v" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                            <stop offset="25%" style="stop-color:#f97316;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="75%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path class="loading-logo-path" fill="url(#loading-logo-gradient-v)" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
+                </svg>
+            </div>
+            <div class="loading-logo-c-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                    <defs>
+                        <linearGradient id="loading-logo-gradient-c" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                            <stop offset="25%" style="stop-color:#f97316;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="75%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path class="loading-logo-path" fill="url(#loading-logo-gradient-c)" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="loading-circle-container">
+            <svg class="loading-circle" viewBox="0 0 120 120">
+                <circle class="loading-circle-bg" cx="60" cy="60" r="54"></circle>
+                <circle class="loading-circle-progress" cx="60" cy="60" r="54" id="loading-circle-progress"></circle>
+            </svg>
+            <div class="loading-percentage" id="loading-percentage">0%</div>
+        </div>
+    </div>
+
+    <div class="scroll-progress"></div>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-row">
+                    <a href="index.html">
+                        <!-- SVG logo here -->
+                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                            <defs>
+                                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" class="stop1" style="stop-color:#ef4444;stop-opacity:1" />
+                                    <stop offset="25%" class="stop2" style="stop-color:#f59e0b;stop-opacity:1" />
+                                    <stop offset="50%" class="stop3" style="stop-color:#a855f7;stop-opacity:1" />
+                                    <stop offset="75%" class="stop4" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                    <stop offset="100%" class="stop5" style="stop-color:#06b6d4;stop-opacity:1" />
+                                </linearGradient>
+                                <style>
+                                    .cls-1 { fill: #61afef; stroke-width: 0px; }
+                                </style>
+                            </defs>
+                            <path class="cls-1" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
+                            <path class="cls-1" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Nav links now wrapped in a container for better mobile control -->
+            <div class="nav-wrapper">
+                <div class="nav-links">
+                    <a href="education.html">Education</a>
+                    <a href="experience.html" class="active">Experience</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
+                </div>
+            </div>
+
+            <div class="clock-container">
+                <div class="time" id="live-clock">--:-- PM</div>
+                <div class="timezone">CST</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-----------------------EXPERIENCE SECTION--------------------->
+    <section id="experience">
+        <div class="experience-timeline">
+            <!-- Mastercard Position -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/ma_symbol.svg" alt="Mastercard">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Mastercard</h3>
+                            <p class="exp-role">Site Relability Engineer 1</p>
+                        </div>
+                        <p class="exp-date">January 2026 - Current</p>
+                    </div>
+                    <p class="exp-description">Member of Mastercard's Global Clearing Management Systems, supporting the accurate clearing of 500M+ daily transactions across a network that processed $10.6 trillion in gross dollar volume in 2025, serving 3.39 billion active cardholders worldwide.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Responsibilities</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> Architecting and maintaining CI/CD pipelines to enable high-frequency, low-risk deployments across distributed mainframe and cloud environments — driving DevOps transformation and infrastructure-as-code practices at planetary scale across 210+ countries, multiple regulatory jurisdictions, and 24/7 zero-downtime SLA requirements, underpinning an estimated 197 billion transactions processed annually</li>
+                            <li><i class="fas fa-check-circle"></i> Leading change management and release governance across mission-critical mainframe systems, ensuring stability and compliance across PCI-DSS, ISO 20022, and global regulatory frameworks</li>
+                            <li><i class="fas fa-check-circle"></i> Bridging mainframe modernization with cloud-native DevOps practices, integrating legacy COBOL and z/OS environments into modern CI/CD pipelines without compromising the throughput and reliability that global payments demand</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maritz Internship -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/maritz.svg" alt="Maritz">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Maritz</h3>
+                            <p class="exp-role">Asset Manager Intern</p>
+                        </div>
+                        <p class="exp-date">May 2025 – Aug 2025</p>
+                    </div>
+                    <p class="exp-description">Optimized IT asset management processes using ServiceNow, projecting $20,000+ in annual savings through automation.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> Optimized logistics through process automation and system optimization to reduce asset loss and operational costs, projecting $20,000+ in annual savings with a 156% return on investment (ROI)</li>
+                            <li><i class="fas fa-check-circle"></i> Established ServiceNow specifications and workflow automation requirements for seamless data flow between ServiceNow platform, ShipEase CORE plugin, managing 6,000+ assets across the company</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Student Researcher -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">University of Missouri</h3>
+                            <p class="exp-role">AI Student Researcher</p>
+                        </div>
+                        <p class="exp-date">Feb 2025 – Dec 2025</p>
+                    </div>
+                    <p class="exp-description">Building RAG systems and AI infrastructure for VR applications, developing Flask APIs with ChromaDB and OpenAI integrations.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> AI Infrastructure: Engineered Flask-based RAG API server with ChromaDB vector database integration, OpenAI API's, serving domain-specific LLM responses to VR lab application via RESTful endpoints with Docker and Tailscale on the Nvidia Jetson for 20+ users</li>
+                            <li><i class="fas fa-check-circle"></i> Data Modeling: Built end-to-end document processing pipeline using Unstructured library for multi-format parsing (PDF/DocX/PPT), implementing semantic search, context extraction and OpenAI embedding model integration achieving 95% accuracy</li>
+                            <li><i class="fas fa-check-circle"></i> RAG System Architecture: Designed automated eval framework as LLM judge with ground-truth datasets to measure retrieval accuracy, response latency, and hallucination rates with average response times of 1.8 seconds, with 90% of all requests under 3 seconds</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Researcher -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">University of Missouri</h3>
+                            <p class="exp-role">Analysis Researcher</p>
+                        </div>
+                        <p class="exp-date">Feb 2024 – Aug 2024</p>
+                    </div>
+                    <p class="exp-description">Analyzed 2,000+ data points from voice and biometric data using AWS, contributing to personalized treatment insights for medical professionals.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> Technical Analysis: Evaluated and analyzed over 2,000+ data points from voice and heart rate data using AWS, contributing to visualizations that directly informed the development of personalized treatment plans by medical professionals</li>
+                            <li><i class="fas fa-check-circle"></i> App Testing: Conducted UX non-functional and functional testing, identifying 45+ critical bugs to developers, maintaining application stability for 20+ users in a CI/CD environment</li>
+                            <li><i class="fas fa-check-circle"></i> Documentation Initiative: Developed over 5,000 words of technical documentation and produced onboarding video training materials, establishing standard reference materials for current team members and future contributors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teaching Assistant -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">University of Missouri</h3>
+                            <p class="exp-role">Teaching Assistant</p>
+                        </div>
+                        <p class="exp-date">June 2024 – Dec 2025</p>
+                    </div>
+                    <p class="exp-description">Assisted 250+ students across multiple CS courses including Python for ML, Software Engineering, SQL, and C# Programming.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> Assisted 250+ students across multiple computer science courses</li>
+                            <li><i class="fas fa-check-circle"></i> Graded assignments for Python for Machine Learning, Software Engineering, SQL Database Systems, and C# Programming</li>
+                            <li><i class="fas fa-check-circle"></i> Provided one-on-one tutoring and debugging support for complex programming concepts</li>
+                            <li><i class="fas fa-check-circle"></i> Facilitated peer learning sessions to reinforce course material and best practices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accenture -->
+            <div class="experience-card">
+                <div class="timeline-line"></div>
+                <div class="exp-logo">
+                    <img src="company-logos/ACN.svg" alt="Accenture">
+                </div>
+                <div class="exp-content">
+                    <div class="exp-header">
+                        <div class="exp-info">
+                            <h3 class="exp-company">Accenture Federal Services</h3>
+                            <p class="exp-role">Apprentice in Training - Java</p>
+                        </div>
+                        <p class="exp-date">June 2022 – Aug 2022</p>
+                    </div>
+                    <p class="exp-description">Implemented Java software components in an agile development pipeline with CI/CD practices for federal government projects.</p>
+                    <button class="view-details-btn" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i> View details
+                    </button>
+                    <div class="details-content">
+                        <h4>Key Achievements</h4>
+                        <ul class="achievements">
+                            <li><i class="fas fa-check-circle"></i> Implemented Java software components in an agile development pipeline with CI/CD practices</li>
+                            <li><i class="fas fa-check-circle"></i> Collaborated with senior developers to deliver reliable code for federal government projects</li>
+                            <li><i class="fas fa-check-circle"></i> Participated in daily stand-ups and sprint planning meetings following Agile methodology</li>
+                            <li><i class="fas fa-check-circle"></i> Gained hands-on experience with version control and automated testing frameworks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/vincent-chu1/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/21vincentchu" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" class="copy-email" data-type="email" aria-label="Copy Email"><i class="fas fa-envelope"></i> Click to copy my email address</a>
+            </div>
+            <p>&copy; 2026 Vincent Chu | Built with HTML, CSS, Javascript, Satoshi Type Face | logo by <a href="https://codytu.com/">codytu.com</a></p>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -10,120 +10,44 @@ const updateInterval = 20; // Update every 20ms for smooth animation
 const increment = 100 / (loadingDuration / updateInterval);
 const circumference = 2 * Math.PI * 54; // 2 * PI * radius
 
-// Start counting immediately
-const counterInterval = setInterval(() => {
-    if (loadingCounter < 100) {
-        loadingCounter += increment;
-        if (loadingCounter > 100) loadingCounter = 100;
+// Check if user has already visited in this session
+const hasVisited = sessionStorage.getItem('hasVisited');
 
-        const percent = Math.floor(loadingCounter);
-        percentageElement.textContent = `${percent}%`;
+if (hasVisited) {
+    // Skip loading animation for subsequent page loads
+    loadingScreen.remove();
+    document.body.classList.add('loaded');
+} else {
+    // First visit - show loading animation and set flag
+    sessionStorage.setItem('hasVisited', 'true');
 
-        // Update circle progress
-        const offset = circumference - (loadingCounter / 100) * circumference;
-        circleProgress.style.strokeDashoffset = offset;
-    } else {
-        clearInterval(counterInterval);
-        percentageElement.textContent = '100%';
-        circleProgress.style.strokeDashoffset = 0;
+    // Start counting immediately
+    const counterInterval = setInterval(() => {
+        if (loadingCounter < 100) {
+            loadingCounter += increment;
+            if (loadingCounter > 100) loadingCounter = 100;
 
-        // Start animation immediately when reaching 100%
-        loadingScreen.classList.add('fade-out');
-        document.body.classList.add('loaded');
-        setTimeout(() => {
-            loadingScreen.remove();
-            // Start typing animation after loading screen is removed
-            startTypingAnimation();
-        }, 600);
-    }
-}, updateInterval);
+            const percent = Math.floor(loadingCounter);
+            percentageElement.textContent = `${percent}%`;
 
-// ========================================
-// TYPING ANIMATION FOR GREETING
-// ========================================
-function startTypingAnimation() {
-    const typedElement = document.getElementById('typed-greeting');
-    const textToType = "Hi! 👋 I am Vincent";
-    // Convert to array to properly handle emojis as single units
-    const textArray = Array.from(textToType);
-    let charIndex = 0;
-    const typingSpeed = 80; // milliseconds per character
-    const deleteSpeed = 50; // faster deletion
-    const pauseAfterTyping = 2000; // pause before deleting
-    const pauseAfterDeleting = 500; // pause before retyping
-
-    function typeNextChar() {
-        if (charIndex < textArray.length) {
-            typedElement.textContent += textArray[charIndex];
-            charIndex++;
-            setTimeout(typeNextChar, typingSpeed);
+            // Update circle progress
+            const offset = circumference - (loadingCounter / 100) * circumference;
+            circleProgress.style.strokeDashoffset = offset;
         } else {
-            // Finished typing, wait then start deleting
-            setTimeout(deleteChar, pauseAfterTyping);
-        }
-    }
+            clearInterval(counterInterval);
+            percentageElement.textContent = '100%';
+            circleProgress.style.strokeDashoffset = 0;
 
-    function deleteChar() {
-        if (charIndex > 0) {
-            charIndex--;
-            typedElement.textContent = textArray.slice(0, charIndex).join('');
-            setTimeout(deleteChar, deleteSpeed);
-        } else {
-            // Finished deleting, wait then start typing again
-            setTimeout(typeNextChar, pauseAfterDeleting);
+            // Start animation immediately when reaching 100%
+            loadingScreen.classList.add('fade-out');
+            document.body.classList.add('loaded');
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 600);
         }
-    }
-
-    // Small delay before starting to type
-    setTimeout(typeNextChar, 300);
+    }, updateInterval);
 }
 
-// Theme Management
-const themeToggleBtn = document.getElementById('theme-toggle-btn');
-const htmlElement = document.documentElement;
-
-// Get saved theme or default to dark
-const savedTheme = localStorage.getItem('theme') || 'dark';
-htmlElement.setAttribute('data-theme', savedTheme);
-
-// Track if light mode CSS is loaded
-let lightModeCSSLoaded = (savedTheme === 'light');
-
-// Function to load light mode CSS dynamically
-function loadLightModeCSS() {
-    if (lightModeCSSLoaded) return;
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'css/light-mode.css?v=1';
-    document.head.appendChild(link);
-    lightModeCSSLoaded = true;
-}
-
-// Handle theme toggle button click
-if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', function() {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        // Load light mode CSS if switching to light and not already loaded
-        if (newTheme === 'light') {
-            loadLightModeCSS();
-        }
-
-        // Apply transition class for smooth switching in both directions
-        document.documentElement.classList.add('theme-transition');
-
-        setTimeout(() => {
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }, 0);
-
-        setTimeout(() => {
-            document.documentElement.classList.remove('theme-transition');
-        }, 450);
-    });
-}
 
 // ========================================
 // CLOCK FUNCTIONALITY
@@ -478,42 +402,6 @@ interactiveElements.forEach(element => {
 // PARALLAX BLOBS - DISABLED
 // ========================================
 // Blobs now just float in place without scrolling
-
-// ========================================
-// BACKGROUND COLOR SHIFT
-// ========================================
-
-const bodyElement = document.body;
-
-const sectionColors = {
-    'experience': '#1a1d23',
-    'education': '#1c1f25',
-    'skills': '#1a1e26',
-    'projects': '#1b1d24',
-    'photos': '#1a1c23',
-    'contact': '#191c22'
-};
-
-const colorObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const sectionId = entry.target.id;
-            if (sectionColors[sectionId]) {
-                bodyElement.style.backgroundColor = sectionColors[sectionId];
-            }
-        }
-    });
-}, {
-    threshold: 0.5
-});
-
-// Observe sections for color changes
-Object.keys(sectionColors).forEach(sectionId => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        colorObserver.observe(section);
-    }
-});
 
 
 // ========================================
