@@ -23,6 +23,8 @@
 body:not(.loaded) {
     overflow: hidden !important;
     height: 100vh;
+    border-radius: 24px;
+
 }
 
 /* Hide content until loading complete */
@@ -42,6 +44,7 @@ body.loaded footer,
 body.loaded nav {
     pointer-events: auto;
 }
+
 
 .loading-gradient {
     display: none;
@@ -184,6 +187,7 @@ body.loaded nav {
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
+    scrollbar-width: none;
 }
 
 
@@ -2345,15 +2349,16 @@ h1 .typing-cursor {
     display: none;
 }
 
-/* Hide scrollbar for Firefox */
-html {
-    scrollbar-width: none;
-}
 
 /* Alternative method - hide scrollbar but keep functionality */
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #e8e2d5;
+     background-image: 
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 40px 50px;
 }
 
 body::-webkit-scrollbar {
@@ -2670,9 +2675,7 @@ body.loaded section#contact {
    ======================================== */
 
 /* Smooth background color transitions */
-body {
-    transition: none;
-}
+
 
 /* Allow blob container to move with parallax */
 .blob-container {
