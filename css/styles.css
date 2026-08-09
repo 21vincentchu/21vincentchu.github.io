@@ -1563,6 +1563,10 @@ h1 .typing-cursor {
     h2 {
         font-size: 1.2rem;
     }
+
+    .hero-greeting {
+        font-size: 3rem;
+    }
 }
 
 
@@ -2356,9 +2360,9 @@ body {
     scrollbar-width: none;
     background-color: #e8e2d5;
      background-image: 
-        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-    background-size: 40px 50px;
+        linear-gradient(rgba(0,80,0,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,80,0,0.05) 1px, transparent 1px);
+    background-size: 40px 60px;
 }
 
 body::-webkit-scrollbar {
