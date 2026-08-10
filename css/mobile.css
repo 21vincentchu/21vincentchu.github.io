@@ -64,6 +64,8 @@
 
     /* Adjust main navigation layout */
     .nav-container {
+        box-sizing: border-box;
+        width: 100%;
         padding: 0 2.5rem !important;
         display: flex;
         flex-wrap: nowrap;

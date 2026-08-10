@@ -129,6 +129,7 @@ body.loaded nav {
 }
 
 .loading-logo-path {
+    fill: #1a1a1a;
     filter: none;
 }
 
@@ -579,6 +580,7 @@ nav .logo {
     align-items: center;
     height: auto;
     gap: 0;
+    counter-reset: nav-item;
 }
 
 .nav-separator {
@@ -586,7 +588,9 @@ nav .logo {
 }
 
 .nav-links a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-weight: 500;
     font-family: var(--font-heading);
     font-size: 1.1rem;
@@ -600,15 +604,12 @@ nav .logo {
     background: transparent;
     border: none;
     position: relative;
+    text-decoration: none;
+    counter-increment: nav-item;
 }
 
 .nav-links a::after {
-    content: '→';
-    margin-left: 0.4rem;
-    opacity: 1;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    font-size: 0.9rem;
+    display: none;
 }
 
 @keyframes border-race {
@@ -658,7 +659,17 @@ nav .logo {
 }
 
 .nav-links a::before {
-    display: none;
+    content: counter(nav-item);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -669,22 +680,18 @@ nav .logo {
     box-shadow: none;
 }
 
-.nav-links a:hover::after {
-    transform: translateX(5px);
-}
-
 .nav-links a.active {
     color: #1a1a1a;
     background: transparent;
     border: none;
-    border-bottom: 2px solid #1a1a1a;
     box-shadow: none;
     overflow: visible;
     transform: none;
 }
 
 .nav-links a.active::before {
-    display: none;
+    background: #1a1a1a;
+    color: #e8e2d5;
 }
 
 .nav-links a.resume-link {
@@ -706,7 +713,6 @@ nav .logo {
 .nav-links a.resume-link.active {
     background: transparent;
     color: #1a1a1a;
-    border-bottom: 2px solid #1a1a1a;
 }
 
 /* Header */
@@ -721,6 +727,31 @@ header {
     max-width: var(--container-max-width);
     margin: 0 auto;
     z-index: 1;
+}
+
+/* Tablet / small desktop: shrink the photo and tighten spacing so the
+   left/right text has room, without dropping to the stacked mobile layout */
+@media (min-width: 971px) and (max-width: 1300px) {
+    header {
+        gap: 2rem;
+    }
+
+    .hero-left {
+        padding-right: 1rem;
+    }
+
+    .hero-right {
+        padding-left: 1rem;
+    }
+
+    .profile-gallery {
+        width: clamp(220px, 24vw, 340px);
+        height: clamp(264px, 28.8vw, 408px);
+    }
+
+    .hero-greeting {
+        font-size: clamp(3rem, 5vw, 5.5rem);
+    }
 }
 
 @media (max-width: 970px) {
@@ -752,21 +783,24 @@ header {
 .hero-left {
     text-align: left;
     padding-right: 2rem;
+    min-width: 0;
 }
 
 .hero-center {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 0;
 }
 
 .hero-right {
     text-align: left;
     padding-left: 2rem;
+    min-width: 0;
 }
 
 .hero-greeting {
-    font-size: 8rem;
+    font-size: clamp(3rem, 6vw, 8rem);
     font-weight: 700;
     line-height: 1;
     margin: 0 0 2rem 0;
@@ -1011,8 +1045,8 @@ h2 {
 
 /* Rolling Gallery */
 .profile-gallery {
-    width: 500px;
-    height: 600px;
+    width: clamp(260px, 32vw, 500px);
+    height: clamp(312px, 38.4vw, 600px);
     position: relative;
     overflow: hidden;
     border-radius: 20px;
@@ -1028,8 +1062,8 @@ h2 {
 }
 
 .gallery-track img {
-    width: 500px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     position: absolute;
     top: 0;
@@ -1608,9 +1642,18 @@ h1 .typing-cursor {
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 1.5rem;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid rgba(26, 26, 26, 0.15);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: rgba(214, 200, 185, 0.92);
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
+    border-bottom: none;
     transition: all 0.3s ease;
+}
+
+.experience-card:last-child {
+    margin-bottom: 0;
 }
 
 .experience-card:last-child {
@@ -2359,9 +2402,9 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color: #e8e2d5;
-     background-image: 
-        linear-gradient(rgba(0,80,0,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,80,0,0.05) 1px, transparent 1px);
+     background-image:
+        linear-gradient(rgba(26,26,26,0.05) 2px, transparent 1px),
+        linear-gradient(90deg, rgba(26,26,26,0.05) 2px, transparent 1px);
     background-size: 40px 60px;
 }
 
@@ -2637,13 +2680,13 @@ body::-webkit-scrollbar {
 /* Cursor hover states */
 .cursor-dot.hover {
     transform: translate(-50%, -50%) scale(1.5);
-    background-color: #c084fc;
+    background-color: rgb(66, 122, 67);
 }
 
 .cursor-ring.hover {
     width: 60px;
     height: 60px;
-    border-color: rgba(192, 132, 252, 0.8);
+    border-color: rgba(66, 122, 67, 0.8);
 }
 
 /* Hide custom cursor on mobile */
