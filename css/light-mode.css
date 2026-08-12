@@ -35,15 +35,15 @@
 }
 
 [data-theme="light"] .loading-circle-bg {
-    stroke: rgba(0, 0, 0, 0.1);
+    stroke: rgba(26, 26, 26, 0.15);
 }
 
 [data-theme="light"] .loading-circle-progress {
-    stroke: #9333ea;
+    stroke: #1a1a1a;
 }
 
 [data-theme="light"] .loading-percentage {
-    color: #1f2937;
+    color: #1a1a1a;
 }
 
 [data-theme="light"] .loading-gradient {

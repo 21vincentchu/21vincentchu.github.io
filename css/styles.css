@@ -1,4 +1,4 @@
-/* Loading Screen */
+/* Loading Screen (first visit only - VC logo split animation) */
 .loading-screen {
     position: fixed;
     top: 0;
@@ -18,33 +18,6 @@
     opacity: 0;
     visibility: hidden;
 }
-
-/* Prevent scroll during loading */
-body:not(.loaded) {
-    overflow: hidden !important;
-    height: 100vh;
-    border-radius: 24px;
-
-}
-
-/* Hide content until loading complete */
-main,
-header,
-section,
-footer,
-nav {
-    opacity: 0;
-    pointer-events: none;
-}
-
-body.loaded main,
-body.loaded header,
-body.loaded section,
-body.loaded footer,
-body.loaded nav {
-    pointer-events: auto;
-}
-
 
 .loading-gradient {
     display: none;
@@ -79,13 +52,13 @@ body.loaded nav {
 
 .loading-circle-bg {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(26, 26, 26, 0.15);
     stroke-width: 1;
 }
 
 .loading-circle-progress {
     fill: none;
-    stroke: #b794f4;
+    stroke: #1a1a1a;
     stroke-width: 1;
     stroke-linecap: round;
     stroke-dasharray: 339.292; /* 2 * PI * 54 */
@@ -100,7 +73,7 @@ body.loaded nav {
     transform: translate(-50%, -50%);
     font-size: 3.5rem;
     font-weight: 700;
-    color: #f5f1e8;
+    color: #1a1a1a;
     font-family: var(--font-body);
     z-index: 11;
 }
@@ -129,7 +102,7 @@ body.loaded nav {
 }
 
 .loading-logo-path {
-    fill: #1a1a1a;
+    fill: #e8e2d5;
     filter: none;
 }
 
@@ -183,6 +156,55 @@ body.loaded nav {
         opacity: 0;
     }
 }
+
+/* Page transition overlay (between multi-page navigations) */
+.page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #0a0a0a;
+    background-image:
+        linear-gradient(rgba(232, 226, 213, 0.15) 2px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 226, 213, 0.15) 2px, transparent 1px);
+    background-size: 40px 60px;
+    z-index: 9997;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.page-transition-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* Prevent scroll during loading */
+body:not(.loaded) {
+    overflow: hidden !important;
+    height: 100vh;
+    border-radius: 24px;
+
+}
+
+/* Hide content until loading complete */
+main,
+header,
+section,
+footer,
+nav {
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.loaded main,
+body.loaded header,
+body.loaded section,
+body.loaded footer,
+body.loaded nav {
+    pointer-events: auto;
+}
+
 
 /* Smooth scrolling with offset for fixed nav */
 html {
@@ -609,7 +631,14 @@ nav .logo {
 }
 
 .nav-links a::after {
-    display: none;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes border-race {
@@ -669,15 +698,25 @@ nav .logo {
     border: 1px solid currentColor;
     font-size: 0.7rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-links a:hover {
     color: #666;
     border-bottom: none;
     background: transparent;
-    transform: none;
+    transform: translateY(-2px);
     box-shadow: none;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover::before {
+    background: #1a1a1a;
+    color: #e8e2d5;
+    transform: scale(1.15) rotate(360deg);
 }
 
 .nav-links a.active {
@@ -694,6 +733,10 @@ nav .logo {
     color: #e8e2d5;
 }
 
+.nav-links a.active::after {
+    width: 100%;
+}
+
 .nav-links a.resume-link {
     background: transparent;
     color: #1a1a1a;
@@ -707,7 +750,6 @@ nav .logo {
     background: transparent;
     color: #666;
     border: none;
-    transform: none;
 }
 
 .nav-links a.resume-link.active {
@@ -971,6 +1013,8 @@ h2 {
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-cta:hover {
@@ -982,13 +1026,46 @@ h2 {
 .hero-cta i {
     font-size: 1rem;
     transition: transform 0.3s ease;
+    animation: hero-cta-arrow-nudge 1.6s ease-in-out infinite;
 }
 
 .hero-cta:hover i {
+    animation-play-state: paused;
     transform: translateX(4px);
 }
 
-.btn::before, .btn::after {
+@keyframes hero-cta-arrow-nudge {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(6px);
+    }
+}
+
+.hero-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: skewX(-20deg);
+    animation: hero-cta-shine 3.2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes hero-cta-shine {
+    0% {
+        left: -75%;
+    }
+    35%, 100% {
+        left: 125%;
+    }
+}
+
+.btn::after {
     display: none;
 }
 
@@ -2728,24 +2805,28 @@ body.loaded section#contact {
 .blob-container {
     will-change: transform;
 }
-/* Stagger delays for cards - faster */
-.experience-card:nth-child(1) { transition-delay: 0.05s; }
-.experience-card:nth-child(2) { transition-delay: 0.1s; }
-.experience-card:nth-child(3) { transition-delay: 0.15s; }
-.experience-card:nth-child(4) { transition-delay: 0.2s; }
-.experience-card:nth-child(5) { transition-delay: 0.25s; }
-.experience-card:nth-child(6) { transition-delay: 0.3s; }
+/* ========================================
+   SCROLL-LINKED STAGGER REVEAL
+   ======================================== */
 
-.project-card:nth-child(1) { transition-delay: 0.05s; }
-.project-card:nth-child(2) { transition-delay: 0.1s; }
-.project-card:nth-child(3) { transition-delay: 0.15s; }
+.reveal-item {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-.gallery-item:nth-child(1) { transition-delay: 0.05s; }
-.gallery-item:nth-child(2) { transition-delay: 0.1s; }
-.gallery-item:nth-child(3) { transition-delay: 0.15s; }
-.gallery-item:nth-child(4) { transition-delay: 0.2s; }
-.gallery-item:nth-child(5) { transition-delay: 0.25s; }
-.gallery-item:nth-child(6) { transition-delay: 0.3s; }
+.reveal-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
 
 /* ========================================
    BACK TO TOP BUTTON

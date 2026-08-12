@@ -1,5 +1,5 @@
 // ========================================
-// LOADING SCREEN ANIMATION
+// LOADING SCREEN ANIMATION (first visit only - VC logo split)
 // ========================================
 let loadingCounter = 0;
 const percentageElement = document.getElementById('loading-percentage');
@@ -12,13 +12,23 @@ const circumference = 2 * Math.PI * 54; // 2 * PI * radius
 
 // Check if user has already visited in this session
 const hasVisited = sessionStorage.getItem('hasVisited');
+const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
 
 if (hasVisited) {
-    // Skip loading animation for subsequent page loads
+    // Skip logo animation for subsequent page loads - reveal the black grid cover right away
     loadingScreen.remove();
     document.body.classList.add('loaded');
+
+    if (pageTransitionOverlay) {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                pageTransitionOverlay.classList.remove('active');
+            });
+        });
+    }
 } else {
-    // First visit - show loading animation and set flag
+    // First visit - keep the black grid cover behind the VC logo animation,
+    // and reveal it only once the logo animation finishes
     sessionStorage.setItem('hasVisited', 'true');
 
     // Start counting immediately
@@ -41,11 +51,45 @@ if (hasVisited) {
             // Start animation immediately when reaching 100%
             loadingScreen.classList.add('fade-out');
             document.body.classList.add('loaded');
+            if (pageTransitionOverlay) {
+                pageTransitionOverlay.classList.remove('active');
+            }
             setTimeout(() => {
                 loadingScreen.remove();
             }, 600);
         }
     }, updateInterval);
+}
+
+// ========================================
+// PAGE TRANSITIONS (black grid cover, for internal nav between pages)
+// ========================================
+
+if (pageTransitionOverlay) {
+    // Restore overlay state when navigating back/forward via bfcache
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            pageTransitionOverlay.classList.remove('active');
+        }
+    });
+
+    // Cover the page in black grid, then navigate, on internal link clicks
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        if (link.target === '_blank' || link.hasAttribute('download')) return;
+        if (!/\.html($|[?#])/.test(href)) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+        e.preventDefault();
+        pageTransitionOverlay.classList.add('active');
+        setTimeout(() => {
+            window.location.href = href;
+        }, 200);
+    });
 }
 
 
@@ -260,6 +304,32 @@ sectionsWithDecorators.forEach(section => {
 });
 
 // ========================================
+// SCROLL-LINKED STAGGER REVEAL
+// ========================================
+const revealItems = document.querySelectorAll(
+    '.experience-card, .project-card, .skill-category, .gallery-item, .contact-option, .spotify-track-card'
+);
+
+revealItems.forEach(item => item.classList.add('reveal-item'));
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const target = entry.target;
+        const siblings = Array.from(target.parentElement.children)
+            .filter(el => el.classList.contains('reveal-item'));
+        const index = siblings.indexOf(target);
+
+        target.style.transitionDelay = `${Math.min(index, 8) * 0.08}s`;
+        target.classList.add('in-view');
+        revealObserver.unobserve(target);
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+revealItems.forEach(item => revealObserver.observe(item));
+
+// ========================================
 // TOGGLE EXPERIENCE DETAILS
 // ========================================
 function toggleDetails(button) {
@@ -324,6 +394,12 @@ async function loadSpotifyTracks() {
         `).join('');
 
         container.innerHTML = tracksHTML;
+
+        // Wire up scroll-reveal for the newly injected track cards
+        container.querySelectorAll('.spotify-track-card').forEach(item => {
+            item.classList.add('reveal-item');
+            revealObserver.observe(item);
+        });
 
     } catch (error) {
         console.error('Error loading Spotify tracks:', error);
@@ -397,6 +473,30 @@ interactiveElements.forEach(element => {
         cursorRing.classList.remove('hover');
     });
 });
+
+// ========================================
+// MAGNETIC HOVER EFFECT
+// ========================================
+function initMagnetic(selector, strength, maxScale) {
+    document.querySelectorAll(selector).forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * strength;
+            const y = (e.clientY - rect.top - rect.height / 2) * strength;
+            el.style.transform = `translate(${x}px, ${y}px) scale(${maxScale})`;
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = '';
+        });
+    });
+}
+
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    initMagnetic('.btn', 0.25, 1.05);
+    initMagnetic('.project-card', 0.06, 1.01);
+}
 
 // ========================================
 // PARALLAX BLOBS - DISABLED
