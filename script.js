@@ -88,7 +88,7 @@ if (pageTransitionOverlay) {
         pageTransitionOverlay.classList.add('active');
         setTimeout(() => {
             window.location.href = href;
-        }, 200);
+        }, 130);
     });
 }
 

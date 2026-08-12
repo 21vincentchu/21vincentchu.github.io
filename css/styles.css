@@ -170,7 +170,7 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.2s ease, visibility 0.2s;
+    transition: opacity 0.13s ease, visibility 0.13s;
 }
 
 .page-transition-overlay.active {
