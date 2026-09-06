@@ -102,7 +102,7 @@
 }
 
 .loading-logo-path {
-    fill: #e8e2d5;
+    fill: rgb(255, 240, 219);
     filter: none;
 }
 
@@ -161,10 +161,10 @@
 .page-transition-overlay {
     position: fixed;
     inset: 0;
-    background-color: #0a0a0a;
+    background-color: rgb(92, 80, 66);
     background-image:
-        linear-gradient(rgba(232, 226, 213, 0.15) 2px, transparent 1px),
-        linear-gradient(90deg, rgba(232, 226, 213, 0.15) 2px, transparent 1px);
+        linear-gradient(rgba(255, 240, 219, 0.15) 2px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 240, 219, 0.15) 2px, transparent 1px);
     background-size: 40px 60px;
     z-index: 9997;
     opacity: 0;
@@ -255,7 +255,7 @@ html {
 }
 
 :root {
-    --bg-color: #e8e2d5;
+    --bg-color: rgb(255, 240, 219);
     --text-color: #1a1a1a;
     --comment-color: #1a1a1a;
     --keyword-color: #1a1a1a;
@@ -715,7 +715,7 @@ nav .logo {
 
 .nav-links a:hover::before {
     background: #1a1a1a;
-    color: #e8e2d5;
+    color: rgb(255, 240, 219);
     transform: scale(1.15) rotate(360deg);
 }
 
@@ -730,7 +730,7 @@ nav .logo {
 
 .nav-links a.active::before {
     background: #1a1a1a;
-    color: #e8e2d5;
+    color: rgb(255, 240, 219);
 }
 
 .nav-links a.active::after {
@@ -830,8 +830,10 @@ header {
 
 .hero-center {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.5rem;
     min-width: 0;
 }
 
@@ -2478,10 +2480,10 @@ h1 .typing-cursor {
 body {
     -ms-overflow-style: none;
     scrollbar-width: none;
-    background-color: #e8e2d5;
+    background-color: rgb(255, 240, 219);
      background-image:
-        linear-gradient(rgba(26,26,26,0.05) 2px, transparent 1px),
-        linear-gradient(90deg, rgba(26,26,26,0.05) 2px, transparent 1px);
+        linear-gradient(rgba(67, 58, 25, 0.1) 2px, transparent 1px),
+        linear-gradient(90deg, rgba(67, 58, 25, 0.1) 2px, transparent 1px);
     background-size: 40px 60px;
 }
 

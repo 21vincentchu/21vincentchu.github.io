@@ -53,7 +53,7 @@
     nav {
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
-        background: rgba(232, 226, 213, 0.85);
+        background: rgba(255, 240, 219, 0.85);
         border-radius: 0;
         border: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -102,7 +102,7 @@
         right: 0;
         width: 240px;
         height: 100vh;
-        background: rgba(232, 226, 213, 0.97);
+        background: rgba(255, 240, 219, 0.97);
         backdrop-filter: blur(80px) saturate(200%);
         -webkit-backdrop-filter: blur(80px) saturate(200%);
         flex-direction: column;
