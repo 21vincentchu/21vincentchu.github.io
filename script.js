@@ -12,20 +12,11 @@ const circumference = 2 * Math.PI * 54; // 2 * PI * radius
 
 // Check if user has already visited in this session
 const hasVisited = sessionStorage.getItem('hasVisited');
-const pageTransitionOverlay = document.querySelector('.page-transition-overlay');
 
 if (hasVisited) {
-    // Skip logo animation for subsequent page loads - reveal the black grid cover right away
+    // Skip logo animation for subsequent page loads
     loadingScreen.remove();
     document.body.classList.add('loaded');
-
-    if (pageTransitionOverlay) {
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                pageTransitionOverlay.classList.remove('active');
-            });
-        });
-    }
 } else {
     // First visit - keep the black grid cover behind the VC logo animation,
     // and reveal it only once the logo animation finishes
@@ -51,47 +42,12 @@ if (hasVisited) {
             // Start animation immediately when reaching 100%
             loadingScreen.classList.add('fade-out');
             document.body.classList.add('loaded');
-            if (pageTransitionOverlay) {
-                pageTransitionOverlay.classList.remove('active');
-            }
             setTimeout(() => {
                 loadingScreen.remove();
             }, 600);
         }
     }, updateInterval);
 }
-
-// ========================================
-// PAGE TRANSITIONS (black grid cover, for internal nav between pages)
-// ========================================
-
-if (pageTransitionOverlay) {
-    // Restore overlay state when navigating back/forward via bfcache
-    window.addEventListener('pageshow', (e) => {
-        if (e.persisted) {
-            pageTransitionOverlay.classList.remove('active');
-        }
-    });
-
-    // Cover the page in black grid, then navigate, on internal link clicks
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href]');
-        if (!link) return;
-
-        const href = link.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-        if (link.target === '_blank' || link.hasAttribute('download')) return;
-        if (!/\.html($|[?#])/.test(href)) return;
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-
-        e.preventDefault();
-        pageTransitionOverlay.classList.add('active');
-        setTimeout(() => {
-            window.location.href = href;
-        }, 130);
-    });
-}
-
 
 // ========================================
 // CLOCK FUNCTIONALITY
@@ -495,7 +451,6 @@ function initMagnetic(selector, strength, maxScale) {
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     initMagnetic('.btn', 0.25, 1.05);
-    initMagnetic('.project-card', 0.06, 1.01);
 }
 
 // ========================================

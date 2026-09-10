@@ -21,24 +21,24 @@
   }
 }
 
-/* Fade-In Animations - only after loading */
+/* Fade/slide-in after loading (page-transition wipe removed) */
 body.loaded header {
-  animation: fadeInHeader 1s ease forwards;
+  animation: fadeInHeader 0.85s ease forwards;
 }
 
 body.loaded nav {
-  animation: slideDownNav 0.8s ease forwards;
+  animation: slideDownNav 0.7s ease forwards;
 }
 
 body.loaded section,
 body.loaded footer {
-  animation: fadeInContent 1s ease forwards;
+  animation: fadeInContent 0.85s ease forwards;
 }
 
 @keyframes fadeInContent {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -49,7 +49,7 @@ body.loaded footer {
 @keyframes slideDownNav {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
@@ -60,11 +60,52 @@ body.loaded footer {
 @keyframes fadeInHeader {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Home page hero panels - staggered slide-in */
+body.loaded header .hero-left {
+  animation: slideInFromLeft 0.9s ease forwards;
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+
+body.loaded header .hero-center {
+  animation: fadeInContent 0.9s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+body.loaded header .hero-right {
+  animation: slideInFromRight 0.9s ease forwards;
+  animation-delay: 0.45s;
+  opacity: 0;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
