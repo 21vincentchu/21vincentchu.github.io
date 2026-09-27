@@ -52,9 +52,20 @@ if (hasVisited) {
 // ========================================
 // CLOCK FUNCTIONALITY
 // ========================================
+function setClockPart(el, value) {
+    if (!el || el.textContent === value) return;
+    el.textContent = value;
+    el.classList.remove('clock-flip');
+    // eslint-disable-next-line no-unused-expressions
+    void el.offsetWidth; // restart animation
+    el.classList.add('clock-flip');
+}
+
 function updateClock() {
-    const clockElement = document.getElementById('live-clock');
-    if (!clockElement) return;
+    const hourEl = document.getElementById('clock-hour');
+    const minuteEl = document.getElementById('clock-minute');
+    const ampmEl = document.getElementById('clock-ampm');
+    if (!hourEl || !minuteEl || !ampmEl) return;
 
     // Create a date object for Central Time (US)
     const options = {
@@ -64,11 +75,14 @@ function updateClock() {
         hour12: true
     };
 
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    const timeString = formatter.format(new Date());
+    const parts = new Intl.DateTimeFormat('en-US', options).formatToParts(new Date());
+    const hour = parts.find(p => p.type === 'hour').value;
+    const minute = parts.find(p => p.type === 'minute').value;
+    const ampm = parts.find(p => p.type === 'dayPeriod').value;
 
-    // Display time without seconds
-    clockElement.innerHTML = timeString;
+    setClockPart(hourEl, hour);
+    setClockPart(minuteEl, minute);
+    setClockPart(ampmEl, ampm);
 }
 
 // Update the clock immediately and then every second
@@ -503,7 +517,7 @@ document.addEventListener('keydown', function(e) {
 // ========================================
 // TIMELINE CAROUSEL (Experience)
 // ========================================
-function initTimelineCarousel(trackId, pointsContainerId, cardSelector) {
+function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnId, nextBtnId) {
     const track = document.getElementById(trackId);
     const pointsContainer = document.getElementById(pointsContainerId);
     if (!track || !pointsContainer) return;
@@ -512,10 +526,18 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector) {
     const cards = Array.from(track.querySelectorAll(cardSelector));
     if (points.length === 0 || cards.length === 0) return;
 
+    const prevBtn = prevBtnId ? document.getElementById(prevBtnId) : null;
+    const nextBtn = nextBtnId ? document.getElementById(nextBtnId) : null;
+
     function getCardStep() {
         const style = getComputedStyle(track);
         const gap = parseFloat(style.columnGap || style.gap || 0);
         return cards[0].getBoundingClientRect().width + gap;
+    }
+
+    function getCurrentIndex() {
+        const step = getCardStep();
+        return step > 0 ? Math.round(track.scrollLeft / step) : 0;
     }
 
     function setActiveIndex(index) {
@@ -523,19 +545,36 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector) {
             point.classList.toggle('active', i === index);
             point.classList.toggle('passed', i < index);
         });
+        if (prevBtn) prevBtn.disabled = index <= 0;
+        if (nextBtn) nextBtn.disabled = index >= points.length - 1;
     }
 
     function updateFromScroll() {
-        const step = getCardStep();
-        const index = step > 0 ? Math.round(track.scrollLeft / step) : 0;
+        const index = getCurrentIndex();
         setActiveIndex(Math.max(0, Math.min(points.length - 1, index)));
     }
 
+    function goToIndex(index) {
+        const clamped = Math.max(0, Math.min(points.length - 1, index));
+        track.scrollTo({ left: clamped * getCardStep(), behavior: 'smooth' });
+    }
+
     points.forEach((point, i) => {
-        point.addEventListener('click', () => {
-            track.scrollTo({ left: i * getCardStep(), behavior: 'smooth' });
-        });
+        point.addEventListener('click', () => goToIndex(i));
     });
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goToIndex(getCurrentIndex() - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToIndex(getCurrentIndex() + 1));
+
+    let wheelLocked = false;
+    track.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        e.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+        goToIndex(getCurrentIndex() + (e.deltaY > 0 ? 1 : -1));
+        setTimeout(() => { wheelLocked = false; }, 450);
+    }, { passive: false });
 
     let scrollTimeout;
     track.addEventListener('scroll', () => {
@@ -546,4 +585,4 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector) {
     updateFromScroll();
 }
 
-initTimelineCarousel('experience-track', 'experience-timeline-points', '.experience-card');
+initTimelineCarousel('experience-track', 'experience-timeline-points', '.experience-card', 'experience-prev', 'experience-next');
