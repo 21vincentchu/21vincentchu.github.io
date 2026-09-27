@@ -345,7 +345,7 @@ nav .logo {
 nav {
     padding: 0;
     background: var(--bg-color);
-    border-bottom: 2px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
 }
 
 nav .nav-container {
@@ -358,7 +358,7 @@ nav .nav-container {
 nav .logo {
     position: relative;
     overflow: hidden;
-    padding: 1.75rem 2.5rem;
+    padding: 1.5rem 2.5rem;
     border-right: 1px solid rgba(64, 59, 53, 0.3);
     display: flex;
     align-items: center;
@@ -406,7 +406,7 @@ nav .logo:hover .logo-home-label {
 }
 
 nav .nav-wrapper {
-    padding: 1.75rem 2.5rem;
+    padding: 1.5rem 2.5rem;
     border-right: 1px solid rgba(64, 59, 53, 0.3);
 }
 
@@ -424,7 +424,7 @@ nav .nav-icons a {
     position: relative;
     overflow: hidden;
     flex: 1;
-    padding: 1rem 2rem;
+    padding: 0.85rem 2rem;
     color: var(--text-color);
     font-size: 1.4rem;
     display: flex;
@@ -461,7 +461,7 @@ nav .nav-icons a:hover i {
 nav .clock-container {
     position: relative;
     overflow: hidden;
-    padding: 1.75rem 2.5rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     align-items: center;
 }
