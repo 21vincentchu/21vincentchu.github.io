@@ -233,9 +233,11 @@ html {
 }
 
 :root {
-    --bg-color: #262321;
-    --text-color: #edddd4;
-    --comment-color: #edddd4;
+    --bg-color: #edddd4;
+    --text-color: #403b35;
+    --comment-color: #403b35;
+    --box-bg: #403b35;
+    --box-text: #403b35;
     --keyword-color: #edddd4;
     --function-color: #edddd4;
     --string-color: #edddd4;
@@ -277,9 +279,9 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
     margin: 0;
     padding: 2rem 3rem;
+    box-sizing: border-box;
     border-radius: 0;
     border: none;
     background: transparent;
@@ -327,9 +329,70 @@ nav .clock-container {
     flex-shrink: 0;
 }
 
+nav .nav-icons {
+    margin: 0;
+    flex-shrink: 0;
+}
+
 nav .logo {
     margin: 0;
     flex-shrink: 0;
+}
+
+/* Boxed/segmented nav - logo | links | clock, each its own
+   bordered cell spanning the full page width, like a toolbar */
+nav {
+    padding: 0;
+    background: var(--bg-color);
+    border-bottom: 2px solid var(--text-color);
+}
+
+nav .nav-container {
+    max-width: none;
+    margin: 0;
+    align-items: stretch;
+    gap: 0;
+}
+
+nav .logo {
+    padding: 1.75rem 2.5rem;
+    border-right: 1px solid rgba(64, 59, 53, 0.3);
+    display: flex;
+    align-items: center;
+}
+
+nav .nav-wrapper {
+    padding: 1.75rem 2.5rem;
+    border-right: 1px solid rgba(64, 59, 53, 0.3);
+}
+
+nav .nav-icons {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    border-right: 1px solid rgba(64, 59, 53, 0.3);
+}
+
+nav .nav-icons a {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+nav .nav-icons a:hover {
+    opacity: 0.65;
+}
+
+nav .clock-container {
+    padding: 1.75rem 2.5rem;
+    display: flex;
+    align-items: center;
 }
 
 /* Mobile menu toggle visibility is handled in mobile.css */
@@ -361,8 +424,11 @@ nav .logo {
 }
 
 @media (max-width: 1200px) {
-    nav {
-        padding: 2rem 2rem;
+    nav .logo,
+    nav .nav-wrapper,
+    nav .nav-icons,
+    nav .clock-container {
+        padding: 1.15rem 1.5rem;
     }
 
     .nav-container {
@@ -380,8 +446,11 @@ nav .logo {
 }
 
 @media (max-width: 1024px) {
-    nav {
-        padding: 1.5rem 2rem;
+    nav .logo,
+    nav .nav-wrapper,
+    nav .nav-icons,
+    nav .clock-container {
+        padding: 1rem 1.25rem;
     }
 
     .nav-container {
@@ -395,8 +464,11 @@ nav .logo {
 }
 
 @media (max-width: 992px) {
-    nav {
-        padding: 1.5rem 1.5rem;
+    nav .logo,
+    nav .nav-wrapper,
+    nav .nav-icons,
+    nav .clock-container {
+        padding: 1rem 1.25rem;
     }
 
     .nav-container {
@@ -415,8 +487,11 @@ nav .logo {
 }
 
 @media (max-width: 900px) {
-    nav {
-        padding: 1.5rem 1.5rem;
+    nav .logo,
+    nav .nav-wrapper,
+    nav .nav-icons,
+    nav .clock-container {
+        padding: 1rem 1.25rem;
     }
 
     .nav-container {
@@ -436,8 +511,14 @@ nav .logo {
 
 @media (max-width: 970px) {
     nav {
-        padding: 1.5rem 1.5rem;
         top: 0;
+    }
+
+    nav .logo,
+    nav .nav-wrapper,
+    nav .nav-icons,
+    nav .clock-container {
+        padding: 1rem 1.25rem;
     }
 
     .nav-links a {
@@ -446,7 +527,7 @@ nav .logo {
     }
 
     nav .logo svg {
-        height: 50px;
+        height: 42px;
     }
 }
 
@@ -473,6 +554,29 @@ nav .logo {
     gap: 0.75rem;
 }
 
+.logo-home-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    white-space: nowrap;
+    max-width: 0;
+    margin-left: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
+}
+
+.logo a:hover .logo-home-label,
+.logo a:focus-visible .logo-home-label,
+.logo a.active .logo-home-label {
+    opacity: 0.7;
+    max-width: 60px;
+    margin-left: 0.6rem;
+}
+
 .logo a {
     display: inline-flex;
     align-items: center;
@@ -481,7 +585,7 @@ nav .logo {
 }
 
 .logo svg {
-    height: 70px;
+    height: 62px;
     width: auto;
     display: block;
     transition: all 0.3s ease;
@@ -531,7 +635,7 @@ nav .logo {
 }
 
 .logo svg .cls-1 {
-    fill: #edddd4;
+    fill: #403b35;
     transition: all 0.3s ease;
 }
 
@@ -740,7 +844,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 4rem;
+    gap: 3rem;
     min-height: 100vh;
     padding: 2rem;
     position: relative;
@@ -765,16 +869,16 @@ header {
     }
 
     .profile-gallery {
-        width: clamp(220px, 24vw, 340px);
-        height: clamp(264px, 28.8vw, 408px);
+        width: clamp(180px, 20vw, 280px);
+        height: clamp(216px, 24vw, 336px);
     }
 
     .footer-social {
-        width: clamp(220px, 24vw, 340px);
+        width: clamp(180px, 20vw, 280px);
     }
 
     .hero-greeting {
-        font-size: clamp(3rem, 5vw, 5.5rem);
+        font-size: clamp(2.25rem, 4vw, 4.25rem);
     }
 }
 
@@ -799,11 +903,11 @@ header {
     }
 
     .hero-greeting {
-        font-size: 5rem;
+        font-size: 3.5rem;
     }
 
     .hero-name {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
     }
 
     .hero-center {
@@ -836,21 +940,20 @@ header {
     justify-content: center;
     gap: 1.5rem;
     min-width: 0;
-    margin-right: -5rem;
 }
 
 .hero-greeting {
-    font-size: clamp(3rem, 6vw, 8rem);
+    font-size: clamp(2.25rem, min(4.5vw, 7vh), 5.5rem);
     font-weight: 700;
     line-height: 1;
-    margin: 0 0 2rem 0;
+    margin: 0 0 1.5rem 0;
     color: var(--text-color);
 }
 
 .hero-name {
-    font-size: clamp(3rem, 5.5vw, 7rem);
+    font-size: clamp(2.25rem, min(4vw, 6.5vh), 5rem);
     white-space: normal;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .hero-greeting span {
@@ -872,11 +975,11 @@ header {
 }
 
 .hero-intro {
-    font-size: 1.5rem;
-    line-height: 1.6;
+    font-size: clamp(1rem, min(1.5vw, 2.2vh), 1.2rem);
+    line-height: 1.5;
     color: var(--text-color);
     margin: 0;
-    max-width: 400px;
+    max-width: 360px;
 }
 
 .hero-description {
@@ -896,20 +999,20 @@ header {
 }
 
 .hero-company {
-    margin-bottom: 5rem;
+    margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .hero-logo {
-    width: 60px;
-    height: 60px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
 }
 
 .hero-company-text {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 600;
     line-height: 1.5;
     color: var(--text-color);
@@ -1008,13 +1111,13 @@ h2 {
 .hero-cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
     background: transparent;
     color: var(--text-color);
     border: 2px solid var(--text-color);
-    border-radius: 50px;
-    font-size: 1.15rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -1076,18 +1179,18 @@ h2 {
 
 .primary-btn {
     background-color: var(--function-color);
-    color: var(--bg-color);
+    color: var(--box-bg);
 }
 
 .primary-btn:hover {
     background-color: var(--highlight);
-    color: var(--bg-color);
+    color: var(--box-bg);
     transform: translateY(-2px);
 }
 
 .gradient-btn {
     background: #c678dd;
-    color: var(--bg-color);
+    color: var(--box-bg);
     border: 1px solid rgba(198, 120, 221, 0.3);
     box-shadow: none;
 }
@@ -1107,7 +1210,7 @@ h2 {
 
 .secondary-btn:hover {
     background-color: var(--function-color);
-    color: var(--bg-color);
+    color: var(--box-bg);
     transform: translateY(-2px);
 }
 
@@ -1127,11 +1230,11 @@ h2 {
 
 /* Rolling Gallery */
 .profile-gallery {
-    width: clamp(260px, 32vw, 500px);
-    height: clamp(312px, 38.4vw, 600px);
+    width: clamp(200px, min(22vw, 32vh), 340px);
+    height: clamp(240px, min(26.4vw, 38.4vh), 408px);
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 6px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     perspective: 1000px;
 }
@@ -1144,13 +1247,16 @@ h2 {
 }
 
 .gallery-track img {
-    width: 100%;
-    height: 100%;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     object-fit: cover;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -1px;
+    left: -1px;
     opacity: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
 }
 
 .gallery-track img:nth-child(1) {
@@ -1348,7 +1454,7 @@ section p {
 }
 
 .skill-category {
-    background-color: #222222;
+    background-color: var(--box-bg);
     backdrop-filter: blur(200px) saturate(180%);
     -webkit-backdrop-filter: blur(200px) saturate(180%);
     padding: 2rem;
@@ -1380,7 +1486,7 @@ section p {
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
-    color: var(--text-color);
+    color: var(--box-text);
 }
 
 .skill-category i {
@@ -1407,7 +1513,7 @@ section p {
     }
 }
 .project-card {
-    background-color: #222222;
+    background-color: var(--box-bg);
     backdrop-filter: blur(200px) saturate(180%);
     -webkit-backdrop-filter: blur(200px) saturate(180%);
     padding: 2rem;
@@ -1427,13 +1533,13 @@ section p {
 .project-card h3 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
-    color: var(--text-color);
+    color: var(--box-text);
 }
 
 .project-card p {
     margin-bottom: 1.5rem;
     font-size: 1rem;
-    color: var(--text-color);
+    color: var(--box-text);
 }
 
 /* Remove description label */
@@ -1495,7 +1601,7 @@ section p {
     display: flex;
     align-items: center;
     padding: 2rem 2.5rem;
-    background-color: #222222;
+    background-color: var(--box-bg);
     border-radius: 12px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
@@ -1505,7 +1611,7 @@ section p {
 
 .contact-option:hover {
     background-color: var(--function-color);
-    color: var(--bg-color);
+    color: var(--box-bg);
     transform: translateY(-2px);
 }
 
@@ -1527,7 +1633,7 @@ section p {
     justify-content: center;
     width: 80px;
     padding: 2rem;
-    background-color: #222222;
+    background-color: var(--box-bg);
     border-radius: 12px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
@@ -1535,7 +1641,7 @@ section p {
 
 #contact .social-links a:hover {
     background-color: var(--function-color);
-    color: var(--bg-color);
+    color: var(--box-bg);
     transform: translateY(-2px);
 }
 
@@ -1545,7 +1651,7 @@ section p {
 }
 
 #contact .social-links a:hover i {
-    color: var(--bg-color);
+    color: var(--box-bg);
 }
 
 /* Footer */
@@ -1571,16 +1677,16 @@ footer a {
 .footer-social {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
     justify-content: center;
-    width: clamp(260px, 32vw, 500px);
+    width: clamp(200px, min(22vw, 32vh), 340px);
 }
 
 .footer-social a {
     color: var(--text-color);
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: opacity 0.3s ease;
     display: flex;
     align-items: center;
@@ -1592,12 +1698,12 @@ footer a {
 }
 
 .footer-social .copy-email {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     cursor: pointer;
 }
 
 .footer-social i {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 /* Terminal cursor effect */
@@ -1642,22 +1748,22 @@ h1 .typing-cursor {
     }
 
     .profile-image img {
-        width: 300px;
-        height: 360px;
+        width: 240px;
+        height: 288px;
     }
 
     .profile-gallery {
-        width: 300px;
-        height: 360px;
+        width: 240px;
+        height: 288px;
     }
 
     .footer-social {
-        width: 300px;
+        width: 240px;
     }
 
     .gallery-track img {
-        width: 300px;
-        height: 360px;
+        width: 240px;
+        height: 288px;
     }
 
     .nav-links {
@@ -1735,10 +1841,12 @@ h1 .typing-cursor {
     gap: 1.5rem;
     padding: 2rem;
     margin-bottom: 1.5rem;
-    background-color: #222222;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.08);
+    background-color: rgba(198, 184, 170, 0.6);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
     border-bottom: none;
     transition: all 0.3s ease;
 }
@@ -1766,7 +1874,7 @@ h1 .typing-cursor {
     width: 80px;
     height: 80px;
     min-width: 80px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
@@ -1795,7 +1903,7 @@ h1 .typing-cursor {
     display: none;
 }
 
-/* STLCC and Maritz logos - make them bigger inside the container */
+/* STLCC and Maritz logos are white assets - invert to black */
 .exp-logo img[src*="STLCC"],
 .exp-logo img[src*="maritz.svg"] {
     filter: invert(1);
@@ -1814,7 +1922,7 @@ h1 .typing-cursor {
     flex-direction: column;
     gap: 1.25rem;
     padding: 1.75rem;
-    background: #222222;
+    background: var(--box-bg);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1840,7 +1948,7 @@ h1 .typing-cursor {
 .project-header h3 {
     font-size: 1.75rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--box-text);
     margin: 0;
 }
 
@@ -1853,7 +1961,7 @@ h1 .typing-cursor {
 
 .project-description {
     font-size: 1.1rem;
-    color: var(--text-color);
+    color: var(--box-text);
     line-height: 1.8;
     margin: 0;
 }
@@ -1886,7 +1994,7 @@ h1 .typing-cursor {
     color: #fff;
     width: 36px;
     height: 36px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1925,7 +2033,7 @@ h1 .typing-cursor {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 6px;
     background: #e5e5e5;
     padding: 2rem;
 }
@@ -1997,13 +2105,14 @@ h1 .typing-cursor {
     background: rgba(96, 165, 250, 0.15);
     color: #edddd4;
     padding: 0.5rem 1.1rem;
-    border-radius: 20px;
+    border-radius: 4px;
     font-size: 1rem;
     font-weight: 500;
     border: 1px solid rgba(96, 165, 250, 0.3);
 }
 
 .project-image-container {
+    position: relative;
     width: 100%;
     margin: 2rem 0 1rem 0;
     display: flex;
@@ -2051,7 +2160,7 @@ h1 .typing-cursor {
     margin: 0;
     line-height: 1.3;
     font-family: var(--font-heading);
-    color: var(--text-color);
+    color: var(--box-text);
     letter-spacing: -0.01em;
 }
 
@@ -2060,19 +2169,19 @@ h1 .typing-cursor {
     font-weight: 400;
     margin: 0;
     font-family: var(--font-body);
-    color: var(--text-color);
+    color: var(--box-text);
     letter-spacing: 0.01em;
 }
 
 .exp-role::before {
     content: "—";
     margin-right: 1rem;
-    color: var(--text-color);
+    color: var(--box-text);
 }
 
 .exp-date {
     font-size: 0.9rem;
-    color: var(--text-color);
+    color: var(--box-text);
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -2084,7 +2193,7 @@ h1 .typing-cursor {
 
 .exp-description {
     font-size: 1.05rem;
-    color: var(--text-color);
+    color: var(--box-text);
     line-height: 1.65;
     margin: 0 0 0.75rem 0;
     max-width: 100%;
@@ -2107,7 +2216,7 @@ h1 .typing-cursor {
 .view-details-btn {
     background: none;
     border: none;
-    color: var(--text-color);
+    color: var(--box-text);
     font-size: 0.9rem;
     cursor: pointer;
     display: inline-flex;
@@ -2150,7 +2259,7 @@ h1 .typing-cursor {
 
 .details-content h4 {
     font-size: 0.85rem;
-    color: var(--text-color);
+    color: var(--box-text);
     margin-bottom: 1rem;
     font-family: var(--font-body);
     text-transform: uppercase;
@@ -2173,7 +2282,7 @@ h1 .typing-cursor {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    color: var(--text-color);
+    color: var(--box-text);
     line-height: 1.7;
     font-size: 1rem;
 }
@@ -2183,7 +2292,7 @@ h1 .typing-cursor {
 }
 
 .achievements i {
-    color: var(--text-color);
+    color: var(--box-text);
     margin-top: 0.3rem;
     font-size: 0.75rem;
     flex-shrink: 0;
@@ -2195,6 +2304,247 @@ h1 .typing-cursor {
     margin-top: 0.75rem;
     border-radius: 8px;
     display: block;
+}
+
+/* ========================================
+   PROJECTS - boxless, divider-line layout
+   (overrides the dark card treatment used
+   by experience/education cards)
+   ======================================== */
+#projects .experience-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 0 3rem;
+    max-width: 1400px;
+}
+
+#projects .experience-card.project-card {
+    display: block;
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 0 2.5rem 0;
+    margin: 0 0 2.5rem 0;
+    border-bottom: 1px solid rgba(64, 59, 53, 0.18);
+}
+
+#projects .experience-card.project-card .exp-logo {
+    display: none;
+}
+
+#projects .exp-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+}
+
+#projects .project-links-row {
+    margin-top: 0.1rem;
+}
+
+#projects .exp-company,
+#projects .exp-role,
+#projects .exp-role::before,
+#projects .exp-description {
+    color: var(--text-color);
+}
+
+#projects .project-tags span {
+    background: rgba(64, 59, 53, 0.08);
+    color: var(--text-color);
+    border: 1px solid rgba(64, 59, 53, 0.18);
+}
+
+@media (max-width: 970px) {
+    #projects .experience-timeline {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* ========================================
+   EXPERIENCE - horizontal sliding carousel
+   (keeps the glass card treatment, just
+   lays the cards out side by side)
+   ======================================== */
+#experience .card-carousel {
+    position: relative;
+    max-width: 100%;
+}
+
+#experience .experience-timeline {
+    display: flex;
+    gap: 2rem;
+    max-width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0.5rem 0 2rem 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#experience .experience-timeline::-webkit-scrollbar {
+    display: none;
+}
+
+/* Logo + quick info (company/date/role) sit side by side on row 1;
+   description and achievements span the full card width below,
+   flush with the logo's left edge - not indented under the quick info. */
+#experience .experience-card {
+    flex: 0 0 clamp(360px, 42vw, 560px);
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    column-gap: 1rem;
+    row-gap: 0;
+    align-items: start;
+    align-content: start;
+    margin-bottom: 0;
+}
+
+#experience .exp-logo {
+    grid-column: 1;
+    grid-row: 1;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+}
+
+#experience .exp-content {
+    display: contents;
+}
+
+#experience .achievements {
+    grid-template-columns: 1fr;
+}
+
+#experience .exp-header {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+
+#experience .exp-info {
+    display: contents;
+}
+
+#experience .exp-company {
+    order: 1;
+}
+
+#experience .exp-date {
+    order: 2;
+    text-align: left;
+    white-space: normal;
+}
+
+#experience .exp-role {
+    order: 3;
+}
+
+#experience .exp-role::before {
+    content: none;
+}
+
+#experience .exp-description {
+    grid-column: 1 / -1;
+    padding-top: 1.25rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+}
+
+#experience .view-details-btn,
+#experience .details-content {
+    grid-column: 1 / -1;
+}
+
+/* Details are always shown - no toggle button */
+#experience .view-details-btn {
+    display: none;
+}
+
+/* Carousel nav arrows (below-right, matches Projects) */
+/* Timeline progression stepper - replaces prev/next arrows */
+#experience .carousel-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+#experience .timeline-points {
+    display: flex;
+    width: 100%;
+    max-width: 700px;
+}
+
+#experience .timeline-point {
+    flex: 1;
+    position: relative;
+    background: none;
+    border: none;
+    border-top: 3px solid rgba(64, 59, 53, 0.18);
+    padding-top: 1.25rem;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+#experience .timeline-point::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(64, 59, 53, 0.3);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#experience .timeline-year {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(64, 59, 53, 0.55);
+    transition: color 0.3s ease;
+}
+
+#experience .timeline-point.passed {
+    border-top-color: var(--text-color);
+}
+
+#experience .timeline-point.passed::before {
+    background: var(--text-color);
+}
+
+#experience .timeline-point.active {
+    border-top-color: var(--text-color);
+}
+
+#experience .timeline-point.active::before {
+    background: var(--text-color);
+    transform: translateX(-50%) scale(1.4);
+}
+
+#experience .timeline-point.active .timeline-year {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+@media (max-width: 970px) {
+    #experience .experience-card {
+        flex: 0 0 85vw;
+    }
 }
 
 /* Responsive */
@@ -2326,7 +2676,7 @@ h1 .typing-cursor {
 
 .timezone {
     font-size: 0.85rem;
-    color: #b3aa9f;
+    color: var(--text-color);
     line-height: 1;
     font-family: var(--font-body);
     font-weight: 400;
@@ -2472,10 +2822,10 @@ h1 .typing-cursor {
 body {
     -ms-overflow-style: none;
     scrollbar-width: none;
-    background-color: #262321;
+    background-color: #edddd4;
      background-image:
-        linear-gradient(rgba(237, 221, 212, 0.08) 2px, transparent 1px),
-        linear-gradient(90deg, rgba(237, 221, 212, 0.08) 2px, transparent 1px);
+        linear-gradient(rgba(38, 35, 33, 0.08) 2px, transparent 1px),
+        linear-gradient(90deg, rgba(38, 35, 33, 0.08) 2px, transparent 1px);
     background-size: 40px 60px;
 }
 
@@ -2490,7 +2840,7 @@ body::-webkit-scrollbar {
     gap: 0.5rem;
     margin-left: auto;
     padding: 0.5rem 1rem;
-    background-color: #222222;
+    background-color: var(--box-bg);
     border: 1px solid var(--border-color);
     border-radius: 6px;
     color: var(--function-color);
@@ -2502,7 +2852,7 @@ body::-webkit-scrollbar {
 
 .github-link:hover {
     background-color: var(--function-color);
-    color: var(--bg-color);
+    color: var(--box-bg);
 }
 
 .github-link i {
@@ -2522,7 +2872,7 @@ body::-webkit-scrollbar {
 
 [data-theme="light"] .github-link:hover {
     background-color: var(--function-color);
-    color: var(--bg-color);
+    color: var(--box-bg);
 }
 
 /* Responsive adjustment */
@@ -2589,7 +2939,7 @@ body::-webkit-scrollbar {
 .spotify-section {
     margin: 4rem 0 3rem 0;
     padding: 3rem;
-    background: #222222;
+    background: var(--box-bg);
     border-radius: 16px;
     border: 2px solid var(--border-color);
 }
@@ -2620,7 +2970,7 @@ body::-webkit-scrollbar {
     align-items: center;
     gap: 1.5rem;
     padding: 1.5rem;
-    background: #222222;
+    background: var(--box-bg);
     border-radius: 12px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
@@ -2659,7 +3009,7 @@ body::-webkit-scrollbar {
 
 .track-artist {
     font-size: 1rem;
-    color: var(--text-color);
+    color: var(--box-text);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -2670,7 +3020,7 @@ body::-webkit-scrollbar {
 .error-text {
     text-align: center;
     padding: 2rem;
-    color: var(--comment-color);
+    color: var(--box-text);
     font-style: italic;
 }
 
@@ -2722,7 +3072,7 @@ body::-webkit-scrollbar {
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background-color: #ffffff;
+    background-color: var(--text-color);
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -2737,7 +3087,7 @@ body::-webkit-scrollbar {
 .cursor-ring {
     width: 40px;
     height: 40px;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--text-color);
     border-radius: 50%;
     position: fixed;
     top: 0;

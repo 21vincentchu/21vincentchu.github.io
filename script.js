@@ -303,24 +303,6 @@ function toggleDetails(button) {
     }
 }
 
-// Make entire experience card clickable for toggling details
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.experience-card');
-    cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Don't toggle if clicking on a link
-            if (e.target.closest('a')) return;
-
-            // If clicking the button itself, let the onclick handle it
-            if (e.target.closest('.view-details-btn')) return;
-
-            const button = card.querySelector('.view-details-btn');
-            if (button) {
-                toggleDetails(button);
-            }
-        });
-    });
-});
 
 // ========================================
 // SPOTIFY RECENTLY PLAYED
@@ -502,11 +484,14 @@ function closeImageModal() {
 }
 
 // Close modal on background click
-document.getElementById('imageModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeImageModal();
-    }
-});
+const imageModalEl = document.getElementById('imageModal');
+if (imageModalEl) {
+    imageModalEl.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeImageModal();
+        }
+    });
+}
 
 // Close modal on Escape key
 document.addEventListener('keydown', function(e) {
@@ -514,3 +499,51 @@ document.addEventListener('keydown', function(e) {
         closeImageModal();
     }
 });
+
+// ========================================
+// TIMELINE CAROUSEL (Experience)
+// ========================================
+function initTimelineCarousel(trackId, pointsContainerId, cardSelector) {
+    const track = document.getElementById(trackId);
+    const pointsContainer = document.getElementById(pointsContainerId);
+    if (!track || !pointsContainer) return;
+
+    const points = Array.from(pointsContainer.querySelectorAll('.timeline-point'));
+    const cards = Array.from(track.querySelectorAll(cardSelector));
+    if (points.length === 0 || cards.length === 0) return;
+
+    function getCardStep() {
+        const style = getComputedStyle(track);
+        const gap = parseFloat(style.columnGap || style.gap || 0);
+        return cards[0].getBoundingClientRect().width + gap;
+    }
+
+    function setActiveIndex(index) {
+        points.forEach((point, i) => {
+            point.classList.toggle('active', i === index);
+            point.classList.toggle('passed', i < index);
+        });
+    }
+
+    function updateFromScroll() {
+        const step = getCardStep();
+        const index = step > 0 ? Math.round(track.scrollLeft / step) : 0;
+        setActiveIndex(Math.max(0, Math.min(points.length - 1, index)));
+    }
+
+    points.forEach((point, i) => {
+        point.addEventListener('click', () => {
+            track.scrollTo({ left: i * getCardStep(), behavior: 'smooth' });
+        });
+    });
+
+    let scrollTimeout;
+    track.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateFromScroll, 50);
+    });
+    window.addEventListener('resize', updateFromScroll);
+    updateFromScroll();
+}
+
+initTimelineCarousel('experience-track', 'experience-timeline-points', '.experience-card');

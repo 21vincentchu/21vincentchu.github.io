@@ -37,18 +37,18 @@
     <title>Projects - Vincent Chu</title>
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="css/styles.css?v=32" as="style">
+    <link rel="preload" href="css/styles.css?v=60" as="style">
     <link rel="preload" href="css/theme.css?v=27" as="style">
 
     <meta name="description" content="Projects by Vincent Chu - RAG systems, music analytics, and research platforms">
 
     <!-- Base styles - always loaded -->
-    <link rel="stylesheet" href="css/styles.css?v=32">
+    <link rel="stylesheet" href="css/styles.css?v=60">
     <link rel="stylesheet" href="css/theme.css?v=27">
 
     <!-- Other styles -->
     <link rel="stylesheet" href="css/animation.css?v=26">
-    <link rel="stylesheet" href="css/mobile.css?v=27">
+    <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
 
     <!-- Preconnect to Font Awesome CDN -->
@@ -120,7 +120,7 @@
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-row">
-                    <a href="index.html">
+                    <a href="index.html" aria-label="Home" title="Home">
                         <!-- SVG logo here -->
                         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
                             <defs>
@@ -138,6 +138,7 @@
                             <path class="cls-1" d="M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z"/>
                             <path class="cls-1" d="M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z"/>
                         </svg>
+                        <span class="logo-home-label">Home</span>
                     </a>
                 </div>
             </div>
@@ -159,6 +160,16 @@
                 </div>
             </div>
 
+            <div class="nav-icons">
+                <a href="https://www.linkedin.com/in/vincent-chu1/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="copy-email" data-type="email" aria-label="Copy Email"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="nav-icons">
+                <a href="https://open.spotify.com/user/1hukv58wvbhdkoyekj09zsitf?si=51c63352fd8d4055" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                <a href="https://www.flickr.com/photos/201227251@N04/" target="_blank" aria-label="Flickr"><i class="fab fa-flickr"></i></a>
+            </div>
+
             <div class="clock-container">
                 <div class="time" id="live-clock">--:-- PM</div>
                 <div class="timezone">CST</div>
@@ -169,92 +180,100 @@
     <!-----------------------PROJECTS SECTION--------------------->
     <section id="projects">
         <div class="experience-timeline">
-            <!---------------- OpenAI RAG Q&A System ----------------------->
-            <div class="experience-card project-card">
-                <div class="timeline-line"></div>
-                <div class="exp-logo"></div>
-                <div class="exp-content">
-                    <div class="exp-header">
-                        <div class="exp-info">
-                            <h3 class="exp-company">A RAG Architecture System with OpenAI</h3>
-                            <p class="exp-role">Document Question-Answering System</p>
+                <!---------------- OpenAI RAG Q&A System ----------------------->
+                <div class="experience-card project-card">
+                    <div class="timeline-line"></div>
+                    <div class="exp-logo"></div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-company">A RAG Architecture System with OpenAI</h3>
+                                <p class="exp-role">Document Question-Answering System</p>
+                            </div>
+                            <div class="project-links-row">
+                                <a href="https://github.com/21vincentchu/openAIAPITest" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="company-logos/AI-Powered Question-Answering System for VR-Enhanced Semiconductor Training_ Design, Implementation, and Evaluation.docx" target="_blank" class="project-github-text"><i class="fas fa-file-alt"></i> Paper</a>
+                                <a href="company-logos/AI Based RAG for VR Semiconductor Slides - Vincent Chu (2).pptx" target="_blank" class="project-github-text"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                            </div>
                         </div>
-                        <div class="project-links-row">
-                            <a href="https://github.com/21vincentchu/openAIAPITest" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="company-logos/AI-Powered Question-Answering System for VR-Enhanced Semiconductor Training_ Design, Implementation, and Evaluation.docx" target="_blank" class="project-github-text"><i class="fas fa-file-alt"></i> Paper</a>
-                            <a href="company-logos/AI Based RAG for VR Semiconductor Slides - Vincent Chu (2).pptx" target="_blank" class="project-github-text"><i class="fas fa-file-powerpoint"></i> Slides</a>
+                        <p class="exp-description">A document question-answering system using RAG (Retrieval Augmented Generation) with ChromaDB vector storage and OpenAI embeddings. Includes a Flask API server for integration with VR applications.</p>
+                        <div class="project-image-container">
+                            <img src="company-logos/AI RAG.svg" alt="RAG System Architecture" class="project-full-image">
+                            <button class="enlarge-btn" onclick="enlargeImage(this)" aria-label="Enlarge diagram"><i class="fas fa-expand"></i></button>
                         </div>
-                    </div>
-                    <p class="exp-description">A document question-answering system using RAG (Retrieval Augmented Generation) with ChromaDB vector storage and OpenAI embeddings. Includes a Flask API server for integration with VR applications.</p>
-                    <div class="project-image-container">
-                        <img src="company-logos/AI RAG.svg" alt="RAG System Architecture" class="project-full-image">
-                    </div>
-                    <div class="project-tags">
-                        <span>RAG</span>
-                        <span>ChromaDB</span>
-                        <span>OpenAI API</span>
-                        <span>Flask</span>
-                        <span>Python</span>
-                        <span>GPT-4o-mini</span>
+                        <div class="project-tags">
+                            <span>RAG</span>
+                            <span>ChromaDB</span>
+                            <span>OpenAI API</span>
+                            <span>Flask</span>
+                            <span>Python</span>
+                            <span>GPT-4o-mini</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!---------------- Reverb Project ----------------------->
-            <div class="experience-card project-card">
-                <div class="timeline-line"></div>
-                <div class="exp-logo"></div>
-                <div class="exp-content">
-                    <div class="exp-header">
-                        <div class="exp-info">
-                            <h3 class="exp-company">Reverb</h3>
-                            <p class="exp-role">Social Music Analytics Platform</p>
+                <!---------------- Reverb Project ----------------------->
+                <div class="experience-card project-card">
+                    <div class="timeline-line"></div>
+                    <div class="exp-logo"></div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-company">Reverb</h3>
+                                <p class="exp-role">Social Music Analytics Platform</p>
+                            </div>
+                            <div class="project-links-row">
+                                <a href="https://github.com/21vincentchu/spotify-music-app" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://reverb.cool" target="_blank" class="project-github-text"><i class="fas fa-globe"></i> Website</a>
+                            </div>
                         </div>
-                        <div class="project-links-row">
-                            <a href="https://github.com/21vincentchu/spotify-music-app" target="_blank" class="project-github-text"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="https://reverb.cool" target="_blank" class="project-github-text"><i class="fas fa-globe"></i> Website</a>
+                        <p class="exp-description">A social music analytics platform that transforms your Spotify listening data into shareable insights and community-driven experiences through music ratings and reviews.</p>
+                        <div class="project-image-container">
+                            <img src="company-logos/Reverb.svg" alt="Reverb Logo" class="project-full-image">
+                            <button class="enlarge-btn" onclick="enlargeImage(this)" aria-label="Enlarge diagram"><i class="fas fa-expand"></i></button>
                         </div>
-                    </div>
-                    <p class="exp-description">A social music analytics platform that transforms your Spotify listening data into shareable insights and community-driven experiences through music ratings and reviews.</p>
-                    <div class="project-image-container">
-                        <img src="company-logos/Reverb.svg" alt="Reverb Logo" class="project-full-image">
-                    </div>
-                    <div class="project-tags">
-                        <span>Spotify API</span>
-                        <span>Music Analytics</span>
-                        <span>React</span>
-                        <span>Python</span>
-                        <span>Social Platform</span>
+                        <div class="project-tags">
+                            <span>Spotify API</span>
+                            <span>Music Analytics</span>
+                            <span>React</span>
+                            <span>Python</span>
+                            <span>Social Platform</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!---------------- CoreAutism Project ----------------------->
-            <div class="experience-card project-card">
-                <div class="timeline-line"></div>
-                <div class="exp-logo"></div>
-                <div class="exp-content">
-                    <div class="exp-header">
-                        <div class="exp-info">
-                            <h3 class="exp-company">CoreAutism Project</h3>
-                            <p class="exp-role">Autism Research Data Analysis Platform</p>
+                <!---------------- CoreAutism Project ----------------------->
+                <div class="experience-card project-card">
+                    <div class="timeline-line"></div>
+                    <div class="exp-logo"></div>
+                    <div class="exp-content">
+                        <div class="exp-header">
+                            <div class="exp-info">
+                                <h3 class="exp-company">CoreAutism Project</h3>
+                                <p class="exp-role">Autism Research Data Analysis Platform</p>
+                            </div>
+                            <div class="project-links-row">
+                                <a href="company-logos/IEEE_CoreAutism_Journalpaper.pdf" target="_blank" class="project-github-text"><i class="fas fa-file-alt"></i> Paper</a>
+                            </div>
                         </div>
-                        <div class="project-links-row">
-                            <a href="company-logos/IEEE_CoreAutism_Journalpaper.pdf" target="_blank" class="project-github-text"><i class="fas fa-file-alt"></i> Paper</a>
+                        <p class="exp-description">A research platform analyzing voice and biometric data to develop personalized treatment insights for medical professionals working with autism patients. Our research findings are currently under review for publication in an IEEE journal.</p>
+                        <div class="project-tags">
+                            <span>AWS</span>
+                            <span>Data Analysis</span>
+                            <span>Python</span>
+                            <span>Biometrics</span>
+                            <span>Healthcare</span>
                         </div>
-                    </div>
-                    <p class="exp-description">A research platform analyzing voice and biometric data to develop personalized treatment insights for medical professionals working with autism patients. Our research findings are currently under review for publication in an IEEE journal.</p>
-                    <div class="project-tags">
-                        <span>AWS</span>
-                        <span>Data Analysis</span>
-                        <span>Python</span>
-                        <span>Biometrics</span>
-                        <span>Healthcare</span>
                     </div>
                 </div>
-            </div>
         </div>
     </section>
+
+    <!-- Image Lightbox Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" src="" alt="Enlarged diagram">
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -267,7 +286,7 @@
         </div>
     </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=3"></script>
 
 </body>
 </html>
