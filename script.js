@@ -317,6 +317,21 @@ function toggleDetails(button) {
     }
 }
 
+function togglePdfPages(button) {
+    const pages = button.nextElementSibling;
+    const isActive = button.classList.contains('active');
+
+    if (isActive) {
+        button.classList.remove('active');
+        pages.classList.remove('show');
+        button.innerHTML = '<i class="fas fa-chevron-down"></i> Expand to view paper';
+    } else {
+        button.classList.add('active');
+        pages.classList.add('show');
+        button.innerHTML = '<i class="fas fa-chevron-up"></i> Collapse paper';
+    }
+}
+
 
 // ========================================
 // SPOTIFY RECENTLY PLAYED
@@ -550,6 +565,15 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
     }
 
     function updateFromScroll() {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (maxScroll <= 0) {
+            setActiveIndex(0);
+            return;
+        }
+        if (track.scrollLeft >= maxScroll - 1) {
+            setActiveIndex(points.length - 1);
+            return;
+        }
         const index = getCurrentIndex();
         setActiveIndex(Math.max(0, Math.min(points.length - 1, index)));
     }
@@ -576,11 +600,14 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
         setTimeout(() => { wheelLocked = false; }, 450);
     }, { passive: false });
 
-    let scrollTimeout;
+    let scrollFrame = null;
     track.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateFromScroll, 50);
-    });
+        if (scrollFrame !== null) return;
+        scrollFrame = requestAnimationFrame(() => {
+            updateFromScroll();
+            scrollFrame = null;
+        });
+    }, { passive: true });
     window.addEventListener('resize', updateFromScroll);
     updateFromScroll();
 }
