@@ -331,3 +331,59 @@ body.loaded header .hero-right {
     0%, 50% { border-color: var(--function-color); }
     51%, 100% { border-color: transparent; }
 }
+/* ========================================
+   PAGE-TO-PAGE NAVIGATION
+   ======================================== */
+
+/* Cross-page transitions (Chrome, Edge, Safari): the old page stays up until the
+   new one is ready, then crossfades. The nav is its own layer so it holds still. */
+@view-transition {
+  navigation: auto;
+}
+
+nav {
+  view-transition-name: site-nav;
+}
+
+::view-transition-group(site-nav) {
+  animation: none;
+}
+
+::view-transition-old(site-nav) {
+  display: none;
+}
+
+::view-transition-new(site-nav) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
+}
+
+/* Returning visitors (set by the inline <head> script): nav is just there,
+   content does a quicker, subtler fade, and the first-visit loader never shows */
+html.returning .loading-screen {
+  display: none;
+}
+
+html.returning nav,
+html.returning body.loaded nav {
+  opacity: 1;
+  pointer-events: auto;
+  animation: none;
+}
+
+html.returning body.loaded header,
+html.returning body.loaded section,
+html.returning body.loaded footer {
+  animation-duration: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

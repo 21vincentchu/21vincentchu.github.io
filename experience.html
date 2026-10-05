@@ -8,6 +8,14 @@
             history.scrollRestoration = 'manual';
         }
 
+        // Moving between pages (not the first page of the visit): show the nav
+        // straight away instead of re-running the entrance animation
+        try {
+            if (sessionStorage.getItem('hasVisited')) {
+                document.documentElement.classList.add('returning');
+            }
+        } catch (e) {}
+
         // Mark styles as loaded when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             if (document.body) {
@@ -37,17 +45,17 @@
     <title>Experience - Vincent Chu</title>
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="css/styles.css?v=109" as="style">
+    <link rel="preload" href="css/styles.css?v=110" as="style">
     <link rel="preload" href="css/theme.css?v=27" as="style">
 
     <meta name="description" content="Professional experience of Vincent Chu - Site Reliability Engineer at Mastercard">
 
     <!-- Base styles - always loaded -->
-    <link rel="stylesheet" href="css/styles.css?v=109">
+    <link rel="stylesheet" href="css/styles.css?v=110">
     <link rel="stylesheet" href="css/theme.css?v=27">
 
     <!-- Other styles -->
-    <link rel="stylesheet" href="css/animation.css?v=26">
+    <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
 
@@ -156,6 +164,7 @@
                     <a href="experience.html" class="active">Experience</a>
                     <a href="education.html">Education</a>
                     <a href="projects.html">Projects</a>
+                    <a href="photos.html">Photos</a>
                     <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
                 </div>
             </div>
@@ -179,6 +188,13 @@
 
     <!-----------------------EXPERIENCE SECTION--------------------->
     <section id="experience">
+        <div class="carousel-toolbar">
+            <div class="strip-controls">
+                <span class="strip-counter" id="experience-counter"></span>
+                <button class="strip-btn" id="experience-prev" aria-label="Previous experience"><i class="fas fa-arrow-left"></i></button>
+                <button class="strip-btn" id="experience-next" aria-label="Next experience"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
         <div class="card-carousel">
         <div class="experience-timeline" id="experience-track">
             <!-- Mastercard Position -->
@@ -372,12 +388,6 @@
                 </div>
             </div>
 
-            <button class="carousel-arrow carousel-arrow-prev carousel-arrow-side" id="experience-prev" aria-label="Previous experience">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-arrow carousel-arrow-next carousel-arrow-side" id="experience-next" aria-label="Next experience">
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </div>
     </section>
 
@@ -387,7 +397,7 @@
         </div>
     </footer>
 
-<script src="script.js?v=10"></script>
+<script src="script.js?v=12"></script>
 
 </body>
 </html>

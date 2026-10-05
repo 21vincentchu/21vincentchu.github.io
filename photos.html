@@ -42,13 +42,13 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education - Vincent Chu</title>
+    <title>Photos - Vincent Chu</title>
 
     <!-- Preload critical CSS -->
     <link rel="preload" href="css/styles.css?v=110" as="style">
     <link rel="preload" href="css/theme.css?v=27" as="style">
 
-    <meta name="description" content="Education background of Vincent Chu - BS in Information Technology from University of Missouri">
+    <meta name="description" content="Photography by Vincent Chu">
 
     <!-- Base styles - always loaded -->
     <link rel="stylesheet" href="css/styles.css?v=110">
@@ -58,6 +58,7 @@
     <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
+    <link rel="stylesheet" href="css/photos.css?v=7">
 
     <!-- Preconnect to Font Awesome CDN -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -67,7 +68,7 @@
 
 </head>
 
-<body id="top">
+<body id="top" class="photos-page">
     <!-- Film Grain Overlay -->
     <div class="film-grain"></div>
 
@@ -162,9 +163,9 @@
             <div class="nav-wrapper">
                 <div class="nav-links">
                     <a href="experience.html">Experience</a>
-                    <a href="education.html" class="active">Education</a>
+                    <a href="education.html">Education</a>
                     <a href="projects.html">Projects</a>
-                    <a href="photos.html">Photos</a>
+                    <a href="photos.html" class="active">Photos</a>
                     <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
                 </div>
             </div>
@@ -186,56 +187,52 @@
         </div>
     </nav>
 
-    <!-----------------------EDUCATION SECTION--------------------->
-    <section id="education">
-        <div class="experience-timeline">
-            <!-- University of Missouri-Columbia -->
-            <div class="experience-card">
-                <div class="timeline-line"></div>
-                <div class="exp-logo">
-                    <img src="company-logos/University_of_Missouri_logo.svg" alt="University of Missouri">
-                </div>
-                <div class="exp-content">
-                    <div class="exp-header">
-                        <div class="exp-info">
-                            <h3 class="exp-company">Bachelor of Science - Information Technology</h3>
-                            <p class="exp-role">University of Missouri-Columbia</p>
-                        </div>
-                        <p class="exp-date">Jan 2023 – Dec 2025</p>
-                    </div>
-                    <p class="exp-description">GPA: 3.75 | Cum Laude</p>
-                    <h4>Honors & Activities</h4>
-                    <ul class="achievements">
-                        <li><i class="fas fa-award"></i> Dean's List: Spring 2023 - Fall 2025</li>
-                        <li><i class="fas fa-flask"></i> 2 years of full academic research under Professor Fang on the CoreAutism Project and XR-VR Project</li>
-                    </ul>
-                </div>
-            </div>
+    <!-----------------------PHOTOS SECTION--------------------->
+    <section id="photos">
+        <div class="photos-header">
+            <h1 class="photos-title">Photos</h1>
+            <p class="photos-subtitle">Things I've pointed a camera at.</p>
+        </div>
 
-            <!-- St. Louis Community College -->
-            <div class="experience-card">
-                <div class="timeline-line"></div>
-                <div class="exp-logo">
-                    <img src="company-logos/STLCC Logo, lightmode.png" alt="St. Louis Community College">
+        <div class="photos-toolbar">
+            <div class="photos-tabs" role="tablist" aria-label="Photo categories">
+                <button class="photos-tab" role="tab" data-category="all">All<span class="photos-tab-count"></span></button>
+                <button class="photos-tab" role="tab" data-category="street">Street<span class="photos-tab-count"></span></button>
+                <button class="photos-tab" role="tab" data-category="landscape">Landscape<span class="photos-tab-count"></span></button>
+            </div>
+            <div class="photos-toolbar-right">
+                <div class="strip-controls">
+                    <span class="strip-counter" id="photo-strip-counter"></span>
+                    <button class="strip-btn" id="photo-strip-prev" aria-label="Previous photos"><i class="fas fa-arrow-left"></i></button>
+                    <button class="strip-btn" id="photo-strip-next" aria-label="Next photos"><i class="fas fa-arrow-right"></i></button>
                 </div>
-                <div class="exp-content">
-                    <div class="exp-header">
-                        <div class="exp-info">
-                            <h3 class="exp-company">Associate of Arts - General Transfers Degree</h3>
-                            <p class="exp-role">St. Louis Community College</p>
-                        </div>
-                        <p class="exp-date">Jun 2021 – Dec 2022</p>
-                    </div>
-                    <p class="exp-description">GPA: 3.9 | Summa Cum Laude</p>
-                    <h4>Honors & Activities</h4>
-                    <ul class="achievements">
-                        <li><i class="fas fa-award"></i> Member of Phi Theta Kappa Honor Society</li>
-                        <li><i class="fas fa-star"></i> Dean's List Honoree (Fall 2021, Spring 2022)</li>
-                    </ul>
+                <div class="photos-view-toggle" aria-label="Layout">
+                    <button class="photos-view-btn" data-view="strip" aria-label="Horizontal strip" title="Strip"><i class="fas fa-grip-lines-vertical"></i></button>
+                    <button class="photos-view-btn" data-view="grid" aria-label="Grid" title="Grid"><i class="fas fa-th-large"></i></button>
                 </div>
             </div>
         </div>
+
+        <!-- Filled from images/photos/photos.json (run scripts/build_photos.py) -->
+        <div class="photos-display view-strip" id="photos-display"></div>
+
+        <p class="photos-empty" id="photos-empty" hidden>Photos coming soon.</p>
+
+        <a href="https://www.flickr.com/photos/201227251@N04/" target="_blank" class="photos-flickr-link">
+            More on Flickr <i class="fas fa-arrow-right"></i>
+        </a>
     </section>
+
+    <!-- Photo Lightbox -->
+    <div class="image-modal photo-modal" id="photoModal">
+        <span class="image-modal-close" onclick="closePhotoModal()">&times;</span>
+        <button class="photo-modal-nav photo-modal-prev" onclick="stepPhoto(-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+        <figure class="photo-modal-figure">
+            <img id="photoModalImage" src="" alt="">
+            <figcaption id="photoModalCaption"></figcaption>
+        </figure>
+        <button class="photo-modal-nav photo-modal-next" onclick="stepPhoto(1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -244,6 +241,7 @@
     </footer>
 
 <script src="script.js?v=12"></script>
+<script src="js/photos.js?v=8"></script>
 
 </body>
 </html>

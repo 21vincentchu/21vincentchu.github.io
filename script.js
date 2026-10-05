@@ -508,6 +508,7 @@ function enlargeImage(button) {
 
 function closeImageModal() {
     const modal = document.getElementById('imageModal');
+    if (!modal) return;
     modal.classList.remove('active');
     document.body.style.overflow = '';
 }
@@ -530,9 +531,118 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ========================================
+// SMOOTH HORIZONTAL SCROLLER (Experience, Photos)
+// Mouse wheel and click-and-drag (with momentum) ease the track toward a
+// target position. Touch screens and trackpads keep their native swipe.
+//   enabled()   - return false to switch it off (e.g. Photos grid view)
+//   wheelTarget - element listening for the wheel (default: the track)
+//   snap(x)     - optional: where to settle after a drag / wheel burst
+// ========================================
+function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, snap = null } = {}) {
+    let target = null;
+    let frame = null;
+    let wheelIdle = null;
+    let drag = null;
+    let suppressClick = false;
+
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+    const settle = (x) => (snap ? snap(x) : x);
+
+    function step() {
+        const diff = target - track.scrollLeft;
+        if (Math.abs(diff) < 0.5) {
+            track.scrollLeft = target;
+            target = null;
+            frame = null;
+            return;
+        }
+        track.scrollLeft += diff * 0.16;
+        frame = requestAnimationFrame(step);
+    }
+
+    function glideTo(x) {
+        target = Math.max(0, Math.min(x, maxScroll()));
+        if (!frame) frame = requestAnimationFrame(step);
+    }
+
+    function stop() {
+        if (frame) cancelAnimationFrame(frame);
+        frame = null;
+        target = null;
+    }
+
+    // Vertical wheel scrolls sideways; once the track hits an end, the page scrolls normally
+    wheelTarget.addEventListener('wheel', function(e) {
+        if (!enabled()) return;
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // trackpad swipe already scrolls sideways
+        const from = target ?? track.scrollLeft;
+        if ((e.deltaY < 0 && from <= 0) || (e.deltaY > 0 && from >= maxScroll() - 1)) return;
+        e.preventDefault();
+        const delta = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * track.clientWidth : e.deltaY;
+        glideTo(from + delta * 1.5);
+        if (snap) {
+            clearTimeout(wheelIdle);
+            wheelIdle = setTimeout(() => glideTo(settle(target ?? track.scrollLeft)), 180);
+        }
+    }, { passive: false });
+
+    track.addEventListener('pointerdown', function(e) {
+        if (!enabled() || e.pointerType !== 'mouse' || e.button !== 0) return;
+        stop();
+        drag = { startX: e.clientX, startScroll: track.scrollLeft, lastX: e.clientX, lastTime: performance.now(), velocity: 0, moved: false };
+    });
+
+    window.addEventListener('pointermove', function(e) {
+        if (!drag) return;
+        const dx = e.clientX - drag.startX;
+        if (!drag.moved && Math.abs(dx) > 5) {
+            drag.moved = true;
+            document.body.classList.add('strip-dragging');
+            window.getSelection().removeAllRanges();
+        }
+        if (!drag.moved) return;
+        track.scrollLeft = drag.startScroll - dx;
+
+        const now = performance.now();
+        const dt = now - drag.lastTime;
+        if (dt > 0) drag.velocity = 0.8 * ((e.clientX - drag.lastX) / dt) + 0.2 * drag.velocity;
+        drag.lastX = e.clientX;
+        drag.lastTime = now;
+    });
+
+    window.addEventListener('pointerup', function() {
+        if (!drag) return;
+        if (drag.moved) {
+            // Swallow the click that follows this mouseup (cleared right after in case none comes)
+            suppressClick = true;
+            setTimeout(() => { suppressClick = false; }, 0);
+            document.body.classList.remove('strip-dragging');
+            // Ignore stale velocity if the mouse paused before letting go
+            const velocity = performance.now() - drag.lastTime > 80 ? 0 : drag.velocity;
+            glideTo(settle(track.scrollLeft - velocity * 250));
+        }
+        drag = null;
+    });
+
+    // A drag shouldn't count as a click on whatever is under the mouse
+    track.addEventListener('click', function(e) {
+        if (suppressClick) {
+            e.stopPropagation();
+            e.preventDefault();
+            suppressClick = false;
+        }
+    }, true);
+
+    // Stop the browser's own image/link dragging from taking over
+    track.addEventListener('dragstart', (e) => { if (enabled()) e.preventDefault(); });
+
+    return { glideTo, stop, get target() { return target; } };
+}
+
+// ========================================
 // TIMELINE CAROUSEL (Experience)
 // ========================================
-function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnId, nextBtnId) {
+function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnId, nextBtnId, counterId) {
     const track = document.getElementById(trackId);
     const pointsContainer = document.getElementById(pointsContainerId);
     if (!track || !pointsContainer) return;
@@ -543,6 +653,7 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
 
     const prevBtn = prevBtnId ? document.getElementById(prevBtnId) : null;
     const nextBtn = nextBtnId ? document.getElementById(nextBtnId) : null;
+    const counter = counterId ? document.getElementById(counterId) : null;
 
     function getCardStep() {
         const style = getComputedStyle(track);
@@ -550,9 +661,17 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
         return cards[0].getBoundingClientRect().width + gap;
     }
 
+    const scroller = initSmoothScroller(track, {
+        snap: (x) => {
+            const step = getCardStep();
+            return step > 0 ? Math.round(x / step) * step : x;
+        }
+    });
+
+    // Based on where the track is heading, so quick repeated arrow clicks keep advancing
     function getCurrentIndex() {
         const step = getCardStep();
-        return step > 0 ? Math.round(track.scrollLeft / step) : 0;
+        return step > 0 ? Math.round((scroller.target ?? track.scrollLeft) / step) : 0;
     }
 
     function setActiveIndex(index) {
@@ -562,6 +681,7 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
         });
         if (prevBtn) prevBtn.disabled = index <= 0;
         if (nextBtn) nextBtn.disabled = index >= points.length - 1;
+        if (counter) counter.textContent = (index + 1) + ' / ' + points.length;
     }
 
     function updateFromScroll() {
@@ -574,13 +694,14 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
             setActiveIndex(points.length - 1);
             return;
         }
-        const index = getCurrentIndex();
+        const step = getCardStep();
+        const index = step > 0 ? Math.round(track.scrollLeft / step) : 0;
         setActiveIndex(Math.max(0, Math.min(points.length - 1, index)));
     }
 
     function goToIndex(index) {
         const clamped = Math.max(0, Math.min(points.length - 1, index));
-        track.scrollTo({ left: clamped * getCardStep(), behavior: 'smooth' });
+        scroller.glideTo(clamped * getCardStep());
     }
 
     points.forEach((point, i) => {
@@ -589,16 +710,6 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
 
     if (prevBtn) prevBtn.addEventListener('click', () => goToIndex(getCurrentIndex() - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => goToIndex(getCurrentIndex() + 1));
-
-    let wheelLocked = false;
-    track.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-        e.preventDefault();
-        if (wheelLocked) return;
-        wheelLocked = true;
-        goToIndex(getCurrentIndex() + (e.deltaY > 0 ? 1 : -1));
-        setTimeout(() => { wheelLocked = false; }, 450);
-    }, { passive: false });
 
     let scrollFrame = null;
     track.addEventListener('scroll', () => {
@@ -612,4 +723,4 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
     updateFromScroll();
 }
 
-initTimelineCarousel('experience-track', 'experience-timeline-points', '.experience-card', 'experience-prev', 'experience-next');
+initTimelineCarousel('experience-track', 'experience-timeline-points', '.experience-card', 'experience-prev', 'experience-next', 'experience-counter');

@@ -8,6 +8,14 @@
             history.scrollRestoration = 'manual';
         }
 
+        // Moving between pages (not the first page of the visit): show the nav
+        // straight away instead of re-running the entrance animation
+        try {
+            if (sessionStorage.getItem('hasVisited')) {
+                document.documentElement.classList.add('returning');
+            }
+        } catch (e) {}
+
         // Mark styles as loaded when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             if (document.body) {
@@ -37,7 +45,7 @@
     <title>Vincent Chu - Site Reliability Engineer at Mastercard</title>
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="css/styles.css?v=109" as="style">
+    <link rel="preload" href="css/styles.css?v=110" as="style">
     <link rel="preload" href="css/theme.css?v=27" as="style">
 
     <meta name="description" content="Site Relability Engineer at Mastercard passionate about machine learning, data engineering, analytics, and infrastructure. Check out my projects and experience!">
@@ -57,11 +65,11 @@
     <meta property="twitter:image" content="https://21vincentchu.github.io/images/og-image.png">
 
     <!-- Base styles - always loaded -->
-    <link rel="stylesheet" href="css/styles.css?v=109">
+    <link rel="stylesheet" href="css/styles.css?v=110">
     <link rel="stylesheet" href="css/theme.css?v=27">
 
     <!-- Other styles -->
-    <link rel="stylesheet" href="css/animation.css?v=26">
+    <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
 
@@ -185,6 +193,7 @@
                     <a href="experience.html">Experience</a>
                     <a href="education.html">Education</a>
                     <a href="projects.html">Projects</a>
+                    <a href="photos.html">Photos</a>
                     <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
                 </div>
             </div>
@@ -246,7 +255,7 @@
         </div>
     </footer>
 
-<script src="script.js?v=10"></script>
+<script src="script.js?v=12"></script>
 
 </body>
 </html>

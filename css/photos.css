@@ -1,0 +1,365 @@
+/* ========================================
+   PHOTOS - Street / Landscape, shown as a
+   horizontal editorial strip or a masonry grid
+   ======================================== */
+
+/* Site beige, minus the background grid lines */
+body.photos-page {
+    background-image: none;
+}
+
+/* The page itself never scrolls sideways - only the strip does. `clip` (unlike
+   `hidden`) also blocks scripted scrolling, so the header and controls stay put. */
+html:has(body.photos-page),
+body.photos-page {
+    overflow-x: clip;
+}
+
+.photos-header {
+    margin-bottom: 1.75rem;
+}
+
+.photos-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.photos-subtitle {
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+}
+
+/* ---------- Toolbar: categories | strip controls + view toggle ---------- */
+.photos-toolbar {
+    /* Fast repeated clicks on the arrows shouldn't highlight text */
+    user-select: none;
+    -webkit-user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    color: var(--text-color);
+}
+
+.photos-tabs {
+    display: flex;
+    gap: 1.75rem;
+}
+
+.photos-tab {
+    padding: 0.25rem 0;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--text-color);
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0.45;
+    cursor: pointer;
+    transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.photos-tab:hover {
+    opacity: 0.8;
+}
+
+.photos-tab.active {
+    opacity: 1;
+    border-bottom-color: var(--text-color);
+}
+
+.photos-tab-count {
+    font-weight: 400;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-left: 0.25rem;
+}
+
+.photos-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.photos-view-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid rgba(64, 59, 53, 0.25);
+    background: none;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.photos-view-btn:hover {
+    background: rgba(64, 59, 53, 0.08);
+}
+
+.photos-view-toggle {
+    display: flex;
+    gap: 0.35rem;
+    padding-left: 1.25rem;
+    border-left: 1px solid rgba(64, 59, 53, 0.2);
+}
+
+.photos-view-btn.active {
+    background: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Strip arrows/counter only make sense in strip view */
+body.photos-view-grid .strip-controls {
+    display: none;
+}
+
+/* ---------- Shared photo item ---------- */
+.photo-item {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: zoom-in;
+}
+
+.photos-display .photo-item[hidden] {
+    display: none;
+}
+
+.photo-item img {
+    display: block;
+    background: rgba(64, 59, 53, 0.08);
+}
+
+.photo-item:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 4px;
+}
+
+.photo-caption {
+    display: block;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* ---------- View: horizontal editorial strip ---------- */
+.photos-display.view-strip {
+    --photo-height: clamp(300px, calc(100vh - 25rem), 820px);
+    /* line the first photo up with the heading, even on very wide screens */
+    --strip-inset: max(var(--container-padding), calc((100vw - var(--container-max-width)) / 2 + var(--container-padding)));
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 0 var(--strip-inset) 1rem;
+    scroll-padding: 0 var(--strip-inset);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.photos-display.view-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.view-strip .photo-item {
+    flex: none;
+}
+
+/* Images shouldn't start the browser's own image drag */
+.view-strip .photo-item img {
+    -webkit-user-drag: none;
+}
+
+.view-strip .photo-item img {
+    height: var(--photo-height);
+    width: auto;
+}
+
+.view-strip .photo-caption {
+    margin-top: 0.75rem;
+    opacity: 0.7;
+}
+
+/* ---------- View: masonry grid ---------- */
+.photos-display.view-grid {
+    columns: 3;
+    column-gap: 1rem;
+}
+
+.view-grid .photo-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    break-inside: avoid;
+}
+
+.view-grid .photo-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s ease;
+}
+
+.view-grid .photo-item:hover img,
+.view-grid .photo-item:focus-visible img {
+    transform: scale(1.03);
+}
+
+.view-grid .photo-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2rem 0.9rem 0.75rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.view-grid .photo-item:hover .photo-caption,
+.view-grid .photo-item:focus-visible .photo-caption {
+    opacity: 1;
+}
+
+/* Touch screens have no hover, so always show grid captions */
+@media (hover: none) {
+    .view-grid .photo-caption { opacity: 1; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 970px) {
+    .photos-display.view-strip {
+        --photo-height: clamp(260px, 58vh, 620px);
+        gap: 1.25rem;
+        padding: 0 2rem 1rem;
+        scroll-padding: 0 2rem;
+    }
+
+    .photos-display.view-grid {
+        columns: 2;
+    }
+
+}
+
+@media (max-width: 560px) {
+    .photos-display.view-strip {
+        padding: 0 1rem 1rem;
+        scroll-padding: 0 1rem;
+    }
+
+    /* Keep wide shots from being wider than the screen */
+    .view-strip .photo-item img {
+        height: auto;
+        max-height: var(--photo-height);
+        max-width: calc(100vw - 3rem);
+    }
+
+    .photos-display.view-grid {
+        columns: 1;
+    }
+
+    .photos-tabs {
+        gap: 1.25rem;
+    }
+
+    .photos-view-toggle {
+        padding-left: 0;
+        border-left: none;
+    }
+}
+
+.photos-empty {
+    color: var(--text-color);
+    opacity: 0.7;
+    padding: 3rem 0;
+}
+
+.photos-flickr-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.photos-flickr-link:hover {
+    color: var(--accent-hover);
+}
+
+.photos-flickr-link i {
+    transition: transform 0.2s ease;
+}
+
+.photos-flickr-link:hover i {
+    transform: translateX(4px);
+}
+
+/* ---------- Lightbox: photos sit edge-to-edge, unlike the padded diagram modal ---------- */
+.photo-modal-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.photo-modal-figure img {
+    max-width: 90vw;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.photo-modal-figure figcaption {
+    color: #fff;
+    opacity: 0.85;
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.photo-modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.photo-modal-nav:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.photo-modal-prev { left: 1.5rem; }
+.photo-modal-next { right: 1.5rem; }
+
+@media (max-width: 560px) {
+    .photo-modal-prev { left: 0.5rem; }
+    .photo-modal-next { right: 0.5rem; }
+}
