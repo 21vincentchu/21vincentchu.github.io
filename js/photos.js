@@ -252,7 +252,7 @@ loadPhotos();
 // SECTION TABS
 // The Fun page shows one .fun-block at a time. Tabs are built from each block's
 // heading (so new sections appear automatically) into two lists: the vertical
-// rail in the left margin on desktop and a row under the intro on smaller
+// rail in the left margin on desktop and a row above the content on smaller
 // screens; CSS shows one or the other. The open tab lives in the URL hash
 // (data-tab, deliberately not the block's id so the browser doesn't jump-scroll
 // to it), so it can be linked to and the back button steps between tabs.

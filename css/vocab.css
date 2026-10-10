@@ -4,20 +4,92 @@
    ======================================== */
 
 .word-of-day {
-    max-width: 26rem;
-    margin-top: 2.25rem;
+    /* small or short screens: centred below the hero */
+    box-sizing: border-box;
+    position: relative;
+    width: min(28rem, calc(100% - 5rem));
+    margin: 4.5rem auto 1rem;   /* top room for the "Learn a new word" note */
+    /* same light panel as the cards on the other pages */
+    padding: 1.25rem 1.5rem;
+    background: #f5ece6;
+    border: 1px solid rgba(64, 59, 53, 0.24);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(64, 59, 53, 0.06), 0 10px 28px -12px rgba(64, 59, 53, 0.22);
     color: var(--text-color);
+    /* hidden behind the loading screen, like the rest of the page */
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+body.loaded .word-of-day,
+html.returning .word-of-day {
+    opacity: 1;
+}
+
+/* Desktop: tucked into the bottom-left corner of the window, out of the hero's way */
+@media (min-width: 971px) and (min-height: 770px) {
+    .word-of-day {
+        position: fixed;
+        left: 2rem;
+        bottom: 2rem;
+        z-index: 5;
+        /* stops short of the centred footer line on narrower windows */
+        width: min(28rem, calc(50vw - 150px - 3rem));
+        margin: 0;
+    }
+}
+
+/* "Learn a new word" note above the card: a line runs right from it,
+   then turns down as an arrow into the card (same style as the nav clock's note) */
+.wod-note {
+    --note-size: 1.05rem;
+    position: absolute;
+    left: 1.5rem;
+    bottom: calc(100% + 7px);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: var(--note-size);
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.wod-note-arrow {
+    position: relative;
+    box-sizing: border-box;
+    width: 2.75rem;
+    height: 1.75rem;
+    margin-top: calc(var(--note-size) / 2 - 0.75px);
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+}
+
+/* arrowhead, pointing down */
+.wod-note-arrow::after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    right: -4.25px;
+    bottom: -1px;
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
 }
 
 .wod-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
 }
 
 .wod-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -58,7 +130,7 @@
 
 .wod-word {
     font-family: var(--font-heading);
-    font-size: 1.15rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--text-color);
     text-decoration: none;
@@ -72,13 +144,61 @@
 
 .wod-pos {
     margin-left: 0.35rem;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-style: italic;
     opacity: 0.6;
 }
 
 .wod-definition {
     display: block;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     opacity: 0.8;
+}
+
+/* Shorter desktop windows: a more compact corner card so it stays clear of the hero panel */
+@media (min-width: 971px) and (min-height: 770px) and (max-height: 949px) {
+    .word-of-day {
+        left: 1.25rem;
+        bottom: 1.25rem;
+        width: min(22rem, calc(50vw - 150px - 2.25rem));
+        padding: 0.8rem 1rem;
+    }
+
+    .wod-top {
+        margin-bottom: 0.25rem;
+    }
+
+    .wod-label {
+        font-size: 0.7rem;
+    }
+
+    .wod-word {
+        font-size: 1.15rem;
+    }
+
+    .wod-pos {
+        font-size: 0.85rem;
+    }
+
+    .wod-entry {
+        line-height: 1.4;
+    }
+
+    .wod-definition {
+        font-size: 0.9rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+
+    .wod-note {
+        --note-size: 0.9rem;
+        left: 1rem;
+    }
+
+    .wod-note-arrow {
+        width: 2.25rem;
+        height: 1.25rem;
+    }
 }

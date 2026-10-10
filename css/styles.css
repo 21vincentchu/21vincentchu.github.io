@@ -324,7 +324,8 @@ nav .nav-wrapper {
 nav .nav-links {
     justify-content: center;
     gap: 2rem;
-    margin-left: 12rem;
+    /* nudges the links right on wide screens; gives the space back as the window narrows */
+    margin-left: clamp(0rem, calc(100vw - 1200px), 12rem);
 }
 
 nav .clock-container {
@@ -489,6 +490,7 @@ nav .clock-container .timezone {
     transition: color 0.45s ease;
 }
 
+nav .clock-container:hover .clock-label,
 nav .clock-container:hover .time,
 nav .clock-container:hover .timezone {
     color: var(--bg-color);
@@ -997,6 +999,63 @@ header {
     z-index: 1;
 }
 
+/* Light panel behind the whole hero (name and intro through to the photos), matching
+   the cards on the other pages. Drawn as a grid item behind the two columns so it
+   hugs them: the row is only as tall as the content and the panel pads out from it. */
+header {
+    align-content: center;
+    --hero-panel-pad: 2.25rem;
+    /* keeps the panel clear of the fixed nav above and the footer below */
+    padding-top: calc(7rem + var(--hero-panel-pad) + 0.5rem);
+    padding-bottom: calc(var(--hero-panel-pad) + 1rem);
+}
+
+header::before {
+    content: '';
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: stretch;
+    justify-self: stretch;
+    margin: calc(-1 * var(--hero-panel-pad));
+    z-index: -1;
+    background: #f5ece6;
+    border: 1px solid rgba(64, 59, 53, 0.24);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(64, 59, 53, 0.06), 0 10px 28px -12px rgba(64, 59, 53, 0.22);
+}
+
+header .hero-left {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+header .hero-center {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+@media (max-width: 1300px) {
+    header {
+        --hero-panel-pad: 1.5rem;
+    }
+}
+
+/* stacked on phones/tablets: the panel covers both rows */
+@media (max-width: 970px) {
+    header {
+        --hero-panel-pad: 1.25rem;
+    }
+
+    header::before {
+        grid-row: 1 / span 2;
+    }
+
+    header .hero-center {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}
+
 /* Tablet / small desktop: shrink the photo and tighten spacing so the
    left/right text has room, without dropping to the stacked mobile layout */
 @media (min-width: 971px) and (max-width: 1300px) {
@@ -1023,6 +1082,22 @@ header {
 
     .hero-greeting {
         font-size: clamp(2.25rem, 4vw, 4.25rem);
+    }
+}
+
+/* Desktop: spare height goes one part above the hero panel and two parts below,
+   so it sits a little above centre and leaves the bottom corner free */
+@media (min-width: 971px) {
+    header {
+        grid-template-rows: minmax(0, 1fr) auto minmax(0, 2fr);
+        align-content: stretch;
+        row-gap: 0;
+    }
+
+    header::before,
+    header .hero-left,
+    header .hero-center {
+        grid-row: 2;
     }
 }
 
@@ -1965,22 +2040,16 @@ h1 .typing-cursor {
     gap: 1.5rem;
     padding: 2rem;
     margin-bottom: 1.5rem;
-    background-color: rgba(198, 184, 170, 0.6);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-    border-bottom: none;
+    /* same light panel as the Listening Stats cards on the Fun page (css/photos.css) */
+    background-color: #f5ece6;
+    border: 1px solid rgba(64, 59, 53, 0.24);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(64, 59, 53, 0.06), 0 10px 28px -12px rgba(64, 59, 53, 0.22);
     transition: all 0.3s ease;
 }
 
 .experience-card:last-child {
     margin-bottom: 0;
-}
-
-.experience-card:last-child {
-    border-bottom: none;
 }
 
 .experience-card:hover {
@@ -2884,6 +2953,104 @@ body.strip-dragging {
     font-weight: 400;
 }
 
+/* "My time is" note in the clock cell's top-right corner. A line runs left from it,
+   turns down the left side of the cell and turns back as an arrow pointing at the time. */
+nav .clock-container {
+    --hook-left: 0.5rem;
+    --hook-width: 1.6rem;
+    --note-top: 0.6rem;
+    --note-size: 0.8rem;
+    padding-left: 2.5rem;
+}
+
+.clock-label {
+    position: absolute;
+    top: var(--note-top);
+    left: calc(var(--hook-left) + var(--hook-width));
+    right: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--note-size);
+    color: var(--text-color);
+    line-height: 1;
+    font-family: var(--font-body);
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0.7;
+    z-index: 1;
+    transition: color 0.45s ease;
+}
+
+.clock-label-line {
+    flex: 1;
+    height: 1.25px;
+    background: currentColor;
+}
+
+/* Square bracket from the line's left end down to the time's mid-height */
+.clock-label-hook {
+    position: absolute;
+    box-sizing: border-box;
+    top: calc(var(--note-top) + var(--note-size) / 2 - 0.6px);
+    bottom: 50%;
+    left: var(--hook-left);
+    width: var(--hook-width);
+    border: 1.25px solid var(--text-color);
+    border-right: none;
+    opacity: 0.7;
+    z-index: 1;
+    transition: border-color 0.45s ease;
+}
+
+/* arrowhead */
+.clock-label-hook::after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    right: -1px;
+    bottom: -3.6px;
+    width: 6px;
+    height: 6px;
+    border-top: 1.25px solid var(--text-color);
+    border-right: 1.25px solid var(--text-color);
+    transform: rotate(45deg);
+    transition: border-color 0.45s ease;
+}
+
+nav .clock-container:hover .clock-label-hook,
+nav .clock-container:hover .clock-label-hook::after {
+    border-color: var(--bg-color);
+}
+
+/* Keep the desktop nav inside the window as it narrows (the mobile menu takes over at 970px) */
+@media (max-width: 1400px) {
+    nav .nav-links {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    nav .clock-container {
+        --hook-left: 0.4rem;
+        --hook-width: 1.25rem;
+        --note-top: 0.45rem;
+        padding-left: 2rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    nav .nav-links {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    nav .nav-icons {
+        padding: 0;
+    }
+}
+
 .time {
     font-size: 0.95rem;
     font-weight: 600;
@@ -3025,10 +3192,11 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
     background-color: #edddd4;
-     background-image:
-        linear-gradient(rgba(38, 35, 33, 0.08) 2px, transparent 1px),
-        linear-gradient(90deg, rgba(38, 35, 33, 0.08) 2px, transparent 1px);
-    background-size: 40px 60px;
+    /* faint tile grid: thin lines, cells taller than they are wide */
+    background-image:
+        linear-gradient(rgba(38, 35, 33, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(38, 35, 33, 0.05) 1px, transparent 1px);
+    background-size: 40px 72px;
 }
 
 body::-webkit-scrollbar {

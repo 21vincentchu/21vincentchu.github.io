@@ -45,7 +45,7 @@
     <title>Vincent Chu - Site Reliability Engineer at Mastercard</title>
 
     <!-- Preload critical CSS -->
-    <link rel="preload" href="css/styles.css?v=110" as="style">
+    <link rel="preload" href="css/styles.css?v=119" as="style">
     <link rel="preload" href="css/theme.css?v=27" as="style">
 
     <meta name="description" content="Site Relability Engineer at Mastercard passionate about machine learning, data engineering, analytics, and infrastructure. Check out my projects and experience!">
@@ -65,14 +65,14 @@
     <meta property="twitter:image" content="https://21vincentchu.github.io/images/og-image.png">
 
     <!-- Base styles - always loaded -->
-    <link rel="stylesheet" href="css/styles.css?v=110">
+    <link rel="stylesheet" href="css/styles.css?v=119">
     <link rel="stylesheet" href="css/theme.css?v=27">
 
     <!-- Other styles -->
     <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
-    <link rel="stylesheet" href="css/vocab.css?v=2">
+    <link rel="stylesheet" href="css/vocab.css?v=10">
 
     <!-- Preconnect to Font Awesome CDN -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -81,12 +81,12 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000'%3E%3Cpath fill='%23edddd4' d='M960,581.5l-395,786.24v-786.24h-165.6c-61.53,0-111.4,49.88-111.4,111.4v724.6h529l420-836h-277Z'/%3E%3Cpath fill='%23edddd4' d='M875.54,1418.5h836.46v-277h-379.35c-18.81,0-31.04-19.82-22.59-36.63l116.78-232.44c4.29-8.54,13.03-13.93,22.59-13.93h262.57v-277h-396.69c-11.84,0-22.66,6.68-27.97,17.25l-411.79,819.75Z'/%3E%3C/svg%3E">
 
     <style>
+        /* Fills the window exactly when everything fits; scrolls only if the window is too short */
         html {
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
         }
         body {
-            height: 100vh;
+            min-height: calc(100vh - 16px);   /* 16px = body margin, top and bottom */
             display: flex;
             flex-direction: column;
         }
@@ -210,6 +210,8 @@
             </div>
 
             <div class="clock-container">
+                <div class="clock-label"><span class="clock-label-line" aria-hidden="true"></span>My time is</div>
+                <span class="clock-label-hook" aria-hidden="true"></span>
                 <div class="time" id="live-clock"><span class="clock-part" id="clock-hour">--</span><span class="clock-colon">:</span><span class="clock-part" id="clock-minute">--</span> <span class="clock-ampm" id="clock-ampm">PM</span></div>
                 <div class="timezone">CST</div>
             </div>
@@ -225,26 +227,13 @@
                     <span class="hero-company-text">Site Reliability Engineer @ <a href="https://www.mastercard.us/" target="_blank">Mastercard</a> &middot; St. Louis, Missouri</span>
                     <img src="company-logos/ma_symbol.svg" alt="Mastercard" class="hero-logo">
                 </div>
-                <p class="hero-intro">Modernizing Global Payment Networks, on the Global Clearing Management System.</p>
+                <p class="hero-intro">Modernizing Global Payment Networks on the Dual Message Clearing team</p>
             </div>
             <div class="cta-buttons">
                 <a href="experience.html" class="btn hero-cta">
                     <span class="hero-cta-text">View My Experience</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
-            </div>
-
-            <!-- Word of the day: picked from vocab.json by script.js -->
-            <div class="word-of-day" id="word-of-day" hidden>
-                <div class="wod-top">
-                    <span class="wod-label">Word of the day</span>
-                    <button class="wod-shuffle" id="wod-shuffle" aria-label="Show another word" title="Another word"><i class="fas fa-shuffle"></i></button>
-                </div>
-                <p class="wod-entry" aria-live="polite">
-                    <a class="wod-word" id="wod-word" href="#" target="_blank" title="Look it up on Merriam-Webster"></a>
-                    <span class="wod-pos" id="wod-pos"></span>
-                    <span class="wod-definition" id="wod-definition"></span>
-                </p>
             </div>
         </div>
 
@@ -262,6 +251,21 @@
             </div>
         </div>
     </header>
+
+    <!-- Word of the day: picked from vocab.json by script.js. Outside the header so it can be
+         pinned to the corner of the window (the header's entrance transform would trap a fixed element). -->
+    <div class="word-of-day" id="word-of-day" hidden>
+        <div class="wod-note" aria-hidden="true">Learn a new word<span class="wod-note-arrow"></span></div>
+        <div class="wod-top">
+            <span class="wod-label">Word of the day</span>
+            <button class="wod-shuffle" id="wod-shuffle" aria-label="Show another word" title="Another word"><i class="fas fa-shuffle"></i></button>
+        </div>
+        <p class="wod-entry" aria-live="polite">
+            <a class="wod-word" id="wod-word" href="#" target="_blank" title="Look it up on Merriam-Webster"></a>
+            <span class="wod-pos" id="wod-pos"></span>
+            <span class="wod-definition" id="wod-definition"></span>
+        </p>
+    </div>
 
     <footer>
         <div class="footer-content">
