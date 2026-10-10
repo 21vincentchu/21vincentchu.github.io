@@ -72,6 +72,7 @@
     <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
+    <link rel="stylesheet" href="css/vocab.css?v=1">
 
     <!-- Preconnect to Font Awesome CDN -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -193,7 +194,7 @@
                     <a href="experience.html">Experience</a>
                     <a href="education.html">Education</a>
                     <a href="projects.html">Projects</a>
-                    <a href="photos.html">Photos</a>
+                    <a href="photos.html">Fun</a>
                     <a href="images/Vincent_Chu_October_2025_Resume.pdf" target="_blank" class="resume-link">Resume</a>
                 </div>
             </div>
@@ -232,6 +233,19 @@
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
+
+            <!-- Word of the day: picked from vocab.json by script.js -->
+            <div class="word-of-day" id="word-of-day" hidden>
+                <div class="wod-top">
+                    <span class="wod-label">Word of the day</span>
+                    <button class="wod-shuffle" id="wod-shuffle" aria-label="Show another word" title="Another word"><i class="fas fa-shuffle"></i></button>
+                </div>
+                <p class="wod-entry" aria-live="polite">
+                    <a class="wod-word" id="wod-word" href="#" target="_blank" title="Look it up on Merriam-Webster"></a>
+                    <span class="wod-pos" id="wod-pos"></span>
+                    <span class="wod-definition" id="wod-definition"></span>
+                </p>
+            </div>
         </div>
 
         <div class="hero-center">
@@ -255,7 +269,7 @@
         </div>
     </footer>
 
-<script src="script.js?v=12"></script>
+<script src="script.js?v=22"></script>
 
 </body>
 </html>

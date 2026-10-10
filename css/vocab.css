@@ -1,0 +1,87 @@
+/* ========================================
+   WORD OF THE DAY (home page, under the CTA)
+   Filled from vocab.json by script.js
+   ======================================== */
+
+.word-of-day {
+    max-width: 26rem;
+    margin-top: 2.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid currentColor;
+    border-top-color: color-mix(in srgb, var(--text-color) 20%, transparent);
+    color: var(--text-color);
+}
+
+.wod-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+}
+
+.wod-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.55;
+}
+
+.wod-shuffle {
+    width: 1.9rem;
+    height: 1.9rem;
+    border: none;
+    border-radius: 50%;
+    background: none;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+.wod-shuffle:hover,
+.wod-shuffle:focus-visible {
+    opacity: 1;
+}
+
+.wod-shuffle.spin {
+    transform: rotate(180deg);
+}
+
+.wod-entry {
+    margin: 0;
+    line-height: 1.55;
+    transition: opacity 0.2s ease;
+}
+
+.word-of-day.swapping .wod-entry {
+    opacity: 0;
+}
+
+.wod-word {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.wod-word:hover {
+    border-bottom-color: currentColor;
+}
+
+.wod-pos {
+    margin-left: 0.35rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.6;
+}
+
+.wod-definition {
+    display: block;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}

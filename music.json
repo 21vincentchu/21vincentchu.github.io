@@ -1,0 +1,226 @@
+{
+    "artists": [
+        {
+            "name": "osk",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb194e4a77b8adbdc365d951f8",
+            "url": "https://open.spotify.com/artist/2LROJMYOnWWaEvqs6eRmQE"
+        },
+        {
+            "name": "kuru",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebdce73aca096d87ad51452cf8",
+            "url": "https://open.spotify.com/artist/1KJ5ZZBncdHtz60i3fiQYu"
+        },
+        {
+            "name": "1hanoimenace",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb4e90878fe8cf81ed8e375251",
+            "url": "https://open.spotify.com/artist/1trreGV7U8TCQHmI9TQzX0"
+        },
+        {
+            "name": "jackzebra",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb13c38f8ae7b9728f4c503f88",
+            "url": "https://open.spotify.com/artist/5zIE5XrsBLymJoVVYznZlL"
+        },
+        {
+            "name": "daine",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb563dd92f09459b7134a278f3",
+            "url": "https://open.spotify.com/artist/4lyCoxLN0aW7nJy5rec0tG"
+        },
+        {
+            "name": "Frost Children",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb51daae4f55980f7ff0ea8c30",
+            "url": "https://open.spotify.com/artist/6R1kfr0GIWnwxY4zW11Vag"
+        },
+        {
+            "name": "Cece Natalie",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb7e049a9ee0ddb20d76f27c03",
+            "url": "https://open.spotify.com/artist/41CdW0otOaIg40HyVDPm2F"
+        },
+        {
+            "name": "Skrillex",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb09a2575e4cfa8af8bce207d1",
+            "url": "https://open.spotify.com/artist/5he5w2lnU9x7JFhnwcekXX"
+        },
+        {
+            "name": "Jane Remover",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebb3ba80684c90081ad8c0b7f2",
+            "url": "https://open.spotify.com/artist/2rLGlNI6htigNxx172qxLu"
+        },
+        {
+            "name": "Lucy Bedroque",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb100cfd4653979ed518fbf28f",
+            "url": "https://open.spotify.com/artist/2I8H267eH5va9da4vGt38O"
+        },
+        {
+            "name": "Cowgirl Clue",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebc1ef23cae0a2c0d480f10046",
+            "url": "https://open.spotify.com/artist/45y43grjcZp3XvyXqfPQu4"
+        },
+        {
+            "name": "dollvirus",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebbc00afbc9b57c1d9b0a9f9ed",
+            "url": "https://open.spotify.com/artist/5liv83SEtVPOdFn1RUQraW"
+        },
+        {
+            "name": "Wisp",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb3c452fd195cec342b58a3eea",
+            "url": "https://open.spotify.com/artist/3TJZG17pjOKXwx1ELKJPfm"
+        },
+        {
+            "name": "ISOxo",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb479dba99dbe84334400964e9",
+            "url": "https://open.spotify.com/artist/4zVCMnjw54nkhGHU4e1Pav"
+        },
+        {
+            "name": "8485",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb0e1937a86bd127b41cf218d4",
+            "url": "https://open.spotify.com/artist/3LwiPwIJNshV4ItekGcIMo"
+        },
+        {
+            "name": "Turnstile",
+            "image": "https://i.scdn.co/image/ab6761610000e5eba4c3fd0017b42344516dc16c",
+            "url": "https://open.spotify.com/artist/2qnpHrOzdmOo1S4ox3j17x"
+        },
+        {
+            "name": "2hollis",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebfa8e5370cae3d2cfba098c87",
+            "url": "https://open.spotify.com/artist/72NhFAGG5Pt91VbheJeEPG"
+        },
+        {
+            "name": "Bladee",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb3c4ebaf1561b2ab468cca261",
+            "url": "https://open.spotify.com/artist/2xvtxDNInKDV4AvGmjw6d1"
+        },
+        {
+            "name": "venturing",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb02bddbeab89ceee7f1874b81",
+            "url": "https://open.spotify.com/artist/13xKCVJaX32BL7EN9IOiCM"
+        },
+        {
+            "name": "Freak Slug",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebdf3cf4a6db3d92f95c1a7ecd",
+            "url": "https://open.spotify.com/artist/5wk7sY8GIg5ihSI09EbWeS"
+        }
+    ],
+    "tracks": [
+        {
+            "title": "Blink2",
+            "artist": "kuru",
+            "image": "https://i.scdn.co/image/ab67616d0000b27330fbadc12bab2e36de271395",
+            "url": "https://open.spotify.com/track/5wdzHbjpQXaavrcV7ADmBX"
+        },
+        {
+            "title": "BYEB4HELLO (GISELLE Solo)",
+            "artist": "aespa",
+            "image": "https://i.scdn.co/image/ab67616d0000b273b219d4d3338ae32e3aaf13b7",
+            "url": "https://open.spotify.com/track/1fKmAGbPcYIA9lZXC73lwK"
+        },
+        {
+            "title": "wow!",
+            "artist": "osk",
+            "image": "https://i.scdn.co/image/ab67616d0000b273f030052ff43db08d11947022",
+            "url": "https://open.spotify.com/track/1vcBkC9XEG28O4uV6pVwG5"
+        },
+        {
+            "title": "Beauty Sleep",
+            "artist": "Jane Remover",
+            "image": "https://i.scdn.co/image/ab67616d0000b27325920ac69f3ad8a4b6065167",
+            "url": "https://open.spotify.com/track/1RrEB90qVYRsVE1DQsqwuJ"
+        },
+        {
+            "title": "Telephone",
+            "artist": "Elxnce, Cece Natalie",
+            "image": "https://i.scdn.co/image/ab67616d0000b273251ba1c3f8be1516088ab04d",
+            "url": "https://open.spotify.com/track/173oCRuE5CCCiG2XSzxUQH"
+        },
+        {
+            "title": "Babylon",
+            "artist": "osk",
+            "image": "https://i.scdn.co/image/ab67616d0000b2733d22504015dd0dad9850ba3a",
+            "url": "https://open.spotify.com/track/2JrwmOPg9ksTmNeqMvanqT"
+        },
+        {
+            "title": "Chỉ Cần Mày Chạm Được Vào Tao",
+            "artist": "1hanoimenace",
+            "image": "https://i.scdn.co/image/ab67616d0000b273cc7bfb50fed5fc21d19e710e",
+            "url": "https://open.spotify.com/track/1Wcou9s2dSI6oWFxivATjS"
+        },
+        {
+            "title": "U wld never do it",
+            "artist": "kuru",
+            "image": "https://i.scdn.co/image/ab67616d0000b273858d1a7c08f66e43a7c12e63",
+            "url": "https://open.spotify.com/track/2UrQ38DTGdUjzgWLex8nUo"
+        },
+        {
+            "title": "Tragic Surprise",
+            "artist": "Snow Strippers",
+            "image": "https://i.scdn.co/image/ab67616d0000b27380ab44e51da54976bfeeb1c4",
+            "url": "https://open.spotify.com/track/6l29X3RtcndQexIlsHOvuI"
+        },
+        {
+            "title": "Hello - triple j Like A Version",
+            "artist": "daine, triple j",
+            "image": "https://i.scdn.co/image/ab67616d0000b273935af88179f097358a1137d5",
+            "url": "https://open.spotify.com/track/6B8XcuiJW6IR8YUEfwCfbi"
+        },
+        {
+            "title": "bite of life",
+            "artist": "osk",
+            "image": "https://i.scdn.co/image/ab67616d0000b273be26e42d01d89ba5dd22796c",
+            "url": "https://open.spotify.com/track/17CvwlqtMHn0zDJnZ0VExc"
+        },
+        {
+            "title": "wakeup",
+            "artist": "kuru, jackzebra",
+            "image": "https://i.scdn.co/image/ab67616d0000b27396345116e29aab2c00455a98",
+            "url": "https://open.spotify.com/track/3lCHwUkb1V4y8emfwief83"
+        },
+        {
+            "title": "frost fest anthem",
+            "artist": "dollvirus",
+            "image": "https://i.scdn.co/image/ab67616d0000b273410cae9145e8ed48bdca6f58",
+            "url": "https://open.spotify.com/track/2UAHVY4o0UUFge3DYS0ozo"
+        },
+        {
+            "title": "Comes and Goes",
+            "artist": "KETTAMA",
+            "image": "https://i.scdn.co/image/ab67616d0000b2735d8230552e1c797f1bc8fc11",
+            "url": "https://open.spotify.com/track/3xQPerJjDVZrSFVE340D8r"
+        },
+        {
+            "title": "Eyelash",
+            "artist": "Bladee",
+            "image": "https://i.scdn.co/image/ab67616d0000b273c68b61db6c5e04fa03e815e6",
+            "url": "https://open.spotify.com/track/52wpFNuwZEr4Im7BSoo2vF"
+        },
+        {
+            "title": "Radio",
+            "artist": "Freak Slug",
+            "image": "https://i.scdn.co/image/ab67616d0000b273d51041ef5c6a58f12afb900a",
+            "url": "https://open.spotify.com/track/1gyIYA98zceKTnjISviYRz"
+        },
+        {
+            "title": "Monster",
+            "artist": "1hanoimenace",
+            "image": "https://i.scdn.co/image/ab67616d0000b27353ea49857320dc8338883291",
+            "url": "https://open.spotify.com/track/6C9NSHE0UnVxYglnt8YmWU"
+        },
+        {
+            "title": "Everything Is Changing",
+            "artist": "Natalie Red",
+            "image": "https://i.scdn.co/image/ab67616d0000b273f5831c9ce43319053c55c314",
+            "url": "https://open.spotify.com/track/5SV02YHaPXcaf7yevq27jH"
+        },
+        {
+            "title": "Whatever",
+            "artist": "1hanoimenace, muyn, duc",
+            "image": "https://i.scdn.co/image/ab67616d0000b2737e54493d0270902f4f54bdae",
+            "url": "https://open.spotify.com/track/4VZbO4EkPj7dTcLMkTPsz2"
+        },
+        {
+            "title": "overdrive",
+            "artist": "Cece Natalie",
+            "image": "https://i.scdn.co/image/ab67616d0000b27356286379142a03df5756f2f2",
+            "url": "https://open.spotify.com/track/3EwdgTfXqdaP0O0vkOS2dn"
+        }
+    ]
+}

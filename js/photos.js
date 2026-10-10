@@ -169,10 +169,10 @@ function updateStripControls() {
     nextBtn.disabled = atEnd;
 }
 
-// Wheel anywhere on the page + mouse drag (shared with Experience, see script.js)
+// Wheel over the strip + mouse drag (shared with Experience, see script.js).
+// Wheeling anywhere else scrolls the page normally, so On Rotation stays reachable.
 const scroller = initSmoothScroller(display, {
-    enabled: () => view === 'strip' && !document.getElementById('photoModal').classList.contains('active'),
-    wheelTarget: window
+    enabled: () => view === 'strip' && !document.getElementById('photoModal').classList.contains('active')
 });
 
 function stopGlide() {
@@ -247,3 +247,56 @@ document.addEventListener('keydown', function(e) {
 });
 
 loadPhotos();
+
+// ========================================
+// SIDE TABLE OF CONTENTS
+// One link per .fun-block, named after its heading, so new sections show up
+// automatically. Highlights the section in view; clicking glides to it.
+// ========================================
+function initFunToc() {
+    const toc = document.getElementById('fun-toc');
+    const blocks = [...document.querySelectorAll('.fun-block[id]')];
+    if (!toc || blocks.length === 0) return;
+
+    const links = blocks.map(block => {
+        const link = document.createElement('a');
+        link.href = '#' + block.id;
+        link.textContent = block.querySelector('.fun-heading').textContent;
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        toc.appendChild(link);
+        return link;
+    });
+
+    // Active = the last section whose top has passed 40% of the screen
+    // (the first one counts as active until then; the last once you hit bottom)
+    function updateActive() {
+        const line = window.innerHeight * 0.4;
+        let active = 0;
+        blocks.forEach((block, i) => {
+            if (block.getBoundingClientRect().top <= line) active = i;
+        });
+        if (window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+            active = blocks.length - 1;
+        }
+        links.forEach((link, i) => {
+            link.classList.toggle('active', i === active);
+            link.toggleAttribute('aria-current', i === active);
+        });
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { updateActive(); ticking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', updateActive);
+    // Photos and music load in after this runs and change the page height
+    new ResizeObserver(updateActive).observe(document.body);
+    updateActive();
+}
+
+initFunToc();

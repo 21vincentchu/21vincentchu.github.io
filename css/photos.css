@@ -16,21 +16,14 @@ body.photos-page {
 }
 
 .photos-header {
-    margin-bottom: 1.75rem;
-}
-
-.photos-title {
-    font-family: var(--font-heading);
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
-    font-weight: 700;
-    color: var(--text-color);
-    margin: 0;
+    margin-bottom: 3rem;
 }
 
 .photos-subtitle {
     color: var(--text-color);
+    font-size: 1.1rem;
     opacity: 0.7;
-    margin-top: 0.5rem;
+    margin: 0;
 }
 
 /* ---------- Toolbar: categories | strip controls + view toggle ---------- */
@@ -156,7 +149,7 @@ body.photos-view-grid .strip-controls {
 .photos-display.view-strip {
     --photo-height: clamp(300px, calc(100vh - 25rem), 820px);
     /* line the first photo up with the heading, even on very wide screens */
-    --strip-inset: max(var(--container-padding), calc((100vw - var(--container-max-width)) / 2 + var(--container-padding)));
+    --strip-inset: max(var(--container-padding), calc((100vw - var(--container-max-width)) / 2));
     display: flex;
     align-items: flex-start;
     gap: 2.5rem;
@@ -165,6 +158,7 @@ body.photos-view-grid .strip-controls {
     padding: 0 var(--strip-inset) 1rem;
     scroll-padding: 0 var(--strip-inset);
     overflow-x: auto;
+    overflow-y: hidden;   /* sideways only - the card fade-in would otherwise let it scroll a few px up/down */
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     user-select: none;
@@ -258,7 +252,11 @@ body.photos-view-grid .strip-controls {
 }
 
 @media (max-width: 560px) {
+    /* Wide shots are capped by the screen width, so keep tall shots close to
+       their height - otherwise the strip leaves a big gap under every wide one */
     .photos-display.view-strip {
+        --photo-height: min(320px, 50vh);
+        align-items: center;
         padding: 0 1rem 1rem;
         scroll-padding: 0 1rem;
     }
@@ -310,6 +308,209 @@ body.photos-view-grid .strip-controls {
 
 .photos-flickr-link:hover i {
     transform: translateX(4px);
+}
+
+/* ---------- Fun page sub-sections: Photos / On Rotation ---------- */
+.fun-heading {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 1.25rem;
+}
+
+/* Space between Fun page sections (Photos, On Rotation, ...) */
+.fun-block + .fun-block {
+    margin-top: 4.5rem;
+}
+
+.music-row-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    opacity: 0.6;
+    margin: 1.75rem 0 1rem;
+}
+
+.music-row-title:first-of-type {
+    margin-top: 0;
+}
+
+/* Side-scrolling row, laid out like the photo strip (full width, first card under the heading) */
+.music-row {
+    --strip-inset: max(var(--container-padding), calc((100vw - var(--container-max-width)) / 2));
+    --card-width: 170px;
+    display: flex;
+    gap: 1.5rem;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    /* top padding leaves room for the hover lift */
+    padding: 0.5rem var(--strip-inset) 1rem;
+    scroll-padding: 0 var(--strip-inset);
+    overflow-x: auto;
+    overflow-y: hidden;   /* sideways only - the card fade-in would otherwise let it scroll a few px up/down */
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.music-row::-webkit-scrollbar {
+    display: none;
+}
+
+.music-card {
+    flex: none;
+    width: var(--card-width);
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.music-cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-user-drag: none;
+}
+
+/* Artists get round photos so the two rows read differently at a glance */
+.music-card-artist .music-cover {
+    border-radius: 50%;
+}
+
+.music-card-artist .music-title {
+    text-align: center;
+}
+
+.music-card:hover .music-cover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.music-title,
+.music-artist {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.music-title {
+    font-weight: 600;
+}
+
+.music-artist {
+    font-size: 0.9rem;
+    opacity: 0.65;
+    margin-top: 0.15rem;
+}
+
+/* ---------- Side table of contents (desktop only) ---------- */
+.fun-toc {
+    display: none;
+}
+
+@media (min-width: 971px) {
+    .fun-block {
+        /* clear the fixed nav bar when jumped to from the side list */
+        scroll-margin-top: 6rem;
+    }
+
+    /* The side list stands in for the section titles, kept for screen readers */
+    .fun-heading {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .fun-toc {
+        /* sits in the left margin, centred on the screen while the page scrolls */
+        --toc-gutter: max(var(--container-padding), calc((100vw - var(--container-max-width)) / 2));
+        position: fixed;
+        top: 50%;
+        left: calc(var(--toc-gutter) - 4.25rem);
+        transform: translateY(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 2.25rem;
+    }
+
+    .fun-toc a {
+        position: relative;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);   /* read bottom-to-top */
+        white-space: nowrap;
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-color);
+        text-decoration: none;
+        opacity: 0.3;
+        transition: opacity 0.25s ease;
+    }
+
+    .fun-toc a:hover,
+    .fun-toc a:focus-visible {
+        opacity: 0.65;
+    }
+
+    .fun-toc a.active {
+        opacity: 1;
+    }
+
+    /* small bar beside the section you're in */
+    .fun-toc a::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -0.75rem;
+        width: 2px;
+        background: currentColor;
+        transform: scaleY(0);
+        transition: transform 0.25s ease;
+    }
+
+    .fun-toc a.active::after {
+        transform: scaleY(1);
+    }
+
+    /* Strips stop at the content's left edge (still running off the right)
+       so scrolled photos never slide under the side titles */
+    .photos-display.view-strip,
+    .music-row {
+        width: calc(100% + var(--strip-inset));
+        margin-left: 0;
+        padding-left: 0;
+        scroll-padding-left: 0;
+    }
+}
+
+@media (max-width: 970px) {
+    .music-row {
+        --strip-inset: 2rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .fun-block + .fun-block {
+        margin-top: 3rem;
+    }
+
+    .music-row {
+        --strip-inset: 1rem;
+        --card-width: 135px;
+        gap: 1rem;
+    }
 }
 
 /* ---------- Lightbox: photos sit edge-to-edge, unlike the padded diagram modal ---------- */

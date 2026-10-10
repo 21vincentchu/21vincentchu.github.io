@@ -334,48 +334,117 @@ function togglePdfPages(button) {
 
 
 // ========================================
-// SPOTIFY RECENTLY PLAYED
+// MUSIC - ON ROTATION (Fun page)
 // ========================================
 
-async function loadSpotifyTracks() {
-    const container = document.getElementById('spotify-tracks');
+async function loadMusic() {
+    const artistGrid = document.getElementById('music-artists');
+    const trackGrid = document.getElementById('music-tracks');
+    if (!artistGrid || !trackGrid) return;
 
     try {
-        const response = await fetch('recently_played.json');
-        const data = await response.json();
+        const response = await fetch('music.json', { cache: 'no-cache' });
+        const { artists = [], tracks = [] } = await response.json();
 
-        if (!data.success || data.tracks.length === 0) {
-            container.innerHTML = '<p class="no-tracks">No recent tracks available. Run update_spotify.py to populate.</p>';
-            return;
-        }
-
-        // Create track cards
-        const tracksHTML = data.tracks.map(track => `
-            <a href="${track.url}" target="_blank" class="spotify-track-card">
-                <img src="${track.image}" alt="${track.album}" class="track-image">
-                <div class="track-info">
-                    <div class="track-name">${track.name}</div>
-                    <div class="track-artist">${track.artist}</div>
-                </div>
+        artistGrid.innerHTML = artists.map(artist => `
+            <a href="${artist.url}" target="_blank" class="music-card music-card-artist">
+                <img src="${artist.image}" alt="${artist.name}" class="music-cover" loading="lazy">
+                <div class="music-title">${artist.name}</div>
             </a>
         `).join('');
 
-        container.innerHTML = tracksHTML;
+        trackGrid.innerHTML = tracks.map(track => `
+            <a href="${track.url}" target="_blank" class="music-card">
+                <img src="${track.image}" alt="${track.title} cover art" class="music-cover" loading="lazy">
+                <div class="music-title">${track.title}</div>
+                <div class="music-artist">${track.artist}</div>
+            </a>
+        `).join('');
 
-        // Wire up scroll-reveal for the newly injected track cards
-        container.querySelectorAll('.spotify-track-card').forEach(item => {
-            item.classList.add('reveal-item');
-            revealObserver.observe(item);
+        // Each row scrolls sideways like the photo strip: wheel over it, drag, or swipe
+        [artistGrid, trackGrid].forEach(row => initSmoothScroller(row));
+
+        // Reveal each row as a whole: cards scrolled off to the right would otherwise
+        // sit shifted down (not revealed yet) and poke out of the bottom of the row
+        [artistGrid, trackGrid].forEach(row => {
+            row.classList.add('reveal-item');
+            revealObserver.observe(row);
         });
-
     } catch (error) {
-        console.error('Error loading Spotify tracks:', error);
-        container.innerHTML = '<p class="error-text">Failed to load tracks. Please try again later.</p>';
+        console.error('Error loading music:', error);
+        trackGrid.closest('.music-section').hidden = true;
     }
 }
 
-// Load Spotify tracks when page loads
-document.addEventListener('DOMContentLoaded', loadSpotifyTracks);
+document.addEventListener('DOMContentLoaded', loadMusic);
+
+// ========================================
+// WORD OF THE DAY (home page)
+// Same word for everyone on a given day; the shuffle button deals the rest
+// of vocab.json in random order before repeating any.
+// ========================================
+
+async function loadWordOfDay() {
+    const box = document.getElementById('word-of-day');
+    if (!box) return;
+
+    let words = [];
+    try {
+        const response = await fetch('vocab.json', { cache: 'no-cache' });
+        words = response.ok ? await response.json() : [];
+    } catch (error) {
+        console.error('Error loading vocab:', error);
+    }
+    if (!words.length) return;   // box stays hidden
+
+    const wordLink = document.getElementById('wod-word');
+    const shuffleBtn = document.getElementById('wod-shuffle');
+
+    let labelBase = 'Word of the day';
+
+    function render(index) {
+        const entry = words[index];
+        document.querySelector('.wod-label').textContent = entry.topic ? labelBase + ' \u00b7 ' + entry.topic : labelBase;
+        wordLink.textContent = entry.word;
+        wordLink.href = 'https://www.merriam-webster.com/dictionary/' + encodeURIComponent(entry.word);
+        document.getElementById('wod-pos').textContent = entry.pos;
+        document.getElementById('wod-definition').textContent = entry.definition;
+        box.title = entry.example ? '“' + entry.example + '”' : '';
+    }
+
+    const now = new Date();
+    const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+    // vocab.json is grouped by topic, so step through it by a stride that shares no
+    // factor with its length: consecutive days hop between topics, and every word
+    // still comes up once per cycle
+    const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+    const stride = [97, 89, 83, 79, 73, 71, 1].find(p => gcd(p, words.length) === 1);
+    let current = (dayNumber * stride) % words.length;
+    let deck = [];
+
+    shuffleBtn.addEventListener('click', () => {
+        if (!deck.length) {
+            deck = words.map((_, i) => i).filter(i => i !== current);
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+        }
+        current = deck.pop();
+        labelBase = 'Random word';
+        shuffleBtn.classList.toggle('spin');
+        box.classList.add('swapping');
+        setTimeout(() => {
+            render(current);
+            box.classList.remove('swapping');
+        }, 200);
+    });
+
+    render(current);
+    box.hidden = false;
+}
+
+document.addEventListener('DOMContentLoaded', loadWordOfDay);
 
 // ========================================
 // CUSTOM CURSOR
@@ -571,10 +640,35 @@ function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, 
         target = null;
     }
 
-    // Vertical wheel scrolls sideways; once the track hits an end, the page scrolls normally
+    // Trackpads report fine-grained pixel deltas (Chrome/Safari: wheelDeltaY is exactly
+    // -3x deltaY; mouse wheels jump in big steps). Leave those alone: two-finger
+    // up/down scrolls the page and left/right swipes the track natively.
+    function isTrackpad(e) {
+        if (e.deltaMode !== 0) return false;                                  // line/page steps = mouse wheel
+        if (e.deltaX !== 0 || !Number.isInteger(e.deltaY)) return true;       // diagonal or sub-pixel = trackpad
+        if (e.wheelDeltaY) return e.wheelDeltaY === -3 * e.deltaY;
+        return Math.abs(e.deltaY) < 50;
+    }
+
+    // A sideways trackpad swipe scrolls natively: stop any running glide so the two
+    // don't fight, and once the swipe (and its momentum) ends, ease onto a card
+    function onTrackpadSwipe(e) {
+        if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+        stop();
+        if (snap) {
+            clearTimeout(wheelIdle);
+            wheelIdle = setTimeout(() => glideTo(settle(track.scrollLeft)), 150);
+        }
+    }
+
+    // Mouse wheel scrolls sideways; once the track hits an end, the page scrolls normally
     wheelTarget.addEventListener('wheel', function(e) {
         if (!enabled()) return;
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // trackpad swipe already scrolls sideways
+        if (isTrackpad(e)) {
+            onTrackpadSwipe(e);
+            return;
+        }
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // horizontal wheel already scrolls sideways
         const from = target ?? track.scrollLeft;
         if ((e.deltaY < 0 && from <= 0) || (e.deltaY > 0 && from >= maxScroll() - 1)) return;
         e.preventDefault();
