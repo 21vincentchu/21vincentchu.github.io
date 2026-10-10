@@ -42,13 +42,13 @@ html.returning .word-of-day {
 /* "Learn a new word" note above the card: a line runs right from it,
    then turns down as an arrow into the card (same style as the nav clock's note) */
 .wod-note {
-    --note-size: 1.05rem;
+    --note-size: 17px;   /* odd, so the 1px line centres on a whole pixel */
     position: absolute;
     left: 1.5rem;
-    bottom: calc(100% + 7px);
+    bottom: calc(100% + 6px);
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 8px;
     font-size: var(--note-size);
     font-weight: 500;
     line-height: 1;
@@ -60,11 +60,11 @@ html.returning .word-of-day {
 .wod-note-arrow {
     position: relative;
     box-sizing: border-box;
-    width: 2.75rem;
-    height: 1.75rem;
-    margin-top: calc(var(--note-size) / 2 - 0.75px);
-    border-top: 1.5px solid currentColor;
-    border-right: 1.5px solid currentColor;
+    width: 44px;
+    height: 28px;
+    margin-top: calc((var(--note-size) - 1px) / 2);
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
 }
 
 /* arrowhead, pointing down */
@@ -72,13 +72,15 @@ html.returning .word-of-day {
     content: '';
     position: absolute;
     box-sizing: border-box;
-    right: -4.25px;
-    bottom: -1px;
-    width: 7px;
-    height: 7px;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
-    transform: rotate(45deg);
+    /* 9px chevron mask, turned to point down; tip on the line's end */
+    right: -5px;
+    bottom: -2px;
+    width: 9px;
+    height: 9px;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M2.5 .5l4 4-4 4' fill='none' stroke='%23000'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M2.5 .5l4 4-4 4' fill='none' stroke='%23000'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
+    transform: rotate(90deg);
 }
 
 .wod-top {
@@ -193,7 +195,7 @@ html.returning .word-of-day {
     }
 
     .wod-note {
-        --note-size: 0.9rem;
+        --note-size: 15px;
         left: 1rem;
     }
 

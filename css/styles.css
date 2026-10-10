@@ -2955,11 +2955,13 @@ body.strip-dragging {
 
 /* "My time is" note in the clock cell's top-right corner. A line runs left from it,
    turns down the left side of the cell and turns back as an arrow pointing at the time. */
+/* Everything here is in whole pixels with 1px strokes, so the three pieces of the
+   arrow meet cleanly at any browser zoom. */
 nav .clock-container {
-    --hook-left: 0.5rem;
-    --hook-width: 1.6rem;
-    --note-top: 0.6rem;
-    --note-size: 0.8rem;
+    --hook-left: 8px;
+    --hook-width: 26px;
+    --note-top: 10px;
+    --note-size: 13px;   /* odd, so the 1px line centres on a whole pixel */
     padding-left: 2.5rem;
 }
 
@@ -2967,10 +2969,10 @@ nav .clock-container {
     position: absolute;
     top: var(--note-top);
     left: calc(var(--hook-left) + var(--hook-width));
-    right: 0.7rem;
+    right: 11px;
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 6px;
     font-size: var(--note-size);
     color: var(--text-color);
     line-height: 1;
@@ -2984,23 +2986,24 @@ nav .clock-container {
 
 .clock-label-line {
     flex: 1;
-    height: 1.25px;
-    background: currentColor;
+    height: 0;
+    border-top: 1px solid currentColor;
 }
 
 /* Square bracket from the line's left end down to the time's mid-height */
 .clock-label-hook {
     position: absolute;
     box-sizing: border-box;
-    top: calc(var(--note-top) + var(--note-size) / 2 - 0.6px);
+    top: calc(var(--note-top) + (var(--note-size) - 1px) / 2);
     bottom: 50%;
     left: var(--hook-left);
     width: var(--hook-width);
-    border: 1.25px solid var(--text-color);
+    color: var(--text-color);
+    border: 1px solid currentColor;
     border-right: none;
     opacity: 0.7;
     z-index: 1;
-    transition: border-color 0.45s ease;
+    transition: color 0.45s ease;
 }
 
 /* arrowhead */
@@ -3008,19 +3011,18 @@ nav .clock-container {
     content: '';
     position: absolute;
     box-sizing: border-box;
-    right: -1px;
-    bottom: -3.6px;
-    width: 6px;
-    height: 6px;
-    border-top: 1.25px solid var(--text-color);
-    border-right: 1.25px solid var(--text-color);
-    transform: rotate(45deg);
-    transition: border-color 0.45s ease;
+    /* 9px chevron drawn as a mask so it takes the line's colour; tip on the line's end */
+    right: -2px;
+    bottom: -5px;
+    width: 9px;
+    height: 9px;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M2.5 .5l4 4-4 4' fill='none' stroke='%23000'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M2.5 .5l4 4-4 4' fill='none' stroke='%23000'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
 }
 
-nav .clock-container:hover .clock-label-hook,
-nav .clock-container:hover .clock-label-hook::after {
-    border-color: var(--bg-color);
+nav .clock-container:hover .clock-label-hook {
+    color: var(--bg-color);
 }
 
 /* Keep the desktop nav inside the window as it narrows (the mobile menu takes over at 970px) */
@@ -3032,9 +3034,9 @@ nav .clock-container:hover .clock-label-hook::after {
 
 @media (max-width: 1200px) {
     nav .clock-container {
-        --hook-left: 0.4rem;
-        --hook-width: 1.25rem;
-        --note-top: 0.45rem;
+        --hook-left: 6px;
+        --hook-width: 20px;
+        --note-top: 7px;
         padding-left: 2rem;
     }
 }
