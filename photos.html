@@ -58,7 +58,7 @@
     <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
-    <link rel="stylesheet" href="css/photos.css?v=25">
+    <link rel="stylesheet" href="css/photos.css?v=29">
 
     <!-- Preconnect to Font Awesome CDN -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -187,9 +187,10 @@
         </div>
     </nav>
 
-    <!-- Side table of contents (desktop), built from each .fun-block's heading by js/photos.js.
-         Lives outside the section: the section's entrance transform would pin it to the section instead of the screen -->
-    <div class="fun-toc" id="fun-toc" role="navigation" aria-label="Sections"></div>
+    <!-- Section tabs, built from each .fun-block's heading by js/photos.js. Desktop: this rail in the
+         left margin (outside the section: its entrance transform would pin a fixed element to the section).
+         Phone/tablet: the .fun-tabbar row inside the section instead. -->
+    <div class="fun-toc" id="fun-toc" role="tablist" aria-label="Fun sections" aria-orientation="vertical"></div>
 
     <!-----------------------PHOTOS SECTION--------------------->
     <section id="photos">
@@ -197,7 +198,9 @@
             <p class="photos-subtitle">What I'm up to when I'm not at work.</p>
         </div>
 
-        <div class="fun-block" id="photos-section">
+        <div class="fun-tabbar" id="fun-tabbar" role="tablist" aria-label="Fun sections"></div>
+
+        <div class="fun-block" id="fun-photos" data-tab="photos">
             <h2 class="fun-heading">Photos</h2>
 
             <div class="photos-toolbar">
@@ -230,7 +233,7 @@
         </div>
 
         <!-- Filled from music.json (run api/update_spotify.py) -->
-        <div class="fun-block music-section" id="on-rotation">
+        <div class="fun-block music-section" id="fun-on-rotation" data-tab="on-rotation">
             <h2 class="fun-heading">On Rotation</h2>
             <h3 class="music-row-title">Top Artists</h3>
             <div class="music-row" id="music-artists"></div>
@@ -242,7 +245,7 @@
         </div>
 
         <!-- Listening stats: numbers come from music.json (api/update_spotify.py), charts drawn by js/music-stats.js -->
-        <div class="fun-block stats-section" id="listening-stats" hidden>
+        <div class="fun-block stats-section" id="fun-listening-stats" data-tab="listening-stats">
             <h2 class="fun-heading">Listening Stats</h2>
             <p class="stats-note" id="stats-note"></p>
 
@@ -308,8 +311,8 @@
 <div class="chart-tooltip" id="chart-tooltip" role="tooltip" hidden></div>
 
 <script src="script.js?v=22"></script>
-<script src="js/photos.js?v=15"></script>
-<script src="js/music-stats.js?v=2"></script>
+<script src="js/photos.js?v=17"></script>
+<script src="js/music-stats.js?v=4"></script>
 
 </body>
 </html>

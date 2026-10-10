@@ -310,18 +310,91 @@ body.photos-view-grid .strip-controls {
     transform: translateX(4px);
 }
 
-/* ---------- Fun page sub-sections: Photos / On Rotation ---------- */
+/* ---------- Fun page sections, shown one at a time as tabs (js/photos.js) ---------- */
+/* The tabs name each section, so the headings stay for screen readers only */
 .fun-heading {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-color);
-    margin: 0 0 1.25rem;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
-/* Space between Fun page sections (Photos, On Rotation, ...) */
-.fun-block + .fun-block {
-    margin-top: 4.5rem;
+.fun-block.tab-inactive {
+    display: none;
+}
+
+.fun-block.tab-entering {
+    animation: fun-tab-in 0.35s ease;
+}
+
+@keyframes fun-tab-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fun-block.tab-entering { animation: none; }
+}
+
+/* Shared tab look: uppercase, spaced, faded until active */
+.fun-tab {
+    position: relative;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    color: var(--text-color);
+    opacity: 0.3;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+}
+
+.fun-tab:hover,
+.fun-tab:focus-visible {
+    opacity: 0.65;
+}
+
+.fun-tab[aria-selected="true"] {
+    opacity: 1;
+}
+
+.fun-tab::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    transition: transform 0.25s ease;
+}
+
+/* Phone / tablet: a row of tabs under the intro line */
+.fun-tabbar {
+    display: flex;
+    flex-wrap: wrap;   /* very narrow phones get a second line rather than a cut-off tab */
+    gap: 0.5rem 1rem;
+    margin: -1.25rem 0 2rem;
+}
+
+.fun-tabbar .fun-tab {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    padding-bottom: 0.4rem;
+}
+
+.fun-tabbar .fun-tab::after {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    transform: scaleX(0);
+}
+
+.fun-tabbar .fun-tab[aria-selected="true"]::after {
+    transform: scaleX(1);
 }
 
 .music-row-title {
@@ -408,84 +481,81 @@ body.photos-view-grid .strip-controls {
     margin-top: 0.15rem;
 }
 
-/* ---------- Side table of contents (desktop only) ---------- */
+/* ---------- Desktop: the tabs become a sidebar menu in the left margin ---------- */
 .fun-toc {
     display: none;
 }
 
 @media (min-width: 971px) {
-    .fun-block {
-        /* clear the fixed nav bar when jumped to from the side list */
-        scroll-margin-top: 6rem;
-    }
-
-    /* The side list stands in for the section titles, kept for screen readers */
-    .fun-heading {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-        white-space: nowrap;
+    .fun-tabbar {
+        display: none;
     }
 
     .fun-toc {
-        /* sits in the left margin, centred on the screen while the page scrolls */
+        /* right edge sits 2.5rem left of the content; top lines up with it */
         --toc-gutter: max(var(--container-padding), calc((100vw - var(--container-max-width)) / 2));
         position: fixed;
-        top: 50%;
-        left: calc(var(--toc-gutter) - 4.25rem);
-        transform: translateY(-50%);
+        top: calc(env(safe-area-inset-top, 0px) + 9.5rem);
+        right: calc(100vw - var(--toc-gutter) + 2.5rem);
         z-index: 10;
         display: flex;
         flex-direction: column;
-        gap: 2.25rem;
+        gap: 0.35rem;
+        counter-reset: fun-tab;
+        /* hidden behind the loading screen, like the rest of the page */
+        opacity: 0;
+        transition: opacity 0.6s ease;
     }
 
-    .fun-toc a {
-        position: relative;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);   /* read bottom-to-top */
-        white-space: nowrap;
-        font-family: var(--font-heading);
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--text-color);
-        text-decoration: none;
-        opacity: 0.3;
-        transition: opacity 0.25s ease;
-    }
-
-    .fun-toc a:hover,
-    .fun-toc a:focus-visible {
-        opacity: 0.65;
-    }
-
-    .fun-toc a.active {
+    body.loaded .fun-toc,
+    html.returning .fun-toc {
         opacity: 1;
     }
 
-    /* small bar beside the section you're in */
-    .fun-toc a::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: -0.75rem;
-        width: 2px;
-        background: currentColor;
-        transform: scaleY(0);
-        transition: transform 0.25s ease;
+    .fun-toc .fun-tab {
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        padding: 0.4rem 0 0.4rem 0.9rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-align: left;
+        opacity: 0.45;
     }
 
-    .fun-toc a.active::after {
+    .fun-toc .fun-tab::before {
+        counter-increment: fun-tab;
+        content: counter(fun-tab, decimal-leading-zero);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        opacity: 0.7;
+    }
+
+    .fun-toc .fun-tab:hover,
+    .fun-toc .fun-tab:focus-visible {
+        opacity: 0.75;
+    }
+
+    .fun-toc .fun-tab[aria-selected="true"] {
+        opacity: 1;
+    }
+
+    /* bar beside the open section */
+    .fun-toc .fun-tab::after {
+        top: 0.35rem;
+        bottom: 0.35rem;
+        left: 0;
+        width: 2px;
+        transform: scaleY(0);
+    }
+
+    .fun-toc .fun-tab[aria-selected="true"]::after {
         transform: scaleY(1);
     }
 
     /* Strips stop at the content's left edge (still running off the right)
-       so scrolled photos never slide under the side titles */
+       so scrolled photos never slide under the sidebar */
     .photos-display.view-strip,
     .music-row {
         width: calc(100% + var(--strip-inset));
@@ -502,10 +572,6 @@ body.photos-view-grid .strip-controls {
 }
 
 @media (max-width: 560px) {
-    .fun-block + .fun-block {
-        margin-top: 3rem;
-    }
-
     .music-row {
         --strip-inset: 1rem;
         --card-width: 135px;

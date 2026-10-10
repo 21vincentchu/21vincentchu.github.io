@@ -249,54 +249,94 @@ document.addEventListener('keydown', function(e) {
 loadPhotos();
 
 // ========================================
-// SIDE TABLE OF CONTENTS
-// One link per .fun-block, named after its heading, so new sections show up
-// automatically. Highlights the section in view; clicking glides to it.
+// SECTION TABS
+// The Fun page shows one .fun-block at a time. Tabs are built from each block's
+// heading (so new sections appear automatically) into two lists: the vertical
+// rail in the left margin on desktop and a row under the intro on smaller
+// screens; CSS shows one or the other. The open tab lives in the URL hash
+// (data-tab, deliberately not the block's id so the browser doesn't jump-scroll
+// to it), so it can be linked to and the back button steps between tabs.
 // ========================================
-function initFunToc() {
-    const toc = document.getElementById('fun-toc');
-    const blocks = [...document.querySelectorAll('.fun-block[id]')];
-    if (!toc || blocks.length === 0) return;
+function initFunTabs() {
+    const blocks = [...document.querySelectorAll('.fun-block[id][data-tab]')];
+    const lists = [document.getElementById('fun-toc'), document.getElementById('fun-tabbar')].filter(Boolean);
+    if (blocks.length === 0 || lists.length === 0) return;
 
-    const links = blocks.map(block => {
-        const link = document.createElement('a');
-        link.href = '#' + block.id;
-        link.textContent = block.querySelector('.fun-heading').textContent;
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            block.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-        toc.appendChild(link);
-        return link;
+    const section = document.getElementById('photos');
+    let current = -1;
+
+    // One button per block in each list
+    const tabsByList = lists.map((list, listIndex) => blocks.map((block, i) => {
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'fun-tab';
+        tab.id = 'fun-tab-' + listIndex + '-' + block.id;
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-controls', block.id);
+        tab.textContent = block.querySelector('.fun-heading').textContent;
+        tab.addEventListener('click', () => select(i, { history: true }));
+        list.appendChild(tab);
+        return tab;
+    }));
+
+    blocks.forEach((block, i) => {
+        block.setAttribute('role', 'tabpanel');
+        block.setAttribute('aria-labelledby', tabsByList[0][i].id);
     });
 
-    // Active = the last section whose top has passed 40% of the screen
-    // (the first one counts as active until then; the last once you hit bottom)
-    function updateActive() {
-        const line = window.innerHeight * 0.4;
-        let active = 0;
+    function select(index, { history = false } = {}) {
+        if (index === current) return;
+        const first = current === -1;
+        current = index;
+
         blocks.forEach((block, i) => {
-            if (block.getBoundingClientRect().top <= line) active = i;
+            block.classList.toggle('tab-inactive', i !== index);
+            block.classList.remove('tab-entering');
         });
-        if (window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-            active = blocks.length - 1;
+        if (!first) {
+            const shown = blocks[index];
+            void shown.offsetWidth;   // restart the fade-in
+            shown.classList.add('tab-entering');
         }
-        links.forEach((link, i) => {
-            link.classList.toggle('active', i === active);
-            link.toggleAttribute('aria-current', i === active);
-        });
+
+        tabsByList.forEach(tabs => tabs.forEach((tab, i) => {
+            tab.setAttribute('aria-selected', String(i === index));
+            tab.tabIndex = i === index ? 0 : -1;
+        }));
+
+        if (history) {
+            window.history.pushState(null, '', '#' + blocks[index].dataset.tab);
+        }
+
+        // Keep the start of the new section in view if the page was scrolled down
+        if (!first && section && section.getBoundingClientRect().top < 0) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => { updateActive(); ticking = false; });
-    }, { passive: true });
-    window.addEventListener('resize', updateActive);
-    // Photos and music load in after this runs and change the page height
-    new ResizeObserver(updateActive).observe(document.body);
-    updateActive();
+    // Arrow keys move between tabs (up/down on the rail, left/right on the row)
+    lists.forEach((list, listIndex) => {
+        list.addEventListener('keydown', e => {
+            const keys = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+            let next = null;
+            if (e.key in keys) next = (current + keys[e.key] + blocks.length) % blocks.length;
+            if (e.key === 'Home') next = 0;
+            if (e.key === 'End') next = blocks.length - 1;
+            if (next === null) return;
+            e.preventDefault();
+            select(next, { history: true });
+            tabsByList[listIndex][next].focus();
+        });
+    });
+
+    function indexFromHash() {
+        const id = decodeURIComponent(window.location.hash.slice(1));
+        const i = blocks.findIndex(block => block.dataset.tab === id);
+        return i === -1 ? 0 : i;
+    }
+
+    window.addEventListener('popstate', () => select(indexFromHash()));
+    select(indexFromHash());
 }
 
-initFunToc();
+initFunTabs();

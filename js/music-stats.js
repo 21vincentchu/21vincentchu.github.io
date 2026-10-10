@@ -6,7 +6,7 @@
 // ========================================
 
 (function () {
-    const section = document.getElementById('listening-stats');
+    const section = document.getElementById('fun-listening-stats');
     if (!section) return;
 
     const tooltip = document.getElementById('chart-tooltip');
@@ -238,9 +238,11 @@
         } catch (e) {
             console.error('Error loading listening stats:', e);
         }
-        if (!stats) return;   // section stays hidden
-
-        section.hidden = false;
+        if (!stats) {
+            document.getElementById('stats-note').textContent = 'Listening stats aren\'t available right now.';
+            section.querySelectorAll('.stat-tiles, .stats-grid').forEach(n => { n.hidden = true; });
+            return;
+        }
         const f = stats.facts;
         document.getElementById('stats-note').textContent =
             'From my Spotify top 50s · updated ' + new Date(stats.updated + 'T12:00:00').toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
