@@ -564,3 +564,388 @@ body.photos-view-grid .strip-controls {
     .photo-modal-prev { left: 0.5rem; }
     .photo-modal-next { right: 0.5rem; }
 }
+
+/* ========================================
+   LISTENING STATS (charts drawn by js/music-stats.js)
+   One data color: a richer step of the site's sage, validated against the
+   beige surface (contrast >= 3:1, chroma above the "reads gray" floor)
+   ======================================== */
+.stats-section {
+    --series-1: #5a8a4a;
+    --card-bg: #f5ece6;               /* lighter panel the charts sit on (green re-validated against it) */
+    --card-border: rgba(64, 59, 53, 0.24);
+    --card-shadow: 0 1px 2px rgba(64, 59, 53, 0.06), 0 10px 28px -12px rgba(64, 59, 53, 0.22);
+    --chart-surface: var(--card-bg);
+    --ink-muted: rgba(64, 59, 53, 0.62);
+    --hairline: rgba(64, 59, 53, 0.16);
+    --axis: rgba(64, 59, 53, 0.32);
+    color: var(--text-color);
+}
+
+.stats-note {
+    margin: 0 0 1.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+}
+
+/* ---------- Stat tiles ---------- */
+.stat-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.stat-tile {
+    padding: 1.1rem 1.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.stat-label {
+    margin: 0 0 0.35rem;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+}
+
+.stat-value {
+    margin: 0;
+    font-size: 1.85rem;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.stat-detail {
+    margin: 0.3rem 0 0;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+}
+
+/* ---------- Chart cards ---------- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.chart-card {
+    margin: 0;
+    padding: 1.5rem 1.5rem 1.15rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    min-width: 0;
+}
+
+/* Popularity strip and climbing/fading span the full width */
+.chart-wide {
+    grid-column: 1 / -1;
+}
+
+.chart-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.chart-sub {
+    margin: 0.25rem 0 1.1rem;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+}
+
+.chart-body {
+    position: relative;
+}
+
+/* Hovered / focused marks lift slightly */
+.chart-mark {
+    cursor: default;
+    outline: none;
+}
+
+.chart-mark:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
+}
+
+/* Horizontal bars (genres) */
+.hbar-row {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 9rem) 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.2rem 0;
+}
+
+.hbar-label {
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hbar-track {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.hbar {
+    height: 14px;
+    min-width: 4px;
+    background: var(--series-1);
+    border-radius: 0 4px 4px 0;   /* rounded data end, square at the baseline */
+    transition: filter 0.15s ease;
+}
+
+.hbar-value {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.chart-mark:hover .hbar,
+.chart-mark:focus-visible .hbar,
+.chart-mark:hover .vbar,
+.chart-mark:focus-visible .vbar {
+    filter: brightness(1.15);
+}
+
+/* Columns (release years) */
+.vbar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 170px;
+    border-bottom: 1px solid var(--axis);
+}
+
+.vbar-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    height: 100%;
+}
+
+.vbar-value {
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.vbar {
+    width: 24px;
+    min-height: 3px;
+    background: var(--series-1);
+    border-radius: 4px 4px 0 0;
+    transition: filter 0.15s ease;
+}
+
+.vbar-labels {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.45rem;
+}
+
+.vbar-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+}
+
+/* Dot strip (popularity) */
+.strip-svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+
+.strip-svg .dot {
+    fill: var(--series-1);
+    stroke: var(--chart-surface);   /* 2px surface ring so overlapping dots stay legible */
+    stroke-width: 2;
+    transition: r 0.15s ease;
+}
+
+.strip-svg .chart-mark:hover .dot,
+.strip-svg .chart-mark:focus .dot {
+    r: 7;
+}
+
+.strip-svg .hit {
+    fill: transparent;
+}
+
+.strip-svg .axis-line {
+    stroke: var(--axis);
+    stroke-width: 1;
+}
+
+.strip-svg .grid-line {
+    stroke: var(--hairline);
+    stroke-width: 1;
+}
+
+.strip-svg .median-line {
+    stroke: var(--text-color);
+    stroke-width: 1;
+}
+
+.strip-svg text {
+    fill: var(--ink-muted);
+    font-size: 12px;
+    font-family: inherit;
+}
+
+.strip-svg .median-label {
+    fill: var(--text-color);
+    font-weight: 600;
+}
+
+/* Climbing / fading lists */
+.movers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.movers h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.movers h4 i {
+    font-size: 0.75rem;
+}
+
+.mover-up {
+    color: var(--series-1);
+}
+
+.mover-down {
+    color: var(--ink-muted);
+}
+
+.movers ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.movers li {
+    padding: 0.4rem 0;
+    border-top: 1px solid var(--hairline);
+    min-width: 0;
+}
+
+.mover-name {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mover-detail {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+}
+
+/* "Show data" table twin */
+.chart-data {
+    margin-top: 0.9rem;
+    font-size: 0.82rem;
+}
+
+.chart-data summary {
+    cursor: pointer;
+    color: var(--ink-muted);
+    width: fit-content;
+}
+
+.chart-data summary:hover {
+    color: var(--text-color);
+}
+
+.chart-data-scroll {
+    max-height: 14rem;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+}
+
+.chart-data table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.chart-data th,
+.chart-data td {
+    padding: 0.3rem 0.4rem;
+    text-align: left;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.chart-data th {
+    font-weight: 600;
+}
+
+.chart-data td.num,
+.chart-data th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Shared tooltip (lives outside the section so position: fixed uses the viewport) */
+.chart-tooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    background: #403b35;
+    color: #edddd4;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    max-width: 16rem;
+}
+
+.chart-tooltip strong {
+    display: block;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 970px) {
+    .stat-tiles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 420px) {
+    .movers {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}

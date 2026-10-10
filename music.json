@@ -1,14 +1,14 @@
 {
     "artists": [
         {
-            "name": "osk",
-            "image": "https://i.scdn.co/image/ab6761610000e5eb194e4a77b8adbdc365d951f8",
-            "url": "https://open.spotify.com/artist/2LROJMYOnWWaEvqs6eRmQE"
-        },
-        {
             "name": "kuru",
             "image": "https://i.scdn.co/image/ab6761610000e5ebdce73aca096d87ad51452cf8",
             "url": "https://open.spotify.com/artist/1KJ5ZZBncdHtz60i3fiQYu"
+        },
+        {
+            "name": "osk",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb194e4a77b8adbdc365d951f8",
+            "url": "https://open.spotify.com/artist/2LROJMYOnWWaEvqs6eRmQE"
         },
         {
             "name": "1hanoimenace",
@@ -16,19 +16,14 @@
             "url": "https://open.spotify.com/artist/1trreGV7U8TCQHmI9TQzX0"
         },
         {
-            "name": "jackzebra",
-            "image": "https://i.scdn.co/image/ab6761610000e5eb13c38f8ae7b9728f4c503f88",
-            "url": "https://open.spotify.com/artist/5zIE5XrsBLymJoVVYznZlL"
-        },
-        {
             "name": "daine",
             "image": "https://i.scdn.co/image/ab6761610000e5eb563dd92f09459b7134a278f3",
             "url": "https://open.spotify.com/artist/4lyCoxLN0aW7nJy5rec0tG"
         },
         {
-            "name": "Frost Children",
-            "image": "https://i.scdn.co/image/ab6761610000e5eb51daae4f55980f7ff0ea8c30",
-            "url": "https://open.spotify.com/artist/6R1kfr0GIWnwxY4zW11Vag"
+            "name": "jackzebra",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb13c38f8ae7b9728f4c503f88",
+            "url": "https://open.spotify.com/artist/5zIE5XrsBLymJoVVYznZlL"
         },
         {
             "name": "Cece Natalie",
@@ -41,9 +36,9 @@
             "url": "https://open.spotify.com/artist/5he5w2lnU9x7JFhnwcekXX"
         },
         {
-            "name": "Jane Remover",
-            "image": "https://i.scdn.co/image/ab6761610000e5ebb3ba80684c90081ad8c0b7f2",
-            "url": "https://open.spotify.com/artist/2rLGlNI6htigNxx172qxLu"
+            "name": "Frost Children",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb51daae4f55980f7ff0ea8c30",
+            "url": "https://open.spotify.com/artist/6R1kfr0GIWnwxY4zW11Vag"
         },
         {
             "name": "Lucy Bedroque",
@@ -51,14 +46,14 @@
             "url": "https://open.spotify.com/artist/2I8H267eH5va9da4vGt38O"
         },
         {
+            "name": "Jane Remover",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebb3ba80684c90081ad8c0b7f2",
+            "url": "https://open.spotify.com/artist/2rLGlNI6htigNxx172qxLu"
+        },
+        {
             "name": "Cowgirl Clue",
             "image": "https://i.scdn.co/image/ab6761610000e5ebc1ef23cae0a2c0d480f10046",
             "url": "https://open.spotify.com/artist/45y43grjcZp3XvyXqfPQu4"
-        },
-        {
-            "name": "dollvirus",
-            "image": "https://i.scdn.co/image/ab6761610000e5ebbc00afbc9b57c1d9b0a9f9ed",
-            "url": "https://open.spotify.com/artist/5liv83SEtVPOdFn1RUQraW"
         },
         {
             "name": "Wisp",
@@ -76,14 +71,14 @@
             "url": "https://open.spotify.com/artist/3LwiPwIJNshV4ItekGcIMo"
         },
         {
+            "name": "dollvirus",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebbc00afbc9b57c1d9b0a9f9ed",
+            "url": "https://open.spotify.com/artist/5liv83SEtVPOdFn1RUQraW"
+        },
+        {
             "name": "Turnstile",
             "image": "https://i.scdn.co/image/ab6761610000e5eba4c3fd0017b42344516dc16c",
             "url": "https://open.spotify.com/artist/2qnpHrOzdmOo1S4ox3j17x"
-        },
-        {
-            "name": "2hollis",
-            "image": "https://i.scdn.co/image/ab6761610000e5ebfa8e5370cae3d2cfba098c87",
-            "url": "https://open.spotify.com/artist/72NhFAGG5Pt91VbheJeEPG"
         },
         {
             "name": "Bladee",
@@ -91,14 +86,19 @@
             "url": "https://open.spotify.com/artist/2xvtxDNInKDV4AvGmjw6d1"
         },
         {
-            "name": "venturing",
-            "image": "https://i.scdn.co/image/ab6761610000e5eb02bddbeab89ceee7f1874b81",
-            "url": "https://open.spotify.com/artist/13xKCVJaX32BL7EN9IOiCM"
-        },
-        {
             "name": "Freak Slug",
             "image": "https://i.scdn.co/image/ab6761610000e5ebdf3cf4a6db3d92f95c1a7ecd",
             "url": "https://open.spotify.com/artist/5wk7sY8GIg5ihSI09EbWeS"
+        },
+        {
+            "name": "2hollis",
+            "image": "https://i.scdn.co/image/ab6761610000e5ebfa8e5370cae3d2cfba098c87",
+            "url": "https://open.spotify.com/artist/72NhFAGG5Pt91VbheJeEPG"
+        },
+        {
+            "name": "poptropicaslutz!",
+            "image": "https://i.scdn.co/image/ab6761610000e5eb5cb074762df785a9eb98f521",
+            "url": "https://open.spotify.com/artist/08DN8ZbOSeuTELiQjc4Jl8"
         }
     ],
     "tracks": [
@@ -145,6 +145,12 @@
             "url": "https://open.spotify.com/track/1Wcou9s2dSI6oWFxivATjS"
         },
         {
+            "title": "Hello - triple j Like A Version",
+            "artist": "daine, triple j",
+            "image": "https://i.scdn.co/image/ab67616d0000b273935af88179f097358a1137d5",
+            "url": "https://open.spotify.com/track/6B8XcuiJW6IR8YUEfwCfbi"
+        },
+        {
             "title": "U wld never do it",
             "artist": "kuru",
             "image": "https://i.scdn.co/image/ab67616d0000b273858d1a7c08f66e43a7c12e63",
@@ -155,12 +161,6 @@
             "artist": "Snow Strippers",
             "image": "https://i.scdn.co/image/ab67616d0000b27380ab44e51da54976bfeeb1c4",
             "url": "https://open.spotify.com/track/6l29X3RtcndQexIlsHOvuI"
-        },
-        {
-            "title": "Hello - triple j Like A Version",
-            "artist": "daine, triple j",
-            "image": "https://i.scdn.co/image/ab67616d0000b273935af88179f097358a1137d5",
-            "url": "https://open.spotify.com/track/6B8XcuiJW6IR8YUEfwCfbi"
         },
         {
             "title": "bite of life",
@@ -175,16 +175,16 @@
             "url": "https://open.spotify.com/track/3lCHwUkb1V4y8emfwief83"
         },
         {
-            "title": "frost fest anthem",
-            "artist": "dollvirus",
-            "image": "https://i.scdn.co/image/ab67616d0000b273410cae9145e8ed48bdca6f58",
-            "url": "https://open.spotify.com/track/2UAHVY4o0UUFge3DYS0ozo"
-        },
-        {
             "title": "Comes and Goes",
             "artist": "KETTAMA",
             "image": "https://i.scdn.co/image/ab67616d0000b2735d8230552e1c797f1bc8fc11",
             "url": "https://open.spotify.com/track/3xQPerJjDVZrSFVE340D8r"
+        },
+        {
+            "title": "frost fest anthem",
+            "artist": "dollvirus",
+            "image": "https://i.scdn.co/image/ab67616d0000b273410cae9145e8ed48bdca6f58",
+            "url": "https://open.spotify.com/track/2UAHVY4o0UUFge3DYS0ozo"
         },
         {
             "title": "Eyelash",
@@ -222,5 +222,369 @@
             "image": "https://i.scdn.co/image/ab67616d0000b27356286379142a03df5756f2f2",
             "url": "https://open.spotify.com/track/3EwdgTfXqdaP0O0vkOS2dn"
         }
-    ]
+    ],
+    "stats": {
+        "updated": "2026-10-10",
+        "facts": {
+            "tracks_counted": 128,
+            "artists_counted": 49,
+            "avg_track_seconds": 173,
+            "explicit_share": 0.438,
+            "released_last_year_share": 0.477,
+            "median_artist_popularity": 60,
+            "distinct_genres": 28
+        },
+        "genres": [
+            {
+                "genre": "hyperpop",
+                "artists": 19
+            },
+            {
+                "genre": "electroclash",
+                "artists": 7
+            },
+            {
+                "genre": "cloud rap",
+                "artists": 7
+            },
+            {
+                "genre": "rage rap",
+                "artists": 6
+            },
+            {
+                "genre": "underground hip hop",
+                "artists": 4
+            },
+            {
+                "genre": "art pop",
+                "artists": 2
+            },
+            {
+                "genre": "shoegaze",
+                "artists": 2
+            },
+            {
+                "genre": "bedroom pop",
+                "artists": 2
+            }
+        ],
+        "popularity": [
+            {
+                "name": "yyuan",
+                "popularity": 1
+            },
+            {
+                "name": "1hanoimenace",
+                "popularity": 3
+            },
+            {
+                "name": "Misty Blue",
+                "popularity": 25
+            },
+            {
+                "name": "sxored",
+                "popularity": 32
+            },
+            {
+                "name": "Floats",
+                "popularity": 33
+            },
+            {
+                "name": "Juliet Ivy",
+                "popularity": 36
+            },
+            {
+                "name": "Deer park",
+                "popularity": 37
+            },
+            {
+                "name": "MISOGI",
+                "popularity": 37
+            },
+            {
+                "name": "hateoryx",
+                "popularity": 38
+            },
+            {
+                "name": "Cowgirl Clue",
+                "popularity": 43
+            },
+            {
+                "name": "SEBii",
+                "popularity": 43
+            },
+            {
+                "name": "jackzebra",
+                "popularity": 45
+            },
+            {
+                "name": "8485",
+                "popularity": 46
+            },
+            {
+                "name": "RainingLol",
+                "popularity": 49
+            },
+            {
+                "name": "vax",
+                "popularity": 50
+            },
+            {
+                "name": "osk",
+                "popularity": 51
+            },
+            {
+                "name": "Soccer Mommy",
+                "popularity": 51
+            },
+            {
+                "name": "venturing",
+                "popularity": 52
+            },
+            {
+                "name": "tsubi club",
+                "popularity": 52
+            },
+            {
+                "name": "dollvirus",
+                "popularity": 53
+            },
+            {
+                "name": "kuru",
+                "popularity": 55
+            },
+            {
+                "name": "daine",
+                "popularity": 56
+            },
+            {
+                "name": "Yves",
+                "popularity": 56
+            },
+            {
+                "name": "ISOxo",
+                "popularity": 58
+            },
+            {
+                "name": "Frost Children",
+                "popularity": 60
+            },
+            {
+                "name": "Oklou",
+                "popularity": 60
+            },
+            {
+                "name": "bleood",
+                "popularity": 62
+            },
+            {
+                "name": "twentythree",
+                "popularity": 63
+            },
+            {
+                "name": "Wisp",
+                "popularity": 64
+            },
+            {
+                "name": "Cece Natalie",
+                "popularity": 64
+            },
+            {
+                "name": "Jane Remover",
+                "popularity": 65
+            },
+            {
+                "name": "Feng",
+                "popularity": 65
+            },
+            {
+                "name": "Tiffany Day",
+                "popularity": 65
+            },
+            {
+                "name": "Ninajirachi",
+                "popularity": 66
+            },
+            {
+                "name": "Aphex Twin",
+                "popularity": 67
+            },
+            {
+                "name": "Lucy Bedroque",
+                "popularity": 68
+            },
+            {
+                "name": "underscores",
+                "popularity": 68
+            },
+            {
+                "name": "Bladee",
+                "popularity": 69
+            },
+            {
+                "name": "slayr",
+                "popularity": 69
+            },
+            {
+                "name": "Turnstile",
+                "popularity": 70
+            },
+            {
+                "name": "2hollis",
+                "popularity": 71
+            },
+            {
+                "name": "fakemink",
+                "popularity": 76
+            },
+            {
+                "name": "Skrillex",
+                "popularity": 77
+            },
+            {
+                "name": "NIKI",
+                "popularity": 79
+            },
+            {
+                "name": "Clairo",
+                "popularity": 81
+            },
+            {
+                "name": "beabadoobee",
+                "popularity": 83
+            },
+            {
+                "name": "Charli xcx",
+                "popularity": 85
+            },
+            {
+                "name": "Cigarettes After Sex",
+                "popularity": 85
+            },
+            {
+                "name": "Olivia Rodrigo",
+                "popularity": 95
+            }
+        ],
+        "rising": [
+            {
+                "name": "osk",
+                "now": 2,
+                "before": null,
+                "climb": 49
+            },
+            {
+                "name": "1hanoimenace",
+                "now": 3,
+                "before": null,
+                "climb": 48
+            },
+            {
+                "name": "daine",
+                "now": 4,
+                "before": null,
+                "climb": 47
+            },
+            {
+                "name": "Cece Natalie",
+                "now": 6,
+                "before": null,
+                "climb": 45
+            },
+            {
+                "name": "Cowgirl Clue",
+                "now": 11,
+                "before": null,
+                "climb": 40
+            },
+            {
+                "name": "Wisp",
+                "now": 12,
+                "before": null,
+                "climb": 39
+            }
+        ],
+        "fading": [
+            {
+                "name": "Charli xcx",
+                "now": null,
+                "before": 1
+            },
+            {
+                "name": "NCT 127",
+                "now": null,
+                "before": 2
+            },
+            {
+                "name": "beabadoobee",
+                "now": 32,
+                "before": 3
+            },
+            {
+                "name": "EXO",
+                "now": null,
+                "before": 5
+            },
+            {
+                "name": "NCT DREAM",
+                "now": null,
+                "before": 6
+            },
+            {
+                "name": "Bladee",
+                "now": 17,
+                "before": 7
+            }
+        ],
+        "release_years": [
+            {
+                "year": 1987,
+                "tracks": 1
+            },
+            {
+                "year": 2008,
+                "tracks": 1
+            },
+            {
+                "year": 2013,
+                "tracks": 1
+            },
+            {
+                "year": 2015,
+                "tracks": 1
+            },
+            {
+                "year": 2019,
+                "tracks": 2
+            },
+            {
+                "year": 2020,
+                "tracks": 1
+            },
+            {
+                "year": 2021,
+                "tracks": 6
+            },
+            {
+                "year": 2022,
+                "tracks": 5
+            },
+            {
+                "year": 2023,
+                "tracks": 5
+            },
+            {
+                "year": 2024,
+                "tracks": 17
+            },
+            {
+                "year": 2025,
+                "tracks": 31
+            },
+            {
+                "year": 2026,
+                "tracks": 57
+            }
+        ]
+    }
 }

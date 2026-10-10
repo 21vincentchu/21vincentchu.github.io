@@ -58,7 +58,7 @@
     <link rel="stylesheet" href="css/animation.css?v=27">
     <link rel="stylesheet" href="css/mobile.css?v=28">
     <link rel="stylesheet" href="css/weather.css?v=26">
-    <link rel="stylesheet" href="css/photos.css?v=23">
+    <link rel="stylesheet" href="css/photos.css?v=25">
 
     <!-- Preconnect to Font Awesome CDN -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -240,6 +240,51 @@
                 More on Spotify <i class="fas fa-arrow-right"></i>
             </a>
         </div>
+
+        <!-- Listening stats: numbers come from music.json (api/update_spotify.py), charts drawn by js/music-stats.js -->
+        <div class="fun-block stats-section" id="listening-stats" hidden>
+            <h2 class="fun-heading">Listening Stats</h2>
+            <p class="stats-note" id="stats-note"></p>
+
+            <div class="stat-tiles" id="stat-tiles"></div>
+
+            <div class="stats-grid">
+                <figure class="chart-card chart-wide">
+                    <figcaption>
+                        <h3 class="chart-title">Underground or mainstream?</h3>
+                        <p class="chart-sub">Each dot is one of my top artists, placed by Spotify's popularity score (0&ndash;100)</p>
+                    </figcaption>
+                    <div class="chart-body" id="chart-popularity"></div>
+                    <details class="chart-data"><summary>Show data</summary><div id="table-popularity"></div></details>
+                </figure>
+
+                <figure class="chart-card">
+                    <figcaption>
+                        <h3 class="chart-title">Top genres</h3>
+                        <p class="chart-sub" id="genres-sub"></p>
+                    </figcaption>
+                    <div class="chart-body" id="chart-genres"></div>
+                    <details class="chart-data"><summary>Show data</summary><div id="table-genres"></div></details>
+                </figure>
+
+                <figure class="chart-card">
+                    <figcaption>
+                        <h3 class="chart-title">When my music came out</h3>
+                        <p class="chart-sub" id="years-sub"></p>
+                    </figcaption>
+                    <div class="chart-body" id="chart-years"></div>
+                    <details class="chart-data"><summary>Show data</summary><div id="table-years"></div></details>
+                </figure>
+
+                <figure class="chart-card chart-wide">
+                    <figcaption>
+                        <h3 class="chart-title">Climbing and fading</h3>
+                        <p class="chart-sub">My top artists this month compared with the past year</p>
+                    </figcaption>
+                    <div class="chart-body movers" id="chart-movers"></div>
+                </figure>
+            </div>
+        </div>
     </section>
 
     <!-- Photo Lightbox -->
@@ -259,8 +304,12 @@
         </div>
     </footer>
 
+<!-- Shared chart tooltip: outside the section so position: fixed uses the viewport -->
+<div class="chart-tooltip" id="chart-tooltip" role="tooltip" hidden></div>
+
 <script src="script.js?v=22"></script>
 <script src="js/photos.js?v=15"></script>
+<script src="js/music-stats.js?v=2"></script>
 
 </body>
 </html>
