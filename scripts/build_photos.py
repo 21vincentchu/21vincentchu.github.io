@@ -6,16 +6,18 @@ Usage:
     1. Drop full-size photos into images/actualphotos/ (not committed)
     2. python scripts/build_photos.py
     3. In images/photos/photos.json, set each new photo's "category" to
-       "street" or "landscape" and optionally add a caption (kept on re-runs)
+       "street", "landscape" or "product" and optionally add a caption (kept on re-runs)
 
 Photos are auto-rotated, resized, and saved WITHOUT EXIF metadata,
 so GPS location / camera serials never end up on the public site.
-New photos are added to the top of the gallery, newest shot first, and
-identical duplicate files are skipped. To reorder, move entries around in
+New photos are added to the top of the gallery, newest shot first.
+Duplicates are skipped: identical files, and re-exports of a frame that is
+already in the gallery under another number (4-DSCF6242 vs 7-DSCF6242). To reorder, move entries around in
 photos.json. Remove a photo by deleting its original and re-running.
 """
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from PIL import Image, ImageOps
@@ -38,6 +40,15 @@ def date_taken(img):
     return exif.get_ifd(0x8769).get(0x9003) or exif.get(0x0132) or ""
 
 
+def output_name(src):
+    return src.stem.replace(" ", "-").lower() + ".jpg"
+
+
+def frame_id(src):
+    # the camera's own file name, without the export's leading sequence number
+    return re.sub(r"^\d+-", "", src.stem).lower()
+
+
 def save_resized(img, size, dest):
     copy = img.copy()
     copy.thumbnail((size, size), Image.LANCZOS)
@@ -52,7 +63,11 @@ def main():
     existing = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else []
     by_file = {p["file"]: p for p in existing}
 
-    originals = sorted(p for p in SRC.iterdir() if p.suffix.lower() in EXTS)
+    # photos already in the gallery go first, so a duplicate never replaces one of them
+    originals = sorted(
+        (p for p in SRC.iterdir() if p.suffix.lower() in EXTS),
+        key=lambda p: (output_name(p) not in by_file, p.name),
+    )
     if not originals:
         print(f"No photos found in {SRC}")
 
@@ -60,12 +75,12 @@ def main():
     taken = {}
     seen = set()
     for src in originals:
-        digest = hashlib.md5(src.read_bytes()).hexdigest()
-        if digest in seen:
+        keys = {hashlib.md5(src.read_bytes()).hexdigest(), frame_id(src)}
+        if keys & seen:
             print(f"  {src.name} skipped (duplicate)")
             continue
-        seen.add(digest)
-        name = src.stem.replace(" ", "-").lower() + ".jpg"
+        seen |= keys
+        name = output_name(src)
         with Image.open(src) as img:
             taken[name] = date_taken(img)
             img = ImageOps.exif_transpose(img).convert("RGB")

@@ -6,7 +6,7 @@
 const PHOTO_DIR = 'images/photos/';
 const FULL_SIZE = 2000;   // keep in sync with scripts/build_photos.py
 const THUMB_SIZE = 900;
-const CATEGORIES = ['all', 'street', 'landscape'];
+const CATEGORIES = ['all', 'street', 'landscape', 'product'];
 const VIEWS = ['strip', 'grid'];
 
 let photos = [];
