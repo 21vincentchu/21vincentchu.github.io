@@ -484,12 +484,12 @@ body.photos-view-grid .strip-controls {
         display: none;
     }
 
-    /* Where the content starts and ends. On very wide screens that is the usual centred
-       column; below ~2130px the page gutter is too narrow to hold the sidebar, so the
-       content starts further right (2.5rem margin + 12.75rem sidebar + 1.75rem gap) instead.
+    /* Where the content starts and ends. It starts right of the sidebar (2.5rem margin +
+       12.75rem sidebar + 1.75rem gap) and stops 6rem short of the right edge. On very
+       wide screens it is a centred column, 1900px at most.
        The 8px is the body margin the other pages' sections sit inside. */
     body.photos-page {
-        --fun-right: max(calc(var(--container-padding) + 8px), calc((100vw - var(--container-max-width)) / 2));
+        --fun-right: max(6rem, calc((100vw - 1900px) / 2));
         --fun-left: max(var(--fun-right), 17rem);
     }
 

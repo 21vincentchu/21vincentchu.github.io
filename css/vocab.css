@@ -7,10 +7,10 @@
     /* small or short screens: centred below the hero */
     box-sizing: border-box;
     position: relative;
-    width: min(28rem, calc(100% - 5rem));
+    width: min(26rem, calc(100% - 5rem));
     margin: 4.5rem auto 1rem;   /* top room for the "Learn a new word" note */
     /* same light panel as the cards on the other pages */
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.35rem;
     background: #f5ece6;
     border: 1px solid rgba(64, 59, 53, 0.24);
     border-radius: 12px;
@@ -34,17 +34,17 @@ html.returning .word-of-day {
         bottom: 2rem;
         z-index: 5;
         /* stops short of the centred footer line on narrower windows */
-        width: min(28rem, calc(50vw - 150px - 3rem));
+        width: min(26rem, calc(50vw - 150px - 3rem));
         margin: 0;
     }
 }
 
 /* "Learn a new word" note above the card: a line runs right from it,
-   then turns down as an arrow into the card (same style as the nav clock's note) */
+   then turns down as an arrow into the card */
 .wod-note {
-    --note-size: 17px;   /* odd, so the 1px line centres on a whole pixel */
+    --note-size: 15px;   /* odd, so the 1px line centres on a whole pixel */
     position: absolute;
-    left: 1.5rem;
+    left: 1.35rem;
     bottom: calc(100% + 6px);
     display: flex;
     align-items: flex-start;
@@ -60,8 +60,8 @@ html.returning .word-of-day {
 .wod-note-arrow {
     position: relative;
     box-sizing: border-box;
-    width: 44px;
-    height: 28px;
+    width: 40px;
+    height: 24px;
     margin-top: calc((var(--note-size) - 1px) / 2);
     border-top: 1px solid currentColor;
     border-right: 1px solid currentColor;
@@ -87,11 +87,11 @@ html.returning .word-of-day {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
 }
 
 .wod-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -99,8 +99,8 @@ html.returning .word-of-day {
 }
 
 .wod-shuffle {
-    width: 1.9rem;
-    height: 1.9rem;
+    width: 1.75rem;
+    height: 1.75rem;
     border: none;
     border-radius: 50%;
     background: none;
@@ -132,7 +132,7 @@ html.returning .word-of-day {
 
 .wod-word {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--text-color);
     text-decoration: none;
@@ -146,14 +146,14 @@ html.returning .word-of-day {
 
 .wod-pos {
     margin-left: 0.35rem;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-style: italic;
     opacity: 0.6;
 }
 
 .wod-definition {
     display: block;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     opacity: 0.8;
 }
 
@@ -162,8 +162,8 @@ html.returning .word-of-day {
     .word-of-day {
         left: 1.25rem;
         bottom: 1.25rem;
-        width: min(22rem, calc(50vw - 150px - 2.25rem));
-        padding: 0.8rem 1rem;
+        width: min(20.5rem, calc(50vw - 150px - 2.25rem));
+        padding: 0.7rem 0.9rem;
     }
 
     .wod-top {
@@ -171,15 +171,15 @@ html.returning .word-of-day {
     }
 
     .wod-label {
-        font-size: 0.7rem;
+        font-size: 0.66rem;
     }
 
     .wod-word {
-        font-size: 1.15rem;
+        font-size: 1.08rem;
     }
 
     .wod-pos {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .wod-entry {
@@ -187,7 +187,7 @@ html.returning .word-of-day {
     }
 
     .wod-definition {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
@@ -195,12 +195,12 @@ html.returning .word-of-day {
     }
 
     .wod-note {
-        --note-size: 15px;
-        left: 1rem;
+        --note-size: 13px;
+        left: 0.9rem;
     }
 
     .wod-note-arrow {
-        width: 2.25rem;
-        height: 1.25rem;
+        width: 32px;
+        height: 18px;
     }
 }

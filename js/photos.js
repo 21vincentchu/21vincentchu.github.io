@@ -170,9 +170,11 @@ function updateStripControls() {
 }
 
 // Wheel over the strip + mouse drag (shared with Experience, see script.js).
+// Any up/down scroll over the strip moves it sideways, whatever the device.
 // Wheeling anywhere else scrolls the page normally, so On Rotation stays reachable.
 const scroller = initSmoothScroller(display, {
-    enabled: () => view === 'strip' && !document.getElementById('photoModal').classList.contains('active')
+    enabled: () => view === 'strip' && !document.getElementById('photoModal').classList.contains('active'),
+    anyWheel: true
 });
 
 function stopGlide() {

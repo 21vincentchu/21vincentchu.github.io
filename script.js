@@ -89,6 +89,23 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
+// ========================================
+// "REBUILT X DAYS AGO" NOTE (footer, bottom-right corner)
+// The page's Last-Modified date is when the site was last deployed
+// ========================================
+(function() {
+    const footer = document.querySelector('footer');
+    const built = new Date(document.lastModified);
+    if (!footer || isNaN(built)) return;
+
+    const days = Math.max(0, Math.floor((Date.now() - built) / 86400000));
+    const note = document.createElement('p');
+    note.className = 'rebuilt-note';
+    note.textContent = 'Rebuilt ' + (days === 0 ? 'today' : days === 1 ? '1 day ago' : days + ' days ago');
+    note.title = built.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    footer.appendChild(note);
+})();
+
 // DOM Content Loaded - Initialize interactive features
 document.addEventListener('DOMContentLoaded', function() {
     // Email protection
@@ -605,9 +622,11 @@ document.addEventListener('keydown', function(e) {
 // target position. Touch screens and trackpads keep their native swipe.
 //   enabled()   - return false to switch it off (e.g. Photos grid view)
 //   wheelTarget - element listening for the wheel (default: the track)
-//   snap(x)     - optional: where to settle after a drag / wheel burst
+//   snap(x)     - optional: where to settle after a drag or trackpad swipe
+//   anyWheel    - true: every up/down scroll over the track moves it sideways,
+//                 trackpads and smooth-scrolling mice included
 // ========================================
-function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, snap = null } = {}) {
+function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, snap = null, anyWheel = false } = {}) {
     let target = null;
     let frame = null;
     let wheelIdle = null;
@@ -640,13 +659,15 @@ function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, 
         target = null;
     }
 
-    // Trackpads report fine-grained pixel deltas (Chrome/Safari: wheelDeltaY is exactly
-    // -3x deltaY; mouse wheels jump in big steps). Leave those alone: two-finger
+    // Trackpads report fine-grained pixel deltas; mouse wheels jump a whole notch at a
+    // time (wheelDeltaY is a multiple of 120). Leave trackpads alone: two-finger
     // up/down scrolls the page and left/right swipes the track natively.
+    // deltaY itself can't be trusted for this: it shrinks and grows with the browser's
+    // zoom and the display scaling (a notch is 100 at 100% zoom but 66.67 at 150%).
     function isTrackpad(e) {
         if (e.deltaMode !== 0) return false;                                  // line/page steps = mouse wheel
-        if (e.deltaX !== 0 || !Number.isInteger(e.deltaY)) return true;       // diagonal or sub-pixel = trackpad
-        if (e.wheelDeltaY) return e.wheelDeltaY === -3 * e.deltaY;
+        if (e.deltaX !== 0) return true;                                      // diagonal = trackpad
+        if (e.wheelDeltaY) return e.wheelDeltaY % 120 !== 0;
         return Math.abs(e.deltaY) < 50;
     }
 
@@ -664,7 +685,10 @@ function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, 
     // Mouse wheel scrolls sideways; once the track hits an end, the page scrolls normally
     wheelTarget.addEventListener('wheel', function(e) {
         if (!enabled()) return;
-        if (isTrackpad(e)) {
+        // Fine-grained scrolling (a trackpad, or a smooth-scrolling mouse that looks like
+        // one) is left to the browser unless anyWheel is on; sideways swipes always are
+        const fine = isTrackpad(e);
+        if (fine && (!anyWheel || Math.abs(e.deltaX) > Math.abs(e.deltaY))) {
             onTrackpadSwipe(e);
             return;
         }
@@ -673,11 +697,9 @@ function initSmoothScroller(track, { enabled = () => true, wheelTarget = track, 
         if ((e.deltaY < 0 && from <= 0) || (e.deltaY > 0 && from >= maxScroll() - 1)) return;
         e.preventDefault();
         const delta = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * track.clientWidth : e.deltaY;
-        glideTo(from + delta * 1.5);
-        if (snap) {
-            clearTimeout(wheelIdle);
-            wheelIdle = setTimeout(() => glideTo(settle(target ?? track.scrollLeft)), 180);
-        }
+        // The wheel glides freely and rests wherever it stops. (Snapping to the nearest
+        // card here pulled a single slow notch straight back to where it started.)
+        glideTo(from + delta * (fine ? 1 : 1.5));
     }, { passive: false });
 
     track.addEventListener('pointerdown', function(e) {
@@ -756,6 +778,7 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
     }
 
     const scroller = initSmoothScroller(track, {
+        anyWheel: true,
         snap: (x) => {
             const step = getCardStep();
             return step > 0 ? Math.round(x / step) * step : x;
@@ -768,10 +791,25 @@ function initTimelineCarousel(trackId, pointsContainerId, cardSelector, prevBtnI
         return step > 0 ? Math.round((scroller.target ?? track.scrollLeft) / step) : 0;
     }
 
+    // The timeline fills up to the furthest job on screen: the last card with at least
+    // half of itself inside the track, so a job that has scrolled into view is marked
+    function lastVisibleIndex() {
+        const view = track.getBoundingClientRect();
+        let last = 0;
+        cards.forEach((card, i) => {
+            const rect = card.getBoundingClientRect();
+            const shown = Math.min(rect.right, view.right) - Math.max(rect.left, view.left);
+            if (shown >= rect.width / 2) last = i;
+        });
+        return last;
+    }
+
+    // index = the card at the left edge (drives the arrows and the counter)
     function setActiveIndex(index) {
+        const head = Math.max(index, lastVisibleIndex());
         points.forEach((point, i) => {
-            point.classList.toggle('active', i === index);
-            point.classList.toggle('passed', i < index);
+            point.classList.toggle('active', i === head);
+            point.classList.toggle('passed', i < head);
         });
         if (prevBtn) prevBtn.disabled = index <= 0;
         if (nextBtn) nextBtn.disabled = index >= points.length - 1;

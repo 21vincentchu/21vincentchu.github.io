@@ -264,6 +264,18 @@ html {
 body,
 html {
     font-family: 'Satoshi', sans-serif;
+    /* everything sized in rem (most of the site) follows this: 15px rather than the
+       browser's 16px, so the pages get a little more breathing room */
+    font-size: 93.75%;
+}
+
+/* Desktop: the base size follows the window width, so small laptops get a tighter page
+   and big monitors a roomier one. 14px at 1280 wide, 15px at 1600, 16px at 1920,
+   up to 18px at 2560 and beyond (percentages, so the browser's own text-size setting still counts). */
+@media (min-width: 971px) {
+    html {
+        font-size: clamp(87.5%, calc(62.5% + 0.3125vw), 112.5%);
+    }
 }
 
 /* Shared container styles */
@@ -1099,6 +1111,19 @@ header .hero-center {
     header .hero-center {
         grid-row: 2;
     }
+
+    /* the text starts near the top of the photo, inset a little from its top edge,
+       with the button following straight after the intro */
+    header .hero-left {
+        align-self: start;
+        padding-top: 1rem;
+    }
+
+    /* drop the space above the capitals so the name's top edge lines up with the photo's */
+    header .hero-name {
+        text-box-trim: trim-start;
+        text-box-edge: cap alphabetic;
+    }
 }
 
 @media (max-width: 970px) {
@@ -1149,7 +1174,7 @@ header .hero-center {
 }
 
 .hero-left .cta-buttons {
-    margin-top: 1.25rem;
+    margin-top: 30px;
 }
 
 .hero-center {
@@ -1871,6 +1896,34 @@ footer a {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+}
+
+/* "Rebuilt x days ago" (added by script.js): in the footer's bottom-right corner,
+   level with the copyright line; on phones it drops under that line instead */
+footer {
+    position: relative;
+}
+
+.rebuilt-note {
+    position: absolute;
+    right: 2rem;
+    bottom: 3rem;
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1.6;
+    white-space: nowrap;
+    color: var(--text-color);
+    opacity: 0.55;
+}
+
+@media (max-width: 970px) {
+    .rebuilt-note {
+        position: static;
+        margin-top: 1rem;
+    }
 }
 
 .footer-social {
@@ -2953,91 +3006,52 @@ body.strip-dragging {
     font-weight: 400;
 }
 
-/* "My time is" note in the clock cell's top-right corner. A line runs left from it,
-   turns down the left side of the cell and turns back as an arrow pointing at the time. */
-/* Everything here is in whole pixels with 1px strokes, so the three pieces of the
-   arrow meet cleanly at any browser zoom. */
+/* Clock cell: a small caps label over the time, stacked like the two-row icon cells beside it */
 nav .clock-container {
-    --hook-left: 8px;
-    --hook-width: 26px;
-    --note-top: 10px;
-    --note-size: 13px;   /* odd, so the 1px line centres on a whole pixel */
-    padding-left: 2.5rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-content: center;
+    align-items: baseline;
+    column-gap: 0.4rem;
+    row-gap: 0.5rem;
 }
 
 .clock-label {
-    position: absolute;
-    top: var(--note-top);
-    left: calc(var(--hook-left) + var(--hook-width));
-    right: 11px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: var(--note-size);
-    color: var(--text-color);
-    line-height: 1;
+    grid-column: 1 / -1;
+    position: relative;
+    z-index: 1;
+    font-size: 0.7rem;
+    font-weight: 600;
     font-family: var(--font-body);
-    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1;
     white-space: nowrap;
-    opacity: 0.7;
-    z-index: 1;
-    transition: color 0.45s ease;
-}
-
-.clock-label-line {
-    flex: 1;
-    height: 0;
-    border-top: 1px solid currentColor;
-}
-
-/* Square bracket from the line's left end down to the time's mid-height */
-.clock-label-hook {
-    position: absolute;
-    box-sizing: border-box;
-    top: calc(var(--note-top) + (var(--note-size) - 1px) / 2);
-    bottom: 50%;
-    left: var(--hook-left);
-    width: var(--hook-width);
     color: var(--text-color);
-    border: 1px solid currentColor;
-    border-right: none;
-    opacity: 0.7;
-    z-index: 1;
+    opacity: 0.55;
     transition: color 0.45s ease;
 }
 
-/* arrowhead */
-.clock-label-hook::after {
-    content: '';
-    position: absolute;
-    box-sizing: border-box;
-    /* 9px chevron drawn as a mask so it takes the line's colour; tip on the line's end */
-    right: -2px;
-    bottom: -5px;
-    width: 9px;
-    height: 9px;
-    background: currentColor;
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M2.5 .5l4 4-4 4' fill='none' stroke='%23000'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M2.5 .5l4 4-4 4' fill='none' stroke='%23000'/%3E%3C/svg%3E") center / 9px 9px no-repeat;
+nav .clock-container .time {
+    font-size: 1.4rem;
+    font-variant-numeric: tabular-nums;
 }
 
-nav .clock-container:hover .clock-label-hook {
-    color: var(--bg-color);
+nav .clock-container .clock-ampm,
+nav .clock-container .timezone {
+    font-size: 0.8rem;
 }
+
+nav .clock-container .timezone {
+    opacity: 0.6;
+}
+
 
 /* Keep the desktop nav inside the window as it narrows (the mobile menu takes over at 970px) */
 @media (max-width: 1400px) {
     nav .nav-links {
         gap: 1.5rem;
-    }
-}
-
-@media (max-width: 1200px) {
-    nav .clock-container {
-        --hook-left: 6px;
-        --hook-width: 20px;
-        --note-top: 7px;
-        padding-left: 2rem;
     }
 }
 
